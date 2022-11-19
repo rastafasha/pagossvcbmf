@@ -1,0 +1,29 @@
+<div class="card-body">
+
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th scope="col">Referencia</th>
+                <th scope="col">Metodo </th>
+                <th scope="col">Monto</th>
+                <th scope="col">Moneda</th>
+                <th scope="col">Fecha</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let pago of pagos | slice: 0:5">
+            <tr>
+                <th scope="row"><a [routerLink]="['/payment-detail', pago.id]">{{pago.referencia}}</a></th>
+                <td>{{pago.metodo}}</td>
+                <td>{{pago.monto}}</td>
+                <td>{{pago.moneda_codigo}}</td>
+                <td>{{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="col-xs-12 col-sm-3">
+        <button class="btn btn-primary" routerLink="../payments">
+      Ver todos
+    </button>
+    </div>
+</div>

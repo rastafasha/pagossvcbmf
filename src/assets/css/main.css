@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/* CSS Document */
+
+
+/*Author: Malcolm cordova @malcolmcordova mercadocreativo@gmail.com www.malcolmcordova.com*/
+
+@import url("loading.css");
+@import url("style.css");
+@import url("fonts.css");
+.cursor {
+    cursor: pointer;
+}
+
+.clear {
+    clear: both;
+    visibility: hidden;
+    margin: 0px;
+    padding: 0px;
+    height: 0;
+}
+
+.required {
+    color: red;
+}
+
+:root {
+    --azul: #353888;
+    --morado: #774477;
+}

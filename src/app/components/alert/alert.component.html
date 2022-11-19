@@ -1,0 +1,45 @@
+<li class="nav-item dropdown">
+
+    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+      <!-- <div *ngIf="alert.lenght > 0"></div> -->
+      <!-- <div *ngIf="alert.lenght <= 0"></div> -->
+        <i class="bi bi-bell"></i>
+        <span class="badge bg-primary badge-number">{{count()}}</span>
+    </a>
+    <!-- End Notification Icon -->
+
+    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+        <li class="dropdown-header">
+            Hay {{count()}} notificaciones
+            <a routerLink="/payments"><span class="badge rounded-pill bg-primary p-2 ms-2 cursor">Ver todo</span></a>
+        </li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
+        <div *ngFor="let alert of alerts | slice: 0:5">
+            <li class="notification-item">
+                <i class="{{cssIconClass(alert)}}"></i>
+                <div>
+                    <h4>{{alert.title}}</h4>
+                    <p [innerHTML]="alert.message">{{alert.message}}</p>
+                    <p>--hace {{alert.time}} min.</p>
+
+                </div>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        </div>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li class="dropdown-footer cursor">
+            <a routerLink="/payments">Leer todo</a>
+        </li>
+
+    </ul>
+    <!-- End Notification Dropdown Items -->
+
+</li>
+<!-- End Notification Nav -->

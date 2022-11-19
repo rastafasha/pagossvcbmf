@@ -1,0 +1,75 @@
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed cursor" routerLink="/">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <!-- End Dashboard Nav -->
+
+
+
+        <li class="nav-heading">Pages Admin</li>
+        <!-- <div *if="user.role === 'Superadmin' || 'Admin' "></div> -->
+
+        <!-- End Profile Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed cursor" routerLink="/users" routerLinkActive="active">
+                <i class="bx bxs-user-account"></i>
+                <span>Usuarios</span>
+            </a>
+        </li>
+        <!-- End Profile Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed cursor" routerLink="/payments" routerLinkActive="active">
+                <i class="bi bi-currency-exchange"> </i>
+                <span>Pagos</span>
+            </a>
+        </li>
+        <!-- End Payments Page Nav -->
+
+
+
+        <li class="nav-heading">Pages User</li>
+        <!-- <div *if="user.role === 'Miembro' || 'Invitado' "></div> -->
+        <li class="nav-item">
+            <a class="nav-link collapsed cursor" routerLink="/profile/1" routerLinkActive="active">
+                <i class="bi bi-person"></i>
+                <span>Mi Cuenta</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed cursor" routerLink="/historial-pagos" routerLinkActive="active">
+                <i class="bi bi-currency-exchange"> </i>
+                <span>Mis Pagos</span>
+            </a>
+        </li>
+        <!-- End Payments Page Nav -->
+        <!-- todos -->
+        <li class="nav-item">
+            <a class="nav-link collapsed cursor" routerLink="/help" routerLinkActive="active">
+                <i class="bi bi-question-circle"></i>
+                <span>Ayuda</span>
+            </a>
+        </li>
+        <!-- End F.A.Q Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed cursor" routerLink="/contact" routerLinkActive="active">
+                <i class="bi bi-envelope"></i>
+                <span>Contacto</span>
+            </a>
+        </li>
+        <!-- End Contact Page Nav -->
+
+
+    </ul>
+
+</aside>
+<!-- End Sidebar-->

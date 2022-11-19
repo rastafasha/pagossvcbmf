@@ -1,0 +1,172 @@
+<app-header></app-header>
+
+<app-aside></app-aside>
+
+<!-- =======| Main |======= -->
+<div class="container" id="main" class="main" role="main" name="profile">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-9">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/">Panel User</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+    </div>
+
+
+
+
+
+    <section class="section dashboard">
+        <form class="form-horizontal form-material">
+            <div class="row">
+
+                <div class="clear"></div>
+
+                <div class=" col-md-6">
+                    <label for="exampleInputEmail1">Monto en Bs. VES </label>
+                    <input type="text" formControlName="monto_ves" class="form-control">
+
+                </div>
+                <br><br>
+                <div class=" col-md-6">
+                    <label for="exampleInputEmail1">Monto en $USD </label>
+                    <input type="text" formControlName="universidad" class="form-control">
+
+                </div>
+                <br><br>
+                <div class=" col-md-6">
+                    <div class="form-group">
+                        <label for="input" class="control-label">Fecha de Transferencia</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="" id="input" class="form-control" value="" required="required" title="">
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div class=" col-md-6">
+                    <label for="exampleInputEmail1">Num. Confirmación </label>
+                    <input type="text" formControlName="website" class="form-control">
+                </div>
+                <br><br>
+                <div class=" col-md-6">
+                    <label for="exampleInputEmail1">Banco Internacional?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radioBanco" id="radioBanco1">
+                        <label class="form-check-label" for="radioBanco1">
+                    Si
+                  </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radioBanco" id="radioBanco2">
+                        <label class="form-check-label" for="radioBanco2">
+                    No
+                  </label>
+                    </div>
+                    <input type="text" formControlName="website" class="form-control" placeholder="Nombre Banco">
+                </div>
+                <br><br>
+                <div class=" col-md-6">
+                    <label for="exampleInputEmail1">Paypal</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radioPaypal" id="radioPaypal1">
+                        <label class="form-check-label" for="radioPaypal1">
+                    Si
+                  </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radioPaypal" id="radioPaypal2">
+                        <label class="form-check-label" for="radioPaypal2">
+                    No
+                  </label>
+                    </div>
+                </div>
+                <br><br>
+                <div class=" col-md-6">
+                    <label for="exampleInputEmail1">Transferencia Banco Nacional</label><br>
+                    <select name="" id="" class="form-control">
+                      <option value="">Seleccione banco</option>
+                      <option value="">Mercantil</option>
+                      <option value="">Provicial</option>
+                      <option value="">BOD</option>
+                      <option value="">BNC</option>
+                      <option value="">Venezuela</option>
+                    </select>
+
+                </div>
+                <br><br>
+                <div class=" col-md-6">
+                    <label for="exampleInputEmail1">Pago Móvil Banco Nacional</label><br>
+                    <select name="" id="" class="form-control">
+                      <option value="">Seleccione banco</option>
+                      <option value="">Mercantil</option>
+                      <option value="">Provicial</option>
+                      <option value="">BOD</option>
+                      <option value="">BNC</option>
+                      <option value="">Venezuela</option>
+                    </select>
+
+                </div>
+                <br><br>
+                <div class=" col-md-6">
+                    <label for="exampleInputEmail1">Pagar por parte?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radioPagoParte" id="radioPagoParte1">
+                        <label class="form-check-label" for="radioPagoParte1">
+                        Si
+                      </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radioPagoParte" id="radioPagoParte2">
+                        <label class="form-check-label" for="radioPagoParte2">
+                        No
+                      </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input" class="control-label">Cantidad</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="" id="input" class="form-control" value="" required="required" title="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-row">
+                        <p>Imagen del pago (opcional) (peso max: 500kb )</p>
+                        <div class="col-xs-12">
+                            <!-- <input type="file" id="image" (change)="onSelectedFile($event)" />
+                      <div [innerHTML]="uploadError" class="error"></div>
+                      <div *ngIf="imagePath">
+                          <br />
+                          <img [src]="imagePath" width="50%" value="photo" class="shadow">
+                      </div> -->
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="clear"></div><br>
+
+            <input type="hidden" formControlName="id">
+            <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Registrar Pago</button>
+
+
+        </form>
+    </section>
+</div>
+<!-- End #main-->
+
+<app-footer></app-footer>

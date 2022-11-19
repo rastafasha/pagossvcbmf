@@ -1,0 +1,114 @@
+<app-header></app-header>
+
+<app-aside></app-aside>
+
+<!-- =======| Main |======= -->
+<div class="container" id="main" class="main" role="main" name="profile">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/">Panel User</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="col-xs-12 col-sm-2">
+            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            <button class="btn btn-primary" routerLink="../realizar-pago">
+              Realizar un pago
+            </button>
+        </div>
+    </div>
+
+
+
+
+
+    <section class="section dashboard">
+
+
+
+        <!-- Recent Pagos -->
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+                <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <li class="dropdown-header text-start">
+                            <h6>Filter</h6>
+                        </li>
+
+                        <li><a class="dropdown-item" href="#">Today</a></li>
+                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title"> <i class="bi bi-currency-exchange"> </i> Transacciones <span>| Todas</span>
+                    </h5>
+
+                    <table class="table table-borderless datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Referencia</th>
+                                <th scope="col">Metodo </th>
+                                <th scope="col">Monto</th>
+                                <th scope="col">Moneda</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><a routerLink="/payment-detail">#22782211</a></th>
+                                <td><i class="bx bxl-paypal"> </i> PayPal</td>
+                                <td>$122.9 </td>
+                                <td>USD</td>
+                                <td>Jun 20, 2022, 3:17:36 AM</td>
+                                <td><span class="badge bg-success">Verificado</span></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row"><a routerLink="/payment-detail">#52712</a></th>
+                                <td><i class="bx bxs-bank"> </i> TPago Mercantil</td>
+                                <td>Bs.200.00 </td>
+                                <td>VES</td>
+                                <td>Jun 20, 2022, 3:17:36 AM</td>
+                                <td><span class="badge bg-warning">Pendiente</span></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row"><a routerLink="/payment-detail">#33315551</a></th>
+                                <td><i class="bx bxs-bank"> </i> Transferencia Mercantil</td>
+                                <td>Bs. 271.00 </td>
+                                <td>VES</td>
+                                <td>Jun 20, 2022, 3:17:36 AM</td>
+                                <td><span class="badge bg-warning">Pendiente</span></td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- End Recent Pagos -->
+    </section>
+</div>
+<!-- End #main-->
+
+<app-footer></app-footer>
