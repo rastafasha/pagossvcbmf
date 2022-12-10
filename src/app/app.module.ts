@@ -6,8 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 //modules
@@ -21,6 +19,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
+import { NgxPayPalModule } from 'ngx-paypal';
+import { AuthModule } from './auth/auth.module';
+import { ConfModule } from './pages/conf/conf.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,16 +35,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PagesModule,
     ComponentsModule,
     NgxPaginationModule,
-    // CKEditorModule
+    NgxPayPalModule,
+    AuthModule,
+    ConfModule
+    // CKEditorModule,
 
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
-  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 
 import { map } from 'rxjs/operators';
+
+import { User } from '../models/user';
 import { Role } from '@app/models/role';
 
 const baseUrl = environment.apiUrl;
@@ -13,6 +15,7 @@ const baseUrl = environment.apiUrl;
 })
 export class RoleService {
 
+  public user: User;
   public role: Role;
 
   constructor(private http: HttpClient) { }
@@ -25,7 +28,7 @@ export class RoleService {
   get headers(){
     return{
       headers: {
-        'x-token': this.token
+        'token': this.token
       }
     }
   }
@@ -38,12 +41,17 @@ export class RoleService {
       )
   }
 
-  get(id: string): Observable<any> {
-    const url = `${baseUrl}/roles/${id}`;
+  getRolbyId(id: number): Observable<any> {
+    const url = `${baseUrl}/role/show/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
-        map((resp:{ok: boolean, rol: Role}) => resp.rol)
+        map((resp:{ok: boolean, role: Role}) => resp.role)
         );
+  }
+
+  updateRole(id: number) {
+    const url = `${baseUrl}/roles/update/${id}`;
+    return this.http.put(url, this.headers);
   }
 
 }

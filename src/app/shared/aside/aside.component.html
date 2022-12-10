@@ -13,47 +13,73 @@
 
 
 
-        <li class="nav-heading">Pages Admin</li>
-        <!-- <div *if="user.role === 'Superadmin' || 'Admin' "></div> -->
+        <div *ngIf="role.id === 1 || role.id === 2 ">
+            <li class="nav-heading" *ngIf="role.id === 1 ">Pages SuperAdmin</li>
+            <li class="nav-heading" *ngIf="role.id === 2">Pages Admin</li>
 
-        <!-- End Profile Page Nav -->
+            <!-- End Profile Page Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed cursor" routerLink="/users" routerLinkActive="active">
-                <i class="bx bxs-user-account"></i>
-                <span>Usuarios</span>
-            </a>
-        </li>
-        <!-- End Profile Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" routerLink="/dashboard/users" routerLinkActive="active">
+                    <i class="bx bxs-user-account"></i>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+            <!-- End Profile Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" routerLink="/dashboard/directorio" routerLinkActive="active">
+                    <i class="bx bxs-user-account"></i>
+                    <span>Directorio</span>
+                </a>
+            </li>
+            <!-- End Profile Page Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed cursor" routerLink="/payments" routerLinkActive="active">
-                <i class="bi bi-currency-exchange"> </i>
-                <span>Pagos</span>
-            </a>
-        </li>
-        <!-- End Payments Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" routerLink="/dashboard/payments" routerLinkActive="active">
+                    <i class="bi bi-currency-exchange"> </i>
+                    <span>Pagos</span>
+                </a>
+            </li>
+            <!-- End Payments Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]" routerLinkActive="active">
+                    <i class="bi bi-person"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" routerLink="/dashboard/configuraciones" routerLinkActive="active">
+                    <i class="bi bi-bricks"> </i>
+                    <span>Configuraciónes</span>
+                </a>
+            </li>
+            <!-- End Payments Page Nav -->
+        </div>
 
 
 
-        <li class="nav-heading">Pages User</li>
-        <!-- <div *if="user.role === 'Miembro' || 'Invitado' "></div> -->
-        <li class="nav-item">
-            <a class="nav-link collapsed cursor" routerLink="/profile/1" routerLinkActive="active">
-                <i class="bi bi-person"></i>
-                <span>Mi Cuenta</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed cursor" routerLink="/historial-pagos" routerLinkActive="active">
-                <i class="bi bi-currency-exchange"> </i>
-                <span>Mis Pagos</span>
-            </a>
-        </li>
+
+        <div *ngIf="role.id === 3 || role.id === 4">
+            <li class="nav-heading" *ngIf="role.id === 3 ">Pages Miembro</li>
+            <li class="nav-heading" *ngIf="role.id === 4">Pages Invitado</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]" routerLinkActive="active">
+                    <i class="bi bi-person"></i>
+                    <span>Mi Cuenta</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" routerLink="/dashboard/historial-pagos" routerLinkActive="active">
+                    <i class="bi bi-currency-exchange"> </i>
+                    <span>Mis Pagos</span>
+                </a>
+            </li>
+        </div>
+
         <!-- End Payments Page Nav -->
         <!-- todos -->
         <li class="nav-item">
-            <a class="nav-link collapsed cursor" routerLink="/help" routerLinkActive="active">
+            <a class="nav-link collapsed cursor" routerLink="/dashboard/help" routerLinkActive="active">
                 <i class="bi bi-question-circle"></i>
                 <span>Ayuda</span>
             </a>
@@ -61,7 +87,7 @@
         <!-- End F.A.Q Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed cursor" routerLink="/contact" routerLinkActive="active">
+            <a class="nav-link collapsed cursor" routerLink="/dashboard/contact" routerLinkActive="active">
                 <i class="bi bi-envelope"></i>
                 <span>Contacto</span>
             </a>

@@ -1,0 +1,36 @@
+.pagetitle h1 {
+    float: left;
+}
+
+.listapermisos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.listapermisos .label,
+.label {
+    width: 100%;
+}
+
+.listapermisos .item ul {
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    column-count: 2;
+}
+
+.listapermisos .item ul li {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    column-count: 2;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-bottom: 10px px;
+}
+
+.listapermisos .item b {
+    color: var(--azul);
+}

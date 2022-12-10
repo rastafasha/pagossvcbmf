@@ -1,0 +1,120 @@
+<!-- =======| Main |======= -->
+<div class="container" id="main" class="main" role="main" name="users">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-10">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/">Panel User</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="col-xs-12 col-sm-2 push-right">
+            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+    </div>
+
+
+
+    <section class="section dashboard">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{title}}</h4>
+                        <form class="form p-t-20 form-horizontal form-material" [formGroup]="planForm" (submit)="updateBlog()">
+                            <div class="form-group">
+                                <label for="exampleInputuname">Nombre<span class="required">*</span></label>
+                                <div class="input-group">
+
+                                    <input type="text" formControlName="name" class="form-control" id="exampleInputuname" placeholder="Nombre" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label style="line-height: 1.5;" class=" col-form-label font-weight-medium" for="text-input">Precio</label>
+                                    <div class="input-group">
+                                        <input type="number" formControlName="price" class="form-control" id="exampleInputuname">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row" style="margin-bottom: 25px;">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="select-input" style="line-height: 2.2;">Moneda <span class="required">*</span></label>
+                                                <select class="form-control " formControlName="currency_id" required>
+                                                  <option disabled  value="">SELECCIONAR</option>
+                                                  <option *ngFor="let item of currenciesAll" [value]="item.id">{{item.name}}</option>
+
+                                              </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="select-input" style="line-height:2.2;">Status</label>
+                                                <select class="form-control " formControlName="status">
+                                            <option  disabled value="">SELECCIONAR</option>
+                                            <option  [value]="true">Activo</option>
+                                            <option  [value]="false">PENDING</option>
+
+                                        </select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <button type="submit" [disabled]="planForm.invalid" class="btn btn-success waves-effect waves-light m-r-10 btn-block">
+                     <i class="fa fa-save"></i> Guardar cambios
+                    </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 animated fadeIn fast" *ngIf="planSeleccionado">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Image</h4>
+                        <div class="text-center">
+                            <!-- <img *ngIf="!imgTemp" [src]="planSeleccionado.image | imagenPipe: 'planes'  " class="img-responsive img-thumbnail" alt=""> -->
+                            <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar">
+                        </div>
+                        <input type="file" (change)="cambiarImagen($event.target.files[0])">
+                        <br>
+                        <br>
+                        <button type="button" [disabled]="!imagenSubir" (click)="subirImagen()" class="btn btn-success waves-effect waves-light m-r-10 btn-block">
+                  <i class="fa fa-save"></i> Cambiar imagen
+                 </button>
+                    </div>
+                    <!-- <div *ngIf="blogSeleccionado.video_review">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Video</h4>
+                                <iframe class="videom" [src]="getVideoIframe(blogSeleccionado.video_review)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; " allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</div>
+<!--/main-->

@@ -64,6 +64,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( ({id}) => this.getUser(id));
+    // this.getUser();
   }
 
   get f() { return this.form.controls; }
@@ -75,7 +76,7 @@ export class UserDetailsComponent implements OnInit {
 s
 
   getUser(id:number){
-    this.userService.getUser(id).subscribe(
+    this.userService.getUserById(id).subscribe(
       res =>{
         this.user = res;
         error => this.error = error

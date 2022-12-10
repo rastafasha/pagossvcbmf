@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Role } from '@app/models/role';
+import { User } from '@app/models/user';
+import { RoleService } from '@app/services/role.service';
+import { UserService } from '@app/services/user.service';
 
 @Component({
   selector: 'app-aside',
@@ -7,9 +12,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsideComponent implements OnInit {
 
-  constructor() { }
+  public user: User;
+
+  error: string;
+  role: Role;
+  id: number;
+
+  constructor(
+    private userService: UserService,
+    private roleService: RoleService,
+    private activatedRoute: ActivatedRoute,
+  ) {
+    this.user = this.userService.user;
+   }
 
   ngOnInit(): void {
+    this.getUser();
+    // this.activatedRoute.params.subscribe( ({id}) => this.getRolbyId(id));
+  }
+
+  getUser(): void {
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    // return this.userService.getUserLocalStorage();
+    // console.log(this.user);
+    // console.log(this.user.id);
+    this.getRolbyId(this.user.id);
+
+  }
+
+  getRolbyId(id:number): void {
+
+    this.roleService.getRolbyId(id).subscribe(
+      res =>{
+        this.role = res;
+        error => this.error = error
+      }
+    );
   }
 
 }

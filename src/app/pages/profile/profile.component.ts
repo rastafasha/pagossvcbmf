@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { UserService } from '@app/services/user.service';
 import { User } from '@app/models/user';
+import { Role, Permission } from '@app/models/role';
+import { RoleService } from '@app/services/role.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,24 +16,43 @@ export class ProfileComponent implements OnInit {
   identity: any;
   error: string;
 
+  user: User;
+  role: Role;
+  permisos: Permission;
+
   constructor(
     private location: Location,
     private userService: UserService,
+    private roleService: RoleService,
+    private activatedRoute: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
+    this.getUser();
+    this.activatedRoute.params.subscribe( ({id}) => this.getRolbyId(id));
   }
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
   }
+  getUser(): void {
 
-  getUser(): void {debugger
-    this.userService.profileUser().subscribe(
+    this.user = JSON.parse(localStorage.getItem('user'));
+    // return this.userService.getUserLocalStorage();
+
+  }
+
+
+
+  getRolbyId(id:number): void {
+
+    this.roleService.getRolbyId(id).subscribe(
       res =>{
-        this.identity = res;
+        this.role = res;
+        this.permisos = res.role[0].permissions;
         error => this.error = error
-        console.log(this.identity);
+        console.log(this.role)
+        console.log(this.permisos)
       }
     );
   }

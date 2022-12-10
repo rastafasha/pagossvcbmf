@@ -7,7 +7,9 @@ import { ComponentsModule } from '@app/components/components.module';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AppRoutingModule } from '@app/app-routing.module';
-
+import {SearchComponent} from './search/search.component';
+import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -15,19 +17,24 @@ import { AppRoutingModule } from '@app/app-routing.module';
     AsideComponent,
     FooterComponent,
     HeaderComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    SearchComponent,
+    ModalComponent
   ],
   exports: [
     AsideComponent,
     FooterComponent,
     HeaderComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    SearchComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
     ComponentsModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

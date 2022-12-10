@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 //import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 //Services
@@ -7,6 +7,8 @@ import { AlertService } from '../../services/alert.service';
 import { AccountService } from '../../services/account.service';
 import { UserService } from '@app/services/user.service';
 import { User } from '@app/models/user';
+import { Role } from '@app/models/role';
+import { RoleService } from '@app/services/role.service';
 
 @Component({
   selector: 'app-header',
@@ -15,30 +17,35 @@ import { User } from '@app/models/user';
 })
 export class HeaderComponent implements OnInit {
 
-  public identity: any;
 
+  public user: User;
+  role: Role;
   error: string;
 
   constructor(
     private alertService: AlertService,
     private userService: UserService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private roleService: RoleService,
     ) {
-      this.identity = this.userService.usuario;
+      this.user = this.accountService.user;
     }
 
   ngOnInit(): void {
-    console.log(this.identity);
+
+    this.getUser();
   }
 
-  getUser(): void {debugger
-    this.userService.profileUser().subscribe(
-      res =>{
-        this.identity = res;
-        error => this.error = error
-        console.log(this.identity);
-      }
-    );
+  // ngDoCheck(): void {
+  //   this.user = this.userService.user;
+  // }
+
+  getUser(): void {
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    // return this.userService.getUserLocalStorage();
+    // console.log(this.user);
+
   }
 
   prueba(): void {
@@ -66,5 +73,7 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.accountService.logout();
   }
+
+
 
 }

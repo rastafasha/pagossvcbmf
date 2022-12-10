@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { first, Observable } from 'rxjs';
 //Models
 import { User } from '@app/models/user';
 import { Role } from '@app/models/role';
@@ -34,8 +33,8 @@ export class UsersComponent implements OnInit {
   error: string;
   msm_error: string;
 
-  private http: HttpClient;
-  ServerUrl = environment.apiDirectorio;
+
+  ServerUrl = environment.apiUrl;
   doctores;
 
   constructor(
@@ -43,6 +42,7 @@ export class UsersComponent implements OnInit {
     private roleService: RoleService,
     private confirmService: ConfirmService,
     private location: Location,
+    private http: HttpClient,
     handler: HttpBackend
     ) {
       this.http = new HttpClient(handler);
@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
 
     this.getUsers();
-    this.getRoles();
+    // this.getRoles();
     // this.closeMenu();
   }
 
@@ -62,22 +62,20 @@ export class UsersComponent implements OnInit {
       res =>{
         this.usuarios = res;
         error => this.error = error
-        console.log(this.usuarios);
       }
     );
   }
 
 
-  getRoles(): void {
+  // getRoles(): void {
 
-        this.roleService.getAll().subscribe(
-          res =>{
-            this.roles = res;
-            error => this.error = error
-            console.log(this.roles);
-          }
-        );
-  }
+  //       this.roleService.getAll().subscribe(
+  //         res =>{
+  //           this.roles = res;
+  //           error => this.error = error
+  //         }
+  //       );
+  // }
 
   showDeleteConfirm(id: any) {
     this.confirmService.openConfirmDialog("Seguro que desea borrar este usuario?" + id, "Eliminar", this.proced, id.toString(),this);
@@ -116,33 +114,33 @@ export class UsersComponent implements OnInit {
   }
 
 
-  search( text: string) {// funciona, devuelve la busqueda
+  // search( text: string) {// funciona, devuelve la busqueda
 
 
-    if( this.search.length == 0){
-      return;
-    }
+  //   if( this.search.length == 0){
+  //     return;
+  //   }
 
-    return this.http.get(this.ServerUrl + 'api_directorio/search?text=' + text )
-      .toPromise()
-      .then(doctores=>{
-        this.doctores= {'results': JSON.stringify(doctores, null),
+  //   return this.http.get(this.ServerUrl + 'api_directorio/search?text=' + text )
+  //     .toPromise()
+  //     .then(doctores=>{
+  //       this.doctores= {'results': JSON.stringify(doctores, null),
 
-        'json': ()=>{
-          return doctores;
-        }
+  //       'json': ()=>{
+  //         return doctores;
+  //       }
 
-      };
+  //     };
 
-      // devolver el array
-      const mapped = Object.keys(doctores)
-      .map(key => ({type: key, value: doctores[key]}));
-      console.log(doctores);
-      this.doctores = doctores;
+  //     // devolver el array
+  //     const mapped = Object.keys(doctores)
+  //     .map(key => ({type: key, value: doctores[key]}));
+  //     console.log(doctores);
+  //     this.doctores = doctores;
 
-      });
+  //     });
 
-  }
+  // }
 
   closeMenu(){
     var menuLateral = document.getElementsByClassName("sidebar");

@@ -21,30 +21,31 @@
 
                                 <div class="pt-4 pb-2">
                                     <h5 class="card-title text-center pb-0 fs-4">Bienvenido!</h5>
-                                    <p class="text-center small">Ingrese su nombre de usuario y contraseña para entrar.
+                                    <p class="text-center small">Ingrese su nombre de email y contraseña para entrar.
                                     </p>
                                 </div>
 
-                                <form [formGroup]="loginForm" (ngSubmit)="login()" class="row g-3 needs-validation" novalidate>
+                                <!-- <form [formGroup]="loginForm" (ngSubmit)="login()" class="row g-3 needs-validation" novalidate> -->
+                                <form [formGroup]="loginForm" id="loginform" (ngSubmit)="login()" class="row g-3 needs-validation" autocapitalize="off">
 
                                     <div class="col-12">
-                                        <label for="username" class="form-label">Nombre de Usuario</label>
+                                        <label for="email" class="form-label">Correo Electrónico</label>
                                         <div class="input-group has-validation">
-                                            <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="text" id="username" [formControl]="username" class="form-control" required>
-                                            <div class="invalid-feedback">Por favor, ingrese su nombre de usuario</div>
+
+                                            <input type="text" id="email" formControlName="email" class="form-control" required>
+                                            <div class="invalid-feedback">Por favor, ingrese su correo electrónico</div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="password" class="form-label">Contraseña</label>
-                                        <input type="password" [formControl]="password" class="form-control" id="password" required>
+                                        <input type="password" formControlName="password" class="form-control" id="password" required>
                                         <div class="invalid-feedback">Por favor, ingrese una contraseña.</div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" [formControl]="remember" id="remember">
+                                            <input class="form-check-input" type="checkbox" formControlName="remember" id="remember">
                                             <label class="form-check-label" for="remember">Recuerdame</label>
                                         </div>
                                         <br>
