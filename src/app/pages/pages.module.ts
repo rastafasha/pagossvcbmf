@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 //componentes
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -13,7 +12,7 @@ import { UsersComponent } from './users/users.component';
 //modulos
 import { SharedModule } from '@app/shared/shared.module';
 import { ComponentsModule } from '@app/components/components.module';
-import { NgForm, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 //helpers
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -31,13 +30,16 @@ import { UserPagarComponent } from './user-pagar/user-pagar.component';
 import { QRCodeModule } from 'angular2-qrcode';
 // paginacion
 import { NgxPaginationModule } from 'ngx-pagination';
-import { AppRoutingModule } from '@app/app-routing.module';
+
 import { UserProfileComponent } from './user-profile/user-profile.component';
+// import { ConfModule } from './conf/conf.module';
+import {PagesComponent} from './pages.component';
+import { DirectorioIndexComponent } from './directorio/directorio-index/directorio-index.component';
+
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    LoginComponent,
     PaymentDetailsComponent,
     PaymentsComponent,
     ProfileComponent,
@@ -50,11 +52,12 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     DashboardAdminComponent,
     UserPagarComponent,
     UserProfileComponent,
+    PagesComponent,
+    DirectorioIndexComponent
 
   ],
   exports: [
     DashboardComponent,
-    LoginComponent,
     PaymentDetailsComponent,
     PaymentsComponent,
     ProfileComponent,
@@ -67,21 +70,20 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     DashboardAdminComponent,
     UserPagarComponent,
     UserProfileComponent,
+    DirectorioIndexComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ComponentsModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     HttpClientModule,
     NgxPaginationModule,
     QRCodeModule,
-    AppRoutingModule
+    // ConfModule
 
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
-  ],
+  ]
 })
 export class PagesModule { }

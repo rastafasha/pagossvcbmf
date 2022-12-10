@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Directorio } from '../models/directorio';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const baseUrl = environment.apiUrl;
@@ -15,7 +11,7 @@ const baseUrl = environment.apiUrl;
 })
 export class DirectorioService {
 
-  public directorio: Directorio;
+  public directories: Directorio;
 
 
   constructor(private http: HttpClient) { }
@@ -28,41 +24,41 @@ export class DirectorioService {
   get headers(){
     return{
       headers: {
-        'x-token': this.token
+        'token': this.token
       }
     }
   }
 
 
   getDirectorios() {
-    const url = `${baseUrl}/directorios`;
+    const url = `${baseUrl}/directories`;
     return this.http.get<any>(url)
       .pipe(
-        map((resp:{ok: boolean, directorios: Directorio}) => resp.directorios)
+        map((resp:{ok: boolean, directories: Directorio}) => resp.directories)
       )
   }
 
-  getDirectorio(id: number) {
-    const url = `${baseUrl}/directorios/${id}`;
+  getDirectorio(directory: any) {
+    const url = `${baseUrl}/directories/show/${directory}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
-        map((resp:{ok: boolean, directorio: Directorio}) => resp.directorio)
+        map((resp:{ok: boolean, directory: Directorio}) => resp.directory)
         );
   }
 
 
-  createDirectorio(directorio:any) {
-    const url = `${baseUrl}/directorios`;
-    return this.http.post(url, directorio, this.headers);
+  createDirectorio(directory:any) {
+    const url = `${baseUrl}/directory/store`;
+    return this.http.post(url, directory, this.headers);
   }
 
-  updateDirectorio(directorio:any, id: number) {
-    const url = `${baseUrl}/directorios/${directorio._id}`;
-    return this.http.put(url, directorio, this.headers);
+  updateDirectorio(directory:any) {
+    const url = `${baseUrl}/directories/${directory}`;
+    return this.http.put(url, directory, this.headers);
   }
 
   deleteDirectorio(id: number) {
-    const url = `${baseUrl}/directorios/${id}`;
+    const url = `${baseUrl}/directories/${id}`;
     return this.http.delete(url, this.headers);
   }
 

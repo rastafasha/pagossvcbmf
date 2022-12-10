@@ -2,6 +2,7 @@ export class Role {
     id:number = 0;
     name:string = "";
     description:string = "";
+    permissions: Permission[];
 
     constructor(id: number, name: string, description: string) {}
 
@@ -10,3 +11,18 @@ export class Role {
     }
 }
 
+
+
+
+
+export class Permission {
+  id: number;
+  name: string;
+  description: string;
+  pivot: Pivot;
+}
+
+interface Pivot {
+  role_id: number;
+  permission_id: number;
+}

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-// import * as $ from "jquery";
-
-declare var jQuery:any;
-declare var $:any;
+declare var $; //se daclara el jquery
 
 @Component({
   selector: 'app-dolar-today',

@@ -12,7 +12,7 @@
         </thead>
         <tbody *ngFor="let pago of pagos | slice: 0:5">
             <tr>
-                <th scope="row"><a [routerLink]="['/payment-detail', pago.id]">{{pago.referencia}}</a></th>
+                <th scope="row"><a [routerLink]="['dashboard/payment-detail', pago.id]">{{pago.referencia}}</a></th>
                 <td>{{pago.metodo}}</td>
                 <td>{{pago.monto}}</td>
                 <td>{{pago.moneda_codigo}}</td>
@@ -22,7 +22,7 @@
         </tbody>
     </table>
     <div class="col-xs-12 col-sm-3">
-        <button class="btn btn-primary" routerLink="../payments">
+        <button class="btn btn-primary" routerLink="/dashboard/payments">
       Ver todos
     </button>
     </div>

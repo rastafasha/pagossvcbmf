@@ -1,0 +1,96 @@
+.formcompr,
+.instruccioness {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    float: left;
+}
+
+.imagenypaypal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    float: left;
+}
+
+.formcompr .form-group {
+    display: flex;
+    float: left;
+    padding: 5px;
+    margin: 0;
+    box-sizing: content-box;
+    flex-direction: column;
+    align-items: start;
+    align-self: flex-start;
+    flex-wrap: wrap;
+}
+
+.formcompr label {
+    font-size: 14px;
+}
+
+.formcompr .form-group label {
+    padding-left: 5px;
+}
+
+.vibiblepayp {
+    display: none;
+}
+
+.vibiblepaypblok {
+    display: block;
+}
+
+.instruccioness img,
+.instruccioness .info {
+    display: flex;
+    float: left;
+    box-sizing: content-box;
+    flex-direction: column;
+    align-items: start;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+.instruccioness img {}
+
+.carousel-indicators .active {
+    opacity: 1;
+    background-color: red;
+}
+
+.datosTranf {
+    display: grid;
+    grid-template-columns: repeat(30%, 1fr);
+    grid-auto-flow: column;
+    border-top: 1px solid #ccc;
+}
+
+.datosTranf .datos {
+    display: flex;
+    float: left;
+    padding: 5px;
+    margin: 0;
+    box-sizing: content-box;
+    flex-direction: column;
+    align-items: start;
+    align-self: flex-start;
+    flex-wrap: wrap;
+}
+
+.datosTranf .datos h3 {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.datosTranf .datos p {
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+}
+
+.info ol {
+    font-size: 14px;
+}

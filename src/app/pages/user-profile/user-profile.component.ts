@@ -16,7 +16,7 @@ import{Payment} from '@app/models/payment';
 export class UserProfileComponent implements OnInit {
 
   title = "Detalles de la cuenta";
-  usuario: User;
+  user: User;
   error: string;
   directorios: Directorio;
   pagos: Payment;
@@ -34,11 +34,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser(id:number){
-    this.userService.getUser(id).subscribe(
+    this.userService.getUserById(id).subscribe(
       res =>{
-        this.usuario = res;
+        this.user = res;
         error => this.error = error
-        console.log(this.usuario);
+        console.log(this.user);
       }
     );
   }

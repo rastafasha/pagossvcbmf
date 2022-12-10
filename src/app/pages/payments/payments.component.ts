@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Payment } from '@app/models/payment';
 import { PaymentService } from '@app/services/payment.service';
 
+
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
@@ -15,6 +16,8 @@ export class PaymentsComponent implements OnInit {
   error:string;
   p: number = 1;
   count: number = 8;
+
+
 
   constructor(
     private location: Location,
@@ -37,5 +40,16 @@ export class PaymentsComponent implements OnInit {
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
   }
+
+  openModal(id, event){
+    var verPaypalpay = document.getElementsByClassName("vibiblepayp");
+      for (var i = 0; i<verPaypalpay.length; i++) {
+        verPaypalpay[i].classList.add("vibiblepaypblok");
+
+      }
+
+      this.paymentService.get(id).subscribe
+  }
+
 
 }

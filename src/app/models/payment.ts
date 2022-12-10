@@ -1,19 +1,25 @@
+import { User } from "./user";
+
 export class Payment {
    id:number;
-   user_id:number;
-   producto_id:number;
-   referencia:string;
-   metodo:string;
-   bank_name:string;
+   user_id?:User;
+   metodo?:string;
+   bank_name?:string;
    monto:number;
-   validacion:number;
-   moneda_id:number;
-   moneda_codigo:string;
-   nombre:string;
-   email:string;
-   status:string;
+   moneda_id?:number;
+   moneda_codigo?:string;
+   referencia?:string;
+   imagen?:string;
+   fecha?:Date;
+
+   producto_id?:number;
+   nombre?:User;
+   email?:User;
+
+   status?:string;
+   validacion?:number;
   //  status:'Pendiente' | 'Aprobado' | 'Rechazado';
-   txn_id:string;
+
    updated_at:Date;
    created_at:Date;
 

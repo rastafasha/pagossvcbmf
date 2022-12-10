@@ -1,0 +1,21 @@
+.card-body {
+    padding: 14px;
+}
+
+.configuraciones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.configuraciones .card-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.configuraciones .card-body .bi {
+    font-size: 46px;
+    color: var(--azul);
+}

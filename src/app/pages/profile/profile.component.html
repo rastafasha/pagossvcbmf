@@ -1,7 +1,3 @@
-<app-header></app-header>
-
-<app-aside></app-aside>
-
 <!-- =======| Main |======= -->
 <div class="container" id="main" class="main" role="main" name="profile">
 
@@ -9,7 +5,8 @@
         <div class="col-xs-12 col-sm-10">
             <!-- Page Title -->
             <div class="pagetitle">
-                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <h1><i class="bx bxs-user-account"></i> {{title}} |</h1>
+                <h3>{{user.username}}</h3>
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
@@ -78,50 +75,54 @@
                                 <br />
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label ">
-                                        <i class="bi bi-person-circle"></i> Nombre
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="col-lg-3 col-md-4 label ">
+                                            <i class="bi bi-person-circle"></i> Nombre
+                                        </div>
+                                        <div class="col-lg-9 col-md-8">Malcolm Cordova</div>
                                     </div>
-                                    <div class="col-lg-9 col-md-8">Malcolm Cordova</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-bank2"></i> Universidad</div>
-                                    <div class="col-lg-9 col-md-8">Universidad Central de Venezuela.</div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi  bi-award"></i> Especialidad</div>
-                                    <div class="col-lg-9 col-md-8">Cirugía Bucomaxilofacial <span>- 2008</span></div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-file-text"></i> Dirección</div>
-                                    <div class="col-lg-9 col-md-8">
-                                        <p>Av. Francisco Solano, Edif. Galerias Bolivar, Torre B, Piso 3, Ofic: 36-B. Grupo Dental Acuario, Urb. Sabana Grande. Caracas -1050-</p>
-
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="col-lg-3 col-md-4 label ">
+                                            <i class="bi bi-person-circle"></i> Username
+                                        </div>
+                                        <div class="col-lg-9 col-md-8">{{user.username}}</div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6">
+                                        <div class="col-lg-3 col-md-4 label"><i class="bi bi-envelope"></i> Email</div>
+                                        <div class="col-lg-9 col-md-8">{{user.email}}</div>
                                     </div>
                                 </div>
+                                <br>
+                                <hr>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">
-                                        <i class="bi bi-geo"></i> Estado
+                                    <div class="col-xs-6 col-sm-6">
+                                        <div class="col-lg-3 col-md-4 label"><i class="bi bi-bank2"></i> Tipo Registro</div>
+                                        <div class="col-lg-9 col-md-8">{{role.name}}</div>
                                     </div>
-                                    <div class="col-lg-9 col-md-8">Distrito Federal</div>
+                                    <div class="col-xs-6 col-sm-6">
+                                        <div class="col-lg-3 col-md-4 label"><i class="bi  bi-award"></i> Descripción</div>
+                                        <div class="col-lg-9 col-md-8">{{role.description}}</div>
+                                    </div>
+                                </div>
+                                <br>
+                                <hr>
+
+                                <div class="column listapermisos">
+                                    <div class="col-lg-3 col-md-4 label labelll"><i class="bi bi-file-text"></i> Permisos</div>
+                                    <div class="clear"></div>
+                                    <div class="item">
+
+                                        <ul>
+                                            <li *ngFor="let permiso of role.permissions">
+                                                <b>{{permiso.name}}</b>{{permiso.description}}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-telephone"></i> Teléfonos</div>
-                                    <div class="col-lg-9 col-md-8">+58(212)761-53.84 / 763-46.90</div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-envelope"></i> Email</div>
-                                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
-                                </div>
+
 
                             </div>
 
@@ -387,5 +388,3 @@
 
 </div>
 <!--/main-->
-
-<app-footer></app-footer>

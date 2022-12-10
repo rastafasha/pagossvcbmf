@@ -1,7 +1,3 @@
-<app-header></app-header>
-
-<app-aside></app-aside>
-
 <!-- =======| Main |======= -->
 <div class="container" id="main" class="main" role="main" name="profile">
 
@@ -38,7 +34,7 @@
                 <p><b>Referencia:</b> {{pago.referencia}}</p>
                 <p><b>Status:</b> <span class="badge bg-primary">{{pago.status}}</span></p>
                 <p><b>Monto:</b> {{pago.moneda_codigo}} {{pago.monto}}</p>
-                <p><b>ProductoId:</b> {{pago.producto_id}}</p>
+                <!-- <p><b>ProductoId:</b> {{pago.producto_id}}</p> -->
             </div>
             <div class="col-xs-12 col-sm-6">
                 <p><b>Email:</b> {{pago.email}}</p>
@@ -47,7 +43,7 @@
                     <p><b>Nombre del Banco:</b> {{pago.bank_name}}</p>
                 </div>
                 <p><b>Validación:</b> {{pago.validacion}}</p>
-                <p><b>Txn Id:</b> {{pago.txn_id}}</p>
+                <!-- <p><b>Txn Id:</b> {{pago.txn_id}}</p> -->
             </div>
 
         </div>
@@ -55,4 +51,3 @@
     </section>
 </div>
 <!-- End #main-->
-<app-footer></app-footer>

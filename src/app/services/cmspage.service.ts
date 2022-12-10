@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class CmspageService {
 
-  ServerUrl = environment.apiDirectorio;
+  ServerUrl = environment.apiUrl;
   errorData: {};
 
   httpOptions = {
@@ -25,7 +25,7 @@ export class CmspageService {
 
 
   contactForm(formdata: Contact) {
-    return this.http.post<Contact>(this.ServerUrl + 'api_contact/contact', formdata,  this.httpOptions)
+    return this.http.post<Contact>(this.ServerUrl + '/contact', formdata,  this.httpOptions)
     .pipe(
       catchError(this.handleError)
     );

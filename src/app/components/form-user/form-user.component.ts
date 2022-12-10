@@ -181,7 +181,7 @@ constructor(
     const id = this.directorioForm.get('id')?.value;
 
     if (id) {
-      this.directorioService.updateDirectorio(formData, +id).subscribe(
+      this.directorioService.updateDirectorio(formData).subscribe(
         res => {
           if (this.error) {
             // this.uploadError = res.message;

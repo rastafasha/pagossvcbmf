@@ -1,7 +1,3 @@
-<app-header></app-header>
-
-<app-aside></app-aside>
-
 <!-- =======| Main |======= -->
 <div class="container" id="main" class="main" role="main" name="profile">
 
@@ -24,7 +20,7 @@
             <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
         <div class="col-xs-12 col-sm-3">
-            <button class="btn btn-primary" routerLink="../realizar-pago">
+            <button class="btn btn-primary" routerLink="/dashboard/realizar-pago">
               Realizar un pago
             </button>
         </div>
@@ -72,7 +68,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row"><a routerLink="/payment-detail">#22782211</a></th>
+                                <th scope="row"><a routerLink="/dashboard/payment-detail">#22782211</a></th>
                                 <td><i class="bx bxl-paypal"> </i> PayPal</td>
                                 <td>$122.9 </td>
                                 <td>USD</td>
@@ -81,7 +77,7 @@
 
                             </tr>
                             <tr>
-                                <th scope="row"><a routerLink="/payment-detail">#52712</a></th>
+                                <th scope="row"><a routerLink="/dashboard/payment-detail">#52712</a></th>
                                 <td><i class="bx bxs-bank"> </i> TPago Mercantil</td>
                                 <td>Bs.200.00 </td>
                                 <td>VES</td>
@@ -90,7 +86,7 @@
 
                             </tr>
                             <tr>
-                                <th scope="row"><a routerLink="/payment-detail">#33315551</a></th>
+                                <th scope="row"><a routerLink="/dashboard/payment-detail">#33315551</a></th>
                                 <td><i class="bx bxs-bank"> </i> Transferencia Mercantil</td>
                                 <td>Bs. 271.00 </td>
                                 <td>VES</td>
@@ -110,5 +106,3 @@
     </section>
 </div>
 <!-- End #main-->
-
-<app-footer></app-footer>

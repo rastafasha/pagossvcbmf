@@ -1,0 +1,55 @@
+<!-- =======| Main |======= -->
+<div class="container" id="main" class="main" role="main" name="users">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-10">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/">Panel User</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="col-xs-12 col-sm-2 push-right">
+            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+    </div>
+
+
+
+    <section class="section dashboard">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{title}}</h4>
+                        <form class="form p-t-20 form-horizontal form-material" [formGroup]="currencyForm" (submit)="updateBlog()">
+                            <div class="form-group" style="margin-bottom: 25px;">
+                                <label for="exampleInputuname">Nombre<span class="required">*</span></label>
+                                <div class="input-group">
+
+                                    <input type="text" formControlName="name" class="form-control" id="exampleInputuname" placeholder="Nombre" required>
+                                </div>
+                            </div>
+                            <button type="submit" [disabled]="currencyForm.invalid" class="btn btn-success waves-effect waves-light m-r-10 btn-block">
+                     <i class="fa fa-save"></i> Guardar cambios
+                    </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</div>
+<!--/main-->
