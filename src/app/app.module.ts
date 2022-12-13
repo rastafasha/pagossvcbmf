@@ -22,6 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { AuthModule } from './auth/auth.module';
 import { ConfModule } from './pages/conf/conf.module';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ConfModule } from './pages/conf/conf.module';
     NgxPaginationModule,
     NgxPayPalModule,
     AuthModule,
-    ConfModule
+    ConfModule,
+    PipesModule
     // CKEditorModule,
 
   ],

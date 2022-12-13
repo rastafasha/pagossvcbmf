@@ -26,7 +26,7 @@
 
 
         <section class="cmspage mt-4 contact">
-            <div class="container barraseccion">
+            <div class="container card">
                 <div class="page-desc row">
                     <div class="col-12 col-sm-6 col-md-8">
                         <form (ngSubmit)="enviarEmail()" [formGroup]="contactForm">
@@ -39,11 +39,11 @@
                           </div>
                       </div> -->
                             </div>
-                            <div class=" form-groupcol-12 col-sm-6" style="float:left">
+                            <div class=" form-group col-12 col-sm-6" style="float:left">
                                 <label>Teléfono <span class="required">*</span></label>
                                 <input type="text" name="phone" id="phone" formControlName="phone" class="form-control" placeholder=" Telefono">
                             </div>
-                            <div class=" form-groupcol-12">
+                            <div class=" form-group col-12">
                                 <label>Email <span class="required">*</span></label>
                                 <input type="text" name="email" id="email" formControlName="email" class="form-control" placeholder="E-Mail" required>
                                 <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
@@ -51,7 +51,7 @@
                             <div *ngIf="email?.errors.email"> {{ 'Email must be a valid email address.' }}</div>
                         </div> -->
                             </div>
-                            <div class=" form-groupcol-12">
+                            <div class=" form-group col-12">
                                 <label>Mensaje <span class="required">*</span></label>
                                 <textarea name="message" id="message" formControlName="message" rows="5" class="form-control" placeholder="Comentario" required></textarea>
                                 <!-- <div *ngIf="message.invalid && (message.dirty || message.touched)" class="error">

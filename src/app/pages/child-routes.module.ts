@@ -49,12 +49,12 @@ const childRoutes: Routes = [
 
     { path: 'planes', component: PlanesIndexComponent, data:{title:'Planes'} },
     { path: 'plan/:id', component: PlanesIndexComponent, data:{title:'Plan'} },
-    { path: 'plan/create', component: PlanesEditComponent, data:{title:'Crear Plan'} },
+    { path: 'planes/create', component: PlanesEditComponent, data:{title:'Crear Plan'} },
     { path: 'plan/edit/:id', component: PlanesEditComponent, data:{title:'Editar Plan'} },
 
     { path: 'currencies', component: CurrenciesIndexComponent, data:{title:'Monedas'} },
     { path: 'currency/:id', component: CurrenciesIndexComponent, data:{title:'Moneda'} },
-    { path: 'currency/create', component: CurrenciesEditComponent, data:{title:'Crear Moneda'} },
+    { path: 'currencies/create', component: CurrenciesEditComponent, data:{title:'Crear Moneda'} },
     { path: 'currency/edit/:id', component: CurrenciesEditComponent, data:{title:'Editar Moneda'} },
 
     { path: 'help', component: HelpComponent, data:{title:'Ayuda'} },

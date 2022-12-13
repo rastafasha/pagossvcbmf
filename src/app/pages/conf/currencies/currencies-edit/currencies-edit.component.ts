@@ -53,23 +53,23 @@ export class CurrenciesEditComponent implements OnInit {
     })
   }
 
-  cargarBlog(id: any){debugger
+  cargarBlog(id: any){
 
 
     if (id !== null && id !== undefined) {
-      this.title = 'Edit Moneda';
-      this.currenciesService.getCurrency(this.currency).subscribe(
+      this.title = 'Editando Moneda';
+      this.currenciesService.getCurrency(id).subscribe(
         res => {
           this.currencyForm.patchValue({
             id: res.id,
             name: res.name,
           });
-          // this.planSeleccionado = res;
-          // console.log(this.planSeleccionado);
+          this.currencySeleccionado = res;
+          console.log(this.currencySeleccionado);
         }
       );
     } else {
-      this.title = 'Crear Moneda';
+      this.title = 'Creando Moneda';
     }
 
   }

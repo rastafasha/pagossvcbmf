@@ -1,4 +1,31 @@
-.formcompr,
+.formcompr {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 3 / 2;
+}
+
+.div2 {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.div3 {
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+.div4 {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.div5 {
+    grid-area: 2 / 3 / 3 / 4;
+}
+
 .instruccioness {
     display: flex;
     flex-direction: row;
@@ -18,11 +45,12 @@
     float: left;
     padding: 5px;
     margin: 0;
-    box-sizing: content-box;
+    box-sizing: inherit;
     flex-direction: column;
     align-items: start;
     align-self: flex-start;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .formcompr label {
@@ -45,15 +73,26 @@
 .instruccioness .info {
     display: flex;
     float: left;
-    box-sizing: content-box;
-    flex-direction: column;
-    align-items: start;
-    align-self: flex-start;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
     flex-wrap: wrap;
     width: 50%;
+    padding: 5px;
 }
 
 .instruccioness img {}
+
+.instruccioness b,
+.datos b,
+.instruccioness h3,
+.datos h3 {
+    color: var(--azul);
+}
+
+.datos h3 {
+    width: 100%;
+}
 
 .carousel-indicators .active {
     opacity: 1;
@@ -65,6 +104,8 @@
     grid-template-columns: repeat(30%, 1fr);
     grid-auto-flow: column;
     border-top: 1px solid #ccc;
+    margin-top: 20px;
+    padding-top: 30px;
 }
 
 .datosTranf .datos {
@@ -73,7 +114,7 @@
     padding: 5px;
     margin: 0;
     box-sizing: content-box;
-    flex-direction: column;
+    flex-direction: inherit;
     align-items: start;
     align-self: flex-start;
     flex-wrap: wrap;
@@ -89,8 +130,62 @@
     font-size: 13px;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+    width: 100%;
 }
 
-.info ol {
+.info ol li {
     font-size: 14px;
+}
+
+.info h2 {
+    padding-left: 33%;
+    color: var(--azul);
+    font-size: 40px;
+}
+
+.info p {
+    padding-left: 20%;
+}
+
+.info ul {
+    display: inline-flex;
+    list-style: none;
+}
+
+.info ul li {
+    font-size: 16px;
+    margin-right: 10px;
+    background-color: #f9f8f8 !important;
+    color: var(--azul);
+}
+
+.formPagar {
+    display: flex;
+    flex-direction: column;
+}
+
+.formPagar .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    align-self: center;
+}
+
+.form-group .form-check,
+.form-group .form-check-label {
+    background-color: transparent;
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.form-group .form-check:hover,
+.form-group .form-check-label:hover {
+    background-color: #f8f8f8;
+    padding: 5px;
 }

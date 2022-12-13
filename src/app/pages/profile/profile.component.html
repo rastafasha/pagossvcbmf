@@ -111,13 +111,17 @@
                                 <div class="column listapermisos">
                                     <div class="col-lg-3 col-md-4 label labelll"><i class="bi bi-file-text"></i> Permisos</div>
                                     <div class="clear"></div>
-                                    <div class="item">
+                                    <div class="item" *ngIf="role.permissions.length > 0">
 
                                         <ul>
                                             <li *ngFor="let permiso of role.permissions">
                                                 <b>{{permiso.name}}</b>{{permiso.description}}
                                             </li>
                                         </ul>
+                                    </div>
+                                    <div class="item " *ngIf="role.permissions.length == 0">
+
+                                        <p> Su tipo de rol no posee permisos, su rol es invitado</p>
                                     </div>
                                 </div>
 

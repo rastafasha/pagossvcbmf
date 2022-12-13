@@ -48,9 +48,15 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link collapsed cursor" routerLink="/dashboard/historial-pagos" routerLinkActive="active">
+                    <i class="bi bi-currency-exchange"> </i>
+                    <span>Mis Pagos</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed cursor" routerLink="/dashboard/configuraciones" routerLinkActive="active">
                     <i class="bi bi-bricks"> </i>
-                    <span>Configuraciónes</span>
+                    <span>Configuraciones</span>
                 </a>
             </li>
             <!-- End Payments Page Nav -->
@@ -90,6 +96,13 @@
             <a class="nav-link collapsed cursor" routerLink="/dashboard/contact" routerLinkActive="active">
                 <i class="bi bi-envelope"></i>
                 <span>Contacto</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed cursor" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Salir</span>
             </a>
         </li>
         <!-- End Contact Page Nav -->

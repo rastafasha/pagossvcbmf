@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Role } from '@app/models/role';
 import { User } from '@app/models/user';
+import { AccountService } from '@app/services/account.service';
 import { RoleService } from '@app/services/role.service';
 import { UserService } from '@app/services/user.service';
 
@@ -22,6 +23,7 @@ export class AsideComponent implements OnInit {
     private userService: UserService,
     private roleService: RoleService,
     private activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
   ) {
     this.user = this.userService.user;
    }
@@ -49,6 +51,10 @@ export class AsideComponent implements OnInit {
         error => this.error = error
       }
     );
+  }
+
+  logout(): void {
+    this.accountService.logout();
   }
 
 }

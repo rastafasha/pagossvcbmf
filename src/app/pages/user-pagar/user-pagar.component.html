@@ -42,22 +42,30 @@
                     <div class="instruccioness">
                         <img src="./assets/img/paypal-pay01.png" alt="">
                         <div class="info">
-                            <h3>Como pagar?</h3>
+                            <h2>¿Cómo pagar?</h2>
                             <p>Dirijase a la app o web del metodo preferido, </p>
+                            <ul>
+                                <li class="badge bg-primary">Paypal</li>
+                                <li class="badge bg-primary">Zelle</li>
+                                <li class="badge bg-primary">Pago Móvil</li>
+                                <li class="badge bg-primary">Transferencia</li>
+                            </ul>
                             <ol>
                                 <li>Copie los datos suministrados para procesar el pago: <br>
                                     <span>
-                                    Correo: correopago@gmail.com, <br>
-                                    Metodo: Transferencia, <br>
-                                    Monto: $USD 40.00, <br>
+                                     <b>Correo</b><br>
+                                    <b>Metodo</b><br>
+                                   <b>Banco</b><br>
+                                   <b>Monto</b><br>
                                   </span>
                                 </li><br>
-                                <li>Dirijase a la app o web del metodo preferido</li>
+
                                 <li>Ingrese los datos correctamente, y verifique antes de pagar </li>
-                                <li>Copiar el numero de referencia del pago o transferencia </li>
-                                <li>Pegar el numero de la referencia en el campo correspondido </li>
+                                <li>Copiar el <b>Número de referencia</b> del pago o transferencia </li>
+                                <li>Dirigirse a nuestro <b>Formulario</b> y llenar los datos requeridos </li>
+                                <li>Pegar el <b>Número de referencia</b> en el campo correspondido </li>
                                 <li>Adjuntar la foto del pago </li>
-                                <li>Espere el cambio de status. </li>
+                                <li>Le indicaremos el cambio de status. </li>
                             </ol>
                         </div>
                     </div>
@@ -65,33 +73,37 @@
                     <div class="datosTranf">
                         <div class="datos">
                             <h3>Paypal</h3>
+                            <div class="clear"></div>
                             <p><b>Correo:</b> correopaypal@gmail.com</p>
                             <p><b>Metodo:</b> Paypal</p>
-                            <p><b>Nombre Banco:</b> Paypal</p>
-                            <p>R<b>equerido:</b> Id transferencia y/o photo</p>
+                            <p><b>Banco:</b> Paypal</p>
+                            <p><b>Requerido:</b> reference y photo</p>
                         </div>
                         <div class="datos">
                             <h3>Zelle</h3>
+                            <div class="clear"></div>
                             <p><b>Correo:</b> correozelle@gmail.com</p>
                             <p> <b>Metodo:</b> Zelle</p>
                             <p><b>Nombre Banco:</b> nombre del banco</p>
-                            <p>Requerido: reference number y/o photo</p>
+                            <p><b>Requerido:</b> reference y photo</p>
                         </div>
                         <div class="datos">
-                            <h3>Transferencia</h3>
+                            <h3>Transferencia Bancaria</h3>
+                            <div class="clear"></div>
                             <p> <b>Metodo:</b> Transferencia</p>
-                            <p><b>Nombre Banco:</b> nombre del banco</p>
-                            <p>Cuenta : 0000-020320320320329</p>
-                            <p>CI o Rif: J-123456789</p>
-                            <p>Requerido: reference number y/o photo</p>
+                            <p><b>Banco:</b> nombre del banco</p>
+                            <p><b>Cuenta:</b> 0000-020320320320329</p>
+                            <p><b>CI o Rif:</b> J-123456789</p>
+                            <p><b>Requerido:</b> reference y photo</p>
                         </div>
                         <div class="datos">
                             <h3>Pago Movil</h3>
+                            <div class="clear"></div>
                             <p> <b>Metodo:</b> Pago Movil</p>
-                            <p><b>Nombre Banco:</b> nombre del banco</p>
-                            <p>tel: 0424-123345567</p>
-                            <p>CI o Rif: J-123456789</p>
-                            <p>Requerido: reference y/o photo</p>
+                            <p><b>Banco:</b> banco</p>
+                            <p><b>Telf:</b> 0424-123345567</p>
+                            <p><b>CI o Rif:</b> J-123456789</p>
+                            <p><b>Requerido:</b> reference y photo</p>
                         </div>
                     </div>
                 </div>
@@ -100,70 +112,87 @@
 
                     <!-- Form -->
                     <section class="section dashboard">
-                        <form class="form-horizontal form-material" [formGroup]="PaymentRegisterForm" (submit)="updateForm()">
+                        <form class="form-horizontal form-material formPagar" [formGroup]="PaymentRegisterForm" (submit)="updateForm()">
                             <div class="container">
 
-                                <div class="col-xs-12 col-md-8 formcompr">
-                                    <div class="form-group">
-                                        <label for="">Tipo De transferencia</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" formControlName="metodo" name="metodoPaypal" (click)="verpaypal()" type="radio" value="Paypal" name="radioBanco" id="radiotipo1">
-                                            <label class="form-check-label" for="radiotipo1">Paypal</label>
+                                <div class="col-xs-12 col-md-8 " style="float: left;">
+                                    <div class="formcompr">
+                                        <div class="div1">
+                                            <div class="form-group ">
+                                                <label for="">Tipo De transferencia</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" formControlName="metodo" name="metodoPaypal" (click)="verpaypal()" type="radio" value="Paypal" name="radioBanco" id="radiotipo1">
+                                                    <label class="form-check-label" for="radiotipo1">Paypal</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" formControlName="metodo" name="metodoZelle" (click)="hidepaypal()" type="radio" value="Zelle" name="radioBanco" id="radiotipo2">
+                                                    <label class="form-check-label" for="radiotipo2">Zelle</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" formControlName="metodo" name="metodoTransferencia" (click)="hidepaypal()" type="radio" value="Transferencia" name="radioBanco" id="radiotipo3">
+                                                    <label class="form-check-label" for="radiotipo3">Transferencia</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" formControlName="metodo" name="metodoPagoMovil" (click)="hidepaypal()" type="radio" value="Pago Movil" name="radioBanco" id="radiotipo4">
+                                                    <label class="form-check-label" for="radiotipo4">Pago Movil</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" formControlName="metodo" name="metodoZelle" (click)="hidepaypal()" type="radio" value="Zelle" name="radioBanco" id="radiotipo2">
-                                            <label class="form-check-label" for="radiotipo2">Zelle</label>
+                                        <div class="div2">
+                                            <div class="form-group ">
+                                                <label for="">Nombre Banco </label>
+                                                <input type="text" formControlName="bank_name" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" formControlName="metodo" name="metodoTransferencia" (click)="hidepaypal()" type="radio" value="Transferencia" name="radioBanco" id="radiotipo3">
-                                            <label class="form-check-label" for="radiotipo3">Transferencia</label>
+                                        <div class="div3">
+                                            <div class="form-group ">
+                                                <label for="">Num. referencia </label>
+                                                <input type="text" formControlName="referencia" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" formControlName="metodo" name="metodoPagoMovil" (click)="hidepaypal()" type="radio" value="Pago Movil" name="radioBanco" id="radiotipo4">
-                                            <label class="form-check-label" for="radiotipo4">Pago Movil</label>
+                                        <div class="div4">
+                                            <div class="form-group ">
+                                                <label for="">Monto</label>
+                                                <input type="number" formControlName="monto" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="div5">
+                                            <div class="form-group ">
+                                                <label for="">Moneda</label>
+
+                                                <select class="form-control " formControlName="moneda_id" required>
+                                                    <option disabled  value="">SELECCIONAR</option>
+                                                    <option *ngFor="let item of currenciesAll" [value]="item.id">{{item.name}}</option>
+
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group ">
-                                        <label for="">Nombre Banco </label>
-                                        <input type="text" formControlName="bank_name" class="form-control">
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="">Num. referencia </label>
-                                        <input type="text" formControlName="referencia" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Monto</label>
-                                        <input type="number" formControlName="monto" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Moneda</label>
-                                        <select formControlName="moneda_id" class="form-control">
-                                      <option value="">Seleccione Moneda</option>
-                                      <option value="1">USD</option>
-                                      <option value="2">BSVES</option>
-                                      <option value="3">EUR</option>
-                                    </select>
-                                    </div>
-                                    <div class="form-group">
+
+
+
+
+
+                                    <!-- <div class="form-group">
                                         <label for="">Fecha de Transferencia </label>
                                         <input type="date" formControlName="fecha" class="form-control">
-                                    </div>
+                                    </div> -->
 
                                 </div>
                                 <div class="col-xs-12 col-md-4 imagenypaypal">
                                     <div class="form-group form-row">
-                                        <p>Imagen del pago (opcional) (peso max: 500kb )</p>
+                                        <p>Imagen del pago <br> (peso max: 500kb )</p>
                                         <div class="col-xs-12">
                                             <!-- <input type="file" id="image" (change)="onSelectedFile($event)" />
-                          <div [innerHTML]="uploadError" class="error"></div>
-                          <div *ngIf="imagePath">
-                              <br />
-                              <img [src]="imagePath" width="50%" value="photo" class="shadow">
-                          </div> -->
+                                        <div [innerHTML]="uploadError" class="error"></div>
+                                        <div *ngIf="imagePath">
+                                            <br />
+                                            <img [src]="imagePath" width="50%" value="photo" class="shadow">
+                                        </div> -->
                                         </div>
                                     </div>
                                     <div class="vibiblepayp">
-                                        <button class="btn btn-outline-success waves-effect waves-light m-r-10" (click)="addToCart()">Pagar por paypal</button>
+                                        <button class="btn btn-outline-success " (click)="addToCart()">Pagar por paypal</button>
                                         <app-cart></app-cart>
                                     </div>
                                 </div>
@@ -175,7 +204,7 @@
 
                             <input type="hidden" formControlName="id">
 
-                            <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Registrar Pago</button>
+                            <button class="btn btn-outline-success " type="submit">Registrar Pago</button>
 
 
                         </form>

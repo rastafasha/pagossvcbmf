@@ -35,6 +35,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 // import { ConfModule } from './conf/conf.module';
 import {PagesComponent} from './pages.component';
 import { DirectorioIndexComponent } from './directorio/directorio-index/directorio-index.component';
+import { PipesModule } from '@app/pipes/pipes.module';
+import { ConfModule } from './conf/conf.module';
 
 
 @NgModule({
@@ -82,7 +84,8 @@ import { DirectorioIndexComponent } from './directorio/directorio-index/director
     HttpClientModule,
     NgxPaginationModule,
     QRCodeModule,
-    // ConfModule
+    PipesModule,
+    ConfModule
 
   ]
 })

@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { ComponentsModule } from '@app/components/components.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PipesModule } from '@app/pipes/pipes.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CurrenciesEditComponent,
     PlanesEditComponent,
     PlanesIndexComponent
+
   ],
   exports: [
     ConfiguracionesComponent,
@@ -37,6 +39,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SharedModule,
     ComponentsModule,
     NgxPaginationModule,
+    PipesModule
   ]
 })
 export class ConfModule { }

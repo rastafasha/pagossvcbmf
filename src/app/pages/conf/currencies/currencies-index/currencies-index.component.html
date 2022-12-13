@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-2">
                     <div class="text-right">
-                        <button class="btn btn-primary" [routerLink]="['/dashboard/currency/create/']">
+                        <button class="btn btn-primary" [routerLink]="['/dashboard/currencies/create/']">
                   <i class="fa fa-pencil"></i>
                   Crear
                 </button>
@@ -74,10 +74,10 @@
                                 <td class="text-nowrap text-center">
 
                                     <a [routerLink]="['/dashboard/currency/edit', currency.id]" class="cursor" data-toggle="tooltip" data-original-title="Edit">
-                                        <div class="btn btn-success"><i class="bx bxs-edit"></i></div>
+                                        <i class="bx bxs-edit text-success" style="font-size: 18px;"></i>
                                     </a>
-                                    <a (click)="eliminarUser(currency.id)" class="cursor" data-toggle="tooltip" data-original-title="Borrar">
-                                        <div class="btn btn-danger"><i class="bx bxs-trash"></i></div>
+                                    <a (click)="eliminarCurrency(currency.id)" class="cursor" data-toggle="tooltip" data-original-title="Borrar">
+                                        <i class="bx bxs-trash text-danger" style="font-size: 18px; margin-left: 10px; margin-right: 10px;"></i>
                                     </a>
                                 </td>
 

@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentService } from '@app/services/payment.service';
 import { UserService } from '../../services/user.service';
 import { Payment } from '@app/models/payment';
+import { Currencies } from '@app/models/currencies';
+import { CurrenciesService } from '@app/services/currencies.service';
 
 @Component({
   selector: 'app-user-pagar',
@@ -23,9 +25,10 @@ export class UserPagarComponent implements OnInit {
   visible :boolean = false;
 
   metodo:string;
-
+  error: string;
   pagoSeleccionado: ProductPaypal;
   pagoS: Payment;
+  currenciesAll: Currencies;
 
 
   title= 'Realizar un Pago';
@@ -37,6 +40,7 @@ export class UserPagarComponent implements OnInit {
     private usuarioService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private currenciesService: CurrenciesService,
   ) {
     this.usuario = usuarioService.user;
   }
@@ -45,6 +49,27 @@ export class UserPagarComponent implements OnInit {
     // this.activatedRoute.params.subscribe( ({id}) => this.cargarForm(id));
     this.validarFormulario();
     this.visible= false;
+    this.getCurrencies();
+    this.getUser();
+    console.log(this.usuario);
+  }
+
+  getUser(): void {
+
+    this.usuario = JSON.parse(localStorage.getItem('user'));
+    // return this.userService.getUserLocalStorage();
+    // console.log(this.user);
+
+  }
+
+  getCurrencies(): void {
+    this.currenciesService.getCurrencies().subscribe(
+      res =>{
+        this.currenciesAll = res;
+        error => this.error = error
+        console.log(this.currenciesAll);
+      }
+    );
   }
 
   goBack() {
@@ -58,10 +83,9 @@ export class UserPagarComponent implements OnInit {
       monto: ['',Validators.required],
       moneda_id: ['',Validators.required],
       referencia: [''],
-      fecha: ['',Validators.required],
-      user_id: [2],
       producto_id: [1],
       status: ['Pendiente'],
+      user_id: [this.usuario.id],
     })
   }
 
@@ -74,12 +98,10 @@ export class UserPagarComponent implements OnInit {
             metodo: res.metodo,
             bank_name: res.bank_name,
             monto: res.monto,
-            moneda_id: res.moneda_id,
+            moneda_id: this.currenciesAll.id,
             referencia: res.referencia,
-            fecha: res.fecha,
-            user_id: '1',
+            user_id: this.usuario.id,
             producto_id: '1',
-            // user_id: this.usuario.uid,
             img : res.img
           });
           this.pagoSeleccionado = res;
@@ -94,15 +116,16 @@ export class UserPagarComponent implements OnInit {
 
   updateForm(){debugger
 
-    const {metodo, bank_name, monto, moneda_codigo, referencia, fecha,
-      user_id,producto_id, email, nombre, status
+    const {metodo, bank_name, monto, moneda_id, referencia,
+      user_id,producto_id,
     } = this.PaymentRegisterForm.value;
 
     if(this.pagoSeleccionado){
       //actualizar
       const data = {
         ...this.PaymentRegisterForm.value,
-        id: this.pagoSeleccionado.id
+        id: this.pagoSeleccionado.id,
+        user_id: this.usuario.id,
       }
       this.paymentService.update(data).subscribe(
         resp =>{
