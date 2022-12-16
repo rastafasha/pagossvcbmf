@@ -25,6 +25,10 @@ import { CurrenciesIndexComponent } from './conf/currencies/currencies-index/cur
 import { PlanesIndexComponent } from './conf/planes/planes-index/planes-index.component';
 import { PlanesEditComponent } from './conf/planes/planes-edit/planes-edit.component';
 import { DirectorioIndexComponent } from './directorio/directorio-index/directorio-index.component';
+import { ReciboFacturaComponent } from '../components/recibo-factura/recibo-factura.component';
+import { DirectorioEditComponent } from './directorio/directorio-edit/directorio-edit.component';
+import { DirectorioViewComponent } from './directorio/directorio-view/directorio-view.component';
+
 
 const childRoutes: Routes = [
 
@@ -36,6 +40,7 @@ const childRoutes: Routes = [
     //admin
     { path: 'payments',   component: PaymentsComponent, data:{title:'Pagos'} },
     { path: 'payment-detail/:id', component: PaymentDetailsComponent, data:{title:'Detalle Pago'} },
+
     //user
     { path: 'users', component: UsersComponent, data:{title:'Usuarios'} },
     { path: 'user/:id', component: UserProfileComponent, data:{title:'Detalle Usuario'} },
@@ -43,18 +48,25 @@ const childRoutes: Routes = [
     { path: 'historial-pagos', component: UserHistorialpagosComponent, data:{title:'Historial Pagos'} },
     { path: 'realizar-pago', component: UserPagarComponent, data:{title:'Relizar Pago'} },
     { path: 'search/:searchItem', component: UsersComponent, data:{title:'Buscar'} },
-    //otros
-    { path: 'directorio', component: DirectorioIndexComponent, data:{title:'Ayuda'} },
-    { path: 'configuraciones', component: ConfiguracionesComponent, data:{title:'Ayuda'} },
+    { path: 'factura', component: ReciboFacturaComponent, data:{title:'Buscar'} },
+
+    //directorio
+    { path: 'directorio', component: DirectorioIndexComponent, data:{title:'Directorio'} },
+    { path: 'directorio/create', component: DirectorioEditComponent, data:{title:'Directorio Crear'} },
+    { path: 'directorio/edit/:id', component: DirectorioEditComponent, data:{title:'Directorio Editar'} },
+    { path: 'directorio/view/:id', component: DirectorioViewComponent, data:{title:'Directorio Editar'} },
+
+    //configuraciones
+    { path: 'configuraciones', component: ConfiguracionesComponent, data:{title:'Configuraciones'} },
 
     { path: 'planes', component: PlanesIndexComponent, data:{title:'Planes'} },
     { path: 'plan/:id', component: PlanesIndexComponent, data:{title:'Plan'} },
-    { path: 'plan/create', component: PlanesEditComponent, data:{title:'Crear Plan'} },
+    { path: 'planes/create', component: PlanesEditComponent, data:{title:'Crear Plan'} },
     { path: 'plan/edit/:id', component: PlanesEditComponent, data:{title:'Editar Plan'} },
 
     { path: 'currencies', component: CurrenciesIndexComponent, data:{title:'Monedas'} },
     { path: 'currency/:id', component: CurrenciesIndexComponent, data:{title:'Moneda'} },
-    { path: 'currency/create', component: CurrenciesEditComponent, data:{title:'Crear Moneda'} },
+    { path: 'currencies/create', component: CurrenciesEditComponent, data:{title:'Crear Moneda'} },
     { path: 'currency/edit/:id', component: CurrenciesEditComponent, data:{title:'Editar Moneda'} },
 
     { path: 'help', component: HelpComponent, data:{title:'Ayuda'} },

@@ -39,7 +39,7 @@ export class DirectorioService {
   }
 
   getDirectorio(directory: any) {
-    const url = `${baseUrl}/directories/show/${directory}`;
+    const url = `${baseUrl}/directory/show/${directory}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, directory: Directorio}) => resp.directory)
@@ -53,12 +53,12 @@ export class DirectorioService {
   }
 
   updateDirectorio(directory:any) {
-    const url = `${baseUrl}/directories/${directory}`;
+    const url = `${baseUrl}/directory/update/${directory}`;
     return this.http.put(url, directory, this.headers);
   }
 
-  deleteDirectorio(id: number) {
-    const url = `${baseUrl}/directories/${id}`;
+  deleteDirectorio(directory:any) {
+    const url = `${baseUrl}/directory/destroy/${directory}`;
     return this.http.delete(url, this.headers);
   }
 

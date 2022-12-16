@@ -39,22 +39,33 @@ export class ProfileComponent implements OnInit {
 
     this.user = JSON.parse(localStorage.getItem('user'));
     // return this.userService.getUserLocalStorage();
+    this.getRolbyId(this.user.id);
 
   }
-
-
 
   getRolbyId(id:number): void {
 
     this.roleService.getRolbyId(id).subscribe(
       res =>{
         this.role = res;
-        this.permisos = res.role[0].permissions;
         error => this.error = error
-        console.log(this.role)
-        console.log(this.permisos)
       }
     );
   }
+
+
+
+  // getRolbyId(id:number): void {
+
+  //   this.roleService.getRolbyId(id).subscribe(
+  //     res =>{
+  //       this.role = res;
+  //       this.permisos = res.role[0].permissions;
+  //       error => this.error = error
+  //       console.log(this.role)
+  //       console.log(this.permisos)
+  //     }
+  //   );
+  // }
 
 }

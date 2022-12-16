@@ -1,0 +1,25 @@
+{
+    "plan": [{
+            "id": 1,
+            "name": "Plan Anual",
+            "price": 80.00,
+            "currency_id": 1,
+            "status": "Activo",
+            "created_at": "13-12-22",
+            "updated_at": "13-12-22",
+            "image": ""
+
+        },
+        {
+            "id": 1,
+            "name": "Plan Semestral",
+            "price": 40.00,
+            "currency_id": 1,
+            "status": "Activo",
+            "created_at": "13-12-22",
+            "updated_at": "13-12-22",
+            "image": ""
+
+        }
+    ]
+}

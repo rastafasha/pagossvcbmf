@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Payment } from '@app/models/payment';
 import { PaymentService } from '@app/services/payment.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-payment-details',
   templateUrl: './payment-details.component.html',
@@ -13,14 +14,17 @@ export class PaymentDetailsComponent implements OnInit {
   title = "Detalle Pago";
   pago: Payment;
   error: string;
+  private payments = 'assets/dataSimulada/pago.json';
+
   constructor(
     private location: Location,
     private activatedRoute: ActivatedRoute,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( ({id}) => this.getUser(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.getPagoById(id));
   }
   getUser(id:number){
     this.paymentService.get(id).subscribe(
@@ -31,6 +35,16 @@ export class PaymentDetailsComponent implements OnInit {
       }
     );
   }
+
+  getPagoById(id:number){debugger
+    this.paymentService.getPagoById(id).subscribe(
+      res=>{
+        this.pago = res;
+        console.log(this.pago);
+      }
+    )
+  }
+
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
   }

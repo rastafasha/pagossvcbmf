@@ -1,5 +1,5 @@
 <!-- =======| Main |======= -->
-<div class="container" id="main" class="main" role="main" name="users">
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="row">
         <div class="col-xs-12 col-sm-10">
@@ -57,6 +57,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>user ID</th>
                                 <th>Nombre</th>
                                 <th>Email</th>
                                 <th>Status</th>
@@ -64,20 +65,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of directories |  paginate: { itemsPerPage: count, currentPage: p }">
+                            <tr *ngFor="let directory of directories |  paginate: { itemsPerPage: count, currentPage: p }">
 
-                                <td>{{user.id}}</td>
-                                <td>{{user.nombre}} {{user.surname}}</td>
-                                <td>{{user.email}} </td>
-                                <td>{{user.status }} </td>
+                                <td>{{directory.id}}</td>
+                                <td>{{directory.user_id}}</td>
+                                <td>{{directory.nombre}} {{directory.surname}}</td>
+                                <td>{{directory.email}} </td>
+                                <td>{{directory.status }} </td>
                                 <!-- <td><span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span></td> -->
 
                                 <td class="text-nowrap text-center">
 
-                                    <a [routerLink]="['/dashboard/directorio/edit', user.id]" class="cursor" data-toggle="tooltip" data-original-title="Edit">
+                                    <a [routerLink]="['/dashboard/directorio/edit', directory.id]" class="cursor" data-toggle="tooltip" data-original-title="Edit">
                                         <div class="btn btn-success"><i class="bx bxs-edit"></i></div>
                                     </a>
-                                    <a (click)="eliminarUser(user.id)" class="cursor" data-toggle="tooltip" data-original-title="Borrar">
+                                    <a (click)="eliminarDirectory(directory.id)" class="cursor" data-toggle="tooltip" data-original-title="Borrar">
                                         <div class="btn btn-danger"><i class="bx bxs-trash"></i></div>
                                     </a>
                                 </td>

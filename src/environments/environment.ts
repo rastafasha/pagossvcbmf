@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiUrl: "http://185.253.155.103/api",
   // apiUrl: "https://apipagos.svcbmf.net/api",
+  apiUrlMedia: "https://apipagos.svcbmf.net/api",
   clientId: 'AXlazeNsZ0CmjfJIronSzcqzw4hLHkcoVEM5fO5BY7AbD-_GhKoKezRcavq6-T4kQuRqaTXFB_VXmheG'
   // apiUrl: "http://localhost:8000/api",
   // apiUrl: "http://localhost/sv2/ci3/index.php?/api"

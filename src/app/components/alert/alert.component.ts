@@ -15,12 +15,24 @@ export class AlertComponent implements OnInit, OnDestroy {
     fade = true;
 
     alerts: Alert[] = [];
+    alert:Alert[] = [];
     alertSubscription: Subscription = new Subscription();
     routeSubscription: Subscription =  new Subscription();
+
+
+    //alert notification
+    options = {
+        autoClose: false,
+        keepAfterRouteChange: false
+    };
 
     constructor(private router: Router, private alertService: AlertService) { }
 
     ngOnInit() {
+        this.iniciarAlert();
+    }
+
+    iniciarAlert(){
         // subscribe to new alert notifications
         this.alertSubscription = this.alertService.onAlert(this.id)
             .subscribe(alert => {
@@ -50,7 +62,8 @@ export class AlertComponent implements OnInit, OnDestroy {
             }
         });
 
-        this.alertService.info("Nuevo Mensaje","Se ha iniciado el sistema de notificaciones");
+        // this.alertService.info("Nuevo Mensaje","Se ha iniciado el sistema de notificaciones");
+        this.alertService.info("Nuevo Mensaje","Bienvenido!");
     }
 
     ngOnDestroy() {

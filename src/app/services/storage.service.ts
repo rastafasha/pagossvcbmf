@@ -6,7 +6,16 @@ import { CartItemModel } from '../models/cart-item-model';
 })
 export class StorageService {
 
-  constructor() { }
+  private linktTheme = document.querySelector('.dark');// se comunica el id pulsado
+
+
+  constructor() {
+
+   }
+
+
+
+
 
   existCart():boolean{
     return localStorage.getItem('pago') != null;
@@ -23,4 +32,6 @@ export class StorageService {
   clear():void{
     localStorage.removeItem('pago');
   }
+
+
 }

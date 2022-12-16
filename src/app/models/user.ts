@@ -3,7 +3,8 @@ import { Member } from "./member";
 import { Role } from "./role";
 import { Directorio } from "./directorio";
 import { Payment } from "./payment";
-
+import { environment } from "@environments/environment";
+const base_url = environment.apiUrl;
 export class User {
 
     id: number = 0;
@@ -31,6 +32,21 @@ export class User {
 
     public get isActive():boolean{
         return (this.is_active === 1 ? true: false);
+    }
+
+
+    get imagenUrl(){
+
+      if(!this.image){
+        return `${base_url}/storage/directories/usuarios/no-image.jpg`;
+      } else if(this.image.includes('https')){
+        return this.image;
+      } else if(this.image){
+        return `${base_url}/storage/directories/usuarios/${this.image}`;
+      }else {
+        return `${base_url}/storage/directories/usuarios/no-image.jpg`;
+      }
+
     }
 
 }

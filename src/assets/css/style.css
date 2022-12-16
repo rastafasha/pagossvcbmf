@@ -15,23 +15,23 @@
 }
 
 body {
-    font-family: 'HelveticaNeueLTStd-Roman';
+    font-family: var(--font-family);
     background: #f6f9ff;
-    color: #444444;
+    color: var(--black);
 }
 
 a {
-    color: #4154f1;
+    color: var(--azul);
     text-decoration: none;
 }
 
 a:hover {
-    color: #717ff5;
+    color: var(--azul);
     text-decoration: none;
 }
 
 b {
-    font-family: 'HelveticaNeueLTPro-Md';
+    font-family: var(--bold);
 }
 
 h1,
@@ -40,7 +40,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'HelveticaNeueLTStd-Roman';
+    font-family: var(--font-family);
 }
 
 
@@ -88,7 +88,7 @@ h6 {
     right: 15px;
     bottom: 15px;
     z-index: 99999;
-    background: #4154f1;
+    background: var(--azul);
     width: 40px;
     height: 40px;
     border-radius: 4px;
@@ -102,7 +102,7 @@ h6 {
 }
 
 .back-to-top:hover {
-    background: #6776f4;
+    background: var(--azul);
     color: #fff;
 }
 
@@ -357,7 +357,7 @@ h6 {
 }
 
 .breadcrumb a:hover {
-    color: #51678f;
+    color: var(--azul);
 }
 
 .breadcrumb .breadcrumb-item::before {
@@ -365,7 +365,7 @@ h6 {
 }
 
 .breadcrumb .active {
-    color: #51678f;
+    color: var(--azul);
     font-weight: 600;
 }
 
@@ -379,7 +379,7 @@ h6 {
 .nav-tabs-bordered .nav-link {
     margin-bottom: -2px;
     border: none;
-    color: #2c384e;
+    color: var(--azul);
 }
 
 .nav-tabs-bordered .nav-link:hover,
@@ -1059,7 +1059,7 @@ h6 {
 .profile .profile-card h2 {
     font-size: 24px;
     font-weight: 700;
-    color: #2c384e;
+    color: var(--azul);
     margin: 10px 0 0 0;
 }
 
@@ -1266,7 +1266,7 @@ h6 {
 }
 
 .error-404 .btn {
-    background: #51678f;
+    background: var(--azul);
     color: #fff;
     padding: 8px 30px;
 }

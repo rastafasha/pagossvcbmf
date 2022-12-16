@@ -1,5 +1,5 @@
 <!-- =======| Main |======= -->
-<div class="container" id="main" class="main" role="main" name="users">
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="row">
         <div class="col-xs-12 col-sm-10">
@@ -32,7 +32,7 @@
             <div class="row">
 
 
-                <div class="col-6 ">
+                <div class="col-xs-12 col-sm-6 ">
                     <div class="card">
                         <div class="card-body">
                             <i class="bi bi-file-post"></i>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="col-6 ">
+                <div class="col-xs-12 col-sm-6 ">
                     <div class="card">
                         <div class="card-body">
                             <i class="bi bi-coin"> </i>
@@ -56,13 +56,13 @@
                     </div>
                 </div>
                 <div class="clear"></div>
-                <div class="col-6 ">
+                <div class="col-xs-12 col-sm-6 ">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body roles">
                             <i class="bi bi-info-circle"> </i>
                             <h2> Roles</h2>
-                            <ul *ngFor="let rol of roles">
-                                <li>{{rol.name}}</li>
+                            <ul>
+                                <li *ngFor="let rol of roles">{{rol.name}}</li>
                             </ul>
                         </div>
                     </div>

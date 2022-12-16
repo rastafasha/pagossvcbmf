@@ -14,9 +14,9 @@ import { UserService } from '@app/services/user.service';
 export class DashboardComponent implements OnInit {
   title = 'Panel Administrativo';
   public user: User;
+  role: Role;
 
   error: string;
-  role: Role;
   constructor(
     private roleService: RoleService,
     private activatedRoute: ActivatedRoute,
@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
 
     this.closeMenu();
     this.getUser();
+    // this.activatedRoute.params.subscribe( ({id}) => this.getRolbyId(id));
   }
 
   closeMenu(){
@@ -50,12 +51,11 @@ export class DashboardComponent implements OnInit {
   }
 
   getRolbyId(id:number): void {
-
     this.roleService.getRolbyId(id).subscribe(
       res =>{
         this.role = res;
         error => this.error = error
-        console.log(this.role)
+        console.log('User rol', this.role.id)
       }
     );
   }

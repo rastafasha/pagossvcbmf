@@ -14,6 +14,12 @@ export class PaymentService {
 
   public pagos: Payment;
 
+  info:any = {};
+  cargada:boolean = false;
+
+  //datos
+  payments = 'assets/dataSimulada/pago.json';
+
   constructor(private http: HttpClient) { }
 
   get token():string{
@@ -28,6 +34,28 @@ export class PaymentService {
       }
     }
   }
+
+  /**
+   * @method cargarListaLocal
+   */
+
+  getPagoById(id:number){
+    return this.http.get(`${this.payments}/${id}`).pipe(
+      map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
+    )
+  }
+
+  carga_info(){debugger
+    return this.http.get(`${this.payments}`).pipe(
+      map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
+    )
+
+  }
+
+
+  /**
+   * @method cargarListaRemota
+   */
 
   getAll(): Observable<any> {
     const url = `${baseUrl}/pagos`;

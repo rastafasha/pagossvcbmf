@@ -47,7 +47,7 @@ export class CurrenciesIndexComponent implements OnInit {
     );
   }
 
-  eliminarPlan(id:number){
+  eliminarCurrency(id:number){
     this.currenciesService.deleteCurrency(id).subscribe(
       response =>{
         this.getCurrencies();

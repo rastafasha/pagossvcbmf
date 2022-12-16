@@ -20,6 +20,9 @@ import { PagosRecientesComponent } from './pagos-recientes/pagos-recientes.compo
 import { UsuariosRecientesComponent } from './usuarios-recientes/usuarios-recientes.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
+import { ReciboFacturaComponent } from './recibo-factura/recibo-factura.component';
+import { PlanesyproductosComponent } from './planesyproductos/planesyproductos.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     PagosRecientesComponent,
     UsuariosRecientesComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    ReciboFacturaComponent,
+    PlanesyproductosComponent,
+    NotificacionesComponent
   ],
   exports: [
     AlertComponent,
@@ -48,7 +54,10 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     PagosRecientesComponent,
     UsuariosRecientesComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    ReciboFacturaComponent,
+    PlanesyproductosComponent,
+    NotificacionesComponent
   ],
   imports: [
     CommonModule,

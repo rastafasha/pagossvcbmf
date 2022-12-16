@@ -35,6 +35,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 // import { ConfModule } from './conf/conf.module';
 import {PagesComponent} from './pages.component';
 import { DirectorioIndexComponent } from './directorio/directorio-index/directorio-index.component';
+import { PipesModule } from '@app/pipes/pipes.module';
+import { ConfModule } from './conf/conf.module';
+import { DirectorioEditComponent } from './directorio/directorio-edit/directorio-edit.component';
+import { DirectorioViewComponent } from './directorio/directorio-view/directorio-view.component';
 
 
 @NgModule({
@@ -53,7 +57,9 @@ import { DirectorioIndexComponent } from './directorio/directorio-index/director
     UserPagarComponent,
     UserProfileComponent,
     PagesComponent,
-    DirectorioIndexComponent
+    DirectorioIndexComponent,
+    DirectorioEditComponent,
+    DirectorioViewComponent
 
   ],
   exports: [
@@ -70,7 +76,9 @@ import { DirectorioIndexComponent } from './directorio/directorio-index/director
     DashboardAdminComponent,
     UserPagarComponent,
     UserProfileComponent,
-    DirectorioIndexComponent
+    DirectorioIndexComponent,
+    DirectorioEditComponent,
+    DirectorioViewComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +90,8 @@ import { DirectorioIndexComponent } from './directorio/directorio-index/director
     HttpClientModule,
     NgxPaginationModule,
     QRCodeModule,
-    // ConfModule
+    PipesModule,
+    ConfModule
 
   ]
 })

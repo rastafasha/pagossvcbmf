@@ -8,6 +8,7 @@ export class CartItemModel {
     productPrice:number;
     description:string;
     quantity:number;
+    monto:number;
 
     constructor(product: Payment){
       this.productId= 1;

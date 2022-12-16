@@ -1,3 +1,6 @@
+import { environment } from "src/environments/environment";
+
+const base_url = environment.apiUrl;
 export class Directorio {
     id: number;
     nombre: string;
@@ -24,6 +27,21 @@ export class Directorio {
     vcard: string;
     created_at: Date;
     image:string;
+    user_id:number;
+
+    get imagenUrl(){
+
+        if(!this.image){
+          return `${base_url}/storage/directories/directory/no-image.jpg`;
+        } else if(this.image.includes('https')){
+          return this.image;
+        } else if(this.image){
+          return `${base_url}/storage/directories/directory/${this.image}`;
+        }else {
+          return `${base_url}/storage/directories/directory/no-image.jpg`;
+        }
+
+      }
 }
 
 

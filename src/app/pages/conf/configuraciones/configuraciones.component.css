@@ -19,3 +19,18 @@
     font-size: 46px;
     color: var(--azul);
 }
+
+@media(max-width:768px) {
+    .configuraciones .card-body {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: row;
+    }
+    .configuraciones .card-body.roles {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+}
