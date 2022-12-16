@@ -41,16 +41,16 @@ export class RoleService {
       )
   }
 
-  getRolbyId(id: number): Observable<any> {
-    const url = `${baseUrl}/role/show/${id}`;
+  getRolbyId(role: any): Observable<any> {
+    const url = `${baseUrl}/role/show/${role}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, role: Role}) => resp.role)
         );
   }
 
-  updateRole(id: number) {
-    const url = `${baseUrl}/roles/update/${id}`;
+  updateRole(role: any) {
+    const url = `${baseUrl}/roles/update/${role}`;
     return this.http.put(url, this.headers);
   }
 

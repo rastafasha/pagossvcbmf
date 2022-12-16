@@ -34,7 +34,7 @@ import { ModalComponent } from './modal/modal.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class SharedModule { }

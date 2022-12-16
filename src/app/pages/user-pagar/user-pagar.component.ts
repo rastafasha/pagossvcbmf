@@ -21,7 +21,7 @@ export class UserPagarComponent implements OnInit {
 
   public PaymentRegisterForm: FormGroup;
   public file :File;
-  usuario;
+  public usuario;
   visible :boolean = false;
 
   metodo:string;
@@ -85,7 +85,7 @@ export class UserPagarComponent implements OnInit {
       referencia: [''],
       producto_id: [1],
       status: ['Pendiente'],
-      user_id: [this.usuario.id],
+      user_id: [''],
     })
   }
 
@@ -116,16 +116,15 @@ export class UserPagarComponent implements OnInit {
 
   updateForm(){debugger
 
-    const {metodo, bank_name, monto, moneda_id, referencia,
-      user_id,producto_id,
+    const {metodo, bank_name, monto, moneda_id, referencia,producto_id,
     } = this.PaymentRegisterForm.value;
 
     if(this.pagoSeleccionado){
       //actualizar
       const data = {
         ...this.PaymentRegisterForm.value,
-        id: this.pagoSeleccionado.id,
         user_id: this.usuario.id,
+        id: this.pagoSeleccionado.id
       }
       this.paymentService.update(data).subscribe(
         resp =>{
@@ -135,10 +134,14 @@ export class UserPagarComponent implements OnInit {
 
     }else{
       //crear
-      this.paymentService.create(this.PaymentRegisterForm.value)
+      const data = {
+        ...this.PaymentRegisterForm.value,
+        user_id: this.usuario.id
+      }
+      this.paymentService.create(data)
       .subscribe( (resp: any) =>{
         // Swal.fire('Creado', `${titulo} creado correctamente`, 'success');
-        // this.router.navigateByUrl(`/dashboard/blog`);
+        this.router.navigateByUrl(`/dashboard/factura`);
         console.log(this.pagoSeleccionado);
 
       })

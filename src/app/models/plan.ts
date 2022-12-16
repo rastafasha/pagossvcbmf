@@ -4,8 +4,8 @@ const base_url = environment.apiUrl;
 export class Plan {
   id: number;
   name: string;
-  price: string;
-  currency_id: string;
+  price: number;
+  currency_id: number;
   image: string;
   status: string;
   created_at: string;

@@ -39,6 +39,7 @@ export class PlanesIndexComponent implements OnInit {
   }
 
   getPlanes(): void {
+    // return this.planesService.carga_info();
     this.planesService.getPlanes().subscribe(
       res =>{
         this.planes = res;

@@ -1,0 +1,26 @@
+<h5 style="margin-top: 30px; text-align: right;"> Notificaciones</h5>
+<div *ngIf="!alerts">
+    <h3>No hay notificaciones por el momento.</h3>
+</div>
+<div *ngIf="alerts ">
+
+
+    <ul class="notificacionesList">
+
+
+        <div *ngFor="let alert of alerts " class="{{cssClass(alert)}}">
+
+            <li class="notification-item">
+                <i class="{{cssIconClass(alert)}}"></i>
+                <div>
+                    <h4>{{alert.title}}</h4>
+                    <p [innerHTML]="alert.message">{{alert.message}}</p>
+                    <p>--hace {{alert.time | date:"HH:mm:ss"}} seg.</p>
+
+                </div>
+                <a class="close pointer" (click)="removeAlert(alert)">&times;</a>
+            </li>
+        </div>
+
+    </ul>
+</div>

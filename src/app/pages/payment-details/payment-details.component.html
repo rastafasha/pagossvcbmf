@@ -1,5 +1,5 @@
 <!-- =======| Main |======= -->
-<div class="container" id="main" class="main" role="main" name="profile">
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="profile">
 
     <div class="row">
         <div class="col-xs-12 col-sm-10">
@@ -29,15 +29,15 @@
 
         <div class="card pagodetail">
             <div class="col-xs-12 col-sm-6">
-                <p><b>Nombre:</b> {{pago.nombre}}</p>
-                <p><b>Fecha | Hora:</b> {{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
+                <!-- <p><b>Nombre:</b> {{pago.nombre}}</p> -->
+                <!-- <p><b>Fecha | Hora:</b> {{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</p> -->
                 <p><b>Referencia:</b> {{pago.referencia}}</p>
                 <p><b>Status:</b> <span class="badge bg-primary">{{pago.status}}</span></p>
                 <p><b>Monto:</b> {{pago.moneda_codigo}} {{pago.monto}}</p>
                 <!-- <p><b>ProductoId:</b> {{pago.producto_id}}</p> -->
             </div>
             <div class="col-xs-12 col-sm-6">
-                <p><b>Email:</b> {{pago.email}}</p>
+                <!-- <p><b>Email:</b> {{pago.email}}</p> -->
                 <p><b>Metodo de Pago:</b> {{pago.metodo}}</p>
                 <div *ngIf="pago.bank_name">
                     <p><b>Nombre del Banco:</b> {{pago.bank_name}}</p>

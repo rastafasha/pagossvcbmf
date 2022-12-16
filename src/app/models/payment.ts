@@ -13,11 +13,8 @@ export class Payment {
    moneda_codigo?:string;
    referencia?:string;
    imagen?:string;
-   fecha?:Date;
 
    producto_id?:number;
-   nombre?:User;
-   email?:User;
 
    status?:string;
    validacion?:number;

@@ -15,7 +15,13 @@
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 
-
+            <li class="nav-item">
+                <div class="btns dayNight">
+                    <i class="bx bx-bulb" (click)="darkmode('dark')"></i>
+                    <!-- <ion-icon name="moon-outline" (click)="darkmode()"></ion-icon>
+                    <ion-icon name="sunny-outline" (click)="darkmode()"></ion-icon> -->
+                </div>
+            </li>
 
             <app-alert></app-alert>
 
@@ -32,7 +38,10 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>{{user.username}}</h6>
-                        <span>Super Admin</span>
+                        <span *ngIf="role.id === 1 ">Super Admin</span>
+                        <span *ngIf="role.id === 2 ">Admin</span>
+                        <span *ngIf="role.id === 3 ">Miembro</span>
+                        <span *ngIf="role.id === 4 ">Invitado</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

@@ -8,6 +8,9 @@
 @import url("loading.css");
 @import url("style.css");
 @import url("fonts.css");
+@import url("animate.css");
+@import url("darkmode.css");
+@import url("dashboard.css");
 .cursor {
     cursor: pointer;
 }
@@ -27,4 +30,12 @@
 :root {
     --azul: #353888;
     --morado: #774477;
+    --black: #202023;
+    --white: #fff;
+    --bold: 'HelveticaNeueLTPro-Md';
+    --font-family: 'HelveticaNeueLTStd-Roman';
+}
+
+.pointer {
+    cursor: pointer;
 }

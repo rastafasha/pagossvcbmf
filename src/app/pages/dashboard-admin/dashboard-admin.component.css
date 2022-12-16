@@ -1,6 +1,4 @@
-p {
-    font-size: 14px;
-    margin: 0;
-    padding: 0;
-    text-align: left;
+.pagetitle {
+    display: flex;
+    flex-direction: row;
 }

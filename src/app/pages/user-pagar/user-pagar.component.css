@@ -186,6 +186,30 @@
 
 .form-group .form-check:hover,
 .form-group .form-check-label:hover {
-    background-color: #f8f8f8;
+    background-color: rgba(248, 248, 248, 0.256);
     padding: 5px;
+}
+
+@media(max-width:768px) {
+    .datosTranf {
+        display: grid;
+        grid-auto-flow: row;
+    }
+    .datosTranf .datos {
+        padding-bottom: 20px;
+        padding-top: 20px;
+        border-bottom: 1px solid #ccc;
+    }
+    .instruccioness img,
+    .instruccioness .info {
+        width: 100%;
+    }
+    .info h2 {
+        padding-left: 0%;
+    }
+    .info ul {
+        flex-direction: column;
+        flex-flow: wrap;
+        justify-content: space-between;
+    }
 }

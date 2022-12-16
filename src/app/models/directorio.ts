@@ -27,6 +27,7 @@ export class Directorio {
     vcard: string;
     created_at: Date;
     image:string;
+    user_id:number;
 
     get imagenUrl(){
 

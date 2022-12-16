@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Payment } from '@app/models/payment';
 import { PaymentService } from '@app/services/payment.service';
+import { UserService } from '@app/services/user.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -10,23 +12,45 @@ import { PaymentService } from '@app/services/payment.service';
   styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
+
+
   title = "Pagos"
 
-  pagos: Payment;
+  pagos: any;
   error:string;
   p: number = 1;
   count: number = 8;
+
+  public user;
+
 
 
 
   constructor(
     private location: Location,
-    private paymentService: PaymentService
-  ) { }
+    private paymentService: PaymentService,
+    private userService: UserService,
+    private http: HttpClient
+  ) {
+    this.user = this.userService.user;
+  }
 
   ngOnInit(): void {
     this.getPagos();
+    // this.getPagos_list();
   }
+
+  //carga usos desde la app
+  getPagos_list(){
+    this.paymentService.carga_info().subscribe(
+      res=>{
+        this.pagos = res;
+        console.log(res)
+      }
+    )
+  }
+
+
 
   getPagos(): void {
     this.paymentService.getAll().subscribe(

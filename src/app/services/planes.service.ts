@@ -12,7 +12,10 @@ const baseUrl = environment.apiUrl;
 export class PlanesService {
 
   public plan: Plan;
+  private panes = 'assets/dataSimulada/plan.json';
 
+  info:any = {};
+  cargada:boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -28,6 +31,17 @@ export class PlanesService {
       }
     }
   }
+
+  public carga_info(){
+    this.http.get( "assets/dataSimulada/plan.json " )
+      .subscribe( data =>{
+        //console.log( data.json() );
+        this.cargada = true;
+        this.info = data;
+      } )
+
+  }
+
 
 
   getPlanes() {

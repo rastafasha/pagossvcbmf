@@ -11,32 +11,28 @@
     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
         <li class="dropdown-header">
             Hay {{count()}} notificaciones
-            <a routerLink="/dashboard/payments"><span class="badge rounded-pill bg-primary p-2 ms-2 cursor">Ver todo</span></a>
+            <a routerLink="/dashboard"><span class="badge rounded-pill bg-primary p-2 ms-2 cursor">Ver todo</span></a>
         </li>
         <li>
             <hr class="dropdown-divider">
         </li>
 
-        <div *ngFor="let alert of alerts | slice: 0:5">
+        <div *ngFor="let alert of alerts | slice: 0:3" class="{{cssClass(alert)}}">
+
             <li class="notification-item">
                 <i class="{{cssIconClass(alert)}}"></i>
                 <div>
                     <h4>{{alert.title}}</h4>
                     <p [innerHTML]="alert.message">{{alert.message}}</p>
-                    <p>--hace {{alert.time}} min.</p>
+                    <p>Hora: {{alert.time | date:"HH:mm:ss"}} seg.</p>
 
                 </div>
+                <a class="close pointer" (click)="removeAlert(alert)">&times;</a>
             </li>
             <li>
                 <hr class="dropdown-divider">
             </li>
         </div>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-        <li class="dropdown-footer cursor">
-            <a routerLink="/dashboard/payments">Leer todo</a>
-        </li>
 
     </ul>
     <!-- End Notification Dropdown Items -->

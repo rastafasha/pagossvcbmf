@@ -1,16 +1,18 @@
 <!-- =======| Main |======= -->
-<div class="container" id="main" class="main" role="main" name="profile">
+
+
+
+
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="profile">
 
     <div class="row">
         <div class="col-xs-12 col-sm-10">
             <!-- Page Title -->
             <div class="pagetitle">
-                <h1><i class="bx bxs-user-account"></i> {{title}} |</h1>
-                <h3>{{user.username}}</h3>
+                <h1><i class="bx bxs-user-account"></i> {{title}} </h1>
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
-                        <li class="breadcrumb-item"><a routerLink="/">Panel Administrativo</a></li>
                         <li class="breadcrumb-item active">{{title}}</li>
                     </ol>
                 </nav>
@@ -30,8 +32,11 @@
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <h2>Malcom Cordova</h2>
-                        <h3>Cirugía Bucomaxilofacial</h3>
+                        <h2>{{user.username}}</h2>
+                        <h3 *ngIf="role.id === 1 ">Super Admin</h3>
+                        <h3 *ngIf="role.id === 2 ">Admin</h3>
+                        <h3 *ngIf="role.id === 3 ">Miembro</h3>
+                        <h3 *ngIf="role.id === 4 ">Invitado</h3>
                         <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -48,26 +53,46 @@
                 <div class="card">
                     <div class="card-body pt-3">
                         <!-- Bordered Tabs -->
-                        <ul class="nav nav-tabs nav-tabs-bordered">
+                        <div *ngIf="role.id === 4">
+                            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                            <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
-                            </li>
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
+                                </li>
 
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
-                            </li>
 
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configuraciones</button>
-                            </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar
+                    Contraseña</button>
+                                </li>
 
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar
+                            </ul>
+
+                        </div>
+
+                        <div *ngIf="role.id === 1 || role.id === 2  || role.id === 3 ">
+                            <ul class="nav nav-tabs nav-tabs-bordered">
+
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
+                                </li>
+
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
+                                </li>
+
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configuraciones</button>
+                                </li>
+
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar
                   Contraseña</button>
-                            </li>
+                                </li>
 
-                        </ul>
+                            </ul>
+
+                        </div>
                         <div class="tab-content pt-2">
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
@@ -129,21 +154,20 @@
 
 
                             </div>
-
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                 <!-- Profile Edit Form -->
                                 <form>
                                     <div class="row mb-3">
                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label"><i class="bi  bi-file-image"></i>
-                      Imagen</label>
+                        Imagen</label>
                                         <div class="col-md-8 col-lg-9">
                                             <img src="assets/img/profile-img.jpg" alt="Profile">
                                             <div class="pt-2">
                                                 <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
-                            class="bi bi-upload"></i></a>
+                              class="bi bi-upload"></i></a>
                                                 <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
-                            class="bi bi-trash"></i></a>
+                              class="bi bi-trash"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -164,7 +188,7 @@
 
                                     <div class="row mb-3">
                                         <label for="universidad" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-bank2"></i>
-                      Universidad</label>
+                        Universidad</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="universidad" type="text" class="form-control" id="universidad" value="Universidad Central de Venezuela">
                                         </div>
@@ -172,7 +196,7 @@
 
                                     <div class="row mb-3">
                                         <label for="especialidad" class="col-md-4 col-lg-3 col-form-label"><i class="bi  bi-award"></i>
-                      Especialidad</label>
+                        Especialidad</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="especialidad" type="text" class="form-control" id="especialidad" value="Cirugía Bucomaxilofacial">
                                         </div>
@@ -180,7 +204,7 @@
 
                                     <div class="row mb-3">
                                         <label for="ano" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-calendar-event"></i>
-                      Año</label>
+                        Año</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="ano" type="text" class="form-control" id="ano" value="2008">
                                         </div>
@@ -188,7 +212,7 @@
 
                                     <div class="row mb-3">
                                         <label for="estado" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-geo"></i>
-                      Estado</label>
+                        Estado</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="estado" type="text" class="form-control" id="estado" value="DF">
                                         </div>
@@ -196,7 +220,7 @@
 
                                     <div class="row mb-3">
                                         <label for="direccion" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-file-text"></i>
-                      Dirección Ppal</label>
+                        Dirección Ppal</label>
                                         <div class="col-md-8 col-lg-9">
                                             <div name="direccion" class="quill-editor-default" id="direccion">
                                                 <p>Av. Francisco Solano, Edif. Galerias Bolivar, Torre B, Piso 3, Ofic: 36-B. Grupo Dental Acuario, Urb. Sabana Grande. Caracas -1050-</p>
@@ -208,7 +232,7 @@
 
                                     <div class="row mb-3">
                                         <label for="direccion1" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-file-text"></i>
-                    Dirección Adicional(opcional)</label>
+                      Dirección Adicional(opcional)</label>
                                         <div class="col-md-8 col-lg-9">
                                             <textarea name="" id="" placeholder="Av. Francisco Solano, Edif. Galerias Bolivar, Torre B, Piso 3, Ofic: 36-B. Grupo Dental Acuario, Urb. Sabana Grande. Caracas -1050-"></textarea>
 
@@ -220,7 +244,7 @@
 
                                     <div class="row mb-3">
                                         <label for="telefonos" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-telephone"></i>
-                      Teléfonos Principal</label>
+                        Teléfonos Principal</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="telefonos" type="text" class="form-control" id="telefonos" value="+58(416)631-16.79 ">
                                         </div>
@@ -228,7 +252,7 @@
 
                                     <div class="row mb-3">
                                         <label for="telefonos" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-telephone"></i>
-                    Teléfonos Movil</label>
+                      Teléfonos Movil</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="telefonos" type="text" class="form-control" id="telefonos" value="+58(212)781-20.42">
                                         </div>
@@ -236,7 +260,7 @@
 
                                     <div class="row mb-3">
                                         <label for="telefonos" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-telephone"></i>
-                  Teléfonos Oficina/Cas</label>
+                    Teléfonos Oficina/Cas</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="telefonos" type="text" class="form-control" id="telefonos" value="+58(212)781-84.02.">
                                         </div>
@@ -244,7 +268,7 @@
 
                                     <div class="row mb-3">
                                         <label for="telefonos" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-telephone"></i>
-                Teléfonos adicionales</label>
+                  Teléfonos adicionales</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="telefonos" type="text" class="form-control" id="telefonos" value="+58(416)631-16.79 / +58(212)781-20.42 / +58(212)781-84.02.">
                                         </div>
@@ -252,7 +276,7 @@
 
                                     <div class="row mb-3">
                                         <label for="Email" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-envelope"></i>
-                      Email</label>
+                        Email</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
                                         </div>
@@ -260,7 +284,7 @@
 
                                     <div class="row mb-3">
                                         <label for="instagram" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-instagram"></i>
-                      Instagram </label>
+                        Instagram </label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="instagram" type="text" class="form-control" id="instagram" value="https://instagram.com/#">
                                         </div>
@@ -268,7 +292,7 @@
 
                                     <div class="row mb-3">
                                         <label for="twitter" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-twitter"></i> Twitter
-                    </label>
+                      </label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="twitter" type="text" class="form-control" id="twitter" value="https://twitter.com/#">
                                         </div>
@@ -276,7 +300,7 @@
 
                                     <div class="row mb-3">
                                         <label for="facebook" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-facebook"></i>
-                      Facebook</label>
+                        Facebook</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="facebook" type="text" class="form-control" id="facebook" value="https://facebook.com/#">
                                         </div>
@@ -286,7 +310,7 @@
 
                                     <div class="row mb-3">
                                         <label for="linkedin" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-linkedin"></i>
-                      Linkedin</label>
+                        Linkedin</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="linkedin" type="text" class="form-control" id="linkedin" value="https://linkedin.com/#">
                                         </div>
@@ -299,7 +323,6 @@
                                 <!-- End Profile Edit Form -->
 
                             </div>
-
                             <div class="tab-pane fade pt-3" id="profile-settings">
 
                                 <!-- Settings Form -->
@@ -311,26 +334,26 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="changesMade" checked>
                                                 <label class="form-check-label" for="changesMade">
-                          Changes made to your account
-                        </label>
+                            Changes made to your account
+                          </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="newProducts" checked>
                                                 <label class="form-check-label" for="newProducts">
-                          Information on new products and services
-                        </label>
+                            Information on new products and services
+                          </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="proOffers">
                                                 <label class="form-check-label" for="proOffers">
-                          Marketing and promo offers
-                        </label>
+                            Marketing and promo offers
+                          </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
                                                 <label class="form-check-label" for="securityNotify">
-                          Security alerts
-                        </label>
+                            Security alerts
+                          </label>
                                             </div>
                                         </div>
                                     </div>
@@ -379,7 +402,6 @@
                                 <!-- End Change Password Form -->
 
                             </div>
-
                         </div>
                         <!-- End Bordered Tabs -->
 
@@ -391,4 +413,5 @@
     </section>
 
 </div>
+
 <!--/main-->

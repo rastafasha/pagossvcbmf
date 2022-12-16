@@ -14,7 +14,8 @@
 }
 
 .listapermisos .item ul {
-    height: 520px;
+    /* height: 520px; */
+    height: auto;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -33,4 +34,15 @@
 
 .listapermisos .item b {
     color: var(--azul);
+}
+
+@media(max-width:768px) {
+    .listapermisos {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .listapermisos .item ul {
+        height: auto;
+        flex-wrap: nowrap;
+        column-count: 1;
+    }
 }
