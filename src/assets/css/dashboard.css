@@ -12,7 +12,7 @@ p {
     float: left;
     width: 100%;
     background-color: #fff;
-    padding: 30px;
+    padding: 0px;
     margin-bottom: 30px;
     margin-top: 20px;
     border-radius: 4px;
@@ -32,7 +32,14 @@ p {
 
 .instruccioness img {}
 
-.instruccioness .info {}
+.instruccioness .info {
+    background-color: rgba(0, 0, 0, .5);
+    padding: 20px;
+    margin: 0;
+    height: 100%;
+    box-sizing: content-box;
+    background: linear-gradient(to right, var(--white), var(--white), transparent);
+}
 
 .info ul {
     display: inline-flex;
@@ -75,6 +82,10 @@ p {
     background-color: #fcfffc;
     align-items: end;
     padding: 10px;
+    background-image: url('/assets/img/pexels-pixabay-35550.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: -70px 0px;
 }
 
 .lateral {
@@ -167,9 +178,11 @@ p {
     }
     .instruccioness .info {
         flex-direction: column;
+        position: relative;
+        left: -67px;
     }
     .acces-icons {
-        width: calc(360px);
+        width: calc(100% - 10px);
         overflow: hidden;
         overflow-x: scroll;
     }
@@ -185,5 +198,6 @@ p {
     }
     .pagetitle .right {
         width: auto !important;
+        background-image: none;
     }
 }

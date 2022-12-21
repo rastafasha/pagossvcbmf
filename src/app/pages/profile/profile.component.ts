@@ -29,8 +29,15 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.closeMenu();
     this.getUser();
-    this.activatedRoute.params.subscribe( ({id}) => this.getRolbyId(id));
+  }
+  closeMenu(){
+    var menuLateral = document.getElementsByClassName("sidebar");
+      for (var i = 0; i<menuLateral.length; i++) {
+         menuLateral[i].classList.remove("active");
+
+      }
   }
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
@@ -38,34 +45,10 @@ export class ProfileComponent implements OnInit {
   getUser(): void {
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    // return this.userService.getUserLocalStorage();
-    this.getRolbyId(this.user.id);
-
-  }
-
-  getRolbyId(id:number): void {
-
-    this.roleService.getRolbyId(id).subscribe(
-      res =>{
-        this.role = res;
-        error => this.error = error
-      }
-    );
+    console.log(this.user);
+    console.log(this.user.id);
   }
 
 
-
-  // getRolbyId(id:number): void {
-
-  //   this.roleService.getRolbyId(id).subscribe(
-  //     res =>{
-  //       this.role = res;
-  //       this.permisos = res.role[0].permissions;
-  //       error => this.error = error
-  //       console.log(this.role)
-  //       console.log(this.permisos)
-  //     }
-  //   );
-  // }
 
 }

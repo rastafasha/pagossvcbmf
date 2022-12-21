@@ -2,7 +2,6 @@
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
         <li class="nav-item">
             <a class="nav-link collapsed cursor" routerLink="/">
                 <i class="bi bi-grid"></i>
@@ -13,11 +12,10 @@
 
         <!-- menu superadmin y admin -->
 
-        <div *ngIf="role.id === 1 || role.id === 2 ">
-            <li class="nav-heading" *ngIf="role.id === 1 ">Pages SuperAdmin</li>
-            <li class="nav-heading" *ngIf="role.id === 2">Pages Admin</li>
+        <div *ngIf="user.role === 'SUPERADMIN' || user.role === 'ADMIN' ">
+            <li class="nav-heading" *ngIf="user.role === 'SUPERADMIN' ">Pages SuperAdmin</li>
+            <li class="nav-heading" *ngIf="user.role === 'ADMIN'">Pages Admin</li>
 
-            <!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed cursor" routerLink="/dashboard/users" routerLinkActive="active">
@@ -25,14 +23,12 @@
                     <span>Usuarios</span>
                 </a>
             </li>
-            <!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed cursor" routerLink="/dashboard/directorio" routerLinkActive="active">
                     <i class="bx bxs-user-account"></i>
                     <span>Directorio</span>
                 </a>
             </li>
-            <!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed cursor" routerLink="/dashboard/payments" routerLinkActive="active">
@@ -40,7 +36,6 @@
                     <span>Pagos</span>
                 </a>
             </li>
-            <!-- End Payments Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]" routerLinkActive="active">
                     <i class="bi bi-person"></i>
@@ -66,8 +61,10 @@
         <!-- menu miembro -->
 
 
-        <div *ngIf="role.id === 3 ">
-            <li class="nav-heading" *ngIf="role.id === 3 ">Pages Miembro</li>
+        <div *ngIf="user.role === 'MEMBER' ">
+            <li class="nav-heading" *ngIf="user.role === 'MEMBER' ">Pages Miembro</li>
+
+
             <li class="nav-item">
                 <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]" routerLinkActive="active">
                     <i class="bi bi-person"></i>
@@ -80,22 +77,27 @@
                     <span>Mis Pagos</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/directorio/view', 1]" routerLinkActive="active">
-                    <i class="bx bxs-user-account"></i>
-                    <span>Directorio</span>
-                </a>
-            </li>
+            <!-- End Payments Page Nav -->
         </div>
-        <div *ngIf="role.id === 4">
 
-            <li class="nav-heading" *ngIf="role.id === 4">Pages Invitado</li>
+
+        <div *ngIf="user.role === 'GUEST' ">
+            <li class="nav-heading" *ngIf="user.role === 'GUEST'">Pages Invitado</li>
+
+
             <li class="nav-item">
                 <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]" routerLinkActive="active">
                     <i class="bi bi-person"></i>
                     <span>Mi Cuenta</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" routerLink="/dashboard/historial-pagos" routerLinkActive="active">
+                    <i class="bi bi-currency-exchange"> </i>
+                    <span>Mis Pagos</span>
+                </a>
+            </li>
+            <!-- End Payments Page Nav -->
         </div>
 
         <!-- End Payments Page Nav -->

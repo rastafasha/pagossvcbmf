@@ -63,6 +63,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userService.closeMenu();
     this.activatedRoute.params.subscribe( ({id}) => this.getUser(id));
     // this.getUser();
   }

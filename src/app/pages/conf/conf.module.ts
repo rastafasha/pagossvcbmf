@@ -12,6 +12,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { ComponentsModule } from '@app/components/components.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '@app/pipes/pipes.module';
+import { RolesViewComponent } from './roles/roles-view/roles-view.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PipesModule } from '@app/pipes/pipes.module';
     CurrenciesIndexComponent,
     CurrenciesEditComponent,
     PlanesEditComponent,
-    PlanesIndexComponent
+    PlanesIndexComponent,
+    RolesViewComponent
 
   ],
   exports: [
@@ -28,7 +30,8 @@ import { PipesModule } from '@app/pipes/pipes.module';
     CurrenciesIndexComponent,
     CurrenciesEditComponent,
     PlanesEditComponent,
-    PlanesIndexComponent
+    PlanesIndexComponent,
+    RolesViewComponent
   ],
   imports: [
     CommonModule,

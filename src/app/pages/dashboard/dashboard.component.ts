@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Role } from '@app/models/role';
 import { User } from '@app/models/user';
 import { RoleService } from '@app/services/role.service';
@@ -14,22 +14,29 @@ import { UserService } from '@app/services/user.service';
 export class DashboardComponent implements OnInit {
   title = 'Panel Administrativo';
   public user: User;
-  role: Role;
+  // role: Role;
+  id:number;
+  roleid:number;
 
   error: string;
+
+
   constructor(
     private roleService: RoleService,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
+    public router: Router
   ) {
-    this.user = this.userService.user;
+    this.user = userService.user;
   }
 
   ngOnInit(): void {
-
     this.closeMenu();
+
     this.getUser();
-    // this.activatedRoute.params.subscribe( ({id}) => this.getRolbyId(id));
+    // this.activatedRoute.params.subscribe( ({id}) => this.getUserfromLocalRemoto(id));
+
+
   }
 
   closeMenu(){
@@ -40,24 +47,43 @@ export class DashboardComponent implements OnInit {
       }
   }
 
+
   getUser(): void {
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    // return this.userService.getUserLocalStorage();
-    console.log(this.user);
-    console.log(this.user.id);
-    this.getRolbyId(this.user.id);
 
+    this.id = this.user.id;
+    // this.getUserfromLocalRemoto(this.id);
   }
 
-  getRolbyId(id:number): void {
-    this.roleService.getRolbyId(id).subscribe(
-      res =>{
-        this.role = res;
-        error => this.error = error
-        console.log('User rol', this.role.id)
-      }
-    );
-  }
+  // getUserfromLocalRemoto(id:number){
+  //   this.user = JSON.parse(localStorage.getItem('user'));//trae el usuario desde localStorage
+
+  //   this.id = this.user.id;
+
+  //   this.userService.getUserById(this.id).subscribe(//insertamos el id del usuario y lo buscamos al db
+  //     res=>{
+  //       this.user= res;
+  //       console.log(this.user);
+
+
+  //       this.roleid = this.user.roles[0].id;
+  //       console.log('esto rol',this.roleid);
+
+  //       if(this.roleid !== null && this.roleid !== undefined){
+
+  //         this.roleService.getRolbyId(this.roleid).subscribe(
+  //           (res:Role) =>{
+  //             this.role = res;
+  //             error => this.error = error
+  //             console.log('el arreglo rol es',this.role)
+  //             console.log('el numero rol es',this.role.id)
+  //           }
+  //         );
+  //       }
+  //     }
+  //   )
+  // }
+
 
 }

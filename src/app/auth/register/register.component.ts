@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
   crearUsuario(){
     this.formSumitted = true;
     // console.log(this.registerForm.value);
-    
+
     if(this.registerForm.invalid){
       return;
     }
@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
     }else{
       return false;
     }
-  
+
 
   }
 

@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
   usersCount = 0;
   usuarios: User[]=[];
   user: User;
-  roles: Role[] = [];
+  roles: Role;
 
   p: number = 1;
   count: number = 8;
@@ -50,9 +50,9 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.closeMenu();
     this.getUsers();
-    // this.getRoles();
-    // this.closeMenu();
+    this.getRoles();
   }
 
 
@@ -61,21 +61,23 @@ export class UsersComponent implements OnInit {
     this.userService.getAll().subscribe(
       res =>{
         this.usuarios = res;
-        error => this.error = error
+        error => this.error = error;
       }
     );
   }
 
 
-  // getRoles(): void {
+  getRoles(): void {
 
-  //       this.roleService.getAll().subscribe(
-  //         res =>{
-  //           this.roles = res;
-  //           error => this.error = error
-  //         }
-  //       );
-  // }
+    this.roleService.getAll().subscribe(
+      (res:Role) =>{
+        this.roles = res;
+        error => this.error = error
+        console.log('el arreglo rol es',this.roles)
+        console.log('el numero rol es',this.roles[0].id)
+      }
+    );
+  }
 
   showDeleteConfirm(id: any) {
     this.confirmService.openConfirmDialog("Seguro que desea borrar este usuario?" + id, "Eliminar", this.proced, id.toString(),this);
@@ -97,8 +99,8 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  eliminarUser(id:number){
-    this.userService.deleteById(id).subscribe(
+  eliminarUser(user:User){
+    this.userService.deleteById(user).subscribe(
       response =>{
         this.getUsers();
       },

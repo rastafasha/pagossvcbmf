@@ -28,7 +28,15 @@ export class ConfiguracionesComponent implements OnInit, DoCheck {
   ) { }
 
   ngOnInit(): void {
-    this.getRoles();
+    this.closeMenu();
+  }
+
+  closeMenu(){
+    var menuLateral = document.getElementsByClassName("sidebar");
+      for (var i = 0; i<menuLateral.length; i++) {
+         menuLateral[i].classList.remove("active");
+
+      }
   }
 
   getRoles(): void {
@@ -69,21 +77,6 @@ export class ConfiguracionesComponent implements OnInit, DoCheck {
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
   }
-
-
-
-
-
-  closeMenu(){
-    var menuLateral = document.getElementsByClassName("sidebar");
-      for (var i = 0; i<menuLateral.length; i++) {
-         menuLateral[i].classList.remove("active");
-
-      }
-  }
-
-
-
 
 
 }

@@ -28,6 +28,12 @@ import { DirectorioIndexComponent } from './directorio/directorio-index/director
 import { ReciboFacturaComponent } from '../components/recibo-factura/recibo-factura.component';
 import { DirectorioEditComponent } from './directorio/directorio-edit/directorio-edit.component';
 import { DirectorioViewComponent } from './directorio/directorio-view/directorio-view.component';
+import { RolesViewComponent } from './conf/roles/roles-view/roles-view.component';
+import { PlanesPageComponent } from './planes/planes-page/planes-page.component';
+import { ProductosPageComponent } from './productos/productos-page/productos-page.component';
+import { ProductoComponent } from './productos/producto/producto.component';
+import { PlanComponent } from './planes/plan/plan.component';
+
 
 
 const childRoutes: Routes = [
@@ -51,18 +57,25 @@ const childRoutes: Routes = [
     { path: 'factura', component: ReciboFacturaComponent, data:{title:'Buscar'} },
 
     //directorio
-    { path: 'directorio', component: DirectorioIndexComponent, data:{title:'Directorio'} },
+    { path: 'directorio',  component: DirectorioIndexComponent, data:{title:'Directorio'} },
     { path: 'directorio/create', component: DirectorioEditComponent, data:{title:'Directorio Crear'} },
     { path: 'directorio/edit/:id', component: DirectorioEditComponent, data:{title:'Directorio Editar'} },
     { path: 'directorio/view/:id', component: DirectorioViewComponent, data:{title:'Directorio Editar'} },
 
     //configuraciones
-    { path: 'configuraciones', component: ConfiguracionesComponent, data:{title:'Configuraciones'} },
+    { path: 'configuraciones',  component: ConfiguracionesComponent, data:{title:'Configuraciones'} },
+
+    { path: 'rolesconf', component: RolesViewComponent, data:{title:'Planes'} },
 
     { path: 'planes', component: PlanesIndexComponent, data:{title:'Planes'} },
     { path: 'plan/:id', component: PlanesIndexComponent, data:{title:'Plan'} },
     { path: 'planes/create', component: PlanesEditComponent, data:{title:'Crear Plan'} },
     { path: 'plan/edit/:id', component: PlanesEditComponent, data:{title:'Editar Plan'} },
+    { path: 'planes/all', component: PlanesPageComponent, data:{title:'Planes'} },
+    { path: 'planes/plan', component: PlanComponent, data:{title:'Planes'} },
+
+    { path: 'productos/all', component: ProductosPageComponent, data:{title:'Productos'} },
+    { path: 'productos/producto', component: ProductoComponent, data:{title:'Producto'} },
 
     { path: 'currencies', component: CurrenciesIndexComponent, data:{title:'Monedas'} },
     { path: 'currency/:id', component: CurrenciesIndexComponent, data:{title:'Moneda'} },

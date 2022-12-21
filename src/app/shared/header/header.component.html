@@ -38,10 +38,10 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>{{user.username}}</h6>
-                        <span *ngIf="role.id === 1 ">Super Admin</span>
-                        <span *ngIf="role.id === 2 ">Admin</span>
-                        <span *ngIf="role.id === 3 ">Miembro</span>
-                        <span *ngIf="role.id === 4 ">Invitado</span>
+                        <span *ngIf="user.role === 'SUPERADMIN'">Super Admin</span>
+                        <span *ngIf="user.role === 'ADMIN'">Admin</span>
+                        <span *ngIf="user.role === 'MEMBER'">Miembro</span>
+                        <span *ngIf="user.role === 'GUEST'">Invitado</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

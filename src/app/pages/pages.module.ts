@@ -39,6 +39,10 @@ import { PipesModule } from '@app/pipes/pipes.module';
 import { ConfModule } from './conf/conf.module';
 import { DirectorioEditComponent } from './directorio/directorio-edit/directorio-edit.component';
 import { DirectorioViewComponent } from './directorio/directorio-view/directorio-view.component';
+import { ProductosPageComponent } from './productos/productos-page/productos-page.component';
+import { PlanesPageComponent } from './planes/planes-page/planes-page.component';
+import { ProductoComponent } from './productos/producto/producto.component';
+import { PlanComponent } from './planes/plan/plan.component';
 
 
 @NgModule({
@@ -59,7 +63,11 @@ import { DirectorioViewComponent } from './directorio/directorio-view/directorio
     PagesComponent,
     DirectorioIndexComponent,
     DirectorioEditComponent,
-    DirectorioViewComponent
+    DirectorioViewComponent,
+    PlanesPageComponent,
+    ProductosPageComponent,
+    ProductoComponent,
+    PlanComponent
 
   ],
   exports: [
@@ -78,7 +86,11 @@ import { DirectorioViewComponent } from './directorio/directorio-view/directorio
     UserProfileComponent,
     DirectorioIndexComponent,
     DirectorioEditComponent,
-    DirectorioViewComponent
+    DirectorioViewComponent,
+    PlanesPageComponent,
+    ProductosPageComponent,
+    ProductoComponent,
+    PlanComponent
   ],
   imports: [
     CommonModule,

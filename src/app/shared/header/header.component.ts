@@ -10,6 +10,7 @@ import { User } from '@app/models/user';
 import { Role } from '@app/models/role';
 import { RoleService } from '@app/services/role.service';
 import { StorageService } from '@app/services/storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -22,11 +23,13 @@ export class HeaderComponent implements OnInit {
 
 
   public user: User;
-  role: Role;
   error: string;
 
   urlTheme:any;
   classExist;
+  id:number;
+  roleid:number;
+
 
   constructor(
     private alertService: AlertService,
@@ -34,6 +37,9 @@ export class HeaderComponent implements OnInit {
     private accountService: AccountService,
     private roleService: RoleService,
     private storageService: StorageService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+
     ) {
       this.user = this.accountService.user;
 
@@ -41,9 +47,11 @@ export class HeaderComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.getUser();
-    this.iniciarDarkMode();
 
+
+
+    // this.iniciarDarkMode();
+    this.getUser();
 
   }
 
@@ -51,28 +59,31 @@ export class HeaderComponent implements OnInit {
 
   // ngDoCheck(): void {
   //   this.user = this.userService.user;
+
   // }
+
 
 
   getUser(): void {
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    // return this.userService.getUserLocalStorage();
-    // console.log(this.user);
+    if(!this.user || !this.user.id || this.user.id == null || this.user.id == undefined){
+      this.router.navigateByUrl('/login');
 
-    this.getRolbyId(this.user.id);
+    }
+      this.id = this.user.id;
+
+
+    //verifica que se hallan logueado
+    if(!this.user || !this.user.id){
+      this.router.navigateByUrl('/login');
+
+    }
+
 
   }
 
-  getRolbyId(id:number): void {
 
-    this.roleService.getRolbyId(id).subscribe(
-      res =>{
-        this.role = res;
-        error => this.error = error
-      }
-    );
-  }
 
   prueba(): void {
     this.alertService.info("Mensaje de Prueba","Hola! Esto es una prueba para los alerts!");
@@ -101,28 +112,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  iniciarDarkMode(){
-    let body = document.querySelector('body');
-    let header = document.querySelector('header');
-    let aside = document.querySelector('aside');
 
-    let classExists = document.getElementsByClassName(
-      'dark'
-     ).length > 0;
-
-
-    if (classExists) {
-      const urlTheme = localStorage.getItem('dark');
-      this.linktTheme?.setAttribute('class', urlTheme);
-      body.classList.toggle('dark');
-        header.classList.toggle('dark');
-        aside.classList.toggle('dark');
-      console.log('✅ class exists on page');
-    } else {
-
-      console.log('⛔️ class does NOT exist on page');
-    }
-  }
 
 
 

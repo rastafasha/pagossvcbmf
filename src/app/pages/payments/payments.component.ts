@@ -36,8 +36,17 @@ export class PaymentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.closeMenu();
     this.getPagos();
     // this.getPagos_list();
+  }
+
+  closeMenu(){
+    var menuLateral = document.getElementsByClassName("sidebar");
+      for (var i = 0; i<menuLateral.length; i++) {
+         menuLateral[i].classList.remove("active");
+
+      }
   }
 
   //carga usos desde la app
@@ -65,15 +74,6 @@ export class PaymentsComponent implements OnInit {
     this.location.back(); // <-- go back to previous location on cancel
   }
 
-  openModal(id, event){
-    var verPaypalpay = document.getElementsByClassName("vibiblepayp");
-      for (var i = 0; i<verPaypalpay.length; i++) {
-        verPaypalpay[i].classList.add("vibiblepaypblok");
-
-      }
-
-      this.paymentService.get(id).subscribe
-  }
 
 
 }

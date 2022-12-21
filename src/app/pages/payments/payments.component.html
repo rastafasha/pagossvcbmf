@@ -9,7 +9,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
-                        <li class="breadcrumb-item"><a routerLink="/">Panel Administrativo</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/">Panel Admin</a></li>
                         <li class="breadcrumb-item active">{{title}}</li>
                     </ol>
                 </nav>
@@ -72,9 +72,9 @@
                                 <td>{{pago.moneda_codigo}}</td>
 
                                 <td>
-                                    <!-- <span class="badge badge-primary " *ngIf="pago.status == 'Pendiente'">{{pago.status}}</span>
-                                    <span class="badge badge-success " *ngIf="pago.status == 'Aprobado'">{{pago.status}}</span>
-                                    <span class="badge badge-danger " *ngIf="pago.status == 'Rechazado'">{{pago.status}}</span> -->
+                                    <!-- <span class="badge badge-primary " *ngIf="pago.status == 'PENDING'">{{pago.status}}</span>
+                                    <span class="badge badge-success " *ngIf="pago.status == 'APPROVED'">{{pago.status}}</span>
+                                    <span class="badge badge-danger " *ngIf="pago.status == 'REJECTED'">{{pago.status}}</span> -->
                                     <span class="badge bg-success">{{pago.status}}</span>
                                 </td>
                                 <td>{{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</td>

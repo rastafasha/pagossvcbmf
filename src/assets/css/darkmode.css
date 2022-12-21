@@ -70,6 +70,10 @@
     background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
+.dark .instruccioness .info {
+    background: linear-gradient(to right, var(--black), var(--black), transparent);
+}
+
 .dark .header,
 .dark .sidebar {
     background: var(--black);
@@ -131,4 +135,13 @@ body .dark {
 .dark .accordion-body {
     color: var(--white);
     background-color: var(--black);
+}
+
+.dark .loginregister {
+    background: var(--black) !important;
+}
+
+.dark .loginregister .main {
+    background: var(--black) !important;
+    border: 1px solid var(--white) !important;
 }

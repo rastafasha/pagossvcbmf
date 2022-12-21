@@ -1,215 +1,121 @@
-<div *ngIf="role.id === 3 || role.id === 4 ">
-    <!-- =======| Main |======= -->
-    <div class="container " id="main" class="main" role="main">
+<!-- =======| Main |======= -->
+<div class="container " id="main" class="main" role="main">
 
-        <!-- Page Title -->
-        <div class="pagetitle animated fadeIn">
-            <div class="left">
-                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
-                        <li class="breadcrumb-item active">{{title}}</li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="right shadow animated fadeIn">
-                <h1>Plan Semestral</h1>
-                <p>Subscrito desde: </p>
-                <span class="badge bg-success">Activo</span>
-            </div>
+    <!-- Page Title -->
+    <div class="pagetitle animated fadeIn">
+        <div class="left">
+            <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
+                    <li class="breadcrumb-item active">{{title}}</li>
+                </ol>
+            </nav>
         </div>
-        <!-- End Page Title -->
+        <div class="right shadow animated fadeIn">
+            <h1>Plan Semestral</h1>
+            <p>Estado del plan: </p>
+            <span class="badge bg-success">Activo</span>
+        </div>
+    </div>
+    <!-- End Page Title -->
 
-        <!-- banners -->
+    <!-- banners planes -->
+    <app-bannerplanes></app-bannerplanes>
+    <!-- banners planes -->
+
+    <div class="clear"></div>
+    <!-- acceso iconos -->
+    <app-menuiconos></app-menuiconos>
+
+    <!-- acceso iconos -->
+    <div class="clear"></div>
+    <section class="section dashboard">
+
         <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                <!-- banner planes -->
+            <div class="col-xs-12 col-sm-4 col-xl-4">
 
-                <div class="instruccioness shadow animated zoomIn">
-                    <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt="">
-                    <div class="info">
+                <div class="card profile">
 
-                        <h2>Plan Anual</h2>
-                        <p>Subscribase de un solo pago </p>
-                        <h2>$100.00</h2>
-                        <p>Dirijase a la app o web del metodo preferido, </p>
-                        <ul>
-                            <li class="badge bg-primary">Paypal</li>
-                            <li class="badge bg-primary">Zelle</li>
-                            <li class="badge bg-primary">Pago Móvil</li>
-                            <li class="badge bg-primary">Transferencia</li>
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Operaciones</h6>
+                            </li>
+
+                            <li><a class="dropdown-item" routerLink="profile/1">Editar</a></li>
+
                         </ul>
-                        <div class="button btn btn-outline-success">Suscribirme</div>
+                    </div>
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <h2>{{user.username}}</h2>
+
+                        <p>Usuario desde:<br>{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
+                        <!-- <p>Ultima actualización:{{user.updated_at | date:'MMM d, y, h:mm:ss a'}}</p> -->
+
                     </div>
                 </div>
-                <!-- banner planes -->
 
             </div>
-            <div class="col-xs-12 col-sm-6">
-                <!-- banner planes -->
+            <div class="col-xs-12 col-sm-8 col-xl-8">
 
-                <div class="instruccioness shadow animated zoomIn">
-                    <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt="">
-                    <div class="info">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <div *ngIf="user.role === 'GUEST'">
+                            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                        <h2>Producto</h2>
-                        <p>Compre nuestros artículos </p>
-                        <h2>$100.00</h2>
-                        <p>Dirijase a la app o web del metodo preferido, </p>
-                        <ul>
-                            <li class="badge bg-primary">Paypal</li>
-                            <li class="badge bg-primary">Zelle</li>
-                            <li class="badge bg-primary">Pago Móvil</li>
-                            <li class="badge bg-primary">Transferencia</li>
-                        </ul>
-                        <div class="button btn btn-outline-success">Comprar</div>
-                    </div>
-                </div>
-                <!-- banner planes -->
-            </div>
-        </div>
-        <!-- banners -->
-
-        <div class="clear"></div>
-        <!-- acceso iconos -->
-        <div *ngIf="role.id === 4">
-            <div class="acces-icons animated fadeInUp">
-                <a class="nav-link collapsed cursor" routerLink="/dashboard">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-grid"></i>
-                        <h3>Dashboard</h3>
-                    </div>
-                </a>
-
-                <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-currency-exchange"> </i>
-                        <h3>Cuenta</h3>
-                    </div>
-                </a>
-
-            </div>
-        </div>
-        <div *ngIf="role.id === 1 || role.id === 2 || role.id === 3">
-            <div class="acces-icons animated fadeInUp">
-                <a class="nav-link collapsed cursor" routerLink="/dashboard">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-grid"></i>
-                        <h3>Dashboard</h3>
-                    </div>
-                </a>
-
-                <a class="nav-link collapsed cursor" routerLink="/dashboard/historial-pagos">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-currency-exchange"> </i>
-                        <h3>Pagos</h3>
-                    </div>
-                </a>
-                <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-currency-exchange"> </i>
-                        <h3>Cuenta</h3>
-                    </div>
-                </a>
-
-            </div>
-        </div>
-
-        <!-- acceso iconos -->
-        <div class="clear"></div>
-        <section class="section dashboard">
-
-            <div class="row">
-                <div class="col-xl-4">
-
-                    <div class="card profile">
-
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Operaciones</h6>
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">News</button>
                                 </li>
-
-                                <li><a class="dropdown-item" routerLink="profile/1">Editar</a></li>
-
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">Notificaciones</button>
+                                </li>
                             </ul>
                         </div>
-                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <div *ngIf="user.role === 'MEMBER'">
+                            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                            <h2>{{user.username}}</h2>
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">News</button>
+                                </li>
 
-                            <p>Creado:{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
-                            <p>Ultima actualización:{{user.updated_at | date:'MMM d, y, h:mm:ss a'}}</p>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">Notificaciones</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#status">Status</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active news" id="news">
+                                <br />
+                                <app-dolar-today></app-dolar-today>
+                            </div>
+                            <div class="tab-pane fade show active recentPayments" id="recentPayments">
+                                <br />
+                                <app-planesyproductos></app-planesyproductos>
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="status">
+                            </div>
+
 
                         </div>
+                        <!-- End Bordered Tabs -->
+
                     </div>
-
                 </div>
-                <div class="col-xl-8">
 
-                    <div class="card">
-                        <div class="card-body pt-3">
-                            <!-- Bordered Tabs -->
-                            <div *ngIf="role.id === 4">
-                                <ul class="nav nav-tabs nav-tabs-bordered">
-
-                                    <li class="nav-item">
-                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">News</button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">Notificaciones</button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div *ngIf="role.id === 1 || role.id === 2 || role.id === 3">
-                                <ul class="nav nav-tabs nav-tabs-bordered">
-
-                                    <li class="nav-item">
-                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">News</button>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">Notificaciones</button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#status">Status</button>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="tab-content pt-2">
-
-                                <div class="tab-pane fade show active news" id="news">
-                                    <br />
-                                    <app-dolar-today></app-dolar-today>
-                                </div>
-                                <div class="tab-pane fade show active recentPayments" id="recentPayments">
-                                    <br />
-                                    <app-planesyproductos></app-planesyproductos>
-                                </div>
-
-                                <div class="tab-pane fade profile-edit pt-3" id="status">
-                                </div>
-
-
-                            </div>
-                            <!-- End Bordered Tabs -->
-
-                        </div>
-                    </div>
-
-                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </div>
-    <!--/main-->
 </div>
+<!--/main-->

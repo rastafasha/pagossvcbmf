@@ -110,7 +110,8 @@ export class AccountService {
 
    validarToken(): Observable<boolean>{
 
-    return this.http.get(`${this.serverUrl}/permisos`, {
+    // return this.http.get(`${this.serverUrl}/permisos`, {
+    return this.http.get(`${this.serverUrl}/refresh`, {
       headers: {
         'token': this.token
       }
@@ -131,20 +132,7 @@ export class AccountService {
               pagos,
           } = resp.user;
 
-        this.user = new User(
-          role_id,
-          username,
-          email,
-          first_name,
-          last_name,
-           is_active,
-           image,
-            created_at,
-            role,
-            member,
-              directorios,
-              pagos,
-             );
+        this.user = new User();
 
         this.guardarLocalStorage(resp.token, resp.user);
         this.router.navigateByUrl('/dashboard');

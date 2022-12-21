@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 
-const base_url = environment.apiUrl;
+const base_url = environment.apiUrlMedia;
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class FileUploadService {
 
     try{
 
-      const url = `${base_url}/storage/directories/${tipo}/${id}`;
+      const url = `${base_url}${tipo}/${id}`;
       const formData = new FormData();
       formData.append('imagen', archivo);
 

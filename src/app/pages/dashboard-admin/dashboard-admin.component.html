@@ -1,220 +1,130 @@
-<div *ngIf="role.id === 1 || role.id === 2 ">
-    <!-- =======| Main |======= -->
-    <div class="container" id="main" class="main" role="main ">
-        <div class="col-xs-12 " style="float: left;">
-            <!-- Page Title -->
-            <div class="pagetitle animated fadeIn">
-                <div class="left">
-                    <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
-                    <nav>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
-                            <li class="breadcrumb-item active">{{title}}</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="right shadow animated fadeIn">
-                    <h1>Plan Semestral</h1>
-                    <p>Subscrito desde: </p>
-                    <span class="badge bg-success">Activo</span>
-                </div>
+<!-- =======| Main |======= -->
+<div class="container " id="main" class="main" role="main ">
+    <div class="col-xs-12 ">
+        <!-- Page Title -->
+        <div class="pagetitle animated fadeIn">
+            <div class="left">
+                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
             </div>
+            <div class="right shadow animated fadeIn">
+                <h1>Plan Semestral</h1>
+                <p>Estado del plan: </p>
+                <span class="badge bg-success">Activo</span>
+            </div>
+        </div>
+        <!-- banners planes -->
+        <app-bannerplanes></app-bannerplanes>
+        <!-- banners planes -->
+
+
+        <div class="clear"></div>
+        <!-- acceso iconos -->
+        <app-menuiconos></app-menuiconos>
+        <!-- acceso iconos -->
+
+        <!-- End Page Title -->
+
+        <section class="section dashboard">
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <!-- banner planes -->
+                <div class=" col-xs-12 col-sm-4 col-xl-4">
 
-                    <div class="instruccioness shadow animated zoomIn">
-                        <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt="">
-                        <div class="info">
+                    <div class="card profile  animated fadeInUp">
 
-                            <h2>Plan Anual</h2>
-                            <p>Subscribase de un solo pago </p>
-                            <h2>$100.00</h2>
-                            <p>Dirijase a la app o web del metodo preferido, </p>
-                            <ul>
-                                <li class="badge bg-primary">Paypal</li>
-                                <li class="badge bg-primary">Zelle</li>
-                                <li class="badge bg-primary">Pago Móvil</li>
-                                <li class="badge bg-primary">Transferencia</li>
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Operaciones</h6>
+                                </li>
+
+                                <li><a class="dropdown-item" routerLink="profile/1">Editar</a></li>
+
                             </ul>
-                            <div class="button btn btn-outline-success">Suscribirme</div>
+                        </div>
+                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                            <h2>{{user.username}}</h2>
+
+                            <p>Administrador desde:<br>{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
+                            <!-- <p>Ultima actualización:{{user.updated_at | date:'MMM d, y, h:mm:ss a'}}</p> -->
+
                         </div>
                     </div>
-                    <!-- banner planes -->
 
                 </div>
-                <div class="col-xs-12 col-sm-6">
-                    <!-- banner planes -->
+                <div class=" col-xs-12 col-sm-8 col-xl-8">
 
-                    <div class="instruccioness shadow animated zoomIn">
-                        <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt="">
-                        <div class="info">
+                    <div class="card  animated fadeInUp">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                            <h2>Producto</h2>
-                            <p>Compre nuestros artículos </p>
-                            <h2>$100.00</h2>
-                            <p>Dirijase a la app o web del metodo preferido, </p>
-                            <ul>
-                                <li class="badge bg-primary">Paypal</li>
-                                <li class="badge bg-primary">Zelle</li>
-                                <li class="badge bg-primary">Pago Móvil</li>
-                                <li class="badge bg-primary">Transferencia</li>
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">Actualidad</button>
+                                </li>
+
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">Transacciones Recientes</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#status">Usuarios Recientes</button>
+                                </li>
+
+
                             </ul>
-                            <div class="button btn btn-outline-success">Comprar</div>
-                        </div>
-                    </div>
-                    <!-- banner planes -->
-                </div>
-            </div>
+                            <div class="tab-content pt-2">
 
-            <div class="clear"></div>
-            <!-- acceso iconos -->
-            <div class="acces-icons animated fadeInUp container">
-                <a class="nav-link collapsed cursor" routerLink="/dashboard">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-grid"></i>
-                        <h3>Dashboard</h3>
-                    </div>
-                </a>
-                <a class="nav-link collapsed cursor" routerLink="/dashboard/users">
-
-                    <div class="icontext shadow">
-                        <i class="bx bxs-user-account"></i>
-                        <h3>Usuarios</h3>
-                    </div>
-                </a>
-                <a class="nav-link collapsed cursor" routerLink="/dashboard/directorio">
-
-                    <div class="icontext shadow">
-                        <i class="bx bxs-user-account"></i>
-                        <h3>Directorio</h3>
-                    </div>
-                </a>
-                <a class="nav-link collapsed cursor" routerLink="/dashboard/payments">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-currency-exchange"> </i>
-                        <h3>Pagos</h3>
-                    </div>
-                </a>
-                <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-currency-exchange"> </i>
-                        <h3>Cuenta</h3>
-                    </div>
-                </a>
-                <a class="nav-link collapsed cursor" routerLink="/dashboard/configuraciones">
-
-                    <div class="icontext shadow">
-                        <i class="bi bi-bricks"> </i>
-                        <h3>mas</h3>
-                    </div>
-                </a>
-
-            </div>
-            <!-- acceso iconos -->
-
-            <!-- End Page Title -->
-
-            <section class="section dashboard">
-
-                <div class="row">
-                    <div class="col-xl-4">
-
-                        <div class="card profile  animated fadeInUp">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Operaciones</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" routerLink="profile/1">Editar</a></li>
-
-                                </ul>
-                            </div>
-                            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-                                <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                                <h2>{{user.username}}</h2>
-
-                                <p>Creado:{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
-                                <p>Ultima actualización:{{user.updated_at | date:'MMM d, y, h:mm:ss a'}}</p>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-xl-8">
-
-                        <div class="card  animated fadeInUp">
-                            <div class="card-body pt-3">
-                                <!-- Bordered Tabs -->
-                                <ul class="nav nav-tabs nav-tabs-bordered">
-
-                                    <li class="nav-item">
-                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">Actualidad</button>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">Transacciones Recientes</button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#status">Usuarios Recientes</button>
-                                    </li>
-
-
-                                </ul>
-                                <div class="tab-content pt-2">
-
-                                    <div class="tab-pane fade show active news" id="news">
-                                        <br />
-                                        <app-dolar-today></app-dolar-today>
-                                    </div>
-                                    <div class="tab-pane fade show  recentPayments" id="recentPayments">
-                                        <app-pagos-recientes></app-pagos-recientes>
-                                    </div>
-
-                                    <div class="tab-pane fade profile-edit pt-3" id="status">
-                                        <app-usuarios-recientes></app-usuarios-recientes>
-                                    </div>
-
-
+                                <div class="tab-pane fade show active news" id="news">
+                                    <br />
+                                    <app-dolar-today></app-dolar-today>
                                 </div>
-                                <!-- End Bordered Tabs -->
+                                <div class="tab-pane fade show  recentPayments" id="recentPayments">
+                                    <!-- <app-pagos-recientes></app-pagos-recientes> -->
+                                </div>
+
+                                <div class="tab-pane fade profile-edit pt-3" id="status">
+                                    <!-- <app-usuarios-recientes></app-usuarios-recientes> -->
+                                </div>
+
 
                             </div>
+                            <!-- End Bordered Tabs -->
+
                         </div>
-
                     </div>
-                </div>
-            </section>
 
-        </div>
-        <!-- <div class="col-xs-12 col-sm-3 lateral">
-            <div class="animated fadeInUp">
-
-                <h2>Notificaciones</h2>
-                <div class="item ">
-                    <img src="./assets/img/logo.png" alt="">
-                    <div class="imagetitulo">
-                        <h1>Plan Semestral</h1>
-                        <p>Desde: Dec 10, 2022</p>
-                        <span class="badge bg-success">Activo</span>
-                    </div>
-                    <div class="info">
-                    </div>
                 </div>
             </div>
-            <div class="clear"></div>
-
-        </div> -->
+        </section>
 
     </div>
-    <!--/main-->
+    <!-- <div class="col-xs-12 col-sm-3 lateral">
+      <div class="animated fadeInUp">
+
+          <h2>Notificaciones</h2>
+          <div class="item ">
+              <img src="./assets/img/logo.png" alt="">
+              <div class="imagetitulo">
+                  <h1>Plan Semestral</h1>
+                  <p>Desde: Dec 10, 2022</p>
+                  <span class="badge bg-success">Activo</span>
+              </div>
+              <div class="info">
+              </div>
+          </div>
+      </div>
+      <div class="clear"></div>
+
+  </div> -->
+
 </div>
+<!--/main-->
 <div class="clear"></div>

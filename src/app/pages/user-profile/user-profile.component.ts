@@ -29,8 +29,17 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.closeMenu();
     this.activatedRoute.params.subscribe( ({id}) => this.getUser(id));
     this.activatedRoute.params.subscribe( ({id}) => this.getpagosUser(id));
+  }
+
+  closeMenu(){
+    var menuLateral = document.getElementsByClassName("sidebar");
+      for (var i = 0; i<menuLateral.length; i++) {
+         menuLateral[i].classList.remove("active");
+
+      }
   }
 
   getUser(id:number){

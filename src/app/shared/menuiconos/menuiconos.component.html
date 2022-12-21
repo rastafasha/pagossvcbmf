@@ -1,0 +1,94 @@
+<div *ngIf="user.role === 'SUPERADMIN'|| user.role === 'ADMIN' ">
+    <div class="acces-icons animated fadeInDown container">
+        <a class="nav-link collapsed cursor" routerLink="/dashboard">
+
+            <div class="icontext shadow">
+                <i class="bi bi-grid"></i>
+                <h3>Dashboard</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/users">
+
+            <div class="icontext shadow">
+                <i class="bx bxs-user-account"></i>
+                <h3>Usuarios</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/directorio">
+
+            <div class="icontext shadow">
+                <i class="bx bxs-user-account"></i>
+                <h3>Directorio</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/payments">
+
+            <div class="icontext shadow">
+                <i class="bi bi-currency-exchange"> </i>
+                <h3>Pagos</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]">
+
+            <div class="icontext shadow">
+                <i class="bi bi-currency-exchange"> </i>
+                <h3>Cuenta</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/configuraciones">
+
+            <div class="icontext shadow">
+                <i class="bi bi-bricks"> </i>
+                <h3>mas</h3>
+            </div>
+        </a>
+
+    </div>
+</div>
+<div *ngIf="user.role === 'MEMBER'">
+    <div class="acces-icons animated fadeInUp container">
+        <a class="nav-link collapsed cursor" routerLink="/dashboard">
+
+            <div class="icontext shadow">
+                <i class="bi bi-grid"></i>
+                <h3>Dashboard</h3>
+            </div>
+        </a>
+
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/directorio">
+
+            <div class="icontext shadow">
+                <i class="bx bxs-user-account"></i>
+                <h3>Directorio</h3>
+            </div>
+        </a>
+
+        <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]">
+
+            <div class="icontext shadow">
+                <i class="bi bi-currency-exchange"> </i>
+                <h3>Cuenta</h3>
+            </div>
+        </a>
+
+    </div>
+</div>
+<!-- <div *ngIf="user.role === 'GUEST'">
+    <div class="acces-icons animated fadeInUp container">
+        <a class="nav-link collapsed cursor" routerLink="/dashboard">
+
+            <div class="icontext shadow">
+                <i class="bi bi-grid"></i>
+                <h3>Dashboard</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]">
+
+            <div class="icontext shadow">
+                <i class="bi bi-currency-exchange"> </i>
+                <h3>Cuenta</h3>
+            </div>
+        </a>
+
+    </div>
+</div> -->
