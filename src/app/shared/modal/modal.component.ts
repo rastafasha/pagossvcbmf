@@ -48,7 +48,7 @@ export class ModalComponent implements OnInit {
   cargarForm(id: string){
 
     if (id) {
-      this.paymentService.get(id).subscribe(
+      this.paymentService.getPagoById(id).subscribe(
         res => {
           this.verificarPagoForm.patchValue({
             id: res.id,

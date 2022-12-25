@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Role } from '@app/models/role';
 import { User } from '@app/models/user';
-import { RoleService } from '@app/services/role.service';
 import { UserService } from '@app/services/user.service';
 
 @Component({
@@ -15,12 +12,8 @@ export class DashboardUserComponent implements OnInit {
   public user: User;
 
   error: string;
-  role: Role;
 
-  roleid:number;
   constructor(
-    private roleService: RoleService,
-    private activatedRoute: ActivatedRoute,
     private userService: UserService,
   ) {
     this.user = userService.user;

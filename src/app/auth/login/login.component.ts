@@ -94,7 +94,7 @@ retrieveMe() {
     this.email.setValue(localStorage.getItem('email'));
   } else {
     this.email.setValue('');
-    this.remember.setValue(false);
+    this.remember.setValue(true);
   }
 }
 

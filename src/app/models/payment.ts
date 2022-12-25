@@ -8,7 +8,7 @@ export class Payment {
    user_id?:User;
    metodo?:string;
    bank_name?:string;
-   monto:number;
+   monto:string;
    moneda_id?:number;
    moneda_codigo?:string;
    referencia?:string;
@@ -16,13 +16,14 @@ export class Payment {
 
    fecha?:Date;
 
-   producto_id?:number;
+   plan_id?:number;
    nombre?:User;
    email?:User;
 
    status?:string;
-   validacion?:number;
-  //  status:'APPROVED' | 'PENDING' | 'REJECTED';
+   validacion?:string;
+  //  validacion?:'APPROVED' | 'PENDING' | 'REJECTED';
+  //  status?: 'APPROVED' | 'PENDING' | 'REJECTED';
 
    updated_at:Date;
    created_at:Date;

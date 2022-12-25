@@ -11,13 +11,13 @@ export class ImagenPipe implements PipeTransform {
   transform(img: string, tipo: 'usuarios'|'payments'|'directories'|'plans'): string {
 
     if(!img){
-      return `${base_url}directories/no-image.jpg`;
+      return `${base_url}no-image.jpg`;
     } else if(img.includes('https')){
       return img;
     } else if(img){
-      return `${base_url}directories/${tipo}/${img}`;
+      return `${base_url}${tipo}/${img}`;
     }else {
-      return `${base_url}directories/no-image.jpg`;
+      return `${base_url}no-image.jpg`;
     }
 
 

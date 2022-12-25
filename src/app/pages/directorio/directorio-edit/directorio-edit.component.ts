@@ -59,6 +59,7 @@ export class DirectorioEditComponent implements OnInit {
    * Propiedad del codigoQR
    */
   directory: Directorio;
+  directories: Directorio;
   id: string | null;
 
   vCardInfo:string;
@@ -69,6 +70,8 @@ export class DirectorioEditComponent implements OnInit {
   vcard: string;
 
   public user:User;
+
+  image:string;
 
 
   constructor(
@@ -184,17 +187,20 @@ this.user = this.userService.user;
       twitter: [''],
       linkedin: [''],
       vcard: [this.vCardInfo],
-      image: [''],
-      user_id: [''],
+      image: [this.image],
+      user_id: [this.user.id],
     });
 
 
   }
 
-  onSelectedFile(event) {
+  onSelectedFile(event) {debugger
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.directorioForm.get('image').setValue(file);
+      this.directorioForm.get('image').setValue(file.name);
+      // this.directorioForm.get('image').setValue(file);
+
+      this.image = file.name;
     }
   }
 

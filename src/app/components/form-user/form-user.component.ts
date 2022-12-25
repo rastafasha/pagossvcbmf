@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Directorio } from '@app/models/directorio';
+import { User } from '@app/models/user';
 import { DirectorioService } from '@app/services/directorio.service';
 import { MemberService } from '@app/services/member.service';
 import { RoleService } from '@app/services/role.service';
@@ -36,10 +37,11 @@ export class FormUserComponent implements OnInit {
   error: string;
   uploadError: string;
   pageTitle: string;
+  directory: Directorio;
 
   public imagenSubir: File;
   public imgTemp: any = null;
-
+  user:User;
 
   //vcard
   vCardInfo:string;
@@ -50,6 +52,8 @@ export class FormUserComponent implements OnInit {
   vcard: string;
 file: File;
 
+image:string;
+
 constructor(
   private fb: FormBuilder,
   private userService: UserService,
@@ -59,7 +63,7 @@ constructor(
   private router: Router,
   private activatedRoute: ActivatedRoute,
   ) {
-
+    this.user = this.userService.user;
   }
 
   ngOnInit(): void {
@@ -71,7 +75,7 @@ constructor(
   iniciarFormulario(id:number){
     if (id) {
       this.pageTitle = 'Editar Directorio';
-      this.directorioService.getDirectorio(+id).subscribe(
+      this.directorioService.getDirectorio(id).subscribe(
         res => {
           this.directorioForm.patchValue({
             id: res.id,
@@ -97,8 +101,9 @@ constructor(
             twitter: res.twitter,
             linkedin: res.linkedin,
             vcard: this.vCardInfo,
+            user_id: this.user.id,
           });
-          // this.imagePath: res.image;
+          this.imagePath = res.image;
           this.directorio = res;
           console.log(this.directorio);
 
@@ -138,16 +143,44 @@ constructor(
       twitter: [''],
       linkedin: [''],
       vcard: [this.vCardInfo],
-      image: [''],
+      image: [this.image],
+      user_id: [''],
     });
   }
 
-  onSelectedFile(event:any) {
+  onSelectedFile(event) {debugger
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.directorioForm.get('image')?.setValue(file);
+      this.directorioForm.get('image').setValue(file.name);
+      // this.directorioForm.get('image').setValue(file);
+
+      this.image = file.name;
     }
   }
+
+  get nombre() { return this.directorioForm.get('nombre'); }
+  get surname() { return this.directorioForm.get('surname'); }
+  get especialidad() { return this.directorioForm.get('especialidad'); }
+  get universidad() { return this.directorioForm.get('universidad'); }
+  get org() { return this.directorioForm.get('org'); }
+  get ano() { return this.directorioForm.get('ano'); }
+  get website() { return this.directorioForm.get('website'); }
+  get email() { return this.directorioForm.get('email'); }
+  get direccion() { return this.directorioForm.get('direccion'); }
+  get direccion1() { return this.directorioForm.get('direccion1'); }
+  get estado() { return this.directorioForm.get('estado'); }
+  get ciudad() { return this.directorioForm.get('ciudad'); }
+  get telefonos() { return this.directorioForm.get('telefonos'); }
+  get tel1() { return this.directorioForm.get('tel1'); }
+  get telhome() { return this.directorioForm.get('telhome'); }
+  get telmovil() { return this.directorioForm.get('telmovil'); }
+  get telprincipal() { return this.directorioForm.get('telprincipal'); }
+  get facebook() { return this.directorioForm.get('facebook'); }
+  get instagram() { return this.directorioForm.get('instagram'); }
+  get twitter() { return this.directorioForm.get('twitter'); }
+  get linkedin() { return this.directorioForm.get('linkedin'); }
+  get user_id() { return this.directorioForm.get('user_id'); }
+
 
   guardarDirectorio() {
 
@@ -178,10 +211,16 @@ constructor(
     formData.append('image', this.directorioForm.get('image')?.value);
     formData.append('vcard', this.vCardInfo);
 
-    const id = this.directorioForm.get('id')?.value;
+
+    const id = this.directorioForm.get('id').value;
 
     if (id) {
-      this.directorioService.updateDirectorio(formData).subscribe(
+      const data = {
+        ...this.directorioForm.value,
+        user_id: this.user.id,
+        id: this.directory.id
+      }
+      this.directorioService.updateDirectorio(data).subscribe(
         res => {
           if (this.error) {
             // this.uploadError = res.message;
@@ -195,7 +234,11 @@ constructor(
         error => this.error = error
       );
     } else {
-      this.directorioService.createDirectorio(formData).subscribe(
+      const data = {
+        ...this.directorioForm.value,
+        user_id: this.user.id,
+      }
+      this.directorioService.createDirectorio(data).subscribe(
         res => {
           if (this.error) {
             // this.uploadError = res.message;
@@ -203,7 +246,7 @@ constructor(
           } else {
             this.infoDirectorio = res;
             Swal.fire('Guardado', 'Los cambios fueron creados', 'success');
-            this.router.navigate(['/directorio']);
+            // this.router.navigate(['/directorio']);
           }
         },
         error => this.error = error

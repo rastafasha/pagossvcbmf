@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { Plan } from '@app/models/plan';
+import {MessageService} from '@app/services/message.service';
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductoComponent implements OnInit {
 
-  constructor() { }
+  // @Input() product: Plan;
+  plan: Plan;
+
+  constructor(
+    private messageService: MessageService,
+    private router: Router
+    ) { }
+
 
   ngOnInit(): void {
+  }
+
+  addToCart(): void{
+    console.log('sending product..')
+    this.messageService.sendMessage(this.plan);
+    this.router.navigateByUrl('/dashboard/realizar-pago');
   }
 
 }

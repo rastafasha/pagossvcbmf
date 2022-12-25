@@ -20,8 +20,8 @@ export class User {
     image: string = "";
     role?: 'SUPERADMIN' | 'ADMIN' | 'MEMBER' | 'GUEST';
     member?: Member;
-    directorios: Directorio;
-    pagos: Payment;
+    directories: Directorio;
+    payments: Payment;
 
 
 

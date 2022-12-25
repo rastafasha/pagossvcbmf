@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+
 //Models
 import { User } from '@app/models/user';
-import { Member } from '@app/models/member';
-import { Role } from '@app/models/role';
+
 //Services
 import { UserService } from '@app/services/user.service';
 import { RoleService } from '@app/services/role.service';
@@ -26,9 +26,7 @@ export class UserDetailsComponent implements OnInit {
 
   title = "Detalles de la cuenta";
   form: FormGroup;
-  user: any;
-
-  roles: Role[] = [];
+  user: User;
 
   error: string;
 
@@ -87,16 +85,6 @@ s
   }
 
 
-
-  getRoles(): void {
-    this.roleService.getAll().subscribe(
-      res =>{
-        this.roles = res;
-        error => this.error = error
-        console.log(this.roles);
-      }
-    );
-  }
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel

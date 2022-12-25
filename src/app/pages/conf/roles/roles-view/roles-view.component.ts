@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../../../services/user.service';
-import { RoleService } from '../../../../services/role.service';
-import {User} from '../../../../models/user';
-import {Role} from '../../../../models/role';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
+import {UserService} from '../../../../services/user.service';
+import {User} from '../../../../models/user';
 
 @Component({
   selector: 'app-roles-view',
@@ -17,13 +15,13 @@ export class RolesViewComponent implements OnInit {
    title = "Roles";
   users: User[] = [];
   user: User;
-  // roles: Role[] = [];
-  role: Role;
+
   p: number = 1;
   count: number = 8;
 
   error: string;
   msm_error: string;
+  roles;
 
   rolesSelected:number;
 
@@ -32,7 +30,6 @@ export class RolesViewComponent implements OnInit {
   constructor(
     private fb:FormBuilder,
     private userService: UserService,
-    private roleService: RoleService,
     private location: Location,
   ) { }
 
@@ -45,7 +42,6 @@ export class RolesViewComponent implements OnInit {
     this.userService.getAll().subscribe(
       res =>{
         this.users = res;
-        this.user.role = res;
         error => this.error = error;
       }
     );
@@ -54,10 +50,11 @@ export class RolesViewComponent implements OnInit {
 
   getRoles(): void {
 
-    this.roleService.getAll().subscribe(
+    this.userService.getAll().subscribe(
       res =>{
-        // this.roles = res;
-        error => this.error = error
+        this.user.role = res;
+        error => this.error = error;
+        console.log(this.user.role);
       }
     );
   }

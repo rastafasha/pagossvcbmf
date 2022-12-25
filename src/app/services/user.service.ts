@@ -52,17 +52,15 @@ export class UserService {
 
   }
 
-  guardarLocalStorage(token: string, usuario: any){
-    localStorage.setItem('token', JSON.stringify(token));
-    localStorage.setItem('user', JSON.stringify(usuario));
+  guardarLocalStorage( user:any, access_token: any){
+    // localStorage.setItem('token', JSON.stringify(token));
+  localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem('token', JSON.stringify(access_token.original.access_token));
   }
 
   getUserLocalStorage(): void {
     return this.user = JSON.parse(localStorage.getItem('user'));
   }
-
-
-
 
 
   getAll(): Observable<any> {
@@ -72,6 +70,16 @@ export class UserService {
       .pipe(
         map((resp:{ok: boolean, users: User}) => resp.users)
       )
+  }
+
+  getUserById(id:number): Observable<any> {
+
+    const url = `${baseUrl}/user/show/${id}`;
+    return this.http.get<any>(url, this.headers)
+      .pipe(
+        map((resp:{ok: boolean, user: User}) => resp.user)
+        );
+
   }
 
   getRecientes(): Observable<any> {
@@ -84,25 +92,6 @@ export class UserService {
 
 
 
-
-  getUser(): Observable<any> {
-
-    const url = `${baseUrl}/user/`;
-    return this.http.get<any>(url, this.headers)
-      .pipe(
-        map((resp:{ok: boolean, user: User}) => resp.user)
-        );
-  }
-
-  getUserById(id:number): Observable<any> {
-
-    const url = `${baseUrl}/user/show/${id}`;
-    return this.http.get<any>(url, this.headers)
-      .pipe(
-        map((resp:{ok: boolean, user: User}) => resp.user)
-        );
-
-  }
 
 
   update(id: number) {

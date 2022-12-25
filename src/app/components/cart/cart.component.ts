@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 // import { ModalComponent } from '../modal/modal.component';
 import { ProductPaypal } from '@app/models/productPaypal';
 import { Payment } from '@app/models/payment';
+import { Plan } from '@app/models/plan';
 // import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
@@ -114,16 +115,16 @@ export class CartComponent implements OnInit {
 }
 
   getItem():void{
-    this.messageService.getMessage().subscribe((product:Payment)=>{
+    this.messageService.getMessage().subscribe((plan:Plan)=>{
       let exists = false;
       this.cartItems.forEach(item =>{
-        if(item.productId === product.id){
+        if(item.productId === plan.id){
           exists = true;
           item.quantity++;
         }
       });
       if(!exists){
-        const cartItem = new CartItemModel(product);
+        const cartItem = new CartItemModel(plan);
         this.cartItems.push(cartItem);
 
       }

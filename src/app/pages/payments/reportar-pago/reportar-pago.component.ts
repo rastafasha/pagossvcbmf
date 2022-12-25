@@ -1,23 +1,27 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { MessageService } from '@app/services/message.service';
-import { ProductPaypal } from '@app/models/productPaypal';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PaymentService } from '@app/services/payment.service';
-import { UserService } from '../../services/user.service';
-import { Payment } from '@app/models/payment';
 import { Currencies } from '@app/models/currencies';
+import { Payment } from '@app/models/payment';
+import { User } from '@app/models/user';
 import { CurrenciesService } from '@app/services/currencies.service';
+import { PaymentService } from '@app/services/payment.service';
+import { UserService } from '@app/services/user.service';
+
+
 
 @Component({
-  selector: 'app-user-pagar',
-  templateUrl: './user-pagar.component.html',
-  styleUrls: ['./user-pagar.component.css']
+  selector: 'app-reportar-pago',
+  templateUrl: './reportar-pago.component.html',
+  styleUrls: ['./reportar-pago.component.css']
 })
-export class UserPagarComponent implements OnInit {
+export class ReportarPagoComponent implements OnInit {
 
-  public product: ProductPaypal;
+  title= 'Realizar un Pago';
+
+  // public product: ProductPaypal;
 
   public PaymentRegisterForm: FormGroup;
   public file :File;
@@ -26,12 +30,15 @@ export class UserPagarComponent implements OnInit {
 
   metodo:string;
   error: string;
-  pagoSeleccionado: ProductPaypal;
+  pagoSeleccionado: Payment;
   pagoS: Payment;
   currenciesAll: Currencies;
 
+  image:string;
+  uploadError: boolean;
+  imagePath: string;
 
-  title= 'Realizar un Pago';
+  user:User;
   constructor(
     private fb: FormBuilder,
     private location: Location,
@@ -42,8 +49,9 @@ export class UserPagarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private currenciesService: CurrenciesService,
   ) {
-    this.usuario = usuarioService.user;
+    this.user = this.usuarioService.user;
   }
+
 
   ngOnInit(): void {
     // this.activatedRoute.params.subscribe( ({id}) => this.cargarForm(id));
@@ -81,29 +89,37 @@ export class UserPagarComponent implements OnInit {
       metodo: ['',Validators.required],
       bank_name: [''],
       monto: ['',Validators.required],
-      moneda_id: ['',Validators.required],
+      currency_id: [''],
+      // moneda_codigo: [''],
       referencia: [''],
-      producto_id: [1],
+      email: [''],
+      nombre: [''],
+      plan_id: [1],
       status: ['Pendiente'],
       user_id: [''],
+      image: [this.image],
     })
   }
 
   cargarForm(id: string){
 
     if (id) {
-      this.paymentService.get(id).subscribe(
+      this.paymentService.getPagoById(id).subscribe(
         res => {
           this.PaymentRegisterForm.patchValue({
             metodo: res.metodo,
             bank_name: res.bank_name,
             monto: res.monto,
-            moneda_id: this.currenciesAll.id,
+            currency_id: this.currenciesAll.id,
+            // moneda_codigo: this.currenciesAll.name,
             referencia: res.referencia,
-            user_id: this.usuario.id,
-            producto_id: '1',
-            img : res.img
+            email: res.email,
+            nombre: res.nombre,
+            user_id: this.user.id,
+            plan_id: '1',
           });
+          this.imagePath  = res.image;
+
           this.pagoSeleccionado = res;
           console.log(this.pagoSeleccionado);
         }
@@ -114,48 +130,48 @@ export class UserPagarComponent implements OnInit {
 
   }
 
+  onSelectedFile(event) {debugger
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.PaymentRegisterForm.get('image').setValue(file.name);
+      // this.directorioForm.get('image').setValue(file);
+
+      this.image = file.name;
+    }
+  }
+
   updateForm(){debugger
 
-    const {metodo, bank_name, monto, moneda_id, referencia,producto_id,
-    } = this.PaymentRegisterForm.value;
-
-    if(this.pagoSeleccionado){
-      //actualizar
-      const data = {
-        ...this.PaymentRegisterForm.value,
-        user_id: this.usuario.id,
-        id: this.pagoSeleccionado.id
-      }
-      this.paymentService.update(data).subscribe(
-        resp =>{
-          // Swal.fire('Actualizado', `${titulo}  actualizado correctamente`, 'success');
-          console.log(this.pagoSeleccionado);
-        });
-
-    }else{
-      //crear
-      const data = {
-        ...this.PaymentRegisterForm.value,
-        user_id: this.usuario.id
-      }
-      this.paymentService.create(data)
-      .subscribe( (resp: any) =>{
-        // Swal.fire('Creado', `${titulo} creado correctamente`, 'success');
-        this.router.navigateByUrl(`/dashboard/factura`);
-        console.log(this.pagoSeleccionado);
-
-      })
 
 
-      this.addToCart();
+    const formData = new FormData();
+    formData.append('metodo', this.PaymentRegisterForm.get('metodo').value);
+    formData.append('bank_name', this.PaymentRegisterForm.get('bank_name').value);
+    formData.append('monto', this.PaymentRegisterForm.get('monto').value);
+    // formData.append('moneda_codigo', this.PaymentRegisterForm.get('moneda_codigo').value);
+    formData.append('currency_id', this.PaymentRegisterForm.get('currency_id').value);
+    formData.append('referencia', this.PaymentRegisterForm.get('referencia').value);
+    formData.append('nombre', this.PaymentRegisterForm.get('nombre').value);
+    formData.append('email', this.PaymentRegisterForm.get('email').value);
+    formData.append('image', this.PaymentRegisterForm.get('image').value);
+
+
+    //crear
+    const data = {
+      ...this.PaymentRegisterForm.value,
+      user_id: this.usuario.id
     }
+    this.paymentService.create(data)
+    .subscribe( (resp: any) =>{
+      // Swal.fire('Creado', `creado correctamente`, 'success');
+      this.router.navigateByUrl(`/dashboard/factura`);
+      console.log(this.pagoSeleccionado);
+
+    })
 
   }
 
-  addToCart(): void{
-    console.log('sending...')
-    this.messageService.sendMessage(this.pagoS);
-  }
+
 
   verpaypal(){
     var verPaypalpay = document.getElementsByClassName("vibiblepayp");
@@ -171,4 +187,5 @@ export class UserPagarComponent implements OnInit {
 
       }
   }
+
 }

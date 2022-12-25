@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 //Models
 import { User } from '@app/models/user';
-import { Role } from '@app/models/role';
 
 //Services
 import { UserService } from '@app/services/user.service';
-import { RoleService } from '@app/services/role.service';
 import { ConfirmService } from '@app/services/confirm.service';
 import { HttpBackend, HttpClient, HttpHandler } from '@angular/common/http';
 
@@ -25,7 +23,7 @@ export class UsersComponent implements OnInit {
   usersCount = 0;
   usuarios: User[]=[];
   user: User;
-  roles: Role;
+  roles;
 
   p: number = 1;
   count: number = 8;
@@ -39,7 +37,6 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private roleService: RoleService,
     private confirmService: ConfirmService,
     private location: Location,
     private http: HttpClient,
@@ -52,7 +49,6 @@ export class UsersComponent implements OnInit {
 
     this.closeMenu();
     this.getUsers();
-    this.getRoles();
   }
 
 
@@ -67,36 +63,10 @@ export class UsersComponent implements OnInit {
   }
 
 
-  getRoles(): void {
-
-    this.roleService.getAll().subscribe(
-      (res:Role) =>{
-        this.roles = res;
-        error => this.error = error
-        console.log('el arreglo rol es',this.roles)
-        console.log('el numero rol es',this.roles[0].id)
-      }
-    );
-  }
 
   showDeleteConfirm(id: any) {
     this.confirmService.openConfirmDialog("Seguro que desea borrar este usuario?" + id, "Eliminar", this.proced, id.toString(),this);
 
-  }
-
-
-  /*
-   proced - Esta función se ejecuta en el ambito del servicio confirmService y no en esta clase.
-            Por eso paso por referencia este objecto en la variable that y así poder ejecutar estos metodos.
-
-   */
-  public proced(id?: string, that?:any): void {
-
-    if (id && that) {
-
-      that.userService.deleteById(id).subscribe();
-
-    }
   }
 
   eliminarUser(user:User){
@@ -114,6 +84,30 @@ export class UsersComponent implements OnInit {
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
   }
+
+  closeMenu(){
+    var menuLateral = document.getElementsByClassName("sidebar");
+      for (var i = 0; i<menuLateral.length; i++) {
+         menuLateral[i].classList.remove("active");
+
+      }
+  }
+
+  /*
+   proced - Esta función se ejecuta en el ambito del servicio confirmService y no en esta clase.
+            Por eso paso por referencia este objecto en la variable that y así poder ejecutar estos metodos.
+
+   */
+  public proced(id?: string, that?:any): void {
+
+    if (id && that) {
+
+      that.userService.deleteById(id).subscribe();
+
+    }
+  }
+
+
 
 
   // search( text: string) {// funciona, devuelve la busqueda
@@ -144,13 +138,7 @@ export class UsersComponent implements OnInit {
 
   // }
 
-  closeMenu(){
-    var menuLateral = document.getElementsByClassName("sidebar");
-      for (var i = 0; i<menuLateral.length; i++) {
-         menuLateral[i].classList.remove("active");
 
-      }
-  }
 
 
 

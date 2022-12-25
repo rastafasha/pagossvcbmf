@@ -13,20 +13,20 @@ export class AuthGuard implements  CanLoad, CanActivate {
   constructor(private accountService: AccountService,
     private router: Router){}
 
-  canLoad(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> | Promise<boolean> {
-    return;
-  }
-
   // canLoad(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> | Promise<boolean> {
-  //   return this.accountService.validarToken()
-  //   .pipe(
-  //     tap( estaAutenticado => {
-  //       if(!estaAutenticado){
-  //         this.router.navigateByUrl('/login');
-  //       }
-  //     })
-  //   );
+  //   return;
   // }
+
+  canLoad(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> | Promise<boolean> {
+    return this.accountService.validarToken()
+    .pipe(
+      tap( estaAutenticado => {
+        if(!estaAutenticado){
+          this.router.navigateByUrl('/login');
+        }
+      })
+    );
+  }
 
 
 

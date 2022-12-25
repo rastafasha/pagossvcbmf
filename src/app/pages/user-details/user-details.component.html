@@ -17,7 +17,7 @@
             <!-- End Page Title -->
         </div>
         <div class="col-xs-12 col-sm-2">
-            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
@@ -35,12 +35,12 @@
                         <!-- <h3>{{ user.username?user.username:'' }}</h3> -->
                         <h3>{{ user.username }}</h3>
                         <!-- <h3>{{ user.role.descripcion }}</h3> -->
-                        <div class="social-links mt-2">
+                        <!-- <div class="social-links mt-2">
                             <a *ngIf="user.twitter" href="{{user.twitter}}" target="_blank" class="twitter"><i class="bi bi-twitter"></i></a>
                             <a *ngIf="user.facebook" href="{{user.facebook}}" target="_blank" class="facebook"><i class="bi bi-facebook"></i></a>
                             <a *ngIf="user.instagram" href="{{user.instagram}}" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a>
                             <a *ngIf="user.linkedin" href="{{user.linkedin}}" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@
 
                             <!-- <li class="nav-item" *ngIf="user.role.name=='Miembro'"> -->
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Detalles</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Directorio</button>
                             </li>
 
                             <li class="nav-item">

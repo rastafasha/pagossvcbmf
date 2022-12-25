@@ -1,5 +1,6 @@
 import { ProductPaypal } from './productPaypal';
 import { Payment } from './payment';
+import { Plan } from './plan';
 
 export class CartItemModel {
 
@@ -8,13 +9,12 @@ export class CartItemModel {
     productPrice:number;
     description:string;
     quantity:number;
-    monto:number;
 
-    constructor(product: Payment){
+    constructor(plan: Plan){
       this.productId= 1;
       this.productName = 'Subcripcion';
       this.description = 'Esto es una subcripcion anual';
-      this.productPrice = product.monto;
+      this.productPrice = plan.price;
       this.quantity = 1;
     }
 

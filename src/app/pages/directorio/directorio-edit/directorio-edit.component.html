@@ -17,7 +17,7 @@
             <!-- End Page Title -->
         </div>
         <div class="col-xs-12 col-sm-2 push-right">
-            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
@@ -154,19 +154,19 @@
                                         <div class="redes form-group">
                                             <div class="switch">
                                                 <i class="fa fa-facebook-square fa-2x" style="margin-right: 5px;"></i>
-                                                <input type="text" class="form-control" formControlName="facebook" value="facebook">
+                                                <input type="text" class="form-control" formControlName="facebook">
                                             </div> <br><br>
                                             <div class="switch">
                                                 <i class="fa fa-instagram fa-2x" style="margin-right: 5px;"></i>
-                                                <input type="text " class="form-control" formControlName="instagram" value="instagram">
+                                                <input type="text " class="form-control" formControlName="instagram">
                                             </div> <br><br>
                                             <div class="switch">
                                                 <i class="fa fa-twitter-square fa-2x" style="margin-right: 5px;"></i>
-                                                <input type="text" class="form-control" formControlName="twitter" value="twitter">
+                                                <input type="text" class="form-control" formControlName="twitter">
                                             </div> <br><br>
                                             <div class="switch">
                                                 <i class="fa fa-linkedin-square fa-2x" style="margin-right: 5px;"></i>
-                                                <input type="text" class="form-control" formControlName="linkedin" value="linkedin">
+                                                <input type="text" class="form-control" formControlName="linkedin">
                                             </div>
                                         </div>
 
@@ -184,14 +184,14 @@
                             </div>
 
                             <input type="hidden" formControlName="id">
-                            <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit" [disabled]="!directorioForm.valid">Guardar</button>
+                            <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Guardar</button>
 
 
                         </form>
 
 
                     </div>
-                    {{error}}
+                    <!-- {{error}} -->
                 </div>
             </div>
         </div>

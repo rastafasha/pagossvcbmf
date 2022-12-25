@@ -17,7 +17,7 @@
             <!-- End Page Title -->
         </div>
         <div class="col-xs-12 col-sm-2">
-            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
@@ -64,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let pago of pagos |  paginate: { itemsPerPage: count, currentPage: p }">
+                            <tr *ngFor="let pago of payments |  paginate: { itemsPerPage: count, currentPage: p }">
                                 <th scope="row"><a [routerLink]="['/dashboard/payment-detail', pago.id]">{{pago.referencia}}</a></th>
                                 <th><a [routerLink]="['/dashboard/user/', pago.user_id]">{{pago.user_id}}</a></th>
                                 <td>{{pago.metodo}}</td>
@@ -81,7 +81,7 @@
                                 <td>
                                     <div class="form-check form-switch" title="Verificar">
                                         <!-- <a data-toggle="modal" [attr.data-target]="'#' + pago.id"> -->
-                                        <a (click)="openModal(pago.id, $e)">
+                                        <a [routerLink]="['/dashboard/payment/edit/', pago.id]">
                                             <button class="btn btn-success">Editar</button>
                                         </a>
 

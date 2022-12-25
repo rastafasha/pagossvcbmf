@@ -28,7 +28,6 @@ export class AccountService {
   public usuario: User;
   public user;
 
-  public role: Role;
 
 
 
@@ -41,6 +40,10 @@ export class AccountService {
 
     get token():string{
       return localStorage.getItem('token') || '';
+    }
+
+    get role(): 'SUPERADMIN' | 'ADMIN' | 'MEMBER' | 'GUEST' {
+      return this.user.role!;
     }
 
 
@@ -111,7 +114,7 @@ export class AccountService {
    validarToken(): Observable<boolean>{
 
     // return this.http.get(`${this.serverUrl}/permisos`, {
-    return this.http.get(`${this.serverUrl}/refresh`, {
+    return this.http.post(`${this.serverUrl}/refresh`, {
       headers: {
         'token': this.token
       }
@@ -134,7 +137,7 @@ export class AccountService {
 
         this.user = new User();
 
-        this.guardarLocalStorage(resp.token, resp.user);
+        this.guardarLocalStorage(resp.access_token, resp.user);
         this.router.navigateByUrl('/dashboard');
         return true;
       }),

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 //componentes
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { PaymentDetailsComponent } from './payments/payment-details/payment-details.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
@@ -22,7 +22,7 @@ import { HelpComponent } from './help/help.component';
 import { ContactComponent } from './contact/contact.component';
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
-import { UserPagarComponent } from './user-pagar/user-pagar.component';
+// import { UserPagarComponent } from './user-pagar/user-pagar.component';
 
 // Import Angular plugin.
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -43,13 +43,14 @@ import { ProductosPageComponent } from './productos/productos-page/productos-pag
 import { PlanesPageComponent } from './planes/planes-page/planes-page.component';
 import { ProductoComponent } from './productos/producto/producto.component';
 import { PlanComponent } from './planes/plan/plan.component';
+import { PaymentEditComponent } from './payments/payment-edit/payment-edit.component';
+import { ReportarPagoComponent } from './payments/reportar-pago/reportar-pago.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    PaymentDetailsComponent,
-    PaymentsComponent,
+
     ProfileComponent,
     UserDetailsComponent,
     UsersComponent,
@@ -58,7 +59,6 @@ import { PlanComponent } from './planes/plan/plan.component';
     ContactComponent,
     DashboardUserComponent,
     DashboardAdminComponent,
-    UserPagarComponent,
     UserProfileComponent,
     PagesComponent,
     DirectorioIndexComponent,
@@ -67,7 +67,13 @@ import { PlanComponent } from './planes/plan/plan.component';
     PlanesPageComponent,
     ProductosPageComponent,
     ProductoComponent,
-    PlanComponent
+    PlanComponent,
+    PaymentDetailsComponent,
+    PaymentsComponent,
+    PaymentEditComponent,
+    ReportarPagoComponent
+
+
 
   ],
   exports: [
@@ -82,7 +88,6 @@ import { PlanComponent } from './planes/plan/plan.component';
     ContactComponent,
     DashboardUserComponent,
     DashboardAdminComponent,
-    UserPagarComponent,
     UserProfileComponent,
     DirectorioIndexComponent,
     DirectorioEditComponent,
@@ -90,7 +95,8 @@ import { PlanComponent } from './planes/plan/plan.component';
     PlanesPageComponent,
     ProductosPageComponent,
     ProductoComponent,
-    PlanComponent
+    PlanComponent,
+    ReportarPagoComponent
   ],
   imports: [
     CommonModule,

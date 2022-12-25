@@ -18,20 +18,21 @@ export class UserProfileComponent implements OnInit {
   title = "Detalles de la cuenta";
   user: User;
   error: string;
-  directorios: Directorio;
-  pagos: Payment;
-
+  directories: Directorio;
+  payments: Payment;
+  id:number;
   constructor(
     private userService: UserService,
     private paymentService: PaymentService,
     private activatedRoute: ActivatedRoute,
     private location: Location
-  ) { }
+  ) {
+    this.user = userService.user;
+  }
 
   ngOnInit(): void {
     this.closeMenu();
-    this.activatedRoute.params.subscribe( ({id}) => this.getUser(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getpagosUser(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.getUserRemoto(id));
   }
 
   closeMenu(){
@@ -42,24 +43,26 @@ export class UserProfileComponent implements OnInit {
       }
   }
 
-  getUser(id:number){
-    this.userService.getUserById(id).subscribe(
+  getUser(): void {
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    // return this.userService.getUserLocalStorage();
+    // console.log(this.user);
+
+
+  }
+
+  getUserRemoto(id:number){
+    this.userService.getUserById(+id).subscribe(
       res =>{
-        this.user = res;
+        this.user = res[0];
         error => this.error = error
         console.log(this.user);
       }
     );
+
   }
-  getpagosUser(id:number){
-    this.paymentService.getPagosbyUser(id).subscribe(
-      res =>{
-        this.pagos = res;
-        error => this.error = error
-        console.log(this.pagos);
-      }
-    );
-  }
+
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel

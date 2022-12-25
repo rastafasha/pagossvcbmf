@@ -16,7 +16,7 @@ export class PaymentsComponent implements OnInit {
 
   title = "Pagos"
 
-  pagos: any;
+  payments: Payment;
   error:string;
   p: number = 1;
   count: number = 8;
@@ -50,23 +50,23 @@ export class PaymentsComponent implements OnInit {
   }
 
   //carga usos desde la app
-  getPagos_list(){
-    this.paymentService.carga_info().subscribe(
-      res=>{
-        this.pagos = res;
-        console.log(res)
-      }
-    )
-  }
+  // getPagos_list(){
+  //   this.paymentService.carga_info().subscribe(
+  //     res=>{
+  //       this.pagos = res;
+  //       console.log(res)
+  //     }
+  //   )
+  // }
 
 
 
   getPagos(): void {
     this.paymentService.getAll().subscribe(
       res =>{
-        this.pagos = res;
+        this.payments = res;
         error => this.error = error
-        console.log(this.pagos);
+        console.log(this.payments);
       }
     );
   }

@@ -27,7 +27,7 @@ export class PaymentDetailsComponent implements OnInit {
     this.activatedRoute.params.subscribe( ({id}) => this.getPagoById(id));
   }
   getUser(id:number){
-    this.paymentService.get(id).subscribe(
+    this.paymentService.getPagosbyUser(id).subscribe(
       res =>{
         this.pago = res;
         error => this.error = error

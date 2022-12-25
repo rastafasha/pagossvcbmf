@@ -32,7 +32,7 @@ export class DirectorioService {
 
   getDirectorios() {
     const url = `${baseUrl}/directories`;
-    return this.http.get<any>(url)
+    return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, directories: Directorio}) => resp.directories)
       )
