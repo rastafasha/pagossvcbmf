@@ -33,7 +33,7 @@
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
 
                         <!-- <h3>{{ user.username?user.username:'' }}</h3> -->
-                        <h3>{{ user.username }}</h3>
+                        <h3>{{ userSelected[0].username }}</h3>
                         <!-- <h3>{{ user.role.descripcion }}</h3> -->
                         <!-- <div class="social-links mt-2">
                             <a *ngIf="user.twitter" href="{{user.twitter}}" target="_blank" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -60,7 +60,7 @@
 
                             <!-- <li class="nav-item" *ngIf="user.role.name=='Miembro'"> -->
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Directorio</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" *ngIf="userSelected[0].directories[0]">Directorio</button>
                             </li>
 
                             <li class="nav-item">
@@ -80,7 +80,8 @@
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label "><i class="bx bxs-user"> </i> Usuario</div>
-                                    <div class="col-lg-9 col-md-8"> {{ user.username }} / {{ user.first_name }} {{user.last_name }} </div>
+                                    <div class="col-lg-9 col-md-8" *ngIf="!userSelected[0].directories[0]"> {{ userSelected[0].username }} </div>
+                                    <div class="col-lg-9 col-md-8" *ngIf="userSelected[0].directories[0]"> {{ userSelected[0].username }} / {{ userSelected[0].directories[0].nombre }} {{userSelected[0].directories[0].surname }} </div>
 
 
                                 </div>
@@ -88,21 +89,21 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label"><i class="bx bxs-shield"> </i> Privilegios
                                     </div>
-                                    <!-- <div class="col-lg-9 col-md-8">{{user.role.name}}</div> -->
+                                    <div class="col-lg-9 col-md-8">{{userSelected[0].role}}</div>
 
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label"><i class="bx bxs-calendar-alt"> </i> Creado el
                                     </div>
-                                    <div class="col-lg-9 col-md-8">{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</div>
+                                    <div class="col-lg-9 col-md-8">{{userSelected[0].created_at | date:'MMM d, y, h:mm:ss a'}}</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label"><i class="bx bxs-calendar-alt"> </i> Status
                                     </div>
                                     <div class="col-lg-9 col-md-8">
-                                        <span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span>
+                                        <span [ngClass]="userSelected[0].is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{userSelected[0].is_active == 1? 'Activo':'Offline'}}</span>
                                     </div>
                                 </div>
 
@@ -113,7 +114,7 @@
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                 <!-- Profile Edit Form -->
-                                <app-form-user [directorioUser]="directorioUser"></app-form-user>
+                                <app-form-user [directorioUser]="directorioUser" id="userSelected[0].directories[0].user_id"></app-form-user>
                                 <!-- End Profile Edit Form -->
 
                             </div>

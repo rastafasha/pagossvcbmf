@@ -70,7 +70,7 @@
                                 <td>{{user.role}} </td>
                                 <td>
 
-                                    <select class="form-control" [(ngModel)]="user.roles">
+                                    <select class="form-control" [(ngModel)]="user.role_id">
                                     <option value="SUPERADMIN">Super Admin</option>
                                     <option value="ADMIN">Admin</option>
                                     <option value="MEMBER">Miembro</option>
@@ -90,7 +90,7 @@
 
                                 <td class="text-nowrap text-center">
 
-                                    <a (click)="cambiarRole(user.id)" class="cursor" data-toggle="tooltip" data-original-title="Edit">
+                                    <a (click)="cambiarRole(user)" class="cursor" data-toggle="tooltip" data-original-title="Edit">
                                         <i class="bx bxs-edit text-success" style="font-size: 18px;"></i>
                                     </a>
 

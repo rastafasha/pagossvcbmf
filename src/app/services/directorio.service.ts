@@ -17,14 +17,14 @@ export class DirectorioService {
   constructor(private http: HttpClient) { }
 
   get token():string{
-    return localStorage.getItem('token') || '';
+    return localStorage.getItem('auth_token') || '';
   }
 
 
   get headers(){
     return{
       headers: {
-        'token': this.token
+        'auth_token': this.token
       }
     }
   }
@@ -38,8 +38,8 @@ export class DirectorioService {
       )
   }
 
-  getDirectorio(directory: any) {
-    const url = `${baseUrl}/directory/show/${directory}`;
+  getDirectorio(id: number) {
+    const url = `${baseUrl}/directory/show/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, directory: Directorio}) => resp.directory)
@@ -47,18 +47,19 @@ export class DirectorioService {
   }
 
 
-  createDirectorio(directory:any) {
+
+  createDirectorio(directory:Directorio) {
     const url = `${baseUrl}/directory/store`;
     return this.http.post(url, directory, this.headers);
   }
 
-  updateDirectorio(directory:any) {
-    const url = `${baseUrl}/directory/update/${directory}`;
+  updateDirectorio(directory:Directorio) {
+    const url = `${baseUrl}/directory/update/${directory.id}`;
     return this.http.put(url, directory, this.headers);
   }
 
-  deleteDirectorio(directory:any) {
-    const url = `${baseUrl}/directory/destroy/${directory}`;
+  deleteDirectorio(id:number) {
+    const url = `${baseUrl}/directory/destroy/${id}`;
     return this.http.delete(url, this.headers);
   }
 

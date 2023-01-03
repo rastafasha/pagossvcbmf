@@ -31,47 +31,37 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title" *ngIf="paymentSeleccionado">{{title}}: {{planSeleccionado.name}}</h4>
-                        <h4 class="card-title" *ngIf="!paymentSeleccionado">{{title}}</h4>
+                        <!-- <h4 class="card-title" *ngIf="paymentSeleccionado">{{title}}: {{planSeleccionado.name}}</h4> -->
+                        <h4 class="card-title">{{title}}</h4>
                         <form class="form p-t-20 form-horizontal form-material" [formGroup]="paymentForm" (submit)="updateBlog()">
                             <div class="form-group" style="margin-bottom: 25px;">
                                 <label for="exampleInputuname">Status<span class="required">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required>
+                                    <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
+                                    <select name="" id="input" class="form-control" formControlName="status" required="required">
+                                      <option value="">Seleccione</option>
+                                      <option value="APROVED">Aprobado</option>
+                                      <option value="PENDING">Pendiente</option>
+                                      <option value="REJECTED">Rechazado</option>
+                                    </select>
                                 </div>
+
+
+
                             </div>
                             <div class="form-group" style="margin-bottom: 25px;">
                                 <label for="exampleInputuname">Validación<span class="required">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" formControlName="validacion" class="form-control" id="exampleInputuname" placeholder="Validacion" required>
+                                    <select name="" id="input" class="form-control" formControlName="validacion" required="required">
+                                    <option value="">Seleccione</option>
+                                    <option value="APROVED">Aprobado</option>
+                                    <option value="PENDING">Pendiente</option>
+                                    <option value="REJECTED">Rechazado</option>
+                                  </select>
+                                    <!-- <input type="text" formControlName="validacion" class="form-control" id="exampleInputuname" placeholder="Validacion" required> -->
                                 </div>
                             </div>
 
-                            <!-- <div class="form-group ">
-                                <label for="">Status</label>
-
-                                <select class="form-control " formControlName="status" required>
-                                <option disabled  value="">SELECCIONAR</option>
-                                <option *ngFor="let item of status" [value]="status.id">{{item.name}}</option>
-                                <option value="PENDIG">Pendiente</option>
-                                <option value="APROVED">Aprobado</option>
-                                <option value="REJECTED">Rechazado</option>
-
-                            </select>
-                            </div>
-
-                            <div class="form-group ">
-                                <label for="">validacion</label>
-
-                                <select class="form-control " formControlName="validacion" required>
-                              <option disabled  value="">SELECCIONAR</option>
-                              <option *ngFor="let item of status" [value]="status.id">{{item.name}}</option>
-                              <option value="PENDIG">Pendiente</option>
-                              <option value="APROVED">Aprobado</option>
-                              <option value="REJECTED">Rechazado</option>
-
-                          </select>
-                            </div> -->
                             <button type="submit" [disabled]="paymentForm.invalid" class="btn btn-success waves-effect waves-light m-r-10 btn-block">
                    <i class="fa fa-save"></i> Guardar cambios
                   </button>

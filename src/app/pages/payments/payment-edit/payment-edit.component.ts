@@ -27,6 +27,7 @@ export class PaymentEditComponent implements OnInit {
   error: string;
 
   idcurrency:any;
+  user: User;
 
   paymentSeleccionado: Payment;
 
@@ -55,7 +56,7 @@ export class PaymentEditComponent implements OnInit {
 
 
     if (id !== null && id !== undefined) {
-      this.title = 'Editando Moneda';
+      this.title = 'Verificando Pago';
       this.paymentsService.getPagoById(id).subscribe(
         res => {
           this.paymentForm.patchValue({
@@ -68,19 +69,20 @@ export class PaymentEditComponent implements OnInit {
         }
       );
     } else {
-      this.title = 'Creando Moneda';
+      this.title = 'Creando Pago';
     }
 
   }
 
   updateBlog(){
 
-    const {status, validacion } = this.paymentForm.value;
+    const {status, user_id,  validacion } = this.paymentForm.value;
 
     if(this.paymentSeleccionado){
       //actualizar
       const data = {
         ...this.paymentForm.value,
+        user_id: this.paymentSeleccionado.user_id,
         id: this.paymentSeleccionado.id
       }
       this.paymentsService.update(data).subscribe(
@@ -93,6 +95,25 @@ export class PaymentEditComponent implements OnInit {
       return;
     }
 
+  }
+
+  openAproved(){
+    const Toasttest = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      // didOpen: (toast) => {
+      //   toast.addEventListener('mouseenter', Swal.stopTimer)
+      //   toast.addEventListener('mouseleave', Swal.resumeTimer)
+      // }
+    })
+
+    Toasttest.fire({
+      icon: 'success',
+      title: 'Pago Aprobado!'
+    })
   }
 
 

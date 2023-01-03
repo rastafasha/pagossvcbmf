@@ -34,7 +34,7 @@ export class UserService {
 
 
   get token():string{
-    return localStorage.getItem('token') || '';
+    return localStorage.getItem('auth_token') || '';
   }
 
   get role(): 'SUPERADMIN' | 'ADMIN' | 'MEMBER' | 'GUEST' {
@@ -45,7 +45,7 @@ export class UserService {
   get headers(){
     return{
       headers: {
-        'token': this.token
+        'auth_token': this.token
 
       }
     }
@@ -94,9 +94,9 @@ export class UserService {
 
 
 
-  update(id: number) {
-    const url = `${baseUrl}/user/update/${id}`;
-    return this.http.put(url,  this.headers);
+  update(user: User) {
+    const url = `${baseUrl}/user/update/${user.id}`;
+    return this.http.put(url, user, this.headers);
   }
 
   deleteById(user:User): Observable<any> {

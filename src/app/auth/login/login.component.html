@@ -34,7 +34,7 @@
                     <div class="col-md-12">
                         <div class="checkbox checkbox-primary p-t-0">
                             <input id="checkbox-signup" formControlName="terminos" type="checkbox">
-                            <label for="checkbox-signup"> Acepto <a href="#">los Términos</a></label>
+                            <label for="checkbox-signup"> Acepto <a href="#"> los Términos</a></label>
                         </div>
                     </div>
                 </div>
@@ -53,6 +53,16 @@
         <div class="login">
             <form [formGroup]="loginForm" id="loginform" (ngSubmit)="login()" autocapitalize="off" style="margin-top: 10px;">
                 <label for="chk" aria-hidden="true"><h1>Ingresar</h1></label>
+                <!-- Errors -->
+                <div *ngIf="errors?.email" class="alert alert-danger mt-3">
+                    {{ errors?.email }}
+                </div>
+                <div *ngIf="errors?.password" class="alert alert-danger mt-3">
+                    {{ errors?.password }}
+                </div>
+                <div *ngIf="errors?.error" class="alert alert-danger mt-3">
+                    {{ errors?.error }}
+                </div>
                 <div class="col-12">
                     <label for="email" class="form-label">Correo Electrónico</label>
                     <div class="input-group has-validation">

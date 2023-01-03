@@ -24,6 +24,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfModule } from './pages/conf/conf.module';
 import { PipesModule } from './pipes/pipes.module';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +44,13 @@ import { PipesModule } from './pipes/pipes.module';
     PipesModule
     // CKEditorModule,
 
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
 
   bootstrap: [AppComponent]

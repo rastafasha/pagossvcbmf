@@ -7,9 +7,11 @@ export class Plan {
   price: number;
   currency_id: number;
   image: string;
-  status: string ;
+  // status: string ;
   created_at: string;
   updated_at: string;
+
+  status?: 'APPROVED' | 'PENDING' | 'REJECTED';
 
 
   get imagenUrl(){

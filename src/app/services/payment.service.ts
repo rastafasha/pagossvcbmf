@@ -25,24 +25,24 @@ export class PaymentService {
   constructor(private http: HttpClient) { }
 
   get token():string{
-    return localStorage.getItem('token');
+    return localStorage.getItem('auth_token');
   }
 
 
   get headers(){
     return{
       headers: {
-        'token': this.token
+        'auth_token': this.token
       }
     }
   }
 
-  // get status(): 'APPROVED' | 'PENDING' | 'REJECTED' {
-  //   return this.payment.status!;
-  // }
-  // get validacion(): 'APPROVED' | 'PENDING' | 'REJECTED' {
-  //   return this.payment.validacion!;
-  // }
+  get status(): 'APPROVED' | 'PENDING' | 'REJECTED' {
+    return this.payment.status!;
+  }
+  get validacion(): 'APPROVED' | 'PENDING' | 'REJECTED' {
+    return this.payment.validacion!;
+  }
 
 
 

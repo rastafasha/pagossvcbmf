@@ -9,8 +9,17 @@ import { User } from '@app/models/user';
 import { CurrenciesService } from '@app/services/currencies.service';
 import { PaymentService } from '@app/services/payment.service';
 import { UserService } from '@app/services/user.service';
+import Swal from 'sweetalert2';
 
+import { FileUploadService } from 'src/app/services/file-upload.service';
+import { environment } from 'src/environments/environment';
 
+interface HtmlInputEvent extends Event{
+  target : HTMLInputElement & EventTarget;
+}
+
+declare var jQuery:any;
+declare var $:any;
 
 @Component({
   selector: 'app-reportar-pago',
@@ -24,7 +33,6 @@ export class ReportarPagoComponent implements OnInit {
   // public product: ProductPaypal;
 
   public PaymentRegisterForm: FormGroup;
-  public file :File;
   public usuario;
   visible :boolean = false;
 
@@ -38,13 +46,22 @@ export class ReportarPagoComponent implements OnInit {
   uploadError: boolean;
   imagePath: string;
 
+  public imagenSubir: File;
+  public imgTemp: any = null;
+  public file:File;
+  public imgSelect : String | ArrayBuffer;
+
+  paymentSeleccionado:Payment;
+
   user:User;
+
   constructor(
     private fb: FormBuilder,
     private location: Location,
     private messageService: MessageService,
     private paymentService: PaymentService,
     private usuarioService: UserService,
+    private fileUploadService: FileUploadService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private currenciesService: CurrenciesService,
@@ -60,6 +77,8 @@ export class ReportarPagoComponent implements OnInit {
     this.getCurrencies();
     this.getUser();
     console.log(this.usuario);
+
+    // this.imagePath = environment.apiUrlMedia;
   }
 
   getUser(): void {
@@ -97,7 +116,7 @@ export class ReportarPagoComponent implements OnInit {
       plan_id: [1],
       status: ['Pendiente'],
       user_id: [''],
-      image: [this.image],
+      image: [this.imagenSubir],
     })
   }
 
@@ -117,8 +136,9 @@ export class ReportarPagoComponent implements OnInit {
             nombre: res.nombre,
             user_id: this.user.id,
             plan_id: '1',
+            // image: this.imagenSubir
           });
-          this.imagePath  = res.image;
+          // this.imagePath  = res.image;
 
           this.pagoSeleccionado = res;
           console.log(this.pagoSeleccionado);
@@ -130,17 +150,20 @@ export class ReportarPagoComponent implements OnInit {
 
   }
 
-  onSelectedFile(event) {debugger
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.PaymentRegisterForm.get('image').setValue(file.name);
-      // this.directorioForm.get('image').setValue(file);
+  onSelectedFile(event) {
 
-      this.image = file.name;
-    }
+    console.log(event);
+        this.file = event.target.files[0];
+
+        const reader = new FileReader();
+        reader.onloadend = () =>{
+          this.imgTemp = reader.result;
+        }
+
+        reader.readAsDataURL(this.file);
   }
 
-  updateForm(){debugger
+  updateForm(){
 
 
 
@@ -186,6 +209,34 @@ export class ReportarPagoComponent implements OnInit {
         verPaypalpay[i].classList.remove("vibiblepaypblok");
 
       }
+  }
+
+
+  cambiarImagen(file: File){
+    this.imagenSubir = file;
+
+    if(!file){
+      return this.imgTemp = null;
+    }
+
+    const reader = new FileReader();
+    const url64 = reader.readAsDataURL(file);
+
+    reader.onloadend = () =>{
+      this.imgTemp = reader.result;
+    }
+  }
+
+  subirImagen(){
+    this.fileUploadService
+    .actualizarFoto(this.imagenSubir, 'payments', this.paymentSeleccionado.id)
+    .then(img => { this.paymentSeleccionado.imagen = img;
+      Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
+
+    }).catch(err =>{
+      Swal.fire('Error', 'No se pudo subir la imagen', 'error');
+
+    })
   }
 
 }

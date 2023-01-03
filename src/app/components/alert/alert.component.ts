@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Alert, AlertType } from '@app/models/alert';
 import { AlertService } from '@app/services/alert.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-alert',
@@ -64,6 +65,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
         // this.alertService.info("Nuevo Mensaje","Se ha iniciado el sistema de notificaciones");
         this.alertService.info("Nuevo Mensaje","Bienvenido!");
+        this.openToastPrueba();
     }
 
     ngOnDestroy() {
@@ -124,5 +126,26 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     count(){
         return this.alerts.length;
+    }
+
+
+
+    openToastPrueba(){
+      const Toasttest = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        // didOpen: (toast) => {
+        //   toast.addEventListener('mouseenter', Swal.stopTimer)
+        //   toast.addEventListener('mouseleave', Swal.resumeTimer)
+        // }
+      })
+
+      Toasttest.fire({
+        icon: 'success',
+        title: 'Bienvenido!'
+      })
     }
 }

@@ -30,8 +30,8 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title" *ngIf="planSeleccionado">{{title}}: {{planSeleccionado.name}}</h4>
-                        <h4 class="card-title" *ngIf="!planSeleccionado">{{title}}</h4>
+
+                        <h4 class="card-title">{{title}}</h4>
                         <form class="form p-t-20 form-horizontal form-material" [formGroup]="planForm" (submit)="updateBlog()">
                             <div class="form-group">
                                 <label for="exampleInputuname">Nombre<span class="required">*</span></label>
@@ -64,8 +64,9 @@
                                                 <label for="select-input" style="line-height:2.2;">Status</label>
                                                 <select class="form-control " formControlName="status">
                                             <option  disabled value="">SELECCIONAR</option>
-                                            <option  [value]="true">Activo</option>
-                                            <option  [value]="false">PENDING</option>
+                                            <option value="APROVED">Aprobado</option>
+                                      <option value="PENDING">Pendiente</option>
+                                      <option value="REJECTED">Rechazado</option>
 
                                         </select>
                                             </div>
@@ -86,29 +87,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 animated fadeIn fast" *ngIf="!planSeleccionado || planSeleccionado ">
+            <div class="col-md-6 animated fadeIn fast">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Image</h4>
-                        <!-- <div class="text-center">
-                            <img *ngIf="!imgTemp" [src]="planSeleccionado.image | imagenPipe: 'planes'  " class="img-responsive img-thumbnail" alt="">
+                        <div class="text-center">
+                            <!-- <img *ngIf="!imgTemp" [src]="plan.image | imagenPipe: 'plans'  " class="img-responsive img-thumbnail" alt=""> -->
                             <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar">
                         </div>
-                        <input type="file" (change)="cambiarImagen($event.target.files[0])">
+                        <input type="file" (change)="onSelectedFile($event.file)">
                         <br>
                         <br>
                         <button type="button" [disabled]="!imagenSubir" (click)="subirImagen()" class="btn btn-success waves-effect waves-light m-r-10 btn-block">
                   <i class="fa fa-save"></i> Cambiar imagen
-                 </button> -->
+                 </button>
 
-                        <div class="col-md-9">
+                        <!-- <div class="col-md-9">
                             <input type="file" id="image" (change)="onSelectedFile($event)" />
                             <div [innerHTML]="uploadError" class="error"></div>
                             <div *ngIf="imagePath">
                                 <br />
                                 <img [src]="imagePath" width="100px">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <div *ngIf="blogSeleccionado.video_review">
                         <div class="card">

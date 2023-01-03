@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { UserService } from '@app/services/user.service';
 import { User } from '@app/models/user';
+import { TokenService } from '@app/services/token.service';
 
 declare const gapi: any;
 
@@ -45,13 +46,14 @@ export class LoginComponent implements OnInit {
   });
   // Registro
 
-
+  errors:any = null;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private accountService: AccountService,
     private usuarioService: UserService,
+    private token: TokenService,
   ) {
 
   }
@@ -76,12 +78,19 @@ login(){
         localStorage.removeItem('email');
       }
       this.router.navigateByUrl('/dashboard');
-    },(err) => {
-      Swal.fire('Error', err.error.msg, 'error');
+      this.responseHandler(resp);
+    },(error) => {
+      // Swal.fire('Error', error.error.msg, 'error');
+      this.errors = error.error;
     }
-  )
+    )
   this.rememberMe();
     // console.log(this.user)
+}
+
+// Handle response
+responseHandler(data:any) {
+  this.token.handleData(data.access_token);
 }
 
 amIRemembered() {

@@ -77,10 +77,10 @@
                                 <td>{{plan.name}}</td>
                                 <td>{{plan.price|currency}} </td>
                                 <td>
-                                    {{plan.status }}
-                                    <!-- <span class="badge badge-primary " *ngIf="plan.status == 'PENDING'">{{plan.status}}</span>
-                                    <span class="badge badge-success " *ngIf="plan.status == 'APPROVED'">{{plan.status}}</span>
-                                    <span class="badge badge-danger " *ngIf="plan.status == 'REJECTED'">{{plan.status}}</span> -->
+                                    <!-- {{plan.status }} -->
+                                    <span class="badge bg-success" *ngIf="plan.status === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="plan.status === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="plan.status === 'REJECTED'">Rechazado</span>
                                 </td>
 
                                 <!-- <td><span [ngClass]="plan.status == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{plan.status == 1? 'Activo':'Offline'}}</span></td> -->

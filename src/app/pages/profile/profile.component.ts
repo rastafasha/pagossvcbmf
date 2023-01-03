@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   identity: any;
 
   user: User;
+  userprofile: User;
   permisos: Permission;
 
   image:string;
@@ -58,16 +59,15 @@ export class ProfileComponent implements OnInit {
   getUser(): void {
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
-    console.log(this.user.id);
+    // console.log(this.user);
   }
 
   getUserServer(id:number){
     this.userService.getUserById(id).subscribe(
       res =>{
-        this.user = res;
+        this.userprofile = res;
         error => this.error = error
-        console.log(this.user);
+        console.log(this.userprofile);
       }
     );
   }

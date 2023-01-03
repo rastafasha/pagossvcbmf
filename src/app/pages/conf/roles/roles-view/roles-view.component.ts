@@ -61,14 +61,15 @@ export class RolesViewComponent implements OnInit {
 
   validarFormulario(){
     this.rolesForm = this.fb.group({
-      rolesSelected: [''],
+      role_id: [''],
     })
   }
 
-  cambiarRole(id: number){
-    this.userService.update(id).subscribe(
+  cambiarRole(user: User){
+    this.userService.update(user).subscribe(
       resp =>{ console.log(resp);
-        Swal.fire('Actualizado', `actualizado correctamente`, 'success')
+        Swal.fire('Actualizado', `actualizado correctamente`, 'success');
+        this.getUsers();
       }
     )
   }

@@ -6,15 +6,21 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
+    SignupComponent,
+    SigninComponent,
   ],
   exports: [
     LoginComponent,
     RegisterComponent,
+    SignupComponent,
+    SigninComponent,
   ],
   imports: [
     CommonModule,

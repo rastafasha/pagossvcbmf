@@ -72,7 +72,7 @@ export class DirectorioIndexComponent implements OnInit {
   }
 
   eliminarDirectory(id:number){
-    this.directorioService.deleteDirectorio(id).subscribe(
+    this.directorioService.deleteDirectorio(+id).subscribe(
       res=>{
         Swal.fire('Eliminado', 'directorio eliminado', 'success');
         this.getDirectorios();

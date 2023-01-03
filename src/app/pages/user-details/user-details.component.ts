@@ -26,7 +26,7 @@ export class UserDetailsComponent implements OnInit {
 
   title = "Detalles de la cuenta";
   form: FormGroup;
-  user: User;
+  userSelected: User;
 
   error: string;
 
@@ -72,14 +72,13 @@ export class UserDetailsComponent implements OnInit {
     console.info('guardando');
     console.log(this.f)
   }
-s
 
   getUser(id:number){
     this.userService.getUserById(id).subscribe(
       res =>{
-        this.user = res;
+        this.userSelected = res;
         error => this.error = error
-        console.log(this.user);
+        console.log(this.userSelected);
       }
     );
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 
@@ -18,7 +19,8 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.user = userService.user;
   }
@@ -37,10 +39,17 @@ export class DashboardComponent implements OnInit {
   }
 
   getUser(): void {
+
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.id = this.user.id;
+    // this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
   }
 
+  getUserProfile(id){
+    this.userService.getUserById(id).subscribe((data: any) => {
+      this.user = data;
+      console.log(this.user)
+    });
+  }
 
 
 }

@@ -59,6 +59,7 @@
                                 <th scope="col">Monto</th>
                                 <th scope="col">Moneda</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Verifiación</th>
                                 <th scope="col">Fecha | Hora</th>
                                 <th scope="col">Acciones</th>
                             </tr>
@@ -72,10 +73,16 @@
                                 <td>{{pago.moneda_codigo}}</td>
 
                                 <td>
-                                    <!-- <span class="badge badge-primary " *ngIf="pago.status == 'PENDING'">{{pago.status}}</span>
-                                    <span class="badge badge-success " *ngIf="pago.status == 'APPROVED'">{{pago.status}}</span>
-                                    <span class="badge badge-danger " *ngIf="pago.status == 'REJECTED'">{{pago.status}}</span> -->
-                                    <span class="badge bg-success">{{pago.status}}</span>
+                                    <span class="badge bg-success" *ngIf="pago.status === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="pago.status === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="pago.status === 'REJECTED'">Rechazado</span>
+                                    <!-- <span class="badge bg-success">{{pago.status}}</span> -->
+                                </td>
+                                <td>
+                                    <span class="badge bg-success" *ngIf="pago.verificacion === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="pago.verificacion === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="pago.verificacion === 'REJECTED'">Rechazado</span>
+                                    <!-- <span class="badge bg-success">{{pago.status}}</span> -->
                                 </td>
                                 <td>{{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
                                 <td>

@@ -20,16 +20,20 @@ export class PlanesService {
   constructor(private http: HttpClient) { }
 
   get token():string{
-    return localStorage.getItem('token') || '';
+    return localStorage.getItem('auth_token') || '';
   }
 
 
   get headers(){
     return{
       headers: {
-        'token': this.token
+        'auth_token': this.token
       }
     }
+  }
+
+  get status(): 'APPROVED' | 'PENDING' | 'REJECTED' {
+    return this.plan.status!;
   }
 
   public carga_info(){
@@ -52,8 +56,8 @@ export class PlanesService {
       )
   }
 
-  getPlan(plan: any) {
-    const url = `${baseUrl}/plan/show/${plan}`;
+  getPlan(id: number) {
+    const url = `${baseUrl}/plan/show/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, plan: Plan}) => resp.plan)

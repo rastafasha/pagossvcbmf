@@ -101,7 +101,7 @@ constructor(
             twitter: res.twitter,
             linkedin: res.linkedin,
             vcard: this.vCardInfo,
-            user_id: this.user.id,
+            user_id: res.user_id,
           });
           this.imagePath = res.image;
           this.directorio = res;

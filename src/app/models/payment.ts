@@ -20,10 +20,10 @@ export class Payment {
    nombre?:User;
    email?:User;
 
-   status?:string;
-   validacion?:string;
-  //  validacion?:'APPROVED' | 'PENDING' | 'REJECTED';
-  //  status?: 'APPROVED' | 'PENDING' | 'REJECTED';
+  //  status?:string;
+  //  validacion?:string;
+   validacion?:'APPROVED' | 'PENDING' | 'REJECTED';
+   status?: 'APPROVED' | 'PENDING' | 'REJECTED';
 
    updated_at:Date;
    created_at:Date;

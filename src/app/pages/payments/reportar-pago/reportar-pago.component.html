@@ -194,9 +194,12 @@
                                 </div>
                                 <div class="col-xs-12 col-md-4 imagenypaypal">
                                     <div class="form-group form-row">
+
                                         <p>Imagen del pago <br> (peso max: 500kb )</p>
+
+
                                         <div class="col-xs-12">
-                                            <input type="file" id="image" (change)="onSelectedFile($event)" />
+                                            <input type="file" id="image" formControlName="image" (change)="onSelectedFile($event)" />
                                             <div [innerHTML]="uploadError" class="error"></div>
                                             <div *ngIf="imagePath">
                                                 <br />

@@ -6,14 +6,16 @@ import Swal from 'sweetalert2';
 
 import { environment } from 'src/environments/environment';
 
-import { FileUploadService } from 'src/app/services/file-upload.service';
-import { User } from 'src/app/models/user';
 import { Plan } from '@app/models/plan';
 import { PlanesService } from '@app/services/planes.service';
+
+import { User } from 'src/app/models/user';
 import { UserService } from '@app/services/user.service';
 import { Currencies } from '@app/models/currencies';
 import { CurrenciesService } from '@app/services/currencies.service';
 
+import { FileUploadService } from 'src/app/services/file-upload.service';
+import { AlertService } from '@app/services/alert.service';
 
 @Component({
   selector: 'app-planes-edit',
@@ -32,9 +34,10 @@ export class PlanesEditComponent implements OnInit {
   public imagenSubir: File;
   public imgTemp: any = null;
   public file :File;
-  planSeleccionado: Plan;
   imagePath: string;
+  planSeleccionado: Plan;
 
+  image:any;
   constructor(
     private fb: FormBuilder,
     private planService: PlanesService,
@@ -44,13 +47,14 @@ export class PlanesEditComponent implements OnInit {
     private location: Location,
     private currenciesService: CurrenciesService,
     private fileUploadService: FileUploadService,
+    private alertService: AlertService,
   ) {
     this.usuario = usuarioService.user;
     const base_url = environment.apiUrl;
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( ({id}) => this.cargarBlog(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.cargarPlan(id));
     this.validarFormulario();
     this.getCurrencies();
 
@@ -62,12 +66,12 @@ export class PlanesEditComponent implements OnInit {
       name: ['',Validators.required],
       price: ['',Validators.required],
       currency_id: ['',Validators.required],
-      status: [false],
-      image: [''],
+      status: [''],
+      image: [this.image],
     })
   }
 
-  cargarBlog(id: any){
+  cargarPlan(id: any){
 
     if (id !== null && id !== undefined) {
       this.title = 'Editando Plan';
@@ -77,8 +81,8 @@ export class PlanesEditComponent implements OnInit {
             id: res.id,
             name: res.name,
             price: res.price,
-            currency_id: this.currenciesAll.id,
             status: res.status,
+            currency_id: this.currenciesAll.id,
           });
           this.imagePath = res.image;
           this.planSeleccionado = res;
@@ -92,15 +96,20 @@ export class PlanesEditComponent implements OnInit {
   }
 
   onSelectedFile(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.planForm.get('image').setValue(file);
+    if (event.file.length > 0) {
+      const file = event.file;
+      this.planForm.get('image').setValue(file.name);
     }
+    this.image = this.file.name;
   }
 
   updateBlog(){debugger
 
     const formData = new FormData();
+    formData.append('name', this.planForm.get('name').value.name);
+    formData.append('price', this.planForm.get('price').value.name);
+    formData.append('currency_id', this.planForm.get('currency_id').value.name);
+    formData.append('status', this.planForm.get('status').value.name);
     formData.append('image', this.planForm.get('image').value.name);
 
     const {name, price, currency_id, status, image } = this.planForm.value;
@@ -122,6 +131,7 @@ export class PlanesEditComponent implements OnInit {
       .subscribe( (resp: any) =>{
         Swal.fire('Creado', `${name} creado correctamente`, 'success');
         this.router.navigateByUrl(`/dashboard/planes`);
+        this.enviarNotificacion();
       })
     }
 
@@ -135,6 +145,10 @@ export class PlanesEditComponent implements OnInit {
         console.log(this.currenciesAll);
       }
     );
+  }
+
+  enviarNotificacion(): void {
+    this.alertService.info("Mensaje de Monedas","Se ha creado una nueva moneda!");
   }
 
 
@@ -158,16 +172,16 @@ export class PlanesEditComponent implements OnInit {
   //   }
   // }
 
-  // subirImagen(){
-  //   this.fileUploadService
-  //   .actualizarFoto(this.imagenSubir, 'plans', this.planSeleccionado.id)
-  //   .then(img => { this.planSeleccionado.image = img;
-  //     Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
+  subirImagen(){
+    this.fileUploadService
+    .actualizarFoto(this.imagenSubir, 'plans', this.planSeleccionado.id)
+    .then(img => { this.planSeleccionado.image = img;
+      Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
 
-  //   }).catch(err =>{
-  //     Swal.fire('Error', 'No se pudo subir la imagen', 'error');
+    }).catch(err =>{
+      Swal.fire('Error', 'No se pudo subir la imagen', 'error');
 
-  //   })
-  // }
+    })
+  }
 
 }

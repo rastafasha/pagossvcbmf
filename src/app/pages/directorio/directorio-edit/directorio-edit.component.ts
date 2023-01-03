@@ -58,7 +58,7 @@ export class DirectorioEditComponent implements OnInit {
   /**
    * Propiedad del codigoQR
    */
-  directory: Directorio;
+  public directory: Directorio;
   directories: Directorio;
   id: string | null;
 
@@ -92,6 +92,7 @@ this.user = this.userService.user;
     // this.iniciarFormulario();
     window.scrollTo(0, 0);
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormulario(id));
+    // this.openToast();
 
 
   }
@@ -123,12 +124,12 @@ this.user = this.userService.user;
 
 
 
-  iniciarFormulario(id:number){debugger
+  iniciarFormulario(id:number){
     // const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      let id = this.directory.id;
+    if (!id == null || !id == undefined || id) {
+      // let id = this.directory.id;
       this.pageTitle = 'Editar Directorio';
-      this.directorioService.getDirectorio(id).subscribe(
+      this.directorioService.getDirectorio(+id).subscribe(
         res => {
           this.directorioForm.patchValue({
             id: res.id,
@@ -154,9 +155,11 @@ this.user = this.userService.user;
             twitter: res.twitter,
             linkedin: res.linkedin,
             vcard: this.vCardInfo,
-            user_id: this.user.id,
+            user_id: res.user_id,
           });
           this.imagePath = res.image;
+          this.directory = res;
+
         }
       );
     } else {
@@ -187,8 +190,8 @@ this.user = this.userService.user;
       twitter: [''],
       linkedin: [''],
       vcard: [this.vCardInfo],
-      image: [this.image],
-      user_id: [this.user.id],
+      image: [''],
+      user_id: [''],
     });
 
 
@@ -258,6 +261,7 @@ this.user = this.userService.user;
     formData.append('instagram', this.directorioForm.get('instagram').value);
     formData.append('twitter', this.directorioForm.get('twitter').value);
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
+    formData.append('user_id', this.directorioForm.get('user_id').value);
     formData.append('image', this.directorioForm.get('image').value);
     formData.append('vcard', this.vCardInfo);
 
@@ -266,7 +270,7 @@ this.user = this.userService.user;
     if (id) {
       const data = {
         ...this.directorioForm.value,
-        user_id: this.user.id,
+        vcard: this.vCardInfo,
         id: this.directory.id
       }
       this.directorioService.updateDirectorio(data).subscribe(

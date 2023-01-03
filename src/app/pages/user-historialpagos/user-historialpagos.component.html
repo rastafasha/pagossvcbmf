@@ -64,34 +64,32 @@
                                 <th scope="col">Moneda</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Validación</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row"><a routerLink="/dashboard/payment-detail">#22782211</a></th>
-                                <td><i class="bx bxl-paypal"> </i> PayPal</td>
-                                <td>$122.9 </td>
-                                <td>USD</td>
-                                <td>Jun 20, 2022, 3:17:36 AM</td>
-                                <td><span class="badge bg-success">Verificado</span></td>
+                            <tr *ngIf="!userProfile.payments">
+                                <td>No data</td>
 
                             </tr>
-                            <tr>
-                                <th scope="row"><a routerLink="/dashboard/payment-detail">#52712</a></th>
-                                <td><i class="bx bxs-bank"> </i> TPago Mercantil</td>
-                                <td>Bs.200.00 </td>
-                                <td>VES</td>
-                                <td>Jun 20, 2022, 3:17:36 AM</td>
-                                <td><span class="badge bg-warning">Pendiente</span></td>
-
-                            </tr>
-                            <tr>
-                                <th scope="row"><a routerLink="/dashboard/payment-detail">#33315551</a></th>
-                                <td><i class="bx bxs-bank"> </i> Transferencia Mercantil</td>
-                                <td>Bs. 271.00 </td>
-                                <td>VES</td>
-                                <td>Jun 20, 2022, 3:17:36 AM</td>
-                                <td><span class="badge bg-warning">Pendiente</span></td>
+                            <tr *ngFor="let userpayment of userProfile.payments ">
+                                <th scope="row">{{userpayment.referencia}}</th>
+                                <td>{{userpayment.metodo}}</td>
+                                <td>{{userpayment.monto}} </td>
+                                <td>{{userpayment.moneda_codigo}}</td>
+                                <td>{{userpayment.created_at}}</td>
+                                <td>
+                                    <!-- <span class="badge bg-success">{{userpayment.status}}</span> -->
+                                    <span class="badge bg-success" *ngIf="userpayment.status === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="userpayment.status === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="userpayment.status === 'REJECTED'">Rechazado</span>
+                                </td>
+                                <td>
+                                    <!-- <span class="badge bg-success">{{userpayment.validacion}}</span> -->
+                                    <span class="badge bg-success" *ngIf="userpayment.validacion === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="userpayment.validacion === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="userpayment.validacion === 'REJECTED'">Rechazado</span>
+                                </td>
 
                             </tr>
 
