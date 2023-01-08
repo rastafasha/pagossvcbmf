@@ -13,17 +13,18 @@ export class TokenService {
     register: `${this.serverUrl}/register`,
   };
   constructor() {}
-  handleData(token: any) {
-    localStorage.setItem('auth_token', JSON.stringify(token));
+  handleData(access_token: any) {
+    // localStorage.setItem('auth_token', JSON.stringify(token));
+    localStorage.setItem('auth_token', access_token.original.access_token);
   }
   getToken() {
     return localStorage.getItem('auth_token');
   }
   // Verify the token
   isValidToken() {
-    const token = this.getToken();
-    if (token) {
-      const payload = this.payload(token);
+    const access_token = this.getToken();
+    if (access_token) {
+      const payload = this.payload(access_token);
       if (payload) {
         return Object.values(this.issuer).indexOf(payload.iss) > -1
           ? true
@@ -33,8 +34,8 @@ export class TokenService {
       return false;
     }
   }
-  payload(token: any) {
-    const jwtPayload = token.split('.')[1];
+  payload(access_token: any) {
+    const jwtPayload = access_token.split('.')[1];
     return JSON.parse(atob(jwtPayload));
   }
   // User state based on valid token

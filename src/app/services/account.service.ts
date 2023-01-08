@@ -60,7 +60,7 @@ export class AccountService {
     guardarLocalStorage( user:any, access_token: any){
       // localStorage.setItem('token', JSON.stringify(token));
     localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('auth_token', JSON.stringify(access_token));
+    localStorage.setItem('auth_token', access_token.original.access_token);
     }
 
 

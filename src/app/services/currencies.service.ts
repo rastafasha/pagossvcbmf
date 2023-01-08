@@ -30,7 +30,7 @@ export class CurrenciesService {
   }
 
 
-  getCurrencies() {
+  getCurrencies() {debugger
     const url = `${baseUrl}/currencies`;
     return this.http.get<any>(url,this.headers)
       .pipe(

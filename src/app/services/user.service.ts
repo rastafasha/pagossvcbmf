@@ -55,7 +55,7 @@ export class UserService {
   guardarLocalStorage( user:any, access_token: any){
     // localStorage.setItem('token', JSON.stringify(token));
   localStorage.setItem('user', JSON.stringify(user));
-  localStorage.setItem('token', JSON.stringify(access_token.original.access_token));
+  localStorage.setItem('auth_token', access_token.original.access_token);
   }
 
   getUserLocalStorage(): void {
@@ -63,7 +63,7 @@ export class UserService {
   }
 
 
-  getAll(): Observable<any> {
+  getAll(): Observable<any> {debugger
 
     const url = `${baseUrl}/users`;
     return this.http.get<any>(url, this.headers)
