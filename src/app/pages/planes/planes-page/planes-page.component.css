@@ -19,3 +19,8 @@
     flex-direction: column;
     flex-wrap: wrap;
 } */
+
+.planespage .col-sm-6 {
+    float: left;
+    padding: 10px;
+}

@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
   getUserServer(id:number){
     this.userService.getUserById(id).subscribe(
       res =>{
-        this.userprofile = res;
+        this.userprofile = res[0];
         error => this.error = error
         console.log(this.userprofile);
       }

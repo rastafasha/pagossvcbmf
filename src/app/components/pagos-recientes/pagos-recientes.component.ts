@@ -10,7 +10,7 @@ import { PaymentService } from '@app/services/payment.service';
 })
 export class PagosRecientesComponent implements OnInit {
 
-  pagos: Payment;
+  payments: Payment;
   error:string;
 
   constructor(
@@ -24,9 +24,9 @@ export class PagosRecientesComponent implements OnInit {
   getPagosRecientes(): void {
     this.paymentService.getRecientes().subscribe(
       res =>{
-        this.pagos = res;
+        this.payments = res;
         error => this.error = error
-        console.log(this.pagos);
+        console.log(this.payments);
       }
     );
   }

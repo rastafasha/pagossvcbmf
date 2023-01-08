@@ -10,13 +10,13 @@
                 <th scope="col">Fecha</th>
             </tr>
         </thead>
-        <tbody *ngFor="let pago of pagos | slice: 0:5">
+        <tbody *ngFor="let payment of payments | slice: 0:5">
             <tr>
-                <th scope="row"><a [routerLink]="['dashboard/payment-detail', pago.id]">{{pago.referencia}}</a></th>
-                <td>{{pago.metodo}}</td>
-                <td>{{pago.monto}}</td>
-                <td>{{pago.moneda_codigo}}</td>
-                <td>{{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
+                <th scope="row"><a [routerLink]="['dashboard/payment-detail', payment.id]">{{payment.referencia}}</a></th>
+                <td>{{payment.metodo}}</td>
+                <td>{{payment.monto}}</td>
+                <td>{{payment.moneda_codigo}}</td>
+                <td>{{payment.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
             </tr>
 
         </tbody>

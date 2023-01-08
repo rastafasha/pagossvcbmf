@@ -23,7 +23,9 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { ReciboFacturaComponent } from './recibo-factura/recibo-factura.component';
 import { PlanesyproductosComponent } from './planesyproductos/planesyproductos.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
-
+import { ProductItemComponent } from './product-item/product-item.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+import {PipesModule} from '../pipes/pipes.module';
 @NgModule({
   declarations: [
     AlertComponent,
@@ -40,7 +42,8 @@ import { NotificacionesComponent } from './notificaciones/notificaciones.compone
     CartItemComponent,
     ReciboFacturaComponent,
     PlanesyproductosComponent,
-    NotificacionesComponent
+    NotificacionesComponent,
+    ProductItemComponent
   ],
   exports: [
     AlertComponent,
@@ -57,7 +60,8 @@ import { NotificacionesComponent } from './notificaciones/notificaciones.compone
     CartItemComponent,
     ReciboFacturaComponent,
     PlanesyproductosComponent,
-    NotificacionesComponent
+    NotificacionesComponent,
+    ProductItemComponent
   ],
   imports: [
     CommonModule,
@@ -66,6 +70,8 @@ import { NotificacionesComponent } from './notificaciones/notificaciones.compone
     FormsModule,
     QRCodeModule,
     HttpClientModule,
+    NgxPayPalModule,
+    PipesModule
     // CKEditorModule
   ]
 })

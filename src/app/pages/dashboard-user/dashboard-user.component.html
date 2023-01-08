@@ -15,7 +15,12 @@
         <div class="right shadow animated fadeIn">
             <h1>Plan Semestral</h1>
             <p>Estado del plan: </p>
-            <span class="badge bg-success">Activo</span>
+            <div *ngIf="userProfile.role == 'MEMBER'||userProfile.role == 'ADMIN'|| userProfile.role == 'SUPERADMIN'">
+                <span class="badge bg-success">Activo</span>
+            </div>
+            <div *ngIf="userProfile.role == 'GUEST'">
+                <span class="badge bg-primary">Inactivo</span>
+            </div>
         </div>
     </div>
     <!-- End Page Title -->
@@ -54,7 +59,6 @@
                         <h2>{{user.username}}</h2>
 
                         <p>Usuario desde:<br>{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
-                        <!-- <p>Ultima actualización:{{user.updated_at | date:'MMM d, y, h:mm:ss a'}}</p> -->
 
                     </div>
                 </div>
@@ -62,49 +66,40 @@
             </div>
             <div class="col-xs-12 col-sm-8 col-xl-8">
 
-                <div class="card">
+                <div class="card  animated fadeInUp">
                     <div class="card-body pt-3">
                         <!-- Bordered Tabs -->
-                        <div *ngIf="user.role === 'GUEST'">
-                            <ul class="nav nav-tabs nav-tabs-bordered">
+                        <ul class="nav nav-tabs nav-tabs-bordered">
 
-                                <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">News</button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">Notificaciones</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div *ngIf="user.role === 'MEMBER'">
-                            <ul class="nav nav-tabs nav-tabs-bordered">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">Actualidad</button>
+                            </li>
 
-                                <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">News</button>
-                                </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">News</button>
+                            </li>
 
-                                <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">Notificaciones</button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#status">Status</button>
-                                </li>
-                            </ul>
-                        </div>
 
+                        </ul>
                         <div class="tab-content pt-2">
 
                             <div class="tab-pane fade show active news" id="news">
                                 <br />
                                 <app-dolar-today></app-dolar-today>
                             </div>
-                            <div class="tab-pane fade show active recentPayments" id="recentPayments">
-                                <br />
-                                <app-planesyproductos></app-planesyproductos>
+                            <div class="tab-pane fade show  recentPayments" id="recentPayments">
+                                <div *ngIf="user.role === 'MEMBER'">
+                                    <h4>Bienvenido!</h4>
+                                    <p>Ahora puedes editar tu informacion del directorio de SVCBMF</p>
+                                    <a [routerLink]="['/dashboard/profile/', user.id]">
+                                        <button class="btn btn-outline-success">Ir a Mi Cuenta</button>
+                                    </a>
+                                </div>
+                                <div *ngIf="user.role === 'GUEST'">
+                                    <app-planesyproductos></app-planesyproductos>
+                                </div>
                             </div>
 
-                            <div class="tab-pane fade profile-edit pt-3" id="status">
-                            </div>
 
 
                         </div>

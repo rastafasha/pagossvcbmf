@@ -16,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 //helpers
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from '@app/helpers/jwt.interceptor';
+// import { JwtInterceptor } from '@app/helpers/jwt.interceptor';
+
 import { UserHistorialpagosComponent } from './user-historialpagos/user-historialpagos.component';
 import { HelpComponent } from './help/help.component';
 import { ContactComponent } from './contact/contact.component';
@@ -25,6 +26,7 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
 // import { UserPagarComponent } from './user-pagar/user-pagar.component';
 
 // Import Angular plugin.
+import { NgxPayPalModule } from 'ngx-paypal';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 //Qr
 import { QRCodeModule } from 'angular2-qrcode';
@@ -45,6 +47,7 @@ import { ProductoComponent } from './productos/producto/producto.component';
 import { PlanComponent } from './planes/plan/plan.component';
 import { PaymentEditComponent } from './payments/payment-edit/payment-edit.component';
 import { ReportarPagoComponent } from './payments/reportar-pago/reportar-pago.component';
+import { AuthInterceptor } from '@app/services/auth.interceptor';
 
 
 @NgModule({
@@ -109,8 +112,16 @@ import { ReportarPagoComponent } from './payments/reportar-pago/reportar-pago.co
     NgxPaginationModule,
     QRCodeModule,
     PipesModule,
-    ConfModule
+    ConfModule,
+    NgxPayPalModule,
 
-  ]
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
 })
 export class PagesModule { }

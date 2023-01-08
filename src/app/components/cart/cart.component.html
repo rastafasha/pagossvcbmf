@@ -1,6 +1,6 @@
 <div *ngIf="cartItems.length < 1">
     <div class="alert alert-info text-center">
-        <h4>Your Cart is empty</h4>
+        <i class="fa fa-shopping-cart"></i>
     </div>
 </div>
 <div *ngIf="cartItems.length > 0">
@@ -15,7 +15,7 @@
                         <app-cart-item [cartItem]="item"></app-cart-item>
                     </div>
                     <div class="col-md-2">
-                        <i class="fa fa-trash-alt fa-2x" (click)="deletItem(i)"></i>
+                        <i class="fa fa-trash-o" (click)="deletItem(i)"></i>
                     </div>
                 </div>
             </li>
@@ -29,4 +29,8 @@
   </button>
 
     <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    <p>ó</p>
+    <button class="btn btn-primary pull-right" routerLink="/dashboard/realizar-pago">
+      Otros Pagos
+    </button>
 </div>

@@ -33,7 +33,7 @@
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
 
                         <!-- <h3>{{ user.username?user.username:'' }}</h3> -->
-                        <h3>{{ userSelected[0].username }}</h3>
+                        <h3>{{ userSelected.username }}</h3>
                         <!-- <h3>{{ user.role.descripcion }}</h3> -->
                         <!-- <div class="social-links mt-2">
                             <a *ngIf="user.twitter" href="{{user.twitter}}" target="_blank" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -60,7 +60,7 @@
 
                             <!-- <li class="nav-item" *ngIf="user.role.name=='Miembro'"> -->
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" *ngIf="userSelected[0].directories[0]">Directorio</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" *ngIf="userSelected.directories[0]">Directorio</button>
                             </li>
 
                             <li class="nav-item">

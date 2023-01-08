@@ -83,7 +83,7 @@ export class UserService {
   }
 
   getRecientes(): Observable<any> {
-    const url = `${baseUrl}/usuarios/recientes/`;
+    const url = `${baseUrl}/users/recientes/`;
     return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, users: User}) => resp.users)

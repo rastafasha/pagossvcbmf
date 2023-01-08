@@ -1,0 +1,10 @@
+.card-img-top {
+    width: 170px;
+    height: 230px;
+    align-self: center;
+    padding-top: 10px;
+}
+
+.itemproduct {
+    width: 18rem;
+}

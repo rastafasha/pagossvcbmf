@@ -27,57 +27,15 @@
 
         <div class="planespage">
             <div class="row">
-                <div class="col-xs-12 col-sm-4" style="float:left">
-                    <!-- banner planes -->
+                <div class="col-xs-12 col-sm-9" style="float:left">
+                    <div class="col-xs-12 col-sm-6" *ngFor="let product of planes">
+                        <app-product-item [product]="product"></app-product-item>
 
-                    <div class="instruccioness shadow animated fadeInUp producto">
-                        <!-- <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt=""> -->
-                        <div class="info">
-
-                            <h2>Nombre Producto</h2>
-                            <p>Subscribase a nustros planes! </p>
-                            <h2>$100.00</h2>
-                            <p>Dirijase a la app o web del metodo preferido, </p>
-                            <ul>
-                                <li class="badge bg-primary">Paypal</li>
-                                <li class="badge bg-primary">Zelle</li>
-                                <li class="badge bg-primary">Pago Móvil</li>
-                                <li class="badge bg-primary">Transferencia</li>
-                            </ul>
-                            <a routerLink="/dashboard/productos/producto">
-                                <div class="button btn btn-outline-success">Ver Producto</div>
-                            </a>
-                        </div>
                     </div>
-                    <!-- banner planes -->
 
                 </div>
-                <div class="col-xs-12 col-sm-4" style="float:left">
-                    <!-- banner planes -->
 
-                    <div class="instruccioness shadow animated fadeInUp producto">
-                        <!-- <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt=""> -->
-                        <div class="info">
-
-                            <h2>Nombre Producto</h2>
-                            <p>vea nuestro Catalogo </p>
-                            <h2>$100.00</h2>
-                            <p>Dirijase a la app o web del metodo preferido, </p>
-                            <ul>
-                                <li class="badge bg-primary">Paypal</li>
-                                <li class="badge bg-primary">Zelle</li>
-                                <li class="badge bg-primary">Pago Móvil</li>
-                                <li class="badge bg-primary">Transferencia</li>
-                            </ul>
-                            <!-- <a routerLink="/dashboard/productos/producto">
-                          <div class="button btn btn-outline-success">Ver Producto</div>
-                      </a> -->
-                            <button href="#" class="btn btn-outline-success" (click)="addToCart()"> <i class="fa fa-cart"></i> add to cart</button>
-                        </div>
-                    </div>
-                    <!-- banner planes -->
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="col-xs-12 col-sm-3 ">
                     <app-cart></app-cart>
                 </div>
             </div>

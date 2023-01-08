@@ -145,3 +145,37 @@ body .dark {
     background: var(--black) !important;
     border: 1px solid var(--white) !important;
 }
+
+.dark .swal2-popup.swal2-toast {
+    background: var(--black);
+}
+
+.dark .profile .profile-edit label {
+    font-weight: 600;
+    color: var(--white);
+}
+
+
+/* cart */
+
+.dark .header__cart img.ligth {
+    display: none;
+}
+
+.dark .header__cart img.darker {
+    display: block;
+}
+
+.dark .header__cart--notification {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.dark .cart-modal--active {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.dark .cart-modal__price span {
+    color: var(--white);
+}

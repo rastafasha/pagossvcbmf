@@ -76,7 +76,7 @@ export class UserDetailsComponent implements OnInit {
   getUser(id:number){
     this.userService.getUserById(id).subscribe(
       res =>{
-        this.userSelected = res;
+        this.userSelected = res[0];
         error => this.error = error
         console.log(this.userSelected);
       }

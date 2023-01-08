@@ -5,6 +5,8 @@
     border-radius: 12px;
     background-color: #f2f2f2;
     box-shadow: 0px 3px 6px #ccc;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .planes :nth-child(1) {
@@ -30,9 +32,18 @@
 
 .plan {
     display: flex;
+    float: left;
+}
+
+.plan .card-img-top {
+    width: 90px;
+    height: 90px;
+    align-self: center;
+    padding-top: 10px;
 }
 
 .plan .item {
+    width: 100%;
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;

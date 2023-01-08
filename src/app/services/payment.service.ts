@@ -91,15 +91,15 @@ export class PaymentService {
     const url = `${baseUrl}/pagos/pagosbyUser/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
-        map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
+        map((resp:{ok: boolean, payments: Payment}) => resp.payments)
         );
   }
 
    getRecientes(): Observable<any> {
-    const url = `${baseUrl}/pagos/recientes`;
+    const url = `${baseUrl}/payment/recientes`;
     return this.http.get<any>(url)
       .pipe(
-        map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
+        map((resp:{ok: boolean, payments: Payment}) => resp.payments)
       )
   }
 

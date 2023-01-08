@@ -129,7 +129,7 @@ this.user = this.userService.user;
     if (!id == null || !id == undefined || id) {
       // let id = this.directory.id;
       this.pageTitle = 'Editar Directorio';
-      this.directorioService.getDirectorio(+id).subscribe(
+      this.directorioService.getDirectorio(id).subscribe(
         res => {
           this.directorioForm.patchValue({
             id: res.id,

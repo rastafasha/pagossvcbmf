@@ -34,10 +34,12 @@ export class FormUserComponent implements OnInit {
   directorio: Directorio;
   infoDirectorio: any;
   id: number | null;
-  error: string;
+  // error: string;
   uploadError: string;
   pageTitle: string;
   directory: Directorio;
+
+  errors:any = null;
 
   public imagenSubir: File;
   public imgTemp: any = null;
@@ -69,13 +71,33 @@ constructor(
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormulario(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.getUser(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.getDirectory(id));
+  }
+
+  getUser(id:number){
+    this.userService.getUserById(id).subscribe(
+      res =>{
+        this.user = res[0];
+        console.log(this.user);
+      }
+    );
+  }
+
+  getDirectory(id:number): void {
+    this.directorioService.getDirectoriobyUser(id).subscribe(
+      res =>{
+        this.directory = res[0];
+        console.log(this.directory);
+      }
+    );
   }
 
 
   iniciarFormulario(id:number){
     if (id) {
       this.pageTitle = 'Editar Directorio';
-      this.directorioService.getDirectorio(id).subscribe(
+      this.directorioService.getDirectoriobyUser(id).subscribe(
         res => {
           this.directorioForm.patchValue({
             id: res.id,
@@ -104,8 +126,8 @@ constructor(
             user_id: res.user_id,
           });
           this.imagePath = res.image;
-          this.directorio = res;
-          console.log(this.directorio);
+          this.directory = res[0];
+          console.log(this.directory);
 
         }
       );
@@ -182,7 +204,7 @@ constructor(
   get user_id() { return this.directorioForm.get('user_id'); }
 
 
-  guardarDirectorio() {
+  guardarDirectorio() {debugger
 
     this.formularioVcardGe();
 
@@ -222,16 +244,17 @@ constructor(
       }
       this.directorioService.updateDirectorio(data).subscribe(
         res => {
-          if (this.error) {
-            // this.uploadError = res.message;
-            Swal.fire('Error', this.uploadError, 'error');
+          if (this.errors) {
+            this.errors = this.errors.error;
+            Swal.fire('Error', this.errors, 'error');
+
           } else {
             // this.router.navigate(['/directorio']);
             this.infoDirectorio = res;
             Swal.fire('Guardado', 'Los cambios fueron actualizados', 'success');
           }
         },
-        error => this.error = error
+        error => this.errors = error
       );
     } else {
       const data = {
@@ -240,16 +263,16 @@ constructor(
       }
       this.directorioService.createDirectorio(data).subscribe(
         res => {
-          if (this.error) {
-            // this.uploadError = res.message;
-            Swal.fire('Error', this.uploadError, 'error');
+          if (this.errors) {
+            this.errors = this.errors.error;
+            Swal.fire('Error', this.errors, 'error');
           } else {
             this.infoDirectorio = res;
             Swal.fire('Guardado', 'Los cambios fueron creados', 'success');
             // this.router.navigate(['/directorio']);
           }
         },
-        error => this.error = error
+        error => this.errors = error
       );
     }
     this.generateQRCode();

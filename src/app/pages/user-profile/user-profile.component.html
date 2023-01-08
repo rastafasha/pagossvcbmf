@@ -67,7 +67,10 @@
                             <div class="tab-pane fade show active historial" id="historial">
                                 <ul *ngFor="let payment of user.payments">
                                     <li><a [routerLink]="['/dashboard/payment-detail', payment.id]">
-                                  Referencia: {{payment.referencia}} | Status: <span class="badge bg-success">{{payment.status}}</span>
+                                  Referencia: {{payment.referencia}} | Status:
+                                  <span class="badge bg-success" *ngIf="payment.status === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="payment.status === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="payment.status === 'REJECTED'">Rechazado</span>
                                 </a></li>
                                 </ul>
                                 <br />
@@ -84,48 +87,53 @@
                                     </div>
                                     <div class="col-lg-9 col-md-8">{{user.first_name}} {{user.last_name}}</div>
                                 </div> -->
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-bank2"></i> Universidad</div>
-                                    <div class="col-lg-9 col-md-8">{{user.directories.universidad}}</div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi  bi-award"></i> Especialidad</div>
-                                    <div class="col-lg-9 col-md-8">{{user.directories.especialidad}} <span>- {{user.directories.ano}}</span></div>
-                                </div>
+                                <div *ngIf="user.directories[0]">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label"><i class="bi bi-bank2"></i> Universidad</div>
+                                        <div class="col-lg-9 col-md-8">{{user.directories.universidad}}</div>
+                                    </div>
 
 
 
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-file-text"></i> Dirección</div>
-                                    <div class="col-lg-9 col-md-8">
-                                        <p>{{user.directories.direccion}}</p>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label"><i class="bi  bi-award"></i> Especialidad</div>
+                                        <div class="col-lg-9 col-md-8">{{user.directories.especialidad}} <span>- {{user.directories.ano}}</span></div>
+                                    </div>
 
+
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label"><i class="bi bi-file-text"></i> Dirección</div>
+                                        <div class="col-lg-9 col-md-8">
+                                            <p>{{user.directories.direccion}}</p>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">
+                                            <i class="bi bi-geo"></i> Estado
+                                        </div>
+                                        <div class="col-lg-9 col-md-8">{{user.directories.estado}}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label"><i class="bi bi-telephone"></i> Teléfonos Ppal.</div>
+                                        <div class="col-lg-9 col-md-8">{{user.directories.telmovil}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label"><i class="bi bi-telephone"></i> Teléfono Movil</div>
+                                        <div class="col-lg-9 col-md-8">{{user.directories.telmovil}}</div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">
-                                        <i class="bi bi-geo"></i> Estado
-                                    </div>
-                                    <div class="col-lg-9 col-md-8">{{user.directories.estado}}</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-telephone"></i> Teléfonos Ppal.</div>
-                                    <div class="col-lg-9 col-md-8">{{user.directories.telmovil}}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label"><i class="bi bi-telephone"></i> Teléfono Movil</div>
-                                    <div class="col-lg-9 col-md-8">{{user.directories.telmovil}}</div>
-                                </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label"><i class="bi bi-envelope"></i> Email</div>
                                     <div class="col-lg-9 col-md-8">{{user.email}}</div>
+                                </div>
+                                <div *ngIf="!user.directories[0]">
+                                    <p>No posee directorio</p>
                                 </div>
 
                             </div>

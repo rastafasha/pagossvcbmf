@@ -34,12 +34,12 @@
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <h2>{{userprofile[0].username}}</h2>
-                        <p>{{userprofile[0].email}}</p>
-                        <span *ngIf="userprofile[0].role === 'SUPERADMIN'">Super Admin</span>
-                        <span *ngIf="userprofile[0].role === 'ADMIN'">Admin</span>
-                        <span *ngIf="userprofile[0].role === 'MEMBER'">Miembro</span>
-                        <span *ngIf="userprofile[0].role === 'GUEST'">Invitado</span>
+                        <h2>{{userprofile.username}}</h2>
+                        <p>{{userprofile.email}}</p>
+                        <span *ngIf="userprofile.role === 'SUPERADMIN'">Super Admin</span>
+                        <span *ngIf="userprofile.role === 'ADMIN'">Admin</span>
+                        <span *ngIf="userprofile.role === 'MEMBER'">Miembro</span>
+                        <span *ngIf="userprofile.role === 'GUEST'">Invitado</span>
 
                     </div>
                 </div>
@@ -68,7 +68,7 @@
 
                         </div>
 
-                        <div *ngIf="userprofile[0].role === 'SUPERADMIN' || userprofile[0].role === 'ADMIN'  || userprofile[0].role === 'MEMBER' ">
+                        <div *ngIf="userprofile.role === 'SUPERADMIN' || userprofile.role === 'ADMIN'  || userprofile.role === 'MEMBER' ">
                             <ul class="nav nav-tabs nav-tabs-bordered">
 
                                 <li class="nav-item">
@@ -111,11 +111,11 @@
                                         <div class="col-lg-3 col-md-4 label ">
                                             <i class="bi bi-person-circle"></i> Username
                                         </div>
-                                        <div class="col-lg-9 col-md-8">{{userprofile[0].username}}</div>
+                                        <div class="col-lg-9 col-md-8">{{userprofile.username}}</div>
                                     </div>
                                     <div class="col-xs-6 col-sm-6">
                                         <div class="col-lg-3 col-md-4 label"><i class="bi bi-envelope"></i> Email</div>
-                                        <div class="col-lg-9 col-md-8">{{userprofile[0].email}}</div>
+                                        <div class="col-lg-9 col-md-8">{{userprofile.email}}</div>
                                     </div>
                                 </div>
                                 <br>
@@ -124,7 +124,7 @@
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
                                         <div class="col-lg-3 col-md-4 label"><i class="bi bi-bank2"></i> Tipo Registro</div>
-                                        <div class="col-lg-9 col-md-8">{{userprofile[0].role}}</div>
+                                        <div class="col-lg-9 col-md-8">{{userprofile.role}}</div>
                                     </div>
                                 </div>
 
@@ -155,7 +155,7 @@
                                     <div class="row mb-3">
                                         <label for="username" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-person-circle"></i> Username</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="username" type="text" class="form-control" id="username" formControlName="username" [value]="userprofile[0].username">
+                                            <input name="username" type="text" class="form-control" id="username" formControlName="username" [value]="userprofile.username">
                                         </div>
                                     </div>
 
@@ -163,7 +163,7 @@
                                         <label for="Email" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-envelope"></i>
                         Email</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="email" type="email" class="form-control" id="Email" [readOnly]="userprofile[0].email" [value]="userprofile[0].email">
+                                            <input name="email" type="email" class="form-control" id="Email" [readOnly]="userprofile.email" [value]="userprofile.email">
                                         </div>
                                     </div>
 
@@ -181,7 +181,7 @@
                             <div class="tab-pane fade pt-3" id="profile-settings">
 
                                 <!-- Profile Edit Form -->
-                                <app-form-user [directorioUser]="directorioUser" id="userprofile[0].directories[0].user_id"></app-form-user>
+                                <app-form-user [directorioUser]="directorioUser" id="userprofile.directories[0].user_id"></app-form-user>
                                 <!-- End Profile Edit Form -->
 
                             </div>
@@ -192,7 +192,7 @@
                                 <form>
                                     <div class="row mb-3">
                                         <h3>Cambiar contraseña</h3>
-                                        <p>La contraseña será cambiada al usuario <span> <b>{{userprofile[0].username}}</b></span>
+                                        <p>La contraseña será cambiada al usuario <span> <b>{{userprofile.username}}</b></span>
                                         </p>
                                     </div>
                                     <!-- <div class="row mb-3">

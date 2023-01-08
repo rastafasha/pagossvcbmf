@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { environment } from 'src/environments/environment';
+import { CartItemModel } from '../../../models/cart-item-model';
 
 interface HtmlInputEvent extends Event{
   target : HTMLInputElement & EventTarget;
@@ -29,6 +30,8 @@ declare var $:any;
 export class ReportarPagoComponent implements OnInit {
 
   title= 'Realizar un Pago';
+
+  @Input() cartItems: CartItemModel;
 
   // public product: ProductPaypal;
 
@@ -238,5 +241,6 @@ export class ReportarPagoComponent implements OnInit {
 
     })
   }
+
 
 }

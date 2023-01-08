@@ -61,7 +61,7 @@ export class RolesViewComponent implements OnInit {
 
   validarFormulario(){
     this.rolesForm = this.fb.group({
-      role_id: [''],
+      role: [''],
     })
   }
 

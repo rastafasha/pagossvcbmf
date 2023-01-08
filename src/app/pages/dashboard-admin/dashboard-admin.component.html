@@ -15,7 +15,12 @@
             <div class="right shadow animated fadeIn">
                 <h1>Plan Semestral</h1>
                 <p>Estado del plan: </p>
-                <span class="badge bg-success">Activo</span>
+                <div *ngIf="user.role == 'MEMBER' || user.role == 'ADMIN'|| user.role == 'SUPERADMIN'">
+                    <span class="badge bg-success">Activo</span>
+                </div>
+                <div *ngIf="user.role == 'GUEST'">
+                    <span class="badge bg-primary">Inactivo</span>
+                </div>
             </div>
         </div>
         <!-- banners planes -->
@@ -87,7 +92,7 @@
                                     <app-dolar-today></app-dolar-today>
                                 </div>
                                 <div class="tab-pane fade show  recentPayments" id="recentPayments">
-                                    <!-- <app-pagos-recientes></app-pagos-recientes> -->
+                                    <app-pagos-recientes></app-pagos-recientes>
                                 </div>
 
                                 <div class="tab-pane fade profile-edit pt-3" id="status">

@@ -16,6 +16,13 @@
         <ul class="d-flex align-items-center">
 
             <li class="nav-item">
+                <div class="header__cart" (click)="viewCart()">
+                    <div class="header__cart--notification">{{cartItems.length}}</div>
+                    <img src="./assets/svg/icon-cart.svg" class="ligth" alt="">
+                    <img src="./assets/svg/icon-cart-white.svg" class="darker" alt="">
+                </div>
+            </li>
+            <li class="nav-item">
                 <div class="btns dayNight">
                     <i class="bx bx-bulb" (click)="darkmode('dark')"></i>
                     <!-- <ion-icon name="moon-outline" (click)="darkmode()"></ion-icon>
@@ -102,3 +109,32 @@
 
 </header>
 <!-- End Header -->
+
+
+<!-- inicio cart modal -->
+<div class="cart-modal">
+    <!-- <p class="cart-modal__title">Cart</p> -->
+    <div class="cart-modal__chekout-container">
+
+        <div *ngIf="cartItems.length > 0">
+            <div class="cart-modal__details-container" *ngFor="let item of cartItems; index as i">
+                <!-- <img class="cart-modal__image" [src]="item.img | imagenPipe: 'plans'" alt="{{item.productName| slice: 0:10 }}"> -->
+                <div>
+                    <p class="cart-modal__product">{{item.productName| slice: 0:10 }}...</p>
+                    <p class="cart-modal__price">${{item.productPrice}} x{{item.quantity }}<span>${{item.quantity * item.productPrice | number: '1.1-2'}}</span> </p>
+                </div>
+                <img class="cart-modal__delete" src="./assets/svg/icon-delete.svg" alt="delete" (click)="deletItem(i)">
+
+            </div>
+            <a routerLink="/dashboard/realizar-pago">
+
+                <button class="cart-modal__chekount">Checkout</button>
+            </a>
+        </div>
+        <div *ngIf="cartItems.length < 1">
+            <p class="cart-empty">Carrito Vacio</p>
+        </div>
+
+    </div>
+</div>
+<!-- fin cart modal -->
