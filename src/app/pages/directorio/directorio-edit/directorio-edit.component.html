@@ -32,7 +32,23 @@
                     <div class="card-body">
                         <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm">
                             <div class="row flex-nowrap">
+
                                 <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <div class="form-group" style="margin-bottom: 25px;">
+                                        <label for="exampleInputuname">Status<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
+                                            <select name="" id="input" class="form-control" formControlName="status" required="required">
+                                          <option value="">Seleccione</option>
+                                          <option value="APROVED">Aprobado</option>
+                                          <option value="PENDING">Pendiente</option>
+                                          <option value="REJECTED">Rechazado</option>
+                                        </select>
+                                        </div>
+
+
+
+                                    </div>
                                     <div class="col-sm-6">
                                         <div class="form-group form-row">
                                             <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>

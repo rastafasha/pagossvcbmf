@@ -156,6 +156,7 @@ this.user = this.userService.user;
             linkedin: res.linkedin,
             vcard: this.vCardInfo,
             user_id: res.user_id,
+            status: res.status
           });
           this.imagePath = res.image;
           this.directory = res;
@@ -192,6 +193,7 @@ this.user = this.userService.user;
       vcard: [this.vCardInfo],
       image: [''],
       user_id: [''],
+      status: ['PENDING'],
     });
 
 

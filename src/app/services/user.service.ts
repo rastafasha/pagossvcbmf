@@ -63,7 +63,7 @@ export class UserService {
   }
 
 
-  getAll(): Observable<any> {debugger
+  getAll(): Observable<any> {
 
     const url = `${baseUrl}/users`;
     return this.http.get<any>(url, this.headers)

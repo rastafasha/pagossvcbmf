@@ -31,7 +31,7 @@
 
                         <h3>{{user.username}}</h3>
                         <h3>{{user.role}}</h3>
-                        <!-- <span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span> -->
+                        <span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span>
                         <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -139,9 +139,40 @@
                             </div>
 
                             <div class="tab-pane fade pt-3" id="profile-settings">
+                                <h4>Role: {{user.role}}</h4>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="form-group col-xs-12 cols-m-6">
+                                            <label for="exampleInputuname">Status<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <select name="" id="input" class="form-control" [(ngModel)]="user.is_active" required="required">
+                                        <option value="">Seleccione</option>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                      </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-xs-12 cols-m-6">
+                                            <label for="exampleInputuname">Status<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <select class="form-control" [(ngModel)]="user.role">
+                                    <option value="SUPERADMIN">Super Admin</option>
+                                    <option value="ADMIN">Admin</option>
+                                    <option value="MEMBER">Miembro</option>
+                                    <option value="GUEST">Invitado</option>
+                                  </select>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button (click)="updateUser(user)" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Settings Form -->
-                                <form>
+                                <!-- <form>
 
                                     <div class="row mb-3">
                                         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
@@ -176,7 +207,7 @@
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Guardar</button>
                                     </div>
-                                </form>
+                                </form> -->
                                 <!-- End settings Form -->
 
                             </div>

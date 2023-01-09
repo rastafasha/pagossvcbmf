@@ -106,11 +106,11 @@ export class PlanesEditComponent implements OnInit {
   updateBlog(){debugger
 
     const formData = new FormData();
-    formData.append('name', this.planForm.get('name').value.name);
-    formData.append('price', this.planForm.get('price').value.name);
-    formData.append('currency_id', this.planForm.get('currency_id').value.name);
-    formData.append('status', this.planForm.get('status').value.name);
-    formData.append('image', this.planForm.get('image').value.name);
+    formData.append('name', this.planForm.get('name').value);
+    formData.append('price', this.planForm.get('price').value);
+    formData.append('currency_id', this.planForm.get('currency_id').value);
+    formData.append('status', this.planForm.get('status').value);
+    formData.append('image', this.planForm.get('image').value);
 
     const {name, price, currency_id, status, image } = this.planForm.value;
     if(this.planSeleccionado){

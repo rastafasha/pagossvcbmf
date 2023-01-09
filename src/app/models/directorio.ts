@@ -28,6 +28,8 @@ export class Directorio {
     created_at: Date;
     image:string;
     user_id:number;
+    status:string;
+
 
     get imagenUrl(){
 

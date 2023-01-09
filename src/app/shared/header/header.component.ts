@@ -54,11 +54,7 @@ export class HeaderComponent implements OnInit {
     private messageService: MessageService,
 
     ) {
-
-
       this.user = this.accountService.user;
-
-
     }
 
   ngOnInit(): void {

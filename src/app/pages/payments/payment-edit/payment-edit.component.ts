@@ -41,7 +41,7 @@ export class PaymentEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( ({id}) => this.cargarBlog(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.cargarPayment(id));
     this.validarFormulario();
   }
 
@@ -49,10 +49,11 @@ export class PaymentEditComponent implements OnInit {
     this.paymentForm = this.fb.group({
       status: ['',Validators.required],
       validacion: ['',Validators.required],
+      user_id: [''],
     })
   }
 
-  cargarBlog(id: any){
+  cargarPayment(id: any){
 
 
     if (id !== null && id !== undefined) {
@@ -63,6 +64,17 @@ export class PaymentEditComponent implements OnInit {
             id: res.id,
             status: res.status,
             validacion: res.validacion,
+
+            metodo: res.metodo,
+            bank_name: res.bank_name,
+            monto: res.monto,
+            currency_id: res.currency_id,
+            moneda_codigo: res.moneda_codigo,
+            referencia: res.referencia,
+            email: res.email,
+            nombre: res.nombre,
+            txn_id: res.txn_id,
+            user_id: res.user_id,
           });
           this.paymentSeleccionado = res;
           console.log(this.paymentSeleccionado);
@@ -74,7 +86,7 @@ export class PaymentEditComponent implements OnInit {
 
   }
 
-  updateBlog(){
+  updateBlog(){debugger
 
     const {status, user_id,  validacion } = this.paymentForm.value;
 
@@ -83,6 +95,7 @@ export class PaymentEditComponent implements OnInit {
       const data = {
         ...this.paymentForm.value,
         user_id: this.paymentSeleccionado.user_id,
+        payment: this.paymentSeleccionado,
         id: this.paymentSeleccionado.id
       }
       this.paymentsService.update(data).subscribe(

@@ -7,6 +7,8 @@ import { UserService } from '@app/services/user.service';
 import { Location } from '@angular/common';
 import { PaymentService } from '@app/services/payment.service';
 import{Payment} from '@app/models/payment';
+import Swal from 'sweetalert2';
+import { AlertService } from '@app/services/alert.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,7 +27,9 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private paymentService: PaymentService,
     private activatedRoute: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private alertService: AlertService,
+
   ) {
     this.user = userService.user;
   }
@@ -66,6 +70,20 @@ export class UserProfileComponent implements OnInit {
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
+  }
+
+  updateUser(user: User){
+    this.userService.update(user).subscribe(
+      resp =>{ console.log(resp);
+        Swal.fire('Actualizado', `actualizado correctamente`, 'success');
+        this.enviarNotificacion();
+
+      }
+    )
+  }
+
+  enviarNotificacion(): void {
+    this.alertService.success("Mensaje de Pago","Pago verificado, Nuevo Miembro!");
   }
 
 
