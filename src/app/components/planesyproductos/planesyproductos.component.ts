@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Plan } from '@app/models/plan';
 import { User } from '@app/models/user';
 import { PlanesService } from '@app/services/planes.service';
+import { MessageService } from '../../services/message.service';
+
 
 @Component({
   selector: 'app-planesyproductos',
@@ -11,6 +13,8 @@ import { PlanesService } from '@app/services/planes.service';
 })
 export class PlanesyproductosComponent implements OnInit {
 
+  @Input() product: Plan;
+
   planes: Plan;
   user: User;
   error: string;
@@ -18,6 +22,7 @@ export class PlanesyproductosComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private planesService: PlanesService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -33,5 +38,12 @@ export class PlanesyproductosComponent implements OnInit {
       }
     );
   }
+
+  addToCart(): void{
+    console.log('sending...')
+    this.messageService.sendMessage(this.product);
+  }
+
+
 
 }

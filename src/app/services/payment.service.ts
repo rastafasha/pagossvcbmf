@@ -5,6 +5,7 @@ import { environment } from '@environments/environment';
 import { map } from 'rxjs/operators';
 
 import { Payment } from '@app/models/payment';
+
 const baseUrl = environment.apiUrl;
 
 @Injectable({
@@ -12,80 +13,68 @@ const baseUrl = environment.apiUrl;
 })
 export class PaymentService {
 
-  public pagos: Payment;
+  public payments: Payment;
+  public payment: Payment;
 
   info:any = {};
   cargada:boolean = false;
 
   //datos
-  payments = 'assets/dataSimulada/pago.json';
+  // payments = 'assets/dataSimulada/pago.json';
 
   constructor(private http: HttpClient) { }
 
   get token():string{
-    return localStorage.getItem('token') || '';
+    return localStorage.getItem('auth_token');
   }
 
 
   get headers(){
     return{
       headers: {
-        'token': this.token
+        'auth_token': this.token
       }
     }
   }
 
-  /**
-   * @method cargarListaLocal
-   */
-
-  getPagoById(id:number){
-    return this.http.get(`${this.payments}/${id}`).pipe(
-      map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
-    )
+  get status(): 'APPROVED' | 'PENDING' | 'REJECTED' {
+    return this.payment.status!;
   }
-
-  carga_info(){debugger
-    return this.http.get(`${this.payments}`).pipe(
-      map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
-    )
-
+  get validacion(): 'APPROVED' | 'PENDING' | 'REJECTED' {
+    return this.payment.validacion!;
   }
 
 
-  /**
-   * @method cargarListaRemota
-   */
 
-  getAll(): Observable<any> {
+  getAll(){
     const url = `${baseUrl}/pagos`;
     return this.http.get<any>(url, this.headers)
       .pipe(
-        map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
+        map((resp:{ok: boolean, payments: Payment}) => resp.payments)
       )
   }
 
-  get(id): Observable<any> {
-    const url = `${baseUrl}/pagos/${id}`;
+  getPagoById(id): Observable<any> {
+    const url = `${baseUrl}/payment/show/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
-        map((resp:{ok: boolean, pago: Payment}) => resp.pago)
+        map((resp:{ok: boolean, payment: Payment}) => resp.payment)
         );
   }
 
   create(data:Payment): Observable<any> {
-    const url = `${baseUrl}/pagos/store`;
+    const url = `${baseUrl}/payment/store`;
     return this.http.post(url, data, this.headers);
   }
 
-  update(pago:Payment): Observable<any> {
-   const url = `${baseUrl}/pagos/update/${pago.id}`;
-    return this.http.put(url, pago, this.headers);
+  update(payment:Payment): Observable<any> {
+   const url = `${baseUrl}/payment/update/${payment.id}`;
+    return this.http.put(url, payment, this.headers);
   }
 
 
   delete(id): Observable<any> {
-    const url = `${baseUrl}/pagos/${id}`;
+    const url = `${baseUrl}/payment/${id}`;
     return this.http.delete(url, this.headers);
   }
 
@@ -102,15 +91,15 @@ export class PaymentService {
     const url = `${baseUrl}/pagos/pagosbyUser/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
-        map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
+        map((resp:{ok: boolean, payments: Payment}) => resp.payments)
         );
   }
 
    getRecientes(): Observable<any> {
-    const url = `${baseUrl}/pagos/recientes`;
+    const url = `${baseUrl}/payment/recientes`;
     return this.http.get<any>(url)
       .pipe(
-        map((resp:{ok: boolean, pagos: Payment}) => resp.pagos)
+        map((resp:{ok: boolean, payments: Payment}) => resp.payments)
       )
   }
 

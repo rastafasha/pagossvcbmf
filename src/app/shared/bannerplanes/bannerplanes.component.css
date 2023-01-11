@@ -1,0 +1,10 @@
+.planss,
+.producto {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bannerplanes .instruccioness .info {
+    flex-direction: column;
+    align-items: flex-start;
+}

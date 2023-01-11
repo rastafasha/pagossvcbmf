@@ -28,7 +28,6 @@ export class AccountService {
   public usuario: User;
   public user;
 
-  public role: Role;
 
 
 
@@ -40,7 +39,11 @@ export class AccountService {
     }
 
     get token():string{
-      return localStorage.getItem('token') || '';
+      return localStorage.getItem('auth_token') || '';
+    }
+
+    get role(): 'SUPERADMIN' | 'ADMIN' | 'MEMBER' | 'GUEST' {
+      return this.user.role!;
     }
 
 
@@ -48,7 +51,7 @@ export class AccountService {
     get headers(){
       return{
         headers: {
-          'token': this.token
+          'auth_token': this.token
         }
       }
     }
@@ -57,7 +60,7 @@ export class AccountService {
     guardarLocalStorage( user:any, access_token: any){
       // localStorage.setItem('token', JSON.stringify(token));
     localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', JSON.stringify(access_token.original.access_token));
+    localStorage.setItem('auth_token', access_token.original.access_token);
     }
 
 
@@ -85,7 +88,7 @@ export class AccountService {
   crearUsuario(formData: RegisterForm){
     return this.http.post(`${this.serverUrl}/register`, formData)
     .pipe(map(user => {
-      localStorage.setItem('token', JSON.stringify(user));
+      localStorage.setItem('auth_token', JSON.stringify(user));
 
       return user;
     }));
@@ -93,7 +96,7 @@ export class AccountService {
 
   getUsuario(id:number): Observable<any> {
 
-    const url = `${this.serverUrl}/usuarios/${id}`;
+    const url = `${this.serverUrl}/user/show/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, user: User}) => resp.user)
@@ -101,7 +104,7 @@ export class AccountService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
     // this.http.post(`${this.serverUrl}/logout`)
@@ -110,9 +113,10 @@ export class AccountService {
 
    validarToken(): Observable<boolean>{
 
-    return this.http.get(`${this.serverUrl}/permisos`, {
+    // return this.http.get(`${this.serverUrl}/permisos`, {
+    return this.http.post(`${this.serverUrl}/refresh`, {
       headers: {
-        'token': this.token
+        'auth_token': this.token
       }
     }).pipe(
       map((resp: any) => {
@@ -131,22 +135,9 @@ export class AccountService {
               pagos,
           } = resp.user;
 
-        this.user = new User(
-          role_id,
-          username,
-          email,
-          first_name,
-          last_name,
-           is_active,
-           image,
-            created_at,
-            role,
-            member,
-              directorios,
-              pagos,
-             );
+        this.user = new User();
 
-        this.guardarLocalStorage(resp.token, resp.user);
+        this.guardarLocalStorage(resp.access_token, resp.user);
         this.router.navigateByUrl('/dashboard');
         return true;
       }),

@@ -9,7 +9,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
-                        <li class="breadcrumb-item"><a routerLink="/">Panel Administrativo</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/">Panel Admin</a></li>
                         <li class="breadcrumb-item active">{{title}}</li>
                     </ol>
                 </nav>
@@ -17,7 +17,7 @@
             <!-- End Page Title -->
         </div>
         <div class="col-xs-12 col-sm-2">
-            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
@@ -59,12 +59,13 @@
                                 <th scope="col">Monto</th>
                                 <th scope="col">Moneda</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Validación</th>
                                 <th scope="col">Fecha | Hora</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let pago of pagos |  paginate: { itemsPerPage: count, currentPage: p }">
+                            <tr *ngFor="let pago of payments |  paginate: { itemsPerPage: count, currentPage: p }">
                                 <th scope="row"><a [routerLink]="['/dashboard/payment-detail', pago.id]">{{pago.referencia}}</a></th>
                                 <th><a [routerLink]="['/dashboard/user/', pago.user_id]">{{pago.user_id}}</a></th>
                                 <td>{{pago.metodo}}</td>
@@ -72,16 +73,22 @@
                                 <td>{{pago.moneda_codigo}}</td>
 
                                 <td>
-                                    <!-- <span class="badge badge-primary " *ngIf="pago.status == 'Pendiente'">{{pago.status}}</span>
-                                    <span class="badge badge-success " *ngIf="pago.status == 'Aprobado'">{{pago.status}}</span>
-                                    <span class="badge badge-danger " *ngIf="pago.status == 'Rechazado'">{{pago.status}}</span> -->
-                                    <span class="badge bg-success">{{pago.status}}</span>
+                                    <span class="badge bg-success" *ngIf="pago.status === 'APPROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="pago.status === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="pago.status === 'REJECTED'">Rechazado</span>
+                                    <!-- <span class="badge bg-success">{{pago.status}}</span> -->
+                                </td>
+                                <td>
+                                    <span class="badge bg-success" *ngIf="pago.validacion === 'APPROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="pago.validacion === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="pago.validacion === 'REJECTED'">Rechazado</span>
+                                    <!-- <span class="badge bg-success">{{pago.status}}</span> -->
                                 </td>
                                 <td>{{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
                                 <td>
                                     <div class="form-check form-switch" title="Verificar">
                                         <!-- <a data-toggle="modal" [attr.data-target]="'#' + pago.id"> -->
-                                        <a (click)="openModal(pago.id, $e)">
+                                        <a [routerLink]="['/dashboard/payment/edit/', pago.id]">
                                             <button class="btn btn-success">Editar</button>
                                         </a>
 

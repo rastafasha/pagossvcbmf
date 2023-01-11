@@ -58,7 +58,8 @@ export class DirectorioEditComponent implements OnInit {
   /**
    * Propiedad del codigoQR
    */
-  directory: Directorio;
+  public directory: Directorio;
+  directories: Directorio;
   id: string | null;
 
   vCardInfo:string;
@@ -69,6 +70,8 @@ export class DirectorioEditComponent implements OnInit {
   vcard: string;
 
   public user:User;
+
+  image:string;
 
 
   constructor(
@@ -89,6 +92,7 @@ this.user = this.userService.user;
     // this.iniciarFormulario();
     window.scrollTo(0, 0);
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormulario(id));
+    // this.openToast();
 
 
   }
@@ -120,10 +124,10 @@ this.user = this.userService.user;
 
 
 
-  iniciarFormulario(id:number){debugger
+  iniciarFormulario(id:number){
     // const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      let id = this.directory.id;
+    if (!id == null || !id == undefined || id) {
+      // let id = this.directory.id;
       this.pageTitle = 'Editar Directorio';
       this.directorioService.getDirectorio(id).subscribe(
         res => {
@@ -151,9 +155,12 @@ this.user = this.userService.user;
             twitter: res.twitter,
             linkedin: res.linkedin,
             vcard: this.vCardInfo,
-            user_id: this.user.id,
+            user_id: res.user_id,
+            status: res.status
           });
           this.imagePath = res.image;
+          this.directory = res;
+
         }
       );
     } else {
@@ -186,6 +193,7 @@ this.user = this.userService.user;
       vcard: [this.vCardInfo],
       image: [''],
       user_id: [''],
+      status: [''],
     });
 
 
@@ -194,7 +202,10 @@ this.user = this.userService.user;
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.directorioForm.get('image').setValue(file);
+      this.directorioForm.get('image').setValue(file.name);
+      // this.directorioForm.get('image').setValue(file);
+
+      this.image = file.name;
     }
   }
 
@@ -252,6 +263,8 @@ this.user = this.userService.user;
     formData.append('instagram', this.directorioForm.get('instagram').value);
     formData.append('twitter', this.directorioForm.get('twitter').value);
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
+    formData.append('user_id', this.directorioForm.get('user_id').value);
+    formData.append('status', this.directorioForm.get('status').value);
     formData.append('image', this.directorioForm.get('image').value);
     formData.append('vcard', this.vCardInfo);
 
@@ -260,7 +273,7 @@ this.user = this.userService.user;
     if (id) {
       const data = {
         ...this.directorioForm.value,
-        user_id: this.user.id,
+        vcard: this.vCardInfo,
         id: this.directory.id
       }
       this.directorioService.updateDirectorio(data).subscribe(

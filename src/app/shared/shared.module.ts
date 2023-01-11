@@ -10,6 +10,9 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import {SearchComponent} from './search/search.component';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './modal/modal.component';
+import { MenuiconosComponent } from './menuiconos/menuiconos.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BannerplanesComponent } from './bannerplanes/bannerplanes.component';
 
 
 @NgModule({
@@ -19,7 +22,9 @@ import { ModalComponent } from './modal/modal.component';
     HeaderComponent,
     BreadcrumbsComponent,
     SearchComponent,
-    ModalComponent
+    ModalComponent,
+    MenuiconosComponent,
+    BannerplanesComponent
   ],
   exports: [
     AsideComponent,
@@ -27,7 +32,10 @@ import { ModalComponent } from './modal/modal.component';
     HeaderComponent,
     BreadcrumbsComponent,
     SearchComponent,
-    ModalComponent
+    ModalComponent,
+    MenuiconosComponent,
+    BannerplanesComponent
+
   ],
   imports: [
     CommonModule,
@@ -35,6 +43,7 @@ import { ModalComponent } from './modal/modal.component';
     RouterModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule
   ]
 })
 export class SharedModule { }

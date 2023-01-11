@@ -5,12 +5,13 @@
 
 /*Author: Malcolm cordova @malcolmcordova mercadocreativo@gmail.com www.malcolmcordova.com*/
 
-@import url("loading.css");
-@import url("style.css");
-@import url("fonts.css");
-@import url("animate.css");
-@import url("darkmode.css");
-@import url("dashboard.css");
+@import url("./loading.css");
+@import url("./style.css");
+@import url("./fonts.css");
+@import url("./animate.css");
+@import url("./darkmode.css");
+@import url("./dashboard.css");
+@import url("./cart.css");
 .cursor {
     cursor: pointer;
 }
@@ -29,6 +30,7 @@
 
 :root {
     --azul: #353888;
+    --azulclaro: #4a77e2;
     --morado: #774477;
     --black: #202023;
     --white: #fff;

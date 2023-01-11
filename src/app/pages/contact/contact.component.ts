@@ -4,6 +4,7 @@ import { Contact } from '../../models/contact';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { UserService } from '@app/services/user.service';
 
 @Component({
   selector: 'app-contact',
@@ -19,11 +20,20 @@ export class ContactComponent implements OnInit {
     private router: Router,
     private cmspageService: CmspageService,
     private fb: FormBuilder,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.closeMenu();
     window.scrollTo(0,0);
     this.iniciarFormulario();
+  }
+  closeMenu(){
+    var menuLateral = document.getElementsByClassName("sidebar");
+      for (var i = 0; i<menuLateral.length; i++) {
+         menuLateral[i].classList.remove("active");
+
+      }
   }
 
   iniciarFormulario(){

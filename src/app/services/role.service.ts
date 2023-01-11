@@ -21,14 +21,14 @@ export class RoleService {
   constructor(private http: HttpClient) { }
 
   get token():string{
-    return localStorage.getItem('token') || '';
+    return localStorage.getItem('auth_token') || '';
   }
 
 
   get headers(){
     return{
       headers: {
-        'token': this.token
+        'auth_token': this.token
       }
     }
   }

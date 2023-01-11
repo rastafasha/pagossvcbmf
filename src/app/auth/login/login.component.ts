@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { UserService } from '@app/services/user.service';
 import { User } from '@app/models/user';
+import { TokenService } from '@app/services/token.service';
 
 declare const gapi: any;
 
@@ -25,18 +26,34 @@ export class LoginComponent implements OnInit {
   loginError: string;
   error = null;
 
-  public formSumitted = false;
   public auth2: any;
 
   user: User;
 
+  // Registro
+  public formSumitted = false;
+  public registerForm = this.fb.group({
+    username: ['', Validators.required],
+    email: [ '', [Validators.required] ],
+    password: ['', Validators.required],
+    password2: ['', Validators.required],
+    role: ['GUEST'],
+    // terminos: [false, Validators.required],
 
+  }, {
+    validators: this.passwordsIguales('password', 'password2')
+
+  });
+  // Registro
+
+  errors:any = null;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private accountService: AccountService,
     private usuarioService: UserService,
+    private token: TokenService,
   ) {
 
   }
@@ -61,12 +78,19 @@ login(){
         localStorage.removeItem('email');
       }
       this.router.navigateByUrl('/dashboard');
-    },(err) => {
-      Swal.fire('Error', err.error.msg, 'error');
+      this.responseHandler(resp);
+    },(error) => {
+      // Swal.fire('Error', error.error.msg, 'error');
+      this.errors = error.error;
     }
-  )
+    )
   this.rememberMe();
-    console.log(this.user)
+    // console.log(this.user)
+}
+
+// Handle response
+responseHandler(data:any) {
+  this.token.handleData(data.access_token);
 }
 
 amIRemembered() {
@@ -79,7 +103,7 @@ retrieveMe() {
     this.email.setValue(localStorage.getItem('email'));
   } else {
     this.email.setValue('');
-    this.remember.setValue(false);
+    this.remember.setValue(true);
   }
 }
 
@@ -92,6 +116,69 @@ rememberMe() {
 
   }
 }
+
+// Registro
+crearUsuario(){debugger
+  this.formSumitted = true;
+  // console.log(this.registerForm.value);
+
+  if(this.registerForm.invalid){
+    return;
+  }
+
+  //realizar el posteo del usuario
+  this.accountService.crearUsuario(this.registerForm.value).subscribe(
+    resp =>{
+      // console.log(resp);
+      // this.router.navigateByUrl('/das');
+      Swal.fire('Registrado!', `Ya puedes ingresar`, 'success');
+      this.ngOnInit();
+    },(error) => {
+      // Swal.fire('Error', err.error.msg, 'error');
+      this.errors = error.error;
+    }
+  );
+
+}
+
+campoNoValido(campo: string): boolean {
+  if(this.registerForm.get(campo).invalid && this.formSumitted){
+    return true;
+  }else{
+    return false;
+  }
+
+
+}
+
+aceptaTerminos(){
+  return !this.registerForm.get('terminos').value && this.formSumitted;
+}
+
+passwordNoValido(){
+  const pass1 = this.registerForm.get('password').value;
+  const pass2 = this.registerForm.get('password2').value;
+
+  if((pass1 !== pass2) && this.formSumitted){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+passwordsIguales(pass1Name: string, pass2Name: string){
+  return (formGroup: FormGroup) =>{
+    const pass1Control = formGroup.get(pass1Name);
+    const pass2Control = formGroup.get(pass2Name);
+
+    if(pass1Control.value === pass2Control.value){
+      pass2Control.setErrors(null)
+    }else{
+      pass2Control.setErrors({noEsIgual: true});
+    }
+  }
+}
+// Registro
 
 
 

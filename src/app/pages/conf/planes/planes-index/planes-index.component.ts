@@ -49,8 +49,8 @@ export class PlanesIndexComponent implements OnInit {
     );
   }
 
-  eliminarPlan(id:number){
-    this.planesService.deletePlan(id).subscribe(
+  eliminarPlan(plan:Plan){
+    this.planesService.deletePlan(plan).subscribe(
       response =>{
         this.getPlanes();
       },

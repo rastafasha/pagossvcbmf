@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Payment } from '@app/models/payment';
 import { Observable, Subject } from 'rxjs';
-import { ProductPaypal } from '../models/productPaypal';
+import {Plan} from '@app/models/plan';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +11,8 @@ export class MessageService {
 
   constructor() { }
 
-  sendMessage(pagoS: Payment):void{
-    this.message.next(pagoS);
+  sendMessage(product: Plan):void{
+    this.message.next(product);
   }
 
   getMessage(): Observable<any>{

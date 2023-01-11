@@ -6,31 +6,25 @@ import { CartItemModel } from '../models/cart-item-model';
 })
 export class StorageService {
 
-  private linktTheme = document.querySelector('.dark');// se comunica el id pulsado
+  // private linktTheme = document.querySelector('.dark');// se comunica el id pulsado
 
 
-  constructor() {
-
-   }
-
-
-
-
+  constructor() {}
 
   existCart():boolean{
-    return localStorage.getItem('pago') != null;
+    return localStorage.getItem('cart') != null;
   }
 
   setCart(cart: CartItemModel[]): void{
-    localStorage.setItem('pago', JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   getCart(): CartItemModel[]{
-    return JSON.parse(localStorage.getItem('pago'));
+    return JSON.parse(localStorage.getItem('cart'));
 
   }
   clear():void{
-    localStorage.removeItem('pago');
+    localStorage.removeItem('cart');
   }
 
 

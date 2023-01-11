@@ -1,0 +1,26 @@
+.planss {
+    background-image: url('/assets/img/pexels-andrea-piacquadio-920382.jpeg');
+}
+
+.producto {
+    background-image: url('/assets/img/pexels-andrea-piacquadio-842548.jpeg');
+}
+
+.planss,
+.producto {
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: left;
+}
+
+
+/* .planespage {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+} */
+
+.planespage .col-sm-6 {
+    float: left;
+    padding: 10px;
+}

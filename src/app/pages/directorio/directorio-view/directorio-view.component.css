@@ -1,0 +1,21 @@
+.elemendirec .fr-view {
+    display: flex;
+    flex-direction: row;
+}
+
+.elemendirec .fr-view .redess {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.elemendirec .fr-view .redess p {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.elemendirec .fr-view i {
+    margin-right: 5px;
+}

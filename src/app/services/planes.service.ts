@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { environment } from '@environments/environment';
 import { map } from 'rxjs/operators';
 
 import { Plan } from '../models/plan';
@@ -17,19 +18,24 @@ export class PlanesService {
   info:any = {};
   cargada:boolean = false;
 
+
   constructor(private http: HttpClient) { }
 
   get token():string{
-    return localStorage.getItem('token') || '';
+    return localStorage.getItem('auth_token') || '';
   }
 
 
   get headers(){
     return{
       headers: {
-        'token': this.token
+        'auth_token': this.token
       }
     }
+  }
+
+  get status(): 'APPROVED' | 'PENDING' | 'REJECTED' {
+    return this.plan.status!;
   }
 
   public carga_info(){
@@ -44,7 +50,9 @@ export class PlanesService {
 
 
 
-  getPlanes() {
+
+
+  getPlanes()  {
     const url = `${baseUrl}/planes`;
     return this.http.get<any>(url, this.headers)
       .pipe(
@@ -52,8 +60,8 @@ export class PlanesService {
       )
   }
 
-  getPlan(plan: any) {
-    const url = `${baseUrl}/plan/show/${plan}`;
+  getPlan(id: number) {
+    const url = `${baseUrl}/plan/show/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, plan: Plan}) => resp.plan)
@@ -66,13 +74,13 @@ export class PlanesService {
     return this.http.post(url, plan, this.headers);
   }
 
-  updatePlan(plan:any) {
-    const url = `${baseUrl}/planes/update/${plan}`;
-    return this.http.put(url, plan, this.headers);
-  }
+  updatePlan(plan:Plan): Observable<any> {
+    const url = `${baseUrl}/plan/update/${plan.id}`;
+     return this.http.put(url, plan, this.headers);
+   }
 
-  deletePlan(plan: number) {
-    const url = `${baseUrl}/planes/destroy/${plan}`;
+  deletePlan(plan: Plan) {
+    const url = `${baseUrl}/plan/destroy/${plan}`;
     return this.http.delete(url, this.headers);
   }
 

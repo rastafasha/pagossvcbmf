@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Role } from '@app/models/role';
 import { User } from '@app/models/user';
-import { RoleService } from '@app/services/role.service';
 import { UserService } from '@app/services/user.service';
 
 @Component({
@@ -11,17 +8,18 @@ import { UserService } from '@app/services/user.service';
   styleUrls: ['./dashboard-user.component.css']
 })
 export class DashboardUserComponent implements OnInit {
-  title = 'Panel Usuario';
+  title = 'Admin Usuario';
   public user: User;
+  public userProfile: User;
 
   error: string;
-  role: Role;
+
+  id:number;
+
   constructor(
-    private roleService: RoleService,
-    private activatedRoute: ActivatedRoute,
     private userService: UserService,
   ) {
-    this.user = this.userService.user;
+    this.user = userService.user;
   }
 
   ngOnInit(): void {
@@ -41,22 +39,24 @@ export class DashboardUserComponent implements OnInit {
   getUser(): void {
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    // return this.userService.getUserLocalStorage();
     console.log(this.user);
     console.log(this.user.id);
-    this.getRolbyId(this.user.id);
+    this.id = this.user.id;
+    this.getUserRemoto(this.id);
 
   }
 
-  getRolbyId(id:number): void {
-
-    this.roleService.getRolbyId(id).subscribe(
+  getUserRemoto(id:number){
+    this.userService.getUserById(+id).subscribe(
       res =>{
-        this.role = res;
+        this.userProfile = res[0];
         error => this.error = error
-        console.log(this.role)
+        console.log(this.userProfile);
       }
     );
+
   }
+
+
 
 }

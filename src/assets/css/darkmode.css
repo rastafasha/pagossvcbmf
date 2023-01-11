@@ -70,6 +70,10 @@
     background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
+.dark .instruccioness .info {
+    background: linear-gradient(to right, var(--black), var(--black), transparent);
+}
+
 .dark .header,
 .dark .sidebar {
     background: var(--black);
@@ -131,4 +135,47 @@ body .dark {
 .dark .accordion-body {
     color: var(--white);
     background-color: var(--black);
+}
+
+.dark .loginregister {
+    background: var(--black) !important;
+}
+
+.dark .loginregister .main {
+    background: var(--black) !important;
+    border: 1px solid var(--white) !important;
+}
+
+.dark .swal2-popup.swal2-toast {
+    background: var(--black);
+}
+
+.dark .profile .profile-edit label {
+    font-weight: 600;
+    color: var(--white);
+}
+
+
+/* cart */
+
+.dark .header__cart img.ligth {
+    display: none;
+}
+
+.dark .header__cart img.darker {
+    display: block;
+}
+
+.dark .header__cart--notification {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.dark .cart-modal--active {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.dark .cart-modal__price span {
+    color: var(--white);
 }

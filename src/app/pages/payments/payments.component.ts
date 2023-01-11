@@ -16,7 +16,7 @@ export class PaymentsComponent implements OnInit {
 
   title = "Pagos"
 
-  pagos: any;
+  payments: Payment;
   error:string;
   p: number = 1;
   count: number = 8;
@@ -36,28 +36,37 @@ export class PaymentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.closeMenu();
     this.getPagos();
     // this.getPagos_list();
   }
 
-  //carga usos desde la app
-  getPagos_list(){
-    this.paymentService.carga_info().subscribe(
-      res=>{
-        this.pagos = res;
-        console.log(res)
+  closeMenu(){
+    var menuLateral = document.getElementsByClassName("sidebar");
+      for (var i = 0; i<menuLateral.length; i++) {
+         menuLateral[i].classList.remove("active");
+
       }
-    )
   }
+
+  //carga usos desde la app
+  // getPagos_list(){
+  //   this.paymentService.carga_info().subscribe(
+  //     res=>{
+  //       this.pagos = res;
+  //       console.log(res)
+  //     }
+  //   )
+  // }
 
 
 
   getPagos(): void {
     this.paymentService.getAll().subscribe(
       res =>{
-        this.pagos = res;
+        this.payments = res;
         error => this.error = error
-        console.log(this.pagos);
+        console.log(this.payments);
       }
     );
   }
@@ -65,15 +74,6 @@ export class PaymentsComponent implements OnInit {
     this.location.back(); // <-- go back to previous location on cancel
   }
 
-  openModal(id, event){
-    var verPaypalpay = document.getElementsByClassName("vibiblepayp");
-      for (var i = 0; i<verPaypalpay.length; i++) {
-        verPaypalpay[i].classList.add("vibiblepaypblok");
-
-      }
-
-      this.paymentService.get(id).subscribe
-  }
 
 
 }

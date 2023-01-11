@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 //componentes
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { PaymentDetailsComponent } from './payments/payment-details/payment-details.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
@@ -16,15 +16,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 //helpers
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from '@app/helpers/jwt.interceptor';
+// import { JwtInterceptor } from '@app/helpers/jwt.interceptor';
+
 import { UserHistorialpagosComponent } from './user-historialpagos/user-historialpagos.component';
 import { HelpComponent } from './help/help.component';
 import { ContactComponent } from './contact/contact.component';
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
-import { UserPagarComponent } from './user-pagar/user-pagar.component';
+// import { UserPagarComponent } from './user-pagar/user-pagar.component';
 
 // Import Angular plugin.
+import { NgxPayPalModule } from 'ngx-paypal';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 //Qr
 import { QRCodeModule } from 'angular2-qrcode';
@@ -39,13 +41,19 @@ import { PipesModule } from '@app/pipes/pipes.module';
 import { ConfModule } from './conf/conf.module';
 import { DirectorioEditComponent } from './directorio/directorio-edit/directorio-edit.component';
 import { DirectorioViewComponent } from './directorio/directorio-view/directorio-view.component';
+import { ProductosPageComponent } from './productos/productos-page/productos-page.component';
+import { PlanesPageComponent } from './planes/planes-page/planes-page.component';
+import { ProductoComponent } from './productos/producto/producto.component';
+import { PlanComponent } from './planes/plan/plan.component';
+import { PaymentEditComponent } from './payments/payment-edit/payment-edit.component';
+import { ReportarPagoComponent } from './payments/reportar-pago/reportar-pago.component';
+import { AuthInterceptor } from '@app/services/auth.interceptor';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    PaymentDetailsComponent,
-    PaymentsComponent,
+
     ProfileComponent,
     UserDetailsComponent,
     UsersComponent,
@@ -54,12 +62,21 @@ import { DirectorioViewComponent } from './directorio/directorio-view/directorio
     ContactComponent,
     DashboardUserComponent,
     DashboardAdminComponent,
-    UserPagarComponent,
     UserProfileComponent,
     PagesComponent,
     DirectorioIndexComponent,
     DirectorioEditComponent,
-    DirectorioViewComponent
+    DirectorioViewComponent,
+    PlanesPageComponent,
+    ProductosPageComponent,
+    ProductoComponent,
+    PlanComponent,
+    PaymentDetailsComponent,
+    PaymentsComponent,
+    PaymentEditComponent,
+    ReportarPagoComponent
+
+
 
   ],
   exports: [
@@ -74,11 +91,15 @@ import { DirectorioViewComponent } from './directorio/directorio-view/directorio
     ContactComponent,
     DashboardUserComponent,
     DashboardAdminComponent,
-    UserPagarComponent,
     UserProfileComponent,
     DirectorioIndexComponent,
     DirectorioEditComponent,
-    DirectorioViewComponent
+    DirectorioViewComponent,
+    PlanesPageComponent,
+    ProductosPageComponent,
+    ProductoComponent,
+    PlanComponent,
+    ReportarPagoComponent
   ],
   imports: [
     CommonModule,
@@ -91,8 +112,16 @@ import { DirectorioViewComponent } from './directorio/directorio-view/directorio
     NgxPaginationModule,
     QRCodeModule,
     PipesModule,
-    ConfModule
+    ConfModule,
+    NgxPayPalModule,
 
-  ]
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
 })
 export class PagesModule { }

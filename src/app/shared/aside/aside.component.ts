@@ -16,8 +16,9 @@ export class AsideComponent implements OnInit {
   public user: User;
 
   error: string;
-  role: Role;
+  public role: Role;
   id: number;
+  roleid:number;
 
   constructor(
     private userService: UserService,
@@ -25,33 +26,26 @@ export class AsideComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private accountService: AccountService,
   ) {
-    this.user = this.userService.user;
+    this.user = userService.user;
    }
 
   ngOnInit(): void {
     this.getUser();
-    // this.activatedRoute.params.subscribe( ({id}) => this.getRolbyId(id));
   }
-
   getUser(): void {
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    // return this.userService.getUserLocalStorage();
-    // console.log(this.user);
-    // console.log(this.user.id);
-    this.getRolbyId(this.user.id);
-
+    this.id = this.user.id;
+    // this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
   }
 
-  getRolbyId(id:number): void {
-
-    this.roleService.getRolbyId(id).subscribe(
-      res =>{
-        this.role = res;
-        error => this.error = error
-      }
-    );
+  getUserProfile(id:number){
+    this.userService.getUserById(id).subscribe((data: any) => {
+      this.user = data;
+      console.log(this.user)
+    });
   }
+
 
   logout(): void {
     this.accountService.logout();

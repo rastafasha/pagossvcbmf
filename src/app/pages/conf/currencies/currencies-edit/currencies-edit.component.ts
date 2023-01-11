@@ -10,6 +10,8 @@ import { User } from 'src/app/models/user';
 import { UserService } from '@app/services/user.service';
 import { Currencies } from '@app/models/currencies';
 import { CurrenciesService } from '@app/services/currencies.service';
+import { AlertService } from '@app/services/alert.service';
+
 
 @Component({
   selector: 'app-currencies-edit',
@@ -28,7 +30,7 @@ export class CurrenciesEditComponent implements OnInit {
 
   idcurrency:any;
 
-  currencySeleccionado: Currencies;
+  public currencySeleccionado: Currencies;
 
   constructor(
     private fb: FormBuilder,
@@ -37,14 +39,25 @@ export class CurrenciesEditComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private currenciesService: CurrenciesService,
+    private alertService: AlertService,
   ) {
     this.usuario = usuarioService.user;
     const base_url = environment.apiUrl;
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( ({id}) => this.cargarBlog(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.cargarCurrency(id));
     this.validarFormulario();
+    window.scrollTo(0,0);
+
+    if(this.currencySeleccionado){
+      //actualizar
+      this.title = 'Creando Moneda';
+
+    }else{
+      //crear
+      this.title = 'Edit Moneda';
+    }
   }
 
   validarFormulario(){
@@ -53,7 +66,7 @@ export class CurrenciesEditComponent implements OnInit {
     })
   }
 
-  cargarBlog(id: any){
+  cargarCurrency(id: number){
 
 
     if (id !== null && id !== undefined) {
@@ -78,7 +91,7 @@ export class CurrenciesEditComponent implements OnInit {
 
     const {name } = this.currencyForm.value;
 
-    if(this.currencySeleccionado){
+    if(this.currencySeleccionado){debugger
       //actualizar
       const data = {
         ...this.currencyForm.value,
@@ -87,6 +100,7 @@ export class CurrenciesEditComponent implements OnInit {
       this.currenciesService.updateCurrency(data).subscribe(
         resp =>{
           Swal.fire('Actualizado', `${name}  actualizado correctamente`, 'success');
+          this.router.navigateByUrl(`/dashboard/currencies`);
           console.log(this.currencySeleccionado);
         });
 
@@ -96,12 +110,15 @@ export class CurrenciesEditComponent implements OnInit {
       .subscribe( (resp: any) =>{
         Swal.fire('Creado', `${name} creado correctamente`, 'success');
         this.router.navigateByUrl(`/dashboard/currencies`);
+        this.enviarNotificacion();
       })
     }
 
   }
 
-
+  enviarNotificacion(): void {
+    this.alertService.success("Mensaje de Monedas","Se ha creado una nueva moneda!");
+  }
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel

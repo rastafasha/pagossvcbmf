@@ -10,7 +10,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
                         <li class="breadcrumb-item"><a routerLink="/">Panel Admin</a></li>
-                        <li class="breadcrumb-item"><a routerLink="/configuraciones">Configuraciones</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/dashboard/configuraciones">Configuraciones</a></li>
                         <li class="breadcrumb-item active">{{title}}</li>
                     </ol>
                 </nav>
@@ -18,7 +18,7 @@
             <!-- End Page Title -->
         </div>
         <div class="col-xs-12 col-sm-2 push-right">
-            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
@@ -76,7 +76,12 @@
                                 </td>
                                 <td>{{plan.name}}</td>
                                 <td>{{plan.price|currency}} </td>
-                                <td>{{plan.status }} </td>
+                                <td>
+                                    <!-- {{plan.status }} -->
+                                    <span class="badge bg-success" *ngIf="plan.status === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-primary" *ngIf="plan.status === 'PENDING'">Pendiente</span>
+                                    <span class="badge bg-danger" *ngIf="plan.status === 'REJECTED'">Rechazado</span>
+                                </td>
 
                                 <!-- <td><span [ngClass]="plan.status == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{plan.status == 1? 'Activo':'Offline'}}</span></td> -->
                                 <td>{{plan.created_at | date:'MMM d, y, h:mm:ss a'}} </td>

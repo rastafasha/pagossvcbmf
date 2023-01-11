@@ -7,8 +7,8 @@ import { StorageService } from '../../services/storage.service';
 import { environment } from '../../../environments/environment';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { ModalComponent } from '../modal/modal.component';
-import { ProductPaypal } from '@app/models/productPaypal';
-import { Payment } from '@app/models/payment';
+
+import { Plan } from '@app/models/plan';
 // import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
@@ -24,9 +24,9 @@ export class CartComponent implements OnInit {
   cartItems=[];
   total= 0;
   value: string;
-  id:string;
+  id:number;
 
-
+  product:Plan;
 
   public payPalConfig ? : IPayPalConfig;
 
@@ -114,7 +114,7 @@ export class CartComponent implements OnInit {
 }
 
   getItem():void{
-    this.messageService.getMessage().subscribe((product:Payment)=>{
+    this.messageService.getMessage().subscribe((product:Plan)=>{
       let exists = false;
       this.cartItems.forEach(item =>{
         if(item.productId === product.id){

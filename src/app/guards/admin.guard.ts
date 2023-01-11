@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { AccountService } from '@app/services/account.service';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { UserService } from '../services/user.service';
 export class AdminGuard implements CanActivate {
 
   constructor(
-    private userService: AccountService,
+    private accountService: AccountService,
     private router: Router
   ){}
 
@@ -18,7 +17,7 @@ export class AdminGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean  {
 
-      if(this.userService.role) {
+      if(this.accountService.role === 'SUPERADMIN') {
         return true;
       }else {
         this.router.navigateByUrl('/dashboard');

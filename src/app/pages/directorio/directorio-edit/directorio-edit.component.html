@@ -2,22 +2,23 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="col-xs-12 col-sm-9">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{pageTitle}}</h1>
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
-                        <li class="breadcrumb-item"><a routerLink="/">Panel User</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/">Panel Admin</a></li>
                         <li class="breadcrumb-item active">{{pageTitle}}</li>
                     </ol>
                 </nav>
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2 push-right">
-            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        <div class="col-xs-12 col-sm-3 push-right">
+            <button class="btn btn-outline-success pull-right" (click)="guardarDirectorio()" [disabled]="!directorioForm.valid">Guardar</button>
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
@@ -29,156 +30,179 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material " (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm">
-                            <div class="row formuEdit">
-                                <div class=" form-group col-xs-12 col-sm-9 m-t-10">
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label>Nombres <span class="required">*</span></label>
-                                            <input type="text" formControlName="nombre" class="form-control" required>
-                                            <!-- <div *ngIf="directorioForm.controls.nombre.errors?.required && nombre.invalid && (nombre.dirty || nombre.touched) && mostrarMensajesVU" class="error" severity="danger" text="{{ campoObligatorio }}"></div> -->
-                                            <!-- <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error">
-                                    <div *ngIf="nombre.errors?.required">
-                                        Campo requerido.
+                        <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm">
+                            <div class="row flex-nowrap">
+
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <div class="form-group" style="margin-bottom: 25px;">
+                                        <label for="exampleInputuname">Status<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
+                                            <select name="" id="input" class="form-control" formControlName="status" required="required">
+                                          <option value="">Seleccione</option>
+                                          <option value="PUBLISHED">Publicado</option>
+                                          <option value="PENDING">Pendiente</option>
+                                          <option value="REJECTED">Rechazado</option>
+                                        </select>
+                                        </div>
+
+
+
                                     </div>
-                                </div> -->
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Apellidos <span class="required">*</span></label>
-                                            <input type="text" formControlName="surname" class="form-control" required>
-                                            <!-- <div *ngIf="surname.invalid && (surname.dirty || surname.touched)" class="error">
-                                    <div *ngIf="surname.errors">
-                                        Campo requerido.
-                                    </div>
-                                </div> -->
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label>Especialidad <span class="required">*</span></label>
-                                            <input type="text" formControlName="especialidad" class="form-control" required>
-                                            <!-- <div *ngIf="especialidad.invalid && (especialidad.dirty || especialidad.touched)" class="error">
-                                    <div *ngIf="especialidad.errors">
-                                        Campo requerido.
-                                    </div>
-                                </div> -->
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Universidad <span class="required">*</span></label>
-                                            <input type="text" formControlName="universidad" class="form-control" required>
-
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Año de Graduación </label>
-                                            <input type="text" formControlName="ano" class="form-control">
-
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Sitio Web </label>
-                                            <input type="text" formControlName="website" class="form-control">
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label>Email<span class="required">*</span></label>
-                                            <input type="text" formControlName="email" class="form-control" required>
-
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label>Estado</label>
-                                            <input type="text" formControlName="estado" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Ciudad</label>
-                                            <input type="text" formControlName="ciudad" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Teléfonos</label>
-                                            <input type="text" formControlName="telefonos" class="form-control">
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label>Teléfonos Principal  <span class="required">*</span></label>
-                                            <input type="text" formControlName="telprincipal" class="form-control" required>
-
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Teléfonos Adicional(Opcional)</label>
-                                            <input type="text" formControlName="tel1" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Teléfonos Móvil  </label>
-                                            <input type="text" formControlName="telmovil" value="telmovil" class="form-control">
-
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Teléfonos Home(Opcional)</label>
-                                            <input type="text" formControlName="telhome" value="telhome" class="form-control">
-                                        </div>
-                                        <div class="clear"></div>
-                                        <div class="form-group col-md-12">
-                                            <label>Dirección <span class="required">*</span></label>
-                                            <div class="form-group col-md-12">
-                                                <!-- <ckeditor [editor]="Editor" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion" value="direccion" rows="5" class="form-control" required></ckeditor> -->
-                                                <textarea formControlName="direccion" value="direccion" rows="5" rows="10" class="form-control" required></textarea>
+                                    <div class="col-sm-6">
+                                        <div class="form-group form-row">
+                                            <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
+                                            <div class="col-xs-12">
+                                                <input type="file" id="image" (change)="onSelectedFile($event)" />
+                                                <div [innerHTML]="uploadError" class="error"></div>
+                                                <div *ngIf="imagePath">
+                                                    <br />
+                                                    <img [src]="imagePath" width="50%" value="photo" class="shadow">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-
-                                            <label>Dirección Adicional (Opcional)</label>
-                                            <!-- <ckeditor [editor]="Editor1" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion1" value="direccion1" rows="5" class="form-control"></ckeditor> -->
-                                            <textarea formControlName="direccion1" value="direccion1" rows="5" rows="10" class="form-control"></textarea>
-                                        </div>
                                     </div>
-
-
-                                </div>
-
-                                <!----//-->
-                                <div class="col-xs-12 col-sm-3 m-t-10">
-                                    <div class="form-group">
-                                        <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
+                                    <div class="col-sm-6">
                                         <div class="col-xs-12">
-                                            <input type="file" id="image" (change)="onSelectedFile($event)" />
-                                            <div [innerHTML]="uploadError" class="error"></div>
-                                            <div *ngIf="imagePath">
-                                                <br />
-                                                <img [src]="imagePath" width="50%" value="photo" class="shadow">
-                                            </div>
+                                            <h4>Codigo Vcard QR</h4>
+                                            <br>
+                                            <qr-code *ngIf="display" class="code" id="box" [value]="vCardInfo" [size]="200" style=>
+                                                <img class="yellow">
+                                            </qr-code>
+                                            <div class="clear"></div>
+                                            <!-- <a class="btn btn-primary" (click)="generateQRCode()">Generar QR</a> -->
+                                            <a class="btn btn-primary" *ngIf="display" value="vCardInfo" (click)="hideQRCode()">Hide QR</a>
+                                            <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}">Download Image</a>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div>
-                                            <h2>Redes Sociales</h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class=" col-md-6">
+                                        <label>Nombres <span class="required">*</span></label>
+                                        <input type="text" formControlName="nombre" value="nombre" class="form-control" required>
+
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label>Apellidos <span class="required">*</span></label>
+                                        <input type="text" formControlName="surname" value="surname" class="form-control" required>
+
+                                    </div>
+
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Especialidad <span class="required">*</span></label>
+                                        <input type="text" formControlName="especialidad" value="especialidad" class="form-control" required>
+
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Universidad <span class="required">*</span></label>
+                                        <input type="text" formControlName="universidad" class="form-control" required>
+
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Año de Graduación </label>
+                                        <input type="text" formControlName="ano" class="form-control">
+
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Sitio Web </label>
+                                        <input type="text" formControlName="website" value="website" class="form-control">
+                                    </div>
+
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Email<span class="required">*</span></label>
+                                        <input type="text" formControlName="email" value="email" class="form-control" required>
+
+                                    </div>
+
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Estado</label>
+                                        <input type="text" formControlName="estado" class="form-control">
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Ciudad</label>
+                                        <input type="text" formControlName="ciudad" class="form-control">
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Teléfonos</label>
+                                        <input type="text" formControlName="telefonos" class="form-control">
+                                    </div>
+
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Teléfonos Principal  <span class="required">*</span></label>
+                                        <input type="text" formControlName="telprincipal" value="telprincipal" class="form-control" required>
+
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Teléfonos Adicional(Opcional)</label>
+                                        <input type="text" formControlName="tel1" value="tel1" class="form-control">
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Teléfonos Móvil  </label>
+                                        <input type="text" formControlName="telmovil" value="telmovil" class="form-control">
+
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="exampleInputEmail1">Teléfonos Home(Opcional)</label>
+                                        <input type="text" formControlName="telhome" value="telhome" class="form-control">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Dirección <span class="required">*</span></label>
+                                        <div class="col-md-12">
+                                            <textarea formControlName="direccion" id="direccion" cols="30" rows="4" class="form-control"></textarea>
+                                            <!-- <ckeditor [editor]="Editor" id="direccion" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion" value="direccion" rows="5" class="form-control" required></ckeditor> -->
+
                                         </div>
-                                        <div class="clear"></div>
-                                        <div class="redes form-group">
-                                            <div class="switch">
-                                                <i class="fa fa-facebook-square fa-2x" style="margin-right: 5px;"></i>
-                                                <input type="text" class="form-control" formControlName="facebook" value="facebook">
-                                            </div> <br><br>
-                                            <div class="switch">
-                                                <i class="fa fa-instagram fa-2x" style="margin-right: 5px;"></i>
-                                                <input type="text " class="form-control" formControlName="instagram" value="instagram">
-                                            </div> <br><br>
-                                            <div class="switch">
-                                                <i class="fa fa-twitter-square fa-2x" style="margin-right: 5px;"></i>
-                                                <input type="text" class="form-control" formControlName="twitter" value="twitter">
-                                            </div> <br><br>
-                                            <div class="switch">
-                                                <i class="fa fa-linkedin-square fa-2x" style="margin-right: 5px;"></i>
-                                                <input type="text" class="form-control" formControlName="linkedin" value="linkedin">
+                                    </div>
+                                    <div class="col-md-12">
+
+                                        <label>Dirección Adicional (Opcional)</label>
+                                        <textarea formControlName="direccion1" id="direccion1" cols="30" rows="4" class="form-control"></textarea>
+                                        <!-- <ckeditor [editor]="Editor1" id="direccion1" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion1" value="direccion1" rows="5" class="form-control"></ckeditor> -->
+
+                                    </div>
+                                    <div class="clear"></div>
+                                    <br>
+                                    <br>
+                                    <hr>
+                                    <br>
+                                    <br>
+                                    <!----//-->
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3">
+                                    <div>
+                                        <h4>Redes Sociales</h4>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="redes">
+                                        <div class="row mb-3">
+                                            <label for="facebook" class="col-md-4 col-lg-3 col-form-label">
+                                          <i class="bi bi-facebook"></i> Facebook</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input type="text" class="form-control" formControlName="facebook" value="facebook" placeholder="https://facebook.com/nameuser">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="instagram" class="col-md-4 col-lg-3 col-form-label">
+                                        <i class="bi bi-instagram"></i> Instagram</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input type="text" class="form-control" formControlName="instagram" value="instagram" placeholder="https://instagram.com/nameuser">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="twitter" class="col-md-4 col-lg-3 col-form-label">
+                                      <i class="bi bi-twitter"></i> Twitter</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input type="text" class="form-control" formControlName="twitter" value="twitter" placeholder="https://twitter.com/nameuser">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="linkedin" class="col-md-4 col-lg-3 col-form-label">
+                                    <i class="bi bi-linkedin"></i> Linkedin</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input type="text" class="form-control" formControlName="linkedin" value="linkedin" placeholder="https://linkedin.com/nameuser">
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <h2>Codigo Vcard QR</h2>
-                                        <br>
-                                        <qr-code *ngIf="display" class="code" id="box" [value]="vCardInfo" [size]="250">
-                                            <img class="yellow">
-                                        </qr-code>
-                                        <a *ngIf="display" [value]="vCardInfo" (click)="hideQRCode()">Hide QR</a>
-                                        <a *ngIf="display" [href]="href" (click)="downloadImage()" download>Download Image</a>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +215,7 @@
 
 
                     </div>
-                    {{error}}
+                    <!-- {{error}} -->
                 </div>
             </div>
         </div>
@@ -201,6 +225,3 @@
 
 </div>
 <!--/main-->
-
-
-html

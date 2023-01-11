@@ -9,7 +9,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
-                        <li class="breadcrumb-item"><a routerLink="/">Panel User</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/">Panel Admin</a></li>
                         <li class="breadcrumb-item active">{{title}}</li>
                     </ol>
                 </nav>
@@ -17,7 +17,7 @@
             <!-- End Page Title -->
         </div>
         <div class="col-xs-12 col-sm-2 push-right">
-            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
@@ -35,31 +35,17 @@
             <!-- buscador -->
             <div class="card recent-sales overflow-auto">
 
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <li class="dropdown-header text-start">
-                            <h6>Filter</h6>
-                        </li>
-
-                        <li><a class="dropdown-item" href="#">Today</a></li>
-                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
                 <div class="card-body">
                     <h5 class="card-title"> <i class="bx bxs-user-account"> </i> Cuentas de usuarios <span>|
-                            Todos ({{ usersCount }})</span>
+                    Todos ({{ usersCount }})</span>
                     </h5>
-
                     <table [ngClass]="loading? 'table table-borderless datatable':'table table-borderless'">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre</th>
                                 <th>Usuario</th>
-                                <th>Rol</th>
+                                <th>Email</th>
+                                <th>Role</th>
                                 <th>Status</th>
                                 <th class="text-nowrap">Acciones</th>
                             </tr>
@@ -68,10 +54,9 @@
                             <tr *ngFor="let user of usuarios |  paginate: { itemsPerPage: count, currentPage: p }">
 
                                 <td>{{user.id}}</td>
-                                <td>{{user.first_name}} {{user.last_name}}</td>
                                 <td>{{user.username}} </td>
-                                <td>{{user.role_id }} </td>
-                                <!-- <td>{{user.role? user.role.name : '' }} </td> -->
+                                <td>{{user.email}}</td>
+                                <td>{{user.role }} </td>
                                 <td><span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span></td>
 
                                 <td class="text-nowrap text-center">
@@ -84,24 +69,25 @@
                                     </a>
                                 </td>
 
-
                             </tr>
                         </tbody>
 
                     </table>
+
                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
                     <!-- <table class="table table-borderless" *ngIf="loading">
-                        <tfoot>
-                            <tr>
-                                <td colspan="6">&nbsp; Encontrados {{ usersCount }} usuarios</td>
-                            </tr>
-                        </tfoot>
-                    </table> -->
+                <tfoot>
+                    <tr>
+                        <td colspan="6">&nbsp; Encontrados {{ usersCount }} usuarios</td>
+                    </tr>
+                </tfoot>
+            </table> -->
 
                 </div>
 
             </div>
+
         </div>
         <!-- End Recent Pagos -->
 

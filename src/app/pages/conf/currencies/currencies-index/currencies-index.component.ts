@@ -35,6 +35,16 @@ export class CurrenciesIndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrencies();
+    this.getUser();
+  }
+
+  getUser(): void {
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
+    console.log(this.user.id);
+
+
   }
 
   getCurrencies(): void {

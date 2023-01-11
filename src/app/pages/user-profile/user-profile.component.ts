@@ -7,6 +7,8 @@ import { UserService } from '@app/services/user.service';
 import { Location } from '@angular/common';
 import { PaymentService } from '@app/services/payment.service';
 import{Payment} from '@app/models/payment';
+import Swal from 'sweetalert2';
+import { AlertService } from '@app/services/alert.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,42 +20,70 @@ export class UserProfileComponent implements OnInit {
   title = "Detalles de la cuenta";
   user: User;
   error: string;
-  directorios: Directorio;
-  pagos: Payment;
-
+  directories: Directorio;
+  payments: Payment;
+  id:number;
   constructor(
     private userService: UserService,
     private paymentService: PaymentService,
     private activatedRoute: ActivatedRoute,
-    private location: Location
-  ) { }
+    private location: Location,
+    private alertService: AlertService,
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe( ({id}) => this.getUser(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getpagosUser(id));
+  ) {
+    this.user = userService.user;
   }
 
-  getUser(id:number){
-    this.userService.getUserById(id).subscribe(
+  ngOnInit(): void {
+    this.closeMenu();
+    this.activatedRoute.params.subscribe( ({id}) => this.getUserRemoto(id));
+  }
+
+  closeMenu(){
+    var menuLateral = document.getElementsByClassName("sidebar");
+      for (var i = 0; i<menuLateral.length; i++) {
+         menuLateral[i].classList.remove("active");
+
+      }
+  }
+
+  getUser(): void {
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    // return this.userService.getUserLocalStorage();
+    // console.log(this.user);
+
+
+  }
+
+  getUserRemoto(id:number){
+    this.userService.getUserById(+id).subscribe(
       res =>{
-        this.user = res;
+        this.user = res[0];
         error => this.error = error
         console.log(this.user);
       }
     );
+
   }
-  getpagosUser(id:number){
-    this.paymentService.getPagosbyUser(id).subscribe(
-      res =>{
-        this.pagos = res;
-        error => this.error = error
-        console.log(this.pagos);
-      }
-    );
-  }
+
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
+  }
+
+  updateUser(user: User){
+    this.userService.update(user).subscribe(
+      resp =>{ console.log(resp);
+        Swal.fire('Actualizado', `actualizado correctamente`, 'success');
+        this.enviarNotificacion();
+
+      }
+    )
+  }
+
+  enviarNotificacion(): void {
+    this.alertService.success("Mensaje de Usuario","Usuario verificado, Nuevo Miembro!");
   }
 
 
