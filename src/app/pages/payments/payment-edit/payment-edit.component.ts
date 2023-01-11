@@ -29,6 +29,8 @@ export class PaymentEditComponent implements OnInit {
   idcurrency:any;
   user: User;
 
+  status:Payment;
+
   paymentSeleccionado: Payment;
 
   constructor(
@@ -64,17 +66,6 @@ export class PaymentEditComponent implements OnInit {
             id: res.id,
             status: res.status,
             validacion: res.validacion,
-
-            metodo: res.metodo,
-            bank_name: res.bank_name,
-            monto: res.monto,
-            currency_id: res.currency_id,
-            moneda_codigo: res.moneda_codigo,
-            referencia: res.referencia,
-            email: res.email,
-            nombre: res.nombre,
-            txn_id: res.txn_id,
-            user_id: res.user_id,
           });
           this.paymentSeleccionado = res;
           console.log(this.paymentSeleccionado);
@@ -86,22 +77,23 @@ export class PaymentEditComponent implements OnInit {
 
   }
 
-  updateBlog(){debugger
+  updateBlog(){
 
-    const {status, user_id,  validacion } = this.paymentForm.value;
+    const {status, validacion } = this.paymentForm.value;
 
     if(this.paymentSeleccionado){
       //actualizar
       const data = {
         ...this.paymentForm.value,
         user_id: this.paymentSeleccionado.user_id,
-        payment: this.paymentSeleccionado,
+        // payment: this.paymentSeleccionado,
         id: this.paymentSeleccionado.id
       }
       this.paymentsService.update(data).subscribe(
         resp =>{
-          Swal.fire('Actualizado', `${status}  actualizado correctamente`, 'success');
+          Swal.fire('Actualizado', ` actualizado correctamente`, 'success');
           console.log(this.paymentSeleccionado);
+          this.router.navigateByUrl(`/dashboard/payments`);
         });
 
     }else{
@@ -109,6 +101,15 @@ export class PaymentEditComponent implements OnInit {
     }
 
   }
+
+  // cambiarPayment(){debugger
+  //   this.paymentsService.update(this.payment).subscribe(
+  //     resp =>{ console.log(resp);
+  //       Swal.fire('Actualizado', `actualizado correctamente`, 'success');
+
+  //     }
+  //   )
+  // }
 
   openAproved(){
     const Toasttest = Swal.mixin({
@@ -128,7 +129,6 @@ export class PaymentEditComponent implements OnInit {
       title: 'Pago Aprobado!'
     })
   }
-
 
 
   goBack() {

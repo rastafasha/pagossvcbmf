@@ -5,13 +5,13 @@
 
 /*Author: Malcolm cordova @malcolmcordova mercadocreativo@gmail.com www.malcolmcordova.com*/
 
-@import url("loading.css");
-@import url("style.css");
-@import url("fonts.css");
-@import url("animate.css");
-@import url("darkmode.css");
-@import url("dashboard.css");
-@import url("cart.css");
+@import url("./loading.css");
+@import url("./style.css");
+@import url("./fonts.css");
+@import url("./animate.css");
+@import url("./darkmode.css");
+@import url("./dashboard.css");
+@import url("./cart.css");
 .cursor {
     cursor: pointer;
 }

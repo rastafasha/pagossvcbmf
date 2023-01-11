@@ -73,9 +73,9 @@
                                 <td>{{directory.email}} </td>
                                 <td>
                                     {{directory.status }}
-                                    <!-- <span class="badge badge-primary " *ngIf="directory.status == 'PENDING'">{{directory.status}}</span>
-                                    <span class="badge badge-success " *ngIf="directory.status == 'APPROVED'">{{directory.status}}</span>
-                                    <span class="badge badge-danger " *ngIf="directory.status == 'REJECTED'">{{directory.status}}</span> -->
+                                    <!-- <span class="badge badge-primary " *ngIf="directory.status === 'PENDING'">{{directory.status}}</span>
+                                    <span class="badge badge-success " *ngIf="directory.status === 'PUBLISHED'">{{directory.status}}</span>
+                                    <span class="badge badge-danger " *ngIf="directory.status === 'REJECTED'">{{directory.status}}</span> -->
                                 </td>
 
                                 <!-- <td><span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span></td> -->

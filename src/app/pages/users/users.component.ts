@@ -68,6 +68,7 @@ export class UsersComponent implements OnInit {
       res =>{
         this.usuarios = res;
         error => this.error = error;
+        console.log(this.usuarios);
       }
     );
   }

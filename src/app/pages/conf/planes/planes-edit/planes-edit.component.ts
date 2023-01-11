@@ -54,7 +54,7 @@ export class PlanesEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( ({id}) => this.cargarPlan(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormulario(id));
     this.validarFormulario();
     this.getCurrencies();
 
@@ -67,11 +67,11 @@ export class PlanesEditComponent implements OnInit {
       price: ['',Validators.required],
       currency_id: ['',Validators.required],
       status: [''],
-      image: [this.image],
+      image: [this.image || 'no-image.jpg' ],
     })
   }
 
-  cargarPlan(id: any){
+  iniciarFormulario(id: number){
 
     if (id !== null && id !== undefined) {
       this.title = 'Editando Plan';
@@ -102,6 +102,10 @@ export class PlanesEditComponent implements OnInit {
     }
     this.image = this.file.name;
   }
+  get name() { return this.planForm.get('name'); }
+  get price() { return this.planForm.get('price'); }
+  get currency_id() { return this.planForm.get('currency_id'); }
+  get status() { return this.planForm.get('status'); }
 
   updateBlog(){debugger
 
@@ -112,7 +116,7 @@ export class PlanesEditComponent implements OnInit {
     formData.append('status', this.planForm.get('status').value);
     formData.append('image', this.planForm.get('image').value);
 
-    const {name, price, currency_id, status, image } = this.planForm.value;
+    const {name, price, currency_id, status } = this.planForm.value;
     if(this.planSeleccionado){
       //actualizar
       const data = {
@@ -127,6 +131,7 @@ export class PlanesEditComponent implements OnInit {
 
     }else{
       //crear
+
       this.planService.createPlan(this.planForm.value)
       .subscribe( (resp: any) =>{
         Swal.fire('Creado', `${name} creado correctamente`, 'success');

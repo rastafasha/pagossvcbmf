@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { environment } from '@environments/environment';
 import { map } from 'rxjs/operators';
 
 import { Plan } from '../models/plan';
@@ -17,14 +18,6 @@ export class PlanesService {
   info:any = {};
   cargada:boolean = false;
 
-  products: Plan [] = [
-    new Plan(1, 'Far Cary 6',  63.17, 'https://m.media-amazon.com/images/I/81AQ0wvcS-L._SL1500_.jpg', ),
-    new Plan(2, 'Assassins Creed Valhalla',   24.99, 'https://m.media-amazon.com/images/I/817zvXdCgSL._SL1500_.jpg', ),
-    new Plan(3, 'Spider-Man: Miles Morales', 46.00, 'https://m.media-amazon.com/images/I/71CqfmZX3PL._SL1361_.jpg', ),
-    new Plan(4, 'Call of Duty: Vanguard', 86.96, 'https://m.media-amazon.com/images/I/71gPbEcd1pL._SL1378_.jpg', ),
-    new Plan(5, 'Demons Souls',  49.95, 'https://m.media-amazon.com/images/I/81QoNRp5+WL._SL1353_.jpg', ),
-    new Plan(6, 'Call of Duty: Black Ops Cold War',   40.99, 'https://m.media-amazon.com/images/I/81QfmDJdOdS._SL1500_.jpg', )
-  ]
 
   constructor(private http: HttpClient) { }
 
@@ -55,9 +48,7 @@ export class PlanesService {
 
   }
 
-  getProducts(): Plan[]{
-    return this.products;
-  }
+
 
 
 
@@ -83,13 +74,13 @@ export class PlanesService {
     return this.http.post(url, plan, this.headers);
   }
 
-  updatePlan(plan:any) {
-    const url = `${baseUrl}/planes/update/${plan}`;
-    return this.http.put(url, plan, this.headers);
-  }
+  updatePlan(plan:Plan): Observable<any> {
+    const url = `${baseUrl}/plan/update/${plan.id}`;
+     return this.http.put(url, plan, this.headers);
+   }
 
-  deletePlan(plan: number) {
-    const url = `${baseUrl}/planes/destroy/${plan}`;
+  deletePlan(plan: Plan) {
+    const url = `${baseUrl}/plan/destroy/${plan}`;
     return this.http.delete(url, this.headers);
   }
 

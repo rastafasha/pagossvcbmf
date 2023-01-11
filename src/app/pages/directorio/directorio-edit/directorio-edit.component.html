@@ -40,7 +40,7 @@
                                             <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
                                             <select name="" id="input" class="form-control" formControlName="status" required="required">
                                           <option value="">Seleccione</option>
-                                          <option value="APROVED">Aprobado</option>
+                                          <option value="PUBLISHED">Publicado</option>
                                           <option value="PENDING">Pendiente</option>
                                           <option value="REJECTED">Rechazado</option>
                                         </select>
@@ -72,7 +72,7 @@
                                             <div class="clear"></div>
                                             <!-- <a class="btn btn-primary" (click)="generateQRCode()">Generar QR</a> -->
                                             <a class="btn btn-primary" *ngIf="display" value="vCardInfo" (click)="hideQRCode()">Hide QR</a>
-                                            <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directorio.nombre}}_{{directorio.surname}}">Download Image</a>
+                                            <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}">Download Image</a>
                                         </div>
                                     </div>
                                 </div>

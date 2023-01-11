@@ -28,19 +28,21 @@ export class Directorio {
     created_at: Date;
     image:string;
     user_id:number;
-    status:string;
+    // status:string;
+
+    status?: 'PUBLISHED'| 'PENDING' | 'REJECTED';
 
 
     get imagenUrl(){
 
         if(!this.image){
-          return `${base_url}directory/no-image.jpg`;
+          return `${base_url}directories/no-image.jpg`;
         } else if(this.image.includes('https')){
           return this.image;
         } else if(this.image){
-          return `${base_url}directory/${this.image}`;
+          return `${base_url}directories/${this.image}`;
         }else {
-          return `${base_url}directory/no-image.jpg`;
+          return `${base_url}directories/no-image.jpg`;
         }
 
       }

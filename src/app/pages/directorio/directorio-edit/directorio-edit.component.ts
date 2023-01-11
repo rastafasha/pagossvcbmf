@@ -193,13 +193,13 @@ this.user = this.userService.user;
       vcard: [this.vCardInfo],
       image: [''],
       user_id: [''],
-      status: ['PENDING'],
+      status: [''],
     });
 
 
   }
 
-  onSelectedFile(event) {debugger
+  onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.directorioForm.get('image').setValue(file.name);
@@ -264,6 +264,7 @@ this.user = this.userService.user;
     formData.append('twitter', this.directorioForm.get('twitter').value);
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
     formData.append('user_id', this.directorioForm.get('user_id').value);
+    formData.append('status', this.directorioForm.get('status').value);
     formData.append('image', this.directorioForm.get('image').value);
     formData.append('vcard', this.vCardInfo);
 

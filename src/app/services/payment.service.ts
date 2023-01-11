@@ -46,7 +46,7 @@ export class PaymentService {
 
 
 
-  getAll(){debugger
+  getAll(){
     const url = `${baseUrl}/pagos`;
     return this.http.get<any>(url, this.headers)
       .pipe(

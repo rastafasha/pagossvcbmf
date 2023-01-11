@@ -68,25 +68,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngIf="!userProfile.payments">
-                                <td>No data</td>
 
-                            </tr>
                             <tr *ngFor="let userpayment of userProfile.payments ">
-                                <th scope="row">{{userpayment.referencia}}</th>
+                                <th scope="row"><a [routerLink]="['/dashboard/payment-detail', userpayment.id]">{{userpayment.referencia}}</a></th>
                                 <td>{{userpayment.metodo}}</td>
                                 <td>{{userpayment.monto}} </td>
                                 <td>{{userpayment.moneda_codigo}}</td>
-                                <td>{{userpayment.created_at}}</td>
+                                <td>{{userpayment.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
                                 <td>
                                     <!-- <span class="badge bg-success">{{userpayment.status}}</span> -->
-                                    <span class="badge bg-success" *ngIf="userpayment.status === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-success" *ngIf="userpayment.status === 'APPROVED'">Aprobado</span>
                                     <span class="badge bg-primary" *ngIf="userpayment.status === 'PENDING'">Pendiente</span>
                                     <span class="badge bg-danger" *ngIf="userpayment.status === 'REJECTED'">Rechazado</span>
                                 </td>
                                 <td>
                                     <!-- <span class="badge bg-success">{{userpayment.validacion}}</span> -->
-                                    <span class="badge bg-success" *ngIf="userpayment.validacion === 'APROVED'">Aprobado</span>
+                                    <span class="badge bg-success" *ngIf="userpayment.validacion === 'APPROVED'">Aprobado</span>
                                     <span class="badge bg-primary" *ngIf="userpayment.validacion === 'PENDING'">Pendiente</span>
                                     <span class="badge bg-danger" *ngIf="userpayment.validacion === 'REJECTED'">Rechazado</span>
                                 </td>

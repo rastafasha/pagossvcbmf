@@ -33,13 +33,13 @@ export class User {
     get imagenUrl(){
 
       if(!this.image){
-        return `${base_url}usuarios/no-image.jpg`;
+        return `${base_url}users/no-image.jpg`;
       } else if(this.image.includes('https')){
         return this.image;
       } else if(this.image){
-        return `${base_url}usuarios/${this.image}`;
+        return `${base_url}users/${this.image}`;
       }else {
-        return `${base_url}usuarios/no-image.jpg`;
+        return `${base_url}users/no-image.jpg`;
       }
 
     }

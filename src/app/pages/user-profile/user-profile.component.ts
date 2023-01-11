@@ -83,7 +83,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   enviarNotificacion(): void {
-    this.alertService.success("Mensaje de Pago","Pago verificado, Nuevo Miembro!");
+    this.alertService.success("Mensaje de Usuario","Usuario verificado, Nuevo Miembro!");
   }
 
 

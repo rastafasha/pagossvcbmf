@@ -72,11 +72,10 @@ constructor(
     window.scrollTo(0, 0);
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormulario(id));
     this.activatedRoute.params.subscribe( ({id}) => this.getUser(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getDirectory(id));
   }
 
   getUser(id:number){
-    this.userService.getUserById(id).subscribe(
+    this.memberService.getMemberDirectoryById(id).subscribe(
       res =>{
         this.user = res[0];
         console.log(this.user);
@@ -84,20 +83,12 @@ constructor(
     );
   }
 
-  getDirectory(id:number): void {
-    this.directorioService.getDirectoriobyUser(id).subscribe(
-      res =>{
-        this.directory = res[0];
-        console.log(this.directory);
-      }
-    );
-  }
 
 
   iniciarFormulario(id:number){
     if (id) {
       this.pageTitle = 'Editar Directorio';
-      this.directorioService.getDirectoriobyUser(id).subscribe(
+      this.memberService.getMemberDirectoryById(id).subscribe(
         res => {
           this.directorioForm.patchValue({
             id: res.id,
@@ -242,7 +233,7 @@ constructor(
         user_id: this.user.id,
         id: this.directory.id
       }
-      this.directorioService.updateDirectorio(data).subscribe(
+      this.memberService.updateMemberDirectory(data).subscribe(
         res => {
           if (this.errors) {
             this.errors = this.errors.error;
@@ -261,7 +252,7 @@ constructor(
         ...this.directorioForm.value,
         user_id: this.user.id,
       }
-      this.directorioService.createDirectorio(data).subscribe(
+      this.memberService.createMemberDirectory(data).subscribe(
         res => {
           if (this.errors) {
             this.errors = this.errors.error;

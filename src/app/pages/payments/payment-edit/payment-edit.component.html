@@ -38,12 +38,23 @@
                                 <label for="exampleInputuname">Status<span class="required">*</span></label>
                                 <div class="input-group">
                                     <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
+                                    <!-- <select class="form-control " formControlName="status" required>
+                                      <option disabled  value="">SELECCIONAR</option>
+                                      <option *ngFor="let item of status" [value]="item">{{item}}</option>
+
+                                  </select> -->
                                     <select name="" id="input" class="form-control" formControlName="status" required="required">
+                                      <option value="">Seleccione</option>
+                                      <option value="APPROVED">Aprobado</option>
+                                      <option value="REJECTED">Pendiente</option>
+                                      <option value="PENDING">Rechazado</option>
+                                    </select>
+                                    <!-- <select class="form-control" [(ngModel)]="payment.status">
                                       <option value="">Seleccione</option>
                                       <option value="APROVED">Aprobado</option>
                                       <option value="PENDING">Pendiente</option>
                                       <option value="REJECTED">Rechazado</option>
-                                    </select>
+                                    </select> -->
                                 </div>
 
 
@@ -52,11 +63,17 @@
                             <div class="form-group" style="margin-bottom: 25px;">
                                 <label for="exampleInputuname">Validación<span class="required">*</span></label>
                                 <div class="input-group">
-                                    <select name="" id="input" class="form-control" formControlName="validacion" required="required">
+                                    <!-- <select class="form-control" [(ngModel)]="payment.validacion">
                                     <option value="">Seleccione</option>
                                     <option value="APROVED">Aprobado</option>
                                     <option value="PENDING">Pendiente</option>
                                     <option value="REJECTED">Rechazado</option>
+                                  </select> -->
+                                    <select name="" id="input" class="form-control" formControlName="validacion" required="required">
+                                    <option value="">Seleccione</option>
+                                    <option value="APPROVED">Aprobado</option>
+                                      <option value="REJECTED">Pendiente</option>
+                                      <option value="PENDING">Rechazado</option>
                                   </select>
                                     <!-- <input type="text" formControlName="validacion" class="form-control" id="exampleInputuname" placeholder="Validacion" required> -->
                                 </div>

@@ -57,7 +57,9 @@
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
                                 </li>
-
+                                <li class="nav-item" *ngIf="userprofile.is_active === 1 ">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Mi Directorio</button>
+                                </li>
 
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar

@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {tap, map, catchError} from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import {map} from 'rxjs/operators';
+import { Observable} from 'rxjs';
 import { Router } from '@angular/router';
 
 //Eviroment
 import { environment } from '../../environments/environment';
 //Models
 import { User } from '../models/user';
-import { Role } from '@app/models/role';
 import { RoleService } from './role.service';
 
 const baseUrl = environment.apiUrl;

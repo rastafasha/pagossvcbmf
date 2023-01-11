@@ -33,12 +33,12 @@ export class LoginComponent implements OnInit {
   // Registro
   public formSumitted = false;
   public registerForm = this.fb.group({
-    nombre: ['', Validators.required],
-    email: [ '', [Validators.required, Validators.email] ],
     username: ['', Validators.required],
+    email: [ '', [Validators.required] ],
     password: ['', Validators.required],
     password2: ['', Validators.required],
-    terminos: [false, Validators.required],
+    role: ['GUEST'],
+    // terminos: [false, Validators.required],
 
   }, {
     validators: this.passwordsIguales('password', 'password2')
@@ -118,7 +118,7 @@ rememberMe() {
 }
 
 // Registro
-crearUsuario(){
+crearUsuario(){debugger
   this.formSumitted = true;
   // console.log(this.registerForm.value);
 
@@ -130,9 +130,12 @@ crearUsuario(){
   this.accountService.crearUsuario(this.registerForm.value).subscribe(
     resp =>{
       // console.log(resp);
-      this.router.navigateByUrl('/login');
-    },(err) => {
-      Swal.fire('Error', err.error.msg, 'error');
+      // this.router.navigateByUrl('/das');
+      Swal.fire('Registrado!', `Ya puedes ingresar`, 'success');
+      this.ngOnInit();
+    },(error) => {
+      // Swal.fire('Error', err.error.msg, 'error');
+      this.errors = error.error;
     }
   );
 

@@ -295,7 +295,7 @@ button:hover {
     height: auto;
     margin: auto;
     display: flex;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .signup .checkbox {
@@ -314,7 +314,7 @@ button:hover {
     }
     .main {
         width: 350px;
-        height: 90vh;
+        height: 76vh;
         border-radius: 0px;
     }
     .main img {
@@ -322,10 +322,10 @@ button:hover {
     }
     .login {
         height: 100vh;
-        transform: translateY(20px);
+        transform: translateY(0px);
         border-radius: 140% / 10%;
     }
     #chk:checked~.login {
-        transform: translateY(-400px);
+        transform: translateY(-360px);
     }
 }

@@ -32,9 +32,13 @@
                 <!-- <p><b>Nombre:</b> {{pago.nombre}}</p> -->
                 <!-- <p><b>Fecha | Hora:</b> {{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</p> -->
                 <p><b>Referencia:</b> {{pago.referencia}}</p>
-                <p><b>Status:</b> <span class="badge bg-primary">{{pago.status}}</span></p>
+                <p><b>Status:</b>
+                    <span class="badge bg-success" *ngIf="pago.status === 'APPROVED'">Aprobado</span>
+                    <span class="badge bg-primary" *ngIf="pago.status === 'PENDING'">Pendiente</span>
+                    <span class="badge bg-danger" *ngIf="pago.status === 'REJECTED'">Rechazado</span>
+                </p>
                 <p><b>Monto:</b> {{pago.moneda_codigo}} {{pago.monto}}</p>
-                <!-- <p><b>ProductoId:</b> {{pago.producto_id}}</p> -->
+                <p><b>ProductoId:</b> {{pago.plan_id}}</p>
             </div>
             <div class="col-xs-12 col-sm-6">
                 <!-- <p><b>Email:</b> {{pago.email}}</p> -->
@@ -42,8 +46,12 @@
                 <div *ngIf="pago.bank_name">
                     <p><b>Nombre del Banco:</b> {{pago.bank_name}}</p>
                 </div>
-                <p><b>Validación:</b> {{pago.validacion}}</p>
-                <!-- <p><b>Txn Id:</b> {{pago.txn_id}}</p> -->
+                <p><b>Validación:</b>
+                    <span class="badge bg-success" *ngIf="pago.validacion === 'APPROVED'">Aprobado</span>
+                    <span class="badge bg-primary" *ngIf="pago.validacion === 'PENDING'">Pendiente</span>
+                    <span class="badge bg-danger" *ngIf="pago.validacion === 'REJECTED'">Rechazado</span>
+                </p>
+                <!-- <p><b>Txn Id:</b> {{pago.}}</p> -->
             </div>
 
         </div>

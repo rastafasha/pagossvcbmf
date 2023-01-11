@@ -36,7 +36,7 @@ export class PaymentDetailsComponent implements OnInit {
     );
   }
 
-  getPagoById(id:number){debugger
+  getPagoById(id:number){
     this.paymentService.getPagoById(id).subscribe(
       res=>{
         this.pago = res;
