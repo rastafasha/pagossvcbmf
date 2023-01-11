@@ -44,6 +44,14 @@
                 </div>
                 <p><b>Validación:</b> {{pago.validacion}}</p>
                 <!-- <p><b>Txn Id:</b> {{pago.txn_id}}</p> -->
+
+                <h3>Items Data:</h3>
+                <hr>
+                <div *ngFor="let item of items">
+                    <p><b>Name</b>{{item.name}} <b>Units</b>{{item.quantity}} <b>Price/unit</b> $ {{item.unit_amount.value}} </p>
+                </div>
+                <hr>
+                <h3><b>Total:</b>$ {{amount}}</h3>
             </div>
 
         </div>

@@ -57,7 +57,7 @@ const childRoutes: Routes = [
     { path: 'historial-pagos', component: UserHistorialpagosComponent, data:{title:'Historial Pagos'} },
     { path: 'realizar-pago', component: ReportarPagoComponent, data:{title:'Relizar Pago'} },
     { path: 'search/:searchItem', component: UsersComponent, data:{title:'Buscar'} },
-    { path: 'factura', component: ReciboFacturaComponent, data:{title:'Buscar'} },
+    { path: 'factura/:id', component: ReciboFacturaComponent, data:{title:'Buscar'} },
 
     //directorio
     { path: 'directorio',  component: DirectorioIndexComponent, data:{title:'Directorio'} },
