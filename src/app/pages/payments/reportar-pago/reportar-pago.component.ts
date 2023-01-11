@@ -218,6 +218,7 @@ export class ReportarPagoComponent implements OnInit {
       this.pagoSeleccionado = resp;
       console.log(this.pagoSeleccionado);
       this.enviarNotificacion();
+      this.emptyCart();
     })
 
   }
@@ -277,6 +278,12 @@ export class ReportarPagoComponent implements OnInit {
       Swal.fire('Error', 'No se pudo subir la imagen', 'error');
 
     })
+  }
+
+  emptyCart():void{
+    this.cartItems = [];
+    this.total = 0;
+    this.storageService.clear();
   }
 
 

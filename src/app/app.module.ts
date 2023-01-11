@@ -20,6 +20,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { NgxPayPalModule } from 'ngx-paypal';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 import { AuthModule } from './auth/auth.module';
 import { ConfModule } from './pages/conf/conf.module';
 import { PipesModule } from './pipes/pipes.module';
@@ -41,7 +44,9 @@ import { AuthInterceptor } from './services/auth.interceptor';
     NgxPayPalModule,
     AuthModule,
     ConfModule,
-    PipesModule
+    PipesModule,
+    NgbModule,
+    NgxSpinnerModule
     // CKEditorModule,
 
   ],

@@ -5,11 +5,12 @@ import { MessageService } from 'src/app/services/message.service';
 import { CartItemModel } from '../../models/cart-item-model';
 import { StorageService } from '../../services/storage.service';
 import { environment } from '../../../environments/environment';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { ModalComponent } from '../modal/modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../modal/modal.component';
 
 import { Plan } from '@app/models/plan';
-// import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -33,7 +34,9 @@ export class CartComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private storageService: StorageService,
-    // private spinner: NgxSpinnerService
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
+    private router: Router
 
     ) {
 
@@ -81,7 +84,7 @@ export class CartComponent implements OnInit {
             layout: 'vertical'
         },
         onApprove: (data, actions) => {
-          // this.spinner.show();
+          this.spinner.show();
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then((details: any) => {
               console.log('onApprove - you can get full order details inside onApprove: ', details);
@@ -96,7 +99,7 @@ export class CartComponent implements OnInit {
               data.purchase_units[0].amount.value,
             );
             this.emptyCart();
-            // this.spinner.hide();
+            this.spinner.hide();
 
         },
         onCancel: (data, actions) => {
@@ -181,9 +184,9 @@ export class CartComponent implements OnInit {
   }
 
   openModal(items, amount): void{
-    // const modalRef = this.modalService.open(ModalComponent);
-    // modalRef.componentInstance.items = items;
-    // modalRef.componentInstance.amount = amount;
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.items = items;
+    modalRef.componentInstance.amount = amount;
 
   }
 
