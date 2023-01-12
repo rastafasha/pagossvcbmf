@@ -42,6 +42,8 @@ export class ProfileComponent implements OnInit {
   directorio: Directorio;
   infoDirectorio: any;
   id: number | null;
+  idDirecotory: number | null;
+  idPerfil: number | null;
   pageTitle: string;
   directory: Directorio;
 
@@ -67,9 +69,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.closeMenu();
     this.getUser();
-    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioPerfil(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioDirectorio(id));
     this.activatedRoute.params.subscribe( ({id}) => this.getUserServer(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioPerfil(this.idPerfil));
+    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioDirectorio(this.idDirecotory));
   }
   closeMenu(){
     var menuLateral = document.getElementsByClassName("sidebar");
@@ -87,8 +89,9 @@ export class ProfileComponent implements OnInit {
     // console.log(this.user);
   }
 
-  getUserServer(id:number){
-    this.userService.getUserById(id).subscribe(
+  getUserServer(idPerfil:number){
+    idPerfil = this.user.id;
+    this.userService.getUserById(idPerfil).subscribe(
       res =>{
         this.userprofile = res[0];
         error => this.error = error
@@ -181,10 +184,11 @@ export class ProfileComponent implements OnInit {
 
   //Directorio
 
-  iniciarFormularioDirectorio(id:number){
-    if (id) {
+  iniciarFormularioDirectorio(idDirecotory:number){
+    idDirecotory = this.directory.user_id;
+    if (idDirecotory) {
       this.pageTitle = 'Editar Directorio';
-      this.memberService.getMemberDirectoryById(id).subscribe(
+      this.directorioService.getDirectoriobyUser(this.directory).subscribe(
         res => {
           this.directorioForm.patchValue({
             id: res.id,

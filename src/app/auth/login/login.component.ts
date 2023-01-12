@@ -118,7 +118,7 @@ rememberMe() {
 }
 
 // Registro
-crearUsuario(){debugger
+crearUsuario(){
   this.formSumitted = true;
   // console.log(this.registerForm.value);
 

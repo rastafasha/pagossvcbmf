@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
 
   title = "Detalles de la cuenta";
   user: User;
+  userprofile: User;
   error: string;
   directories: Directorio;
   payments: Payment;
@@ -59,11 +60,12 @@ export class UserProfileComponent implements OnInit {
   getUserRemoto(id:number){
     this.userService.getUserById(+id).subscribe(
       res =>{
-        this.user = res[0];
+        this.userprofile = res[0];
         error => this.error = error
-        console.log(this.user);
+        console.log(this.userprofile);
       }
     );
+
 
   }
 

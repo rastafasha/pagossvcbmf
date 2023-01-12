@@ -18,7 +18,7 @@ export class DirectorioViewComponent implements OnInit {
   user: User;
   directory: Directorio;
   error: string;
-  id:number;
+  id:any;
 
   constructor(
     private directorioService: DirectorioService,
@@ -33,8 +33,10 @@ export class DirectorioViewComponent implements OnInit {
   }
 
 
-  getDirectory(id:number): void {
-    this.memberService.getMemberDirectoryById(id).subscribe(
+  getDirectory(id:number): void {debugger
+    id = this.directory.user_id;
+
+    this.directorioService.getDirectoriobyUser(this.directory).subscribe(
       res =>{
         this.directory = res;
         error => this.error = error;

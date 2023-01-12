@@ -64,7 +64,8 @@ const childRoutes: Routes = [
     { path: 'directorio',  component: DirectorioIndexComponent, data:{title:'Directorio'} },
     { path: 'directorio/create', component: DirectorioEditComponent, data:{title:'Directorio Crear'} },
     { path: 'directorio/edit/:id', component: DirectorioEditComponent, data:{title:'Directorio Editar'} },
-    { path: 'directorio/view/:id', component: DirectorioViewComponent, data:{title:'Directorio Editar'} },
+    { path: 'directorio/member/edit/:user_id', component: DirectorioEditComponent, data:{title:'Directorio Editar'} },
+    { path: 'directorio/view/:user_id', component: DirectorioViewComponent, data:{title:'Directorio Editar'} },
 
     //configuraciones
     { path: 'configuraciones',  component: ConfiguracionesComponent, data:{title:'Configuraciones'} },
