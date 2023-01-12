@@ -28,7 +28,7 @@
         <div class="planespage">
             <div class="row">
                 <div class="col-xs-12 col-sm-9" style="float:left">
-                    <div class="col-xs-12 col-sm-6" *ngFor="let product of planes">
+                    <div class="col-xs-12 col-sm-6 col-md-4 " *ngFor="let product of planes">
                         <app-product-item [product]="product"></app-product-item>
 
                     </div>
@@ -37,6 +37,10 @@
 
                 <div class="col-xs-12 col-sm-3 ">
                     <app-cart></app-cart>
+                    <p class="text-center">ó</p>
+                    <button class="btn btn-outline-primary btn-block col-12 mb-2" routerLink="/dashboard/realizar-pago">
+      Otros Pagos
+    </button>
                 </div>
             </div>
         </div>

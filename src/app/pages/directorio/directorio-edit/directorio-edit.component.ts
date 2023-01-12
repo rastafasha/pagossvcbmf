@@ -232,13 +232,9 @@ this.user = this.userService.user;
   get linkedin() { return this.directorioForm.get('linkedin'); }
   get user_id() { return this.directorioForm.get('user_id'); }
 
-  guardarDirectorio() {debugger
+  guardarDirectorio() {
 
-    // validacion formulario
-    // if (this.directorioForm.invalid) {
-    //   this.mostrarMensajesVU = true;
-    //   return;
-    // }
+
     this.formularioVcardGe();
 
     const formData = new FormData();

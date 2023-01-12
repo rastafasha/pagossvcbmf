@@ -4,9 +4,9 @@
     </div>
 </div>
 <div *ngIf="cartItems.length > 0">
-    <div class="alert alert-info text-center">
+    <!-- <div class="alert alert-info text-center">
         <h4>Your Cart</h4>
-    </div>
+    </div> -->
     <div class="text-center">
         <ul class="list-group">
             <li class="list-group-item" *ngFor="let item of cartItems; index as i">
@@ -29,8 +29,5 @@
   </button>
 
     <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-    <p>ó</p>
-    <button class="btn btn-primary pull-right" routerLink="/dashboard/realizar-pago">
-      Otros Pagos
-    </button>
+
 </div>

@@ -59,7 +59,6 @@ image:string;
 constructor(
   private fb: FormBuilder,
   private userService: UserService,
-  private roleService: RoleService,
   private directorioService: DirectorioService,
   private memberService: MemberService,
   private router: Router,
