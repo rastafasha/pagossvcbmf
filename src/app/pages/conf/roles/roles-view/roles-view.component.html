@@ -57,8 +57,6 @@
                                 <th>Role</th>
                                 <th>Role Edit</th>
                                 <th>Edit</th>
-                                <th>Creado</th>
-                                <th>Actualizado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,7 +65,14 @@
                                 <td>{{user.id}}</td>
                                 <td>{{user.username}}</td>
                                 <td>{{user.email}} </td>
-                                <td>{{user.role}} </td>
+                                <td>
+                                    <!-- {{user.role}}  -->
+                                    <span class="badge bg-dark-light" *ngIf="user.role === 'SUPERADMIN'">SuperAdmin</span>
+                                    <span class="badge bg-primary" *ngIf="user.role === 'ADMIN'">Admin</span>
+                                    <span class="badge bg-success" *ngIf="user.role === 'MEMBER'">Miembro</span>
+                                    <span class="badge bg-secondary" *ngIf="user.role === 'GUEST'">Invitado</span>
+
+                                </td>
                                 <td>
 
                                     <select class="form-control" [(ngModel)]="user.role">
@@ -91,12 +96,12 @@
                                 <td class="text-nowrap text-center">
 
                                     <a (click)="cambiarRole(user)" class="cursor" data-toggle="tooltip" data-original-title="Edit">
-                                        <i class="bx bxs-edit text-success" style="font-size: 18px;"></i>
+                                        <button class="btn btn-outline-success">
+                                          <i class="bx bxs-check-circle text-success" style="font-size: 18px;"></i> Aceptar
+                                        </button>
                                     </a>
 
                                 </td>
-                                <td>{{user.created_at | date:'MMM d, y, h:mm:ss a'}} </td>
-                                <td>{{user.updated_at | date:'MMM d, y, h:mm:ss a'}} </td>
 
                             </tr>
                         </tbody>

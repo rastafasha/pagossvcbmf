@@ -159,7 +159,7 @@
                                             <div class="form-group " *ngIf="total">
                                                 <label for="">Monto</label>
                                                 <p>{{currenciesAll[0].name}} {{total}}</p>
-                                                <input type="text" formControlName="monto" class="form-control">
+                                                <input type="text" formControlName="monto" class="form-control" placeholder="Ingrese el monto mostrado arriba">
                                             </div>
                                         </div>
                                         <div class="div5">
@@ -180,9 +180,9 @@
                                                 <select class="form-control " formControlName="moneda_codigo" required>
                                                   <option disabled  value="">SELECCIONAR</option>
                                                   <!-- <option *ngFor="let item of currenciesAll" [value]="item.id">{{item.name}}</option> -->
-                                                  <option value="EURO"></option>
-                                                  <option value="DOLLAR"></option>
-                                                  <option value="BOLIVAR"></option>
+                                                  <option value="EURO">Euro</option>
+                                                  <option value="DOLLAR">Dollar</option>
+                                                  <option value="BSVES">BSVES</option>
                                               </select>
                                             </div>
                                         </div>

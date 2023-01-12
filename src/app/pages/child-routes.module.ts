@@ -53,7 +53,8 @@ const childRoutes: Routes = [
     //user
     { path: 'users', component: UsersComponent, data:{title:'Usuarios'} },
     { path: 'user/:id', component: UserProfileComponent, data:{title:'Detalle Usuario'} },
-    { path: 'user/edit/:id', component: UserDetailsComponent, data:{title:'Editar Usuario'} },
+    { path: 'user/edit/:id', component: UserProfileComponent, data:{title:'Editar Usuario'} },
+    // { path: 'user/edit/:id', component: UserDetailsComponent, data:{title:'Editar Usuario'} },
     { path: 'historial-pagos', component: UserHistorialpagosComponent, data:{title:'Historial Pagos'} },
     { path: 'realizar-pago', component: ReportarPagoComponent, data:{title:'Relizar Pago'} },
     { path: 'search/:searchItem', component: UsersComponent, data:{title:'Buscar'} },

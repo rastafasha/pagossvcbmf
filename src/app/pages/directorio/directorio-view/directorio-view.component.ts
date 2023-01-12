@@ -5,6 +5,7 @@ import { User } from '@app/models/user';
 import { DirectorioService } from '@app/services/directorio.service';
 import { UserService } from '@app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { MemberService } from '../../../services/member.service';
 
 @Component({
   selector: 'app-directorio-view',
@@ -23,6 +24,7 @@ export class DirectorioViewComponent implements OnInit {
     private directorioService: DirectorioService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
+    private memberService: MemberService,
     private location: Location,
   ) { }
 
@@ -32,9 +34,9 @@ export class DirectorioViewComponent implements OnInit {
 
 
   getDirectory(id:number): void {
-    this.directorioService.getDirectoriobyUser(id).subscribe(
+    this.memberService.getMemberDirectoryById(id).subscribe(
       res =>{
-        this.directory = res[0];
+        this.directory = res;
         error => this.error = error;
         console.log(this.directory);
       }

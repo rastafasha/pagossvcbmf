@@ -20,7 +20,8 @@
     flex-wrap: wrap;
 } */
 
-.planespage .col-sm-6 {
+.planespage .col-sm-6,
+.planespage .col-md-4 {
     float: left;
     padding: 10px;
 }
