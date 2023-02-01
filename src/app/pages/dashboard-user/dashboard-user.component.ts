@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-user',
@@ -10,7 +11,7 @@ import { UserService } from '@app/services/user.service';
 export class DashboardUserComponent implements OnInit {
   title = 'Admin Usuario';
   public user: User;
-  public userProfile: User;
+  public userprofile: User;
 
   error: string;
 
@@ -18,6 +19,7 @@ export class DashboardUserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.user = userService.user;
   }
@@ -42,19 +44,21 @@ export class DashboardUserComponent implements OnInit {
     console.log(this.user);
     console.log(this.user.id);
     this.id = this.user.id;
-    this.getUserRemoto(this.id);
+    // this.getUserRemoto(this.id);
+    this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
+
 
   }
 
-  getUserRemoto(id:number){
-    this.userService.getUserById(+id).subscribe(
+  getUserProfile(id:number){
+    id  = this.user.id
+    this.userService.getUserById(id).subscribe(
       res =>{
-        this.userProfile = res[0];
+        this.userprofile = res[0];
         error => this.error = error
-        console.log(this.userProfile);
+        console.log(this.userprofile);
       }
     );
-
   }
 
 

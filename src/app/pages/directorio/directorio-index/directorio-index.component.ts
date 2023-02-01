@@ -61,7 +61,7 @@ export class DirectorioIndexComponent implements OnInit {
       res =>{
         this.directories = res;
         error => this.error = error;
-        console.log(this.directories);
+        // console.log(this.directories);
       }
     );
   }

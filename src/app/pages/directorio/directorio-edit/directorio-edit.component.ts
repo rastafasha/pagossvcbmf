@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DirectorioService } from '../../../services/directorio.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -71,7 +71,7 @@ export class DirectorioEditComponent implements OnInit {
 
   public user:User;
 
-  image:string;
+  imagen:string;
 
 
   constructor(
@@ -80,7 +80,8 @@ export class DirectorioEditComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private cd: ChangeDetectorRef
   ) {
 this.user = this.userService.user;
   }
@@ -91,7 +92,7 @@ this.user = this.userService.user;
   ngOnInit() {
     // this.iniciarFormulario();
     window.scrollTo(0, 0);
-    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormulario(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioDirectorio(id));
     // this.openToast();
 
 
@@ -124,7 +125,7 @@ this.user = this.userService.user;
 
 
 
-  iniciarFormulario(id:number){
+  iniciarFormularioDirectorio(id:number){
     // const id = this.route.snapshot.paramMap.get('id');
     if (!id == null || !id == undefined || id) {
       // let id = this.directory.id;
@@ -156,7 +157,8 @@ this.user = this.userService.user;
             linkedin: res.linkedin,
             vcard: this.vCardInfo,
             user_id: res.user_id,
-            status: res.status
+            status: res.status,
+            // image : res.image
           });
           this.imagePath = res.image;
           this.directory = res;
@@ -199,14 +201,28 @@ this.user = this.userService.user;
 
   }
 
-  onSelectedFile(event) {
+  onSelectedFile(event) {debugger
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.directorioForm.get('image').setValue(file.name);
-      // this.directorioForm.get('image').setValue(file);
 
-      this.image = file.name;
+      this.imagen = file.name;
     }
+    // const reader = new FileReader();
+
+    // if(event.target.files && event.target.files.length) {
+    //   const [file] = event.target.files;
+    //   reader.readAsDataURL(file);
+
+    //   reader.onload = () => {
+    //     this.directorioForm.patchValue({
+    //       file: reader.result
+    //    });
+
+    //     // need to run CD since file load runs outside of zone
+    //     this.cd.markForCheck();
+    //   };
+    // }
   }
 
   get nombre() { return this.directorioForm.get('nombre'); }
@@ -232,8 +248,8 @@ this.user = this.userService.user;
   get linkedin() { return this.directorioForm.get('linkedin'); }
   get user_id() { return this.directorioForm.get('user_id'); }
 
-  guardarDirectorio() {
 
+  guardarDirectorio() {debugger
 
     this.formularioVcardGe();
 

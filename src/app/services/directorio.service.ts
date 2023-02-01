@@ -45,8 +45,8 @@ export class DirectorioService {
         map((resp:{ok: boolean, directory: Directorio}) => resp.directory)
         );
   }
-  getDirectoriobyUser(directory: Directorio) {
-    const url = `${baseUrl}/directory/show/user/${directory.user_id}`;
+  getDirectoriobyUser(user_id: number) {
+    const url = `${baseUrl}/directory/show/user/${user_id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
         map((resp:{ok: boolean, directory: Directorio}) => resp.directory)

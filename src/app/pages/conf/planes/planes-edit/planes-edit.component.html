@@ -87,38 +87,26 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 animated fadeIn fast">
+            <div class="col-md-6 animated fadeIn fast" *ngIf="planSeleccionado">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Image</h4>
+                        <!-- <form #f="ngForm" (ngSubmit)="onSubmitform(f)">
+                            <input type="file" name="myFile" (change)="fileEvent($event)" />
+                            <button>Upload Image</button>
+                        </form> -->
                         <div class="text-center">
-                            <!-- <img *ngIf="!imgTemp" [src]="plan.image | imagenPipe: 'plans'  " class="img-responsive img-thumbnail" alt=""> -->
+                            <img *ngIf="!imgTemp" [src]="planSeleccionado.image | imagenPipe: 'plans'  " class="img-responsive img-thumbnail" alt="">
                             <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar">
                         </div>
-                        <input type="file" (change)="onSelectedFile($event.file)">
+                        <input type="file" (change)="cambiarImagen($event.target.files[0])">
                         <br>
                         <br>
                         <button type="button" [disabled]="!imagenSubir" (click)="subirImagen()" class="btn btn-success waves-effect waves-light m-r-10 btn-block">
-                  <i class="fa fa-save"></i> Cambiar imagen
-                 </button>
+                            <i class="fa fa-save"></i> Cambiar imagen
+                          </button>
 
-                        <!-- <div class="col-md-9">
-                            <input type="file" id="image" (change)="onSelectedFile($event)" />
-                            <div [innerHTML]="uploadError" class="error"></div>
-                            <div *ngIf="imagePath">
-                                <br />
-                                <img [src]="imagePath" width="100px">
-                            </div>
-                        </div> -->
                     </div>
-                    <!-- <div *ngIf="blogSeleccionado.video_review">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Video</h4>
-                                <iframe class="videom" [src]="getVideoIframe(blogSeleccionado.video_review)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; " allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div> -->
+
                 </div>
             </div>
         </div>

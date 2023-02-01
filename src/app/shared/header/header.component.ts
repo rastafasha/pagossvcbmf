@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
   private linktTheme = document.querySelector('.dark');// se comunica el id pulsado
 
-  userProfile!: User;
+  userprofile!: User;
 
   public user: User;
   error: string;
@@ -65,6 +65,7 @@ export class HeaderComponent implements OnInit {
       }
       this.getItem();
       this.total = this.getTotal();
+
   }
 
   // ngDoCheck(): void {
@@ -90,15 +91,19 @@ export class HeaderComponent implements OnInit {
 
     }
 
+    this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
 
   }
 
-  getUserProfile(){
-    // this.userService.getUserById(id).subscribe((data: any) => {
-    this.authService.profileUser().subscribe((data: any) => {
-      this.userProfile = data;
-      console.log('userProfile',this.userProfile)
-    });
+  getUserProfile(id:number){
+    id  = this.user.id
+    this.userService.getUserById(id).subscribe(
+      res =>{
+        this.userprofile = res[0];
+        error => this.error = error
+        // console.log(this.userprofile);
+      }
+    );
   }
 
 
@@ -189,10 +194,10 @@ export class HeaderComponent implements OnInit {
 
       if (classExists) {
         localStorage.removeItem('dark');
-        console.log('✅ class exists on page, removido');
+        // console.log('✅ class exists on page, removido');
       } else {
         localStorage.setItem('dark', dark);
-        console.log('⛔️ class does NOT exist on page, agregado');
+        // console.log('⛔️ class does NOT exist on page, agregado');
       }
       // console.log('Pulsado');
   }

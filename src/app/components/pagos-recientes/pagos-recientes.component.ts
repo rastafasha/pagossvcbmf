@@ -26,7 +26,7 @@ export class PagosRecientesComponent implements OnInit {
       res =>{
         this.payments = res;
         error => this.error = error
-        console.log(this.payments);
+        // console.log(this.payments);
       }
     );
   }

@@ -24,6 +24,10 @@ export class UserProfileComponent implements OnInit {
   directories: Directorio;
   payments: Payment;
   id:number;
+
+  rolesSelected:number;
+
+
   constructor(
     private userService: UserService,
     private paymentService: PaymentService,
@@ -87,6 +91,8 @@ export class UserProfileComponent implements OnInit {
   enviarNotificacion(): void {
     this.alertService.success("Mensaje de Usuario","Usuario verificado, Nuevo Miembro!");
   }
+
+
 
 
 }

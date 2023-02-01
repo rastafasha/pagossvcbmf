@@ -22,11 +22,11 @@ export class UsuariosRecientesComponent implements OnInit {
   }
 
   getRecentUsers(): void {
-    this.userService.getRecientes().subscribe(
+    this.userService.getAll().subscribe(
       res =>{
         this.usuarios = res;
         error => this.error = error
-        console.log(this.usuarios);
+        // console.log(this.usuarios);
       }
     );
   }

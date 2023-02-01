@@ -62,7 +62,7 @@ export class PaymentService {
         );
   }
 
-  create(data:Payment): Observable<any> {
+  create(data:any): Observable<any> {
     const url = `${baseUrl}/payment/store`;
     return this.http.post(url, data, this.headers);
   }

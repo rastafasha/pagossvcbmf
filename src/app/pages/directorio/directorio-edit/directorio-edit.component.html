@@ -30,7 +30,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm">
+
+                        <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm" enctype="multipart/form-data">
                             <div class="row flex-nowrap">
 
                                 <div class="col-xs-12 col-sm-12 col-md-3">

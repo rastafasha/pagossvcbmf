@@ -82,7 +82,7 @@ export class UserService {
   }
 
   getRecientes(): Observable<any> {
-    const url = `${baseUrl}/users/recientes/`;
+    const url = `${baseUrl}/user/recientes/`;
     return this.http.get<any>(url)
       .pipe(
         map((resp:{ok: boolean, users: User}) => resp.users)
@@ -127,7 +127,14 @@ export class UserService {
       }
   }
 
-
+  changePassword(){
+    const url = `${baseUrl}/change-password/`;
+    return this.http.post(url,  this.headers);
+  }
+  resetPassword(){
+    const url = `${baseUrl}/reset-password/`;
+    return this.http.post(url,  this.headers);
+  }
 
 
 

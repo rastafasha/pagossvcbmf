@@ -28,6 +28,7 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
 // Import Angular plugin.
 import { NgxPayPalModule } from 'ngx-paypal';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 //Qr
 import { QRCodeModule } from 'angular2-qrcode';
 // paginacion
@@ -114,6 +115,7 @@ import { AuthInterceptor } from '@app/services/auth.interceptor';
     PipesModule,
     ConfModule,
     NgxPayPalModule,
+    AngularFileUploaderModule
 
   ],
   providers: [

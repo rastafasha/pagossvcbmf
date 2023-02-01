@@ -58,6 +58,7 @@
                     <table class="table table-borderless datatable">
                         <thead>
                             <tr>
+                                <th scope="col">Id</th>
                                 <th scope="col">Referencia</th>
                                 <th scope="col">Metodo </th>
                                 <th scope="col">Monto</th>
@@ -70,7 +71,8 @@
                         <tbody>
 
                             <tr *ngFor="let userpayment of userProfile.payments ">
-                                <th scope="row"><a [routerLink]="['/dashboard/payment-detail', userpayment.id]">{{userpayment.referencia}}</a></th>
+                                <th scope="row"><a [routerLink]="['/dashboard/payment-detail', userpayment.id]">{{userpayment.id}}</a></th>
+                                <th scope="row">{{userpayment.referencia}}</th>
                                 <td>{{userpayment.metodo}}</td>
                                 <td>{{userpayment.monto}} </td>
                                 <td>{{userpayment.moneda_codigo}}</td>

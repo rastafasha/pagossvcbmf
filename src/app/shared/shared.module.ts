@@ -13,7 +13,7 @@ import { ModalComponent } from './modal/modal.component';
 import { MenuiconosComponent } from './menuiconos/menuiconos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BannerplanesComponent } from './bannerplanes/bannerplanes.component';
-
+import {PipesModule} from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { BannerplanesComponent } from './bannerplanes/bannerplanes.component';
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PipesModule
   ]
 })
 export class SharedModule { }

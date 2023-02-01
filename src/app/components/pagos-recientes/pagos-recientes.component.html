@@ -8,18 +8,24 @@
                 <th scope="col">Monto</th>
                 <th scope="col">Moneda</th>
                 <th scope="col">UserId</th>
-                <th scope="col">Fecha</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
-        <tbody *ngFor="let payment of payments | slice: 0:5">
+        <tbody *ngFor="let payment of payments| slice: 0:5">
             <tr>
                 <th scope="row"><a [routerLink]="['./payment-detail', payment.id]">{{payment.referencia}}</a></th>
                 <td>{{payment.metodo}}</td>
                 <td>{{payment.monto}}</td>
                 <td>{{payment.moneda_codigo}}</td>
                 <td>{{payment.user_id}}</td>
-                <td>{{payment.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
+                <td>
+                    <span class="badge bg-success" *ngIf="payment.status === 'APPROVED'">Aprobado</span>
+                    <span class="badge bg-primary" *ngIf="payment.status === 'PENDING'">Pendiente</span>
+                    <span class="badge bg-danger" *ngIf="payment.status === 'REJECTED'">Rechazado</span>
+                </td>
+                <!-- <td>{{payment.created_at | date:'MMM d, y, h:mm:ss a'}}</td> -->
             </tr>
+
 
         </tbody>
     </table>
