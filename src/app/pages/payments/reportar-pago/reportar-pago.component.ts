@@ -14,9 +14,11 @@ import Swal from 'sweetalert2';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { environment } from 'src/environments/environment';
 import { CartItemModel } from '../../../models/cart-item-model';
-import { Plan } from '@app/models/plan';
 import { StorageService } from '@app/services/storage.service';
 import { AlertService } from '@app/services/alert.service';
+
+import { Plan } from '@app/models/plan';
+import{PlanesService} from '@app/services/planes.service';
 
 interface HtmlInputEvent extends Event{
   target : HTMLInputElement & EventTarget;
@@ -64,6 +66,7 @@ export class ReportarPagoComponent implements OnInit {
   paymentSeleccionado:Payment;
 
   user:User;
+  planes: Plan;
 
   constructor(
     private fb: FormBuilder,
@@ -77,6 +80,7 @@ export class ReportarPagoComponent implements OnInit {
     private currenciesService: CurrenciesService,
     private storageService: StorageService,
     private alertService: AlertService,
+    private planesService: PlanesService,
   ) {
     this.user = this.usuarioService.user;
   }
@@ -87,6 +91,7 @@ export class ReportarPagoComponent implements OnInit {
     this.validarFormulario();
     this.visible= false;
     this.getCurrencies();
+    this.getPlanes();
     this.getUser();
     this.closeCart();
     console.log(this.usuario);
@@ -123,6 +128,17 @@ export class ReportarPagoComponent implements OnInit {
     );
   }
 
+  getPlanes(): void {
+    // return this.planesService.carga_info();
+    this.planesService.getPlanes().subscribe(
+      res =>{
+        this.planes = res;
+        error => this.error = error
+        console.log(this.planes);
+      }
+    );
+  }
+
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
   }
@@ -137,10 +153,10 @@ export class ReportarPagoComponent implements OnInit {
       referencia: [''],
       email: [''],
       nombre: [''],
-      plan_id: [1],
+      plan_id: [''],
       status: ['PENDING'],
       validacion: ['PENDING'],
-      txn_id: [1],
+      txn_id: ['0'],
       user_id: [''],
       image: [this.imagenSubir],
     })
@@ -164,7 +180,7 @@ export class ReportarPagoComponent implements OnInit {
             validacion: res.validacion,
             txn_id: res.txn_id,
             user_id: this.user.id,
-            plan_id: '1',
+            plan_id: this.planes.id,
             // image: this.imagenSubir
           });
           // this.imagePath  = res.image;

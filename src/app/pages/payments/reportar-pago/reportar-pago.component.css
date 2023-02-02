@@ -1,7 +1,7 @@
 .formcompr {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, .4fr);
+    grid-template-columns: repeat(3, 0.5fr);
+    grid-template-rows: repeat(5, 0.4fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
@@ -35,7 +35,11 @@
 }
 
 .div8 {
-    grid-area: 4 / 4 / 4 / 2;
+    grid-area: 4 / 3 / 4 / 2;
+}
+
+.div9 {
+    grid-area: 4 / 4 / 4 / 3;
 }
 
 .instruccioness {

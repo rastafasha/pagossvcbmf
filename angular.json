@@ -19,8 +19,9 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                          "src/favicon.ico",
+                          "src/assets",
+                          "src/manifest.webmanifest"
                         ],
                         "styles": [
 
@@ -28,7 +29,9 @@
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.js"
-                        ]
+                        ],
+                        "serviceWorker": true,
+                        "ngswConfigPath": "ngsw-config.json"
                     },
                     "configurations": {
                         "production": {
@@ -86,8 +89,9 @@
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                          "src/favicon.ico",
+                          "src/assets",
+                          "src/manifest.webmanifest"
                         ],
                         "styles": [
                             "src/styles.css"

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 
@@ -30,6 +30,9 @@ import { PipesModule } from './pipes/pipes.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AngularFileUploaderModule } from "angular-file-uploader";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '@environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +51,13 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
     PipesModule,
     NgbModule,
     NgxSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
     // AngularFileUploaderModule
     // CKEditorModule,
 
