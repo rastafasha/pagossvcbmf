@@ -36,10 +36,11 @@
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                         <h2>{{userprofile.username}}</h2>
                         <p>{{userprofile.email}}</p>
-                        <span *ngIf="userprofile.role === 'SUPERADMIN'">Super Admin</span>
-                        <span *ngIf="userprofile.role === 'ADMIN'">Admin</span>
-                        <span *ngIf="userprofile.role === 'MEMBER'">Miembro</span>
-                        <span *ngIf="userprofile.role === 'GUEST'">Invitado</span>
+
+                        <span class="badge bg-dark-light" *ngIf="userprofile.role === 'SUPERADMIN'">SuperAdmin</span>
+                        <span class="badge bg-primary" *ngIf="userprofile.role === 'ADMIN'">Admin</span>
+                        <span class="badge bg-success" *ngIf="userprofile.role === 'MEMBER'">Miembro</span>
+                        <span class="badge bg-secondary" *ngIf="userprofile.role === 'GUEST'">Invitado</span>
 
                     </div>
                 </div>
@@ -188,7 +189,7 @@
                                             <h5>{{pageTitle}}</h5>
                                         </div>
                                         <div class="col-xs-6 col-sm-4">
-                                            <a [routerLink]="['/dashboard/directorio/view/', userdirectory.id]">
+                                            <a [routerLink]="['/dashboard/directorio/view/', userdirectory.user_id]">
                                                 <button class="btn btn-outline-success">Ver mi Tarjeta</button>
                                             </a>
                                         </div>

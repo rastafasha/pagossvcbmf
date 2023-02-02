@@ -9,18 +9,19 @@ const base_url = environment.apiUrlMedia;
 })
 export class FileUploadService {
 
-
+  image: string;
   constructor() { }
 
   async actualizarFoto(
     archivo: File,
-    tipo: 'usuarios'|'payments'|'directories'|'plans',
+    tipo: 'users'|'payments'|'directories'|'plans',
     id: number
   ){
 
-    try{
+    try{debugger
 
-      const url = `${base_url}${tipo}/${id}`;
+      // const url = `${base_url}/${tipo}/update/${id}`;
+      const url = `${base_url}${tipo}`;
       const formData = new FormData();
       formData.append('imagen', archivo);
 
@@ -33,12 +34,17 @@ export class FileUploadService {
       });
 
       const data = await resp.json();
+      console.log(data.name);
 
       if(data.ok){
-        return data.nombreArchivo;
+        console.log(data.name);
+        console.log(archivo);
+        return data.name;
 
       }else{
+        console.log(archivo);
         console.log(data.msg);
+        console.log(data);
         return false;
 
       }

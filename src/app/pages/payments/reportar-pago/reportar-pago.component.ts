@@ -214,7 +214,7 @@ export class ReportarPagoComponent implements OnInit {
     this.paymentService.create(data)
     .subscribe( (resp: any) =>{
       // Swal.fire('Creado', `creado correctamente`, 'success');
-      this.router.navigateByUrl(`/dashboard/factura`);
+      this.router.navigateByUrl(`/dashboard/historial-pagos`);
       this.pagoSeleccionado = resp;
       console.log(this.pagoSeleccionado);
       this.enviarNotificacion();

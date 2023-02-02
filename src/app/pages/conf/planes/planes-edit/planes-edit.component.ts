@@ -17,6 +17,18 @@ import { CurrenciesService } from '@app/services/currencies.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { AlertService } from '@app/services/alert.service';
 
+import { HttpClient,HttpHeaders } from '@angular/common/http';
+import {NgForm} from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import { StorageService } from '@app/services/storage.service';
+import { AccountService } from '@app/services/account.service';
+interface HtmlInputEvent extends Event{
+  target : HTMLInputElement & EventTarget;
+}
+
+declare var jQuery:any;
+declare var $:any;
+
 @Component({
   selector: 'app-planes-edit',
   templateUrl: './planes-edit.component.html',
@@ -26,18 +38,23 @@ export class PlanesEditComponent implements OnInit {
 
   title : string;
 
+  serverUrl = environment.apiUrl;
+
   public planForm: FormGroup;
   public plan: Plan;
   public usuario: User;
-  currenciesAll: Currencies;
-  error: string;
+  public currenciesAll: Currencies;
   public imagenSubir: File;
   public imgTemp: any = null;
   public file :File;
-  imagePath: string;
-  planSeleccionado: Plan;
+  public imgSelect : String | ArrayBuffer;
+  public planSeleccionado: Plan;
 
+  error: string;
+  id:number
   image:any;
+
+
   constructor(
     private fb: FormBuilder,
     private planService: PlanesService,
@@ -48,17 +65,25 @@ export class PlanesEditComponent implements OnInit {
     private currenciesService: CurrenciesService,
     private fileUploadService: FileUploadService,
     private alertService: AlertService,
+    private http:HttpClient
   ) {
     this.usuario = usuarioService.user;
-    const base_url = environment.apiUrl;
   }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormulario(id));
-    this.validarFormulario();
     this.getCurrencies();
+    this.validarFormulario();
 
+    // if(this.planSeleccionado){
+    //   //actualizar
+    //   this.title = 'Create Blog';
 
+    // }else{
+    //   //crear
+    //   this.title = 'Edit Blog';
+    // }
   }
 
   validarFormulario(){
@@ -67,8 +92,17 @@ export class PlanesEditComponent implements OnInit {
       price: ['',Validators.required],
       currency_id: ['',Validators.required],
       status: [''],
-      image: [this.image || 'no-image.jpg' ],
+      image: ['' ],
     })
+  }
+
+  getCurrencies(): void {
+    this.currenciesService.getCurrencies().subscribe(
+      res =>{
+        this.currenciesAll = res;
+        error => this.error = error;
+      }
+    );
   }
 
   iniciarFormulario(id: number){
@@ -83,31 +117,23 @@ export class PlanesEditComponent implements OnInit {
             price: res.price,
             status: res.status,
             currency_id: this.currenciesAll.id,
+            image : res.image
           });
-          this.imagePath = res.image;
           this.planSeleccionado = res;
-          console.log(this.planSeleccionado);
         }
       );
     } else {
       this.title = 'Creando Plan';
     }
-
   }
 
-  onSelectedFile(event) {
-    if (event.file.length > 0) {
-      const file = event.file;
-      this.planForm.get('image').setValue(file.name);
-    }
-    this.image = this.file.name;
-  }
+
   get name() { return this.planForm.get('name'); }
   get price() { return this.planForm.get('price'); }
   get currency_id() { return this.planForm.get('currency_id'); }
   get status() { return this.planForm.get('status'); }
 
-  updateBlog(){debugger
+  updateBlog(){
 
     const formData = new FormData();
     formData.append('name', this.planForm.get('name').value);
@@ -116,18 +142,19 @@ export class PlanesEditComponent implements OnInit {
     formData.append('status', this.planForm.get('status').value);
     formData.append('image', this.planForm.get('image').value);
 
-    const {name, price, currency_id, status } = this.planForm.value;
+    const {name, price, image, currency_id, status } = this.planForm.value;
     if(this.planSeleccionado){
       //actualizar
-      const data = {
+      const datos = {
         ...this.planForm.value,
+        image: this.image,
         id: this.planSeleccionado.id,
       }
-      this.planService.updatePlan(data).subscribe(
+      this.planService.updatePlan(datos).subscribe(
         resp =>{
           Swal.fire('Actualizado', `${name}  actualizado correctamente`, 'success');
-          console.log(this.planSeleccionado);
         });
+
 
     }else{
       //crear
@@ -140,17 +167,11 @@ export class PlanesEditComponent implements OnInit {
       })
     }
 
+    // this.subirImagen();
+
   }
 
-  getCurrencies(): void {
-    this.currenciesService.getCurrencies().subscribe(
-      res =>{
-        this.currenciesAll = res;
-        error => this.error = error
-        console.log(this.currenciesAll);
-      }
-    );
-  }
+
 
   enviarNotificacion(): void {
     this.alertService.info("Mensaje de Monedas","Se ha creado una nueva moneda!");
@@ -162,31 +183,49 @@ export class PlanesEditComponent implements OnInit {
     this.location.back(); // <-- go back to previous location on cancel
   }
 
-  // cambiarImagen(file: File){debugger
-  //   this.imagenSubir = file;
 
-  //   if(!file){
-  //     return this.imgTemp = null;
-  //   }
+  cambiarImagen(file: File){
+    this.imagenSubir = file;
 
-  //   const reader = new FileReader();
-  //   const url64 = reader.readAsDataURL(file);
+    if(!file){
+      return this.imgTemp = null;
+    }
+    const reader = new FileReader();
+    const url64 = reader.readAsDataURL(file);
 
-  //   reader.onloadend = () =>{
-  //     this.imgTemp = reader.result;
-  //   }
-  // }
-
-  subirImagen(){
-    this.fileUploadService
-    .actualizarFoto(this.imagenSubir, 'plans', this.planSeleccionado.id)
-    .then(img => { this.planSeleccionado.image = img;
-      Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
-
-    }).catch(err =>{
-      Swal.fire('Error', 'No se pudo subir la imagen', 'error');
-
-    })
+    reader.onloadend = () =>{
+      this.imgTemp = reader.result;
+    }
   }
+
+  subirImagen(){debugger
+    const {image, id } = this.planForm.value;
+    const datos = {
+      ...this.planForm.value,
+      image: this.imagenSubir.name,
+      id: this.planSeleccionado.id,
+    }
+    this.planService.updatePlan(datos).subscribe(
+      res=>{
+        this.image = res;
+        console.log(this.image)
+          Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
+      }
+    )
+    // .actualizarFoto(this.imagenSubir, 'plans', this.planSeleccionado.id)
+    // .then(img => { this.planSeleccionado.image = img;
+    //   Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
+
+    // }).catch(err =>{
+    //   Swal.fire('Error', 'No se pudo subir la imagen', 'error');
+
+    // })
+
+  }
+
+
+
+
+
 
 }

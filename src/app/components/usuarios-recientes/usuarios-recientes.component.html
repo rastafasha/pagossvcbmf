@@ -5,14 +5,21 @@
             <tr>
                 <th scope="col">Usuario </th>
                 <th scope="col">Email</th>
-                <th scope="col">Fecha</th>
+                <th scope="col">Role</th>
             </tr>
         </thead>
         <tbody *ngFor="let user of usuarios | slice: 0:5">
             <tr>
                 <th scope="row">{{user.username}}</th>
-                <th><a [routerLink]="['/dashboard/user/', user.id]">{{user.email}}</a></th>
-                <td>{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
+                <th><a [routerLink]="['/user/', user.id]">{{user.email}}</a></th>
+                <td>
+                    <!-- {{user.role}} -->
+                    <span class="badge bg-dark-light" *ngIf="user.role === 'SUPERADMIN'">SuperAdmin</span>
+                    <span class="badge bg-primary" *ngIf="user.role === 'ADMIN'">Admin</span>
+                    <span class="badge bg-success" *ngIf="user.role === 'MEMBER'">Miembro</span>
+                    <span class="badge bg-secondary" *ngIf="user.role === 'GUEST'">Invitado</span>
+
+                </td>
             </tr>
 
         </tbody>

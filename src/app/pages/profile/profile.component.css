@@ -36,6 +36,14 @@
     color: var(--azul);
 }
 
+.form-horizontal input.picture {
+    width: 169px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 30px;
+}
+
 @media(max-width:768px) {
     .listapermisos {
         grid-template-columns: repeat(1, 1fr);

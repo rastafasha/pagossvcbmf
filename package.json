@@ -22,6 +22,7 @@
         "@ckeditor/ckeditor5-angular": "^4.0.0",
         "@ckeditor/ckeditor5-build-classic": "^35.2.1",
         "@ng-bootstrap/ng-bootstrap": "^14.0.1",
+        "angular-file-uploader": "^7.1.1",
         "angular2-qrcode": "^2.0.3",
         "bootstrap": "^5.2.0",
         "dolartoday": "^1.0.2",

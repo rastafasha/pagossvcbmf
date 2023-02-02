@@ -12,6 +12,11 @@ import { Plan } from '@app/models/plan';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
 
+import { Payment } from '@app/models/payment';
+import { PaymentService } from '@app/services/payment.service';
+import { AlertService } from '@app/services/alert.service';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -31,12 +36,17 @@ export class CartComponent implements OnInit {
 
   public payPalConfig ? : IPayPalConfig;
 
+
+
   constructor(
     private messageService: MessageService,
     private storageService: StorageService,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private router: Router,
+    private paymentService: PaymentService,
+    private fb: FormBuilder,
+    private alertService: AlertService,
 
     ) {
 
@@ -88,6 +98,7 @@ export class CartComponent implements OnInit {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then((details: any) => {
               console.log('onApprove - you can get full order details inside onApprove: ', details);
+
           });
 
       },
@@ -97,9 +108,18 @@ export class CartComponent implements OnInit {
             this.openModal(
               data.purchase_units[0].items,
               data.purchase_units[0].amount.value,
+              data.id,
+              data.payer.email_address,
+              data.payer.name.given_name,
+              data.status,
+              data.purchase_units[0].items[0]
+
             );
             this.emptyCart();
+
             this.spinner.hide();
+            // this.procesarPagoPaypal();
+
 
         },
         onCancel: (data, actions) => {
@@ -144,6 +164,7 @@ export class CartComponent implements OnInit {
     this.cartItems.forEach((it: CartItemModel)=>{
       item = {
         name: it.productName,
+        id: it.productId,
         unit_amount: {
           currency_code: 'USD',
           value: it.productPrice,
@@ -183,12 +204,36 @@ export class CartComponent implements OnInit {
     this.storageService.setCart(this.cartItems);
   }
 
-  openModal(items, amount): void{
+
+
+
+
+
+
+  openModal(items, amount, reference,email, name,  status, planid): void{
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.items = items;
     modalRef.componentInstance.amount = amount;
+    modalRef.componentInstance.reference = reference;
+    modalRef.componentInstance.email = email;
+    modalRef.componentInstance.name = name;
+    modalRef.componentInstance.amount = amount;
+    modalRef.componentInstance.status = status;
+    modalRef.componentInstance.items[0] = planid;
 
   }
+  // cargarForm(reference,email, name, amount, status): void{
+  //   const modalRef = this.modalService.open(ModalComponent);
+  //   modalRef.componentInstance.reference = reference;
+  //   modalRef.componentInstance.email = email;
+  //   modalRef.componentInstance.name = name;
+  //   modalRef.componentInstance.amount = amount;
+  //   modalRef.componentInstance.status = status;
+
+  // }
+
+
+
 
 
 

@@ -107,6 +107,7 @@ export class AccountService {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
+    // this.cookieService.delete('<your-cookie-name>', '/', 'localhost', false, 'Lax');
     // this.http.post(`${this.serverUrl}/logout`)
   }
 
@@ -144,4 +145,6 @@ export class AccountService {
       catchError(error => of(false))
     );
   }
+
+
 }

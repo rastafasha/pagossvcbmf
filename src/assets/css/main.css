@@ -41,3 +41,7 @@
 .pointer {
     cursor: pointer;
 }
+
+.profile .profile-card .social-links a {
+    color: var(--azul);
+}

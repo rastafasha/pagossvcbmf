@@ -179,3 +179,16 @@ body .dark {
 .dark .cart-modal__price span {
     color: var(--white);
 }
+
+.dark .profile .profile-card .social-links a {
+    color: var(--white);
+}
+
+.dark .historial ul li a {
+    color: var(--white) !important;
+}
+
+.dark .historial ul li a:hover {
+    color: var(--white) !important;
+    background-color: var(--black) !important;
+}

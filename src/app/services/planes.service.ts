@@ -78,6 +78,10 @@ export class PlanesService {
     const url = `${baseUrl}/plan/update/${plan.id}`;
      return this.http.put(url, plan, this.headers);
    }
+  updatePlanImage(plan:any): Observable<any> {
+    const url = `${baseUrl}/plan/update/${plan.id}`;
+     return this.http.post(url, plan, this.headers);
+   }
 
   deletePlan(plan: Plan) {
     const url = `${baseUrl}/plan/destroy/${plan}`;

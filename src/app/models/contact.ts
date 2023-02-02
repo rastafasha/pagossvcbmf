@@ -4,5 +4,6 @@ export class Contact {
     ciudad: string;
     email: string;
     phone?: string;
+    subject: string;
     message: string;
 }

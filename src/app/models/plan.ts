@@ -10,7 +10,6 @@ export class Plan {
   price: number;
   image: string;
   currency_id: number ;
-  // status: string ;
   created_at: string;
   updated_at: string;
 

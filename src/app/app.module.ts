@@ -29,6 +29,7 @@ import { PipesModule } from './pipes/pipes.module';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     ConfModule,
     PipesModule,
     NgbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    // AngularFileUploaderModule
     // CKEditorModule,
 
   ],

@@ -15,10 +15,10 @@ import { MemberService } from '../../../services/member.service';
 export class DirectorioViewComponent implements OnInit {
 
   title = "Mi Directorio"
-  user: User;
+  userprofile: User;
   directory: Directorio;
   error: string;
-  id:number;
+  id:any;
 
   constructor(
     private directorioService: DirectorioService,
@@ -29,16 +29,28 @@ export class DirectorioViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( ({id}) => this.getDirectory(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
   }
 
 
   getDirectory(id:number): void {
-    this.memberService.getMemberDirectoryById(id).subscribe(
+    id = this.directory.user_id;
+
+    this.directorioService.getDirectoriobyUser(id).subscribe(
       res =>{
         this.directory = res;
         error => this.error = error;
         console.log(this.directory);
+      }
+    );
+  }
+
+  getUserProfile(id:number): void {
+    this.userService.getUserById(id).subscribe(
+      res =>{
+        this.userprofile = res[0];
+        error => this.error = error
+        console.log(this.userprofile);
       }
     );
   }

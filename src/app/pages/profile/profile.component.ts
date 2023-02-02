@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '@app/services/user.service';
 import { User } from '@app/models/user';
 import { Role, Permission } from '@app/models/role';
@@ -38,10 +38,13 @@ export class ProfileComponent implements OnInit {
   profileSeleccionado: User;
 
   directorioForm: FormGroup;
+  passwordForm: FormGroup;
 
   directorio: Directorio;
   infoDirectorio: any;
   id: number | null;
+  idDirecotory: number | null;
+  idPerfil: number | null;
   pageTitle: string;
   directory: Directorio;
 
@@ -54,6 +57,8 @@ export class ProfileComponent implements OnInit {
   vcard: string;
   errors:any = null;
 
+  public formSumitted = false;
+
   constructor(
     private location: Location,
     private userService: UserService,
@@ -61,15 +66,15 @@ export class ProfileComponent implements OnInit {
     private memberService: MemberService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
   ) {
   }
 
   ngOnInit(): void {
     this.closeMenu();
     this.getUser();
-    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioPerfil(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioDirectorio(id));
     this.activatedRoute.params.subscribe( ({id}) => this.getUserServer(id));
+
   }
   closeMenu(){
     var menuLateral = document.getElementsByClassName("sidebar");
@@ -92,97 +97,24 @@ export class ProfileComponent implements OnInit {
       res =>{
         this.userprofile = res[0];
         error => this.error = error
-        console.log(this.userprofile);
+        // console.log(this.userprofile);
       }
     );
+
+
+    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioDirectorio(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioPassword(id));
   }
 
-  iniciarFormularioPerfil(id:number){
-    // const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      let id = this.user.id;
-      // this.pageTitle = 'Editar Directorio';
-      this.userService.getUserById(id).subscribe(
-        res => {
-          this.profileForm.patchValue({
-            id: res.id,
-            // nombre: res.nombre,
-            username: res.username,
-            email: res.email,
-            user_id: this.user.id,
-          });
-          this.imagePath = res.image;
-          this.profileSeleccionado = res;
-        }
-      );
-    }
 
-    this.validarFormularioPerfil();
-
-  }
-
-  validarFormularioPerfil(){
-    this.profileForm = this.fb.group({
-      id: [''],
-      // nombre: ['', Validators.required],
-      username: ['', Validators.required],
-      image: [this.image],
-      user_id: [''],
-    });
-  }
-
-  onSelectedFile(event) {debugger
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.profileForm.get('image').setValue(file.name);
-      // this.directorioForm.get('image').setValue(file);
-
-      this.image = file.name;
-    }
-  }
-
-  // get nombre() { return this.profileForm.get('nombre'); }
-  get username() { return this.profileForm.get('username'); }
-
-
-  updateForm() {debugger
-
-
-    const formData = new FormData();
-    // formData.append('nombre', this.profileForm.get('nombre').value);
-    formData.append('username', this.profileForm.get('username').value);
-    formData.append('image', this.profileForm.get('image').value);
-
-    const id = this.profileForm.get('id').value;
-
-    if (id) {
-      const data = {
-        ...this.profileForm.value,
-        user_id: this.user.id,
-        id: this.user.id
-      }
-      this.userService.update(data).subscribe(
-        res => {
-          if (this.error) {
-            // this.uploadError = res.message;
-            // Swal.fire('Error', this.uploadError, 'error');
-          } else {
-            // this.router.navigate(['/directorio']);
-            // this.infoDirectorio = res;
-            Swal.fire('Guardado', 'Los cambios fueron actualizados', 'success');
-          }
-        },
-        error => this.error = error
-      );
-    }
-
-  }
 
 
   //Directorio
 
   iniciarFormularioDirectorio(id:number){
-    if (id) {
+    // const id = this.route.snapshot.paramMap.get('id');
+    if (!id == null || !id == undefined || id) {
+      // let id = this.directory.id;
       this.pageTitle = 'Editar Directorio';
       this.memberService.getMemberDirectoryById(id).subscribe(
         res => {
@@ -209,12 +141,12 @@ export class ProfileComponent implements OnInit {
             instagram: res.instagram,
             twitter: res.twitter,
             linkedin: res.linkedin,
-            vcard: this.vCardInfo,
             user_id: res.user_id,
+            status: res.status,
+            vcard: this.vCardInfo,
           });
           this.imagePath = res.image;
-          this.directory = res[0];
-          console.log(this.directory);
+          this.directory = res;
 
         }
       );
@@ -252,11 +184,24 @@ export class ProfileComponent implements OnInit {
       twitter: [''],
       linkedin: [''],
       vcard: [this.vCardInfo],
-      image: [this.image],
-      user_id: [''],
+      image: [''],
+      user_id: [this.user.id],
       status: ['PENDING'],
     });
   }
+
+
+  onSelectedFile(event) {debugger
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.profileForm.get('image').setValue(file.name);
+      // this.directorioForm.get('image').setValue(file);
+
+      this.image = file.name;
+    }
+
+  }
+
 
   get nombre() { return this.directorioForm.get('nombre'); }
   get surname() { return this.directorioForm.get('surname'); }
@@ -309,7 +254,7 @@ export class ProfileComponent implements OnInit {
     formData.append('instagram', this.directorioForm.get('instagram')?.value);
     formData.append('twitter', this.directorioForm.get('twitter')?.value);
     formData.append('linkedin', this.directorioForm.get('linkedin')?.value);
-    formData.append('image', this.directorioForm.get('image')?.value);
+    formData.append('image', this.directorioForm.get('image').value);
     formData.append('vcard', this.vCardInfo);
 
 
@@ -338,6 +283,7 @@ export class ProfileComponent implements OnInit {
     } else {
       const data = {
         ...this.directorioForm.value,
+        vcard: this.vCardInfo,
         user_id: this.user.id,
       }
       this.memberService.createMemberDirectory(data).subscribe(
@@ -449,5 +395,89 @@ hideQRCode(){
   );
 }
 
+
+iniciarFormularioPassword(id:number){
+    // const id = this.route.snapshot.paramMap.get('id');
+    if (!id == null || !id == undefined || id) {
+
+      this.memberService.getMemberDirectoryById(id).subscribe(
+        res => {
+          this.passwordForm.patchValue({
+            id: res.id,
+            email: res.email,
+          });
+
+        }
+      );
+    } else {
+      this.pageTitle = 'Crear Directorio';
+    }
+
+
+    this.validarFormularioPassword();
+
+  }
+
+  validarFormularioPassword(){
+    this.passwordForm = this.fb.group({
+      id: [''],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    password2: ['', Validators.required],
+    }, {
+      validators: this.passwordsIguales('password', 'password2')
+
+    });
+  }
+
+  passwordNoValido(){
+    const pass1 = this.passwordForm.get('password').value;
+    const pass2 = this.passwordForm.get('password2').value;
+
+    if((pass1 !== pass2) && this.formSumitted){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  passwordsIguales(pass1Name: string, pass2Name: string){
+    return (formGroup: FormGroup) =>{
+      const pass1Control = formGroup.get(pass1Name);
+      const pass2Control = formGroup.get(pass2Name);
+
+      if(pass1Control.value === pass2Control.value){
+        pass2Control.setErrors(null)
+      }else{
+        pass2Control.setErrors({noEsIgual: true});
+      }
+    }
+  }
+
+cambiarPassword(){debugger
+  this.formSumitted = true;
+
+  const {name } = this.passwordForm.value;
+
+  if(this.userprofile){debugger
+    //actualizar
+    const data = {
+      ...this.passwordForm.value,
+      id: this.userprofile.id
+    }
+    this.userService.changePassword().subscribe(
+      resp =>{
+        Swal.fire('Cambiado', `${name}  Password Cambiado correctamente`, 'success');
+      });
+
+  }else{
+    //crear
+    this.userService.resetPassword()
+    .subscribe( (resp: any) =>{
+      Swal.fire('Reset', `${name} Password reset correctamente`, 'success');
+    })
+  }
+
+}
 
 }

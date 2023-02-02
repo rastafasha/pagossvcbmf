@@ -189,7 +189,7 @@ export class UserDetailsComponent implements OnInit {
   iniciarFormularioDirectorio(id:number){
     if (id) {
       this.pageTitle = 'Editar Directorio';
-      this.userService.getUserById(id).subscribe(
+      this.directorioService.getDirectoriobyUser(id).subscribe(
         res => {
           this.directorioForm.patchValue({
             id: res[0].directories.id,
