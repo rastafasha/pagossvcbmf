@@ -37,7 +37,8 @@ export class Payment {
       } else if(this.imagen){
         return `${base_url}payments/${this.imagen}`;
       }else {
-        return `${base_url}payments/no-image.jpg`;
+        // return `${base_url}payments/no-image.jpg`;
+        return `./assets/img/no-image.jpg`;
       }
 
     }

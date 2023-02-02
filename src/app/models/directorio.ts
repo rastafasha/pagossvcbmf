@@ -43,6 +43,7 @@ export class Directorio {
           return `${base_url}directories/${this.image}`;
         }else {
           return `${base_url}directories/no-image.jpg`;
+          // return `./assets/img/no-image.jpg`;
         }
 
       }
