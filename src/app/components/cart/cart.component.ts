@@ -164,12 +164,14 @@ export class CartComponent implements OnInit {
     this.cartItems.forEach((it: CartItemModel)=>{
       item = {
         name: it.productName,
-        id: it.productId,
+
         unit_amount: {
           currency_code: 'USD',
           value: it.productPrice,
         },
         quantity: it.quantity,
+        id: it.productId,
+        category: it.category,
       };
       items.push(item);
     });

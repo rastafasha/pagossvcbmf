@@ -19,7 +19,7 @@ export class DashboardUserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     this.user = userService.user;
   }

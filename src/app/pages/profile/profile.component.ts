@@ -465,7 +465,7 @@ cambiarPassword(){debugger
       ...this.passwordForm.value,
       id: this.userprofile.id
     }
-    this.userService.changePassword().subscribe(
+    this.userService.changePassword(data).subscribe(
       resp =>{
         Swal.fire('Cambiado', `${name}  Password Cambiado correctamente`, 'success');
       });

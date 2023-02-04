@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PagoHecho } from '@app/models/payment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Payment } from '@app/models/payment';
@@ -63,7 +62,7 @@ export class ModalComponent implements OnInit {
 
   procesarPagoPaypal(reference: any, email: any, name: any,
     status: any, amount: any, items:any,
-    ){debugger
+    ){
     //crear
 
     let data = {

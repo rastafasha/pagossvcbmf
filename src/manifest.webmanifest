@@ -1,13 +1,13 @@
 {
-    "name": "SVCBMF v2 PWA",
-    "short_name": "app miembros",
+    "name": "PWA Miembros SVCBMF",
+    "short_name": "PWA Miembros SVCBMF",
     "theme_color": "#345b9c",
     "background_color": "#fafafa",
     "display": "standalone",
     "scope": "./",
     "start_url": "index.html",
     "orientation": "landscape",
-    "description": "App miembros SVCBMF",
+    "description": "PWA App miembros subscritos a SVCBMF",
     "icons": [{
             "src": "/favicon.ico",
             "sizes": "16x16 32x32"

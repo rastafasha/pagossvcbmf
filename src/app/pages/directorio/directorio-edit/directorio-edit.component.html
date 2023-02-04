@@ -32,52 +32,10 @@
                     <div class="card-body">
 
                         <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm" enctype="multipart/form-data">
-                            <div class="row flex-nowrap">
-
-                                <div class="col-xs-12 col-sm-12 col-md-3">
-                                    <div class="form-group" style="margin-bottom: 25px;">
-                                        <label for="exampleInputuname">Status<span class="required">*</span></label>
-                                        <div class="input-group">
-                                            <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
-                                            <select name="" id="input" class="form-control" formControlName="status" required="required">
-                                          <option value="">Seleccione</option>
-                                          <option value="PUBLISHED">Publicado</option>
-                                          <option value="PENDING">Pendiente</option>
-                                          <option value="REJECTED">Rechazado</option>
-                                        </select>
-                                        </div>
+                            <div class="row ">
 
 
-
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-row">
-                                            <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
-                                            <div class="col-xs-12">
-                                                <input type="file" id="image" (change)="onSelectedFile($event)" />
-                                                <div [innerHTML]="uploadError" class="error"></div>
-                                                <div *ngIf="imagePath">
-                                                    <br />
-                                                    <img [src]="imagePath" width="50%" value="photo" class="shadow">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="col-xs-12">
-                                            <h4>Codigo Vcard QR</h4>
-                                            <br>
-                                            <qr-code *ngIf="display" class="code" id="box" [value]="vCardInfo" [size]="200" style=>
-                                                <img class="yellow">
-                                            </qr-code>
-                                            <div class="clear"></div>
-                                            <!-- <a class="btn btn-primary" (click)="generateQRCode()">Generar QR</a> -->
-                                            <a class="btn btn-primary" *ngIf="display" value="vCardInfo" (click)="hideQRCode()">Hide QR</a>
-                                            <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}">Download Image</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                <div class="col-xs-12 col-sm-6 col-md-8">
                                     <div class=" col-md-6">
                                         <label>Nombres <span class="required">*</span></label>
                                         <input type="text" formControlName="nombre" value="nombre" class="form-control" required>
@@ -173,43 +131,88 @@
                                     <br>
                                     <!----//-->
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-3">
-                                    <div>
-                                        <h4>Redes Sociales</h4>
-                                    </div>
-                                    <div class="clear"></div>
-                                    <div class="redes">
-                                        <div class="row mb-3">
-                                            <label for="facebook" class="col-md-4 col-lg-3 col-form-label">
-                                          <i class="bi bi-facebook"></i> Facebook</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input type="text" class="form-control" formControlName="facebook" value="facebook" placeholder="https://facebook.com/nameuser">
+                                <div class="col-xs-12 col-sm-6 col-md-4">
+                                    <div class="col-xs-12 ">
+                                        <div class="form-group" style="margin-bottom: 25px;">
+                                            <label for="exampleInputuname">Status<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
+                                                <select name="" id="input" class="form-control" formControlName="status" required="required">
+                                          <option value="">Seleccione</option>
+                                          <option value="PUBLISHED">Publicado</option>
+                                          <option value="PENDING">Pendiente</option>
+                                          <option value="REJECTED">Rechazado</option>
+                                        </select>
                                             </div>
+
+
+
                                         </div>
-                                        <div class="row mb-3">
-                                            <label for="instagram" class="col-md-4 col-lg-3 col-form-label">
-                                        <i class="bi bi-instagram"></i> Instagram</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input type="text" class="form-control" formControlName="instagram" value="instagram" placeholder="https://instagram.com/nameuser">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="twitter" class="col-md-4 col-lg-3 col-form-label">
-                                      <i class="bi bi-twitter"></i> Twitter</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input type="text" class="form-control" formControlName="twitter" value="twitter" placeholder="https://twitter.com/nameuser">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="linkedin" class="col-md-4 col-lg-3 col-form-label">
-                                    <i class="bi bi-linkedin"></i> Linkedin</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input type="text" class="form-control" formControlName="linkedin" value="linkedin" placeholder="https://linkedin.com/nameuser">
+                                        <div class="col-xs-12 ">
+                                            <div class="form-group form-row">
+                                                <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
+                                                <div class="col-xs-12">
+                                                    <input type="file" id="image" (change)="onSelectedFile($event)" />
+                                                    <div [innerHTML]="uploadError" class="error"></div>
+                                                    <div *ngIf="imagePath">
+                                                        <br />
+                                                        <img [src]="imagePath" width="50%" value="photo" class="shadow">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
                                     </div>
+                                    <div class="col-xs-12">
+                                        <div>
+                                            <h4>Redes Sociales</h4>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <div class="redes">
+                                            <div class="row mb-3">
+                                                <label for="facebook" class="col-xs-12 col-form-label">
+                                            <i class="bi bi-facebook"></i> Facebook</label>
+                                                <div class="col-11">
+                                                    <input type="text" class="form-control" formControlName="facebook" value="facebook" placeholder="https://facebook.com/nameuser">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="instagram" class="col-xs-12 col-form-label">
+                                          <i class="bi bi-instagram"></i> Instagram</label>
+                                                <div class="col-11">
+                                                    <input type="text" class="form-control" formControlName="instagram" value="instagram" placeholder="https://instagram.com/nameuser">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="twitter" class="col-xs-12 col-form-label">
+                                        <i class="bi bi-twitter"></i> Twitter</label>
+                                                <div class="col-11">
+                                                    <input type="text" class="form-control" formControlName="twitter" value="twitter" placeholder="https://twitter.com/nameuser">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="linkedin" class="col-xs-12 col-form-label">
+                                      <i class="bi bi-linkedin"></i> Linkedin</label>
+                                                <div class="col-11">
+                                                    <input type="text" class="form-control" formControlName="linkedin" value="linkedin" placeholder="https://linkedin.com/nameuser">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <h4>Codigo Vcard QR</h4>
+                                        <br>
+                                        <qr-code *ngIf="display" class="code" id="box" [value]="vCardInfo" [size]="200" style=>
+                                            <img class="yellow">
+                                        </qr-code>
+                                        <div class="clear"></div>
+                                        <!-- <a class="btn btn-primary" (click)="generateQRCode()">Generar QR</a> -->
+                                        <a class="btn btn-primary" *ngIf="display" value="vCardInfo" (click)="hideQRCode()">Hide QR</a>
+                                        <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}">Download Image</a>
+                                    </div>
                                 </div>
+
                             </div>
 
                             <input type="hidden" formControlName="id">

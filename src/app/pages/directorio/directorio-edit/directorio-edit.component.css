@@ -2,6 +2,10 @@
     padding: 20px;
 }
 
+.card-body {
+    padding: 20px;
+}
+
 .formuEdit .form-group.col-md-6 {
     float: left;
     width: 48%;
@@ -27,7 +31,7 @@
     /* grid-template-columns: repeat(5, 20%); */
     grid-auto-flow: column;
     grid-template-columns: max-content;
-    grid-template-rows: repeat(7, 7%);
+    grid-template-rows: repeat(7, 22%);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     width: 100%;
@@ -86,5 +90,8 @@
         object-fit: contain;
         width: 200px !important;
         display: flex;
+    }
+    .redes {
+        grid-template-rows: repeat(7, 7%);
     }
 }

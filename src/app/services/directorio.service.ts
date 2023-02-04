@@ -12,12 +12,17 @@ const baseUrl = environment.apiUrl;
 export class DirectorioService {
 
   public directories: Directorio;
+  public directory: Directorio;
 
 
   constructor(private http: HttpClient) { }
 
   get token():string{
     return localStorage.getItem('auth_token') || '';
+  }
+
+  get status(): 'PUBLISHED'| 'PENDING' | 'REJECTED' {
+    return this.directory.status!;
   }
 
 

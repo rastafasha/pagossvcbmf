@@ -11,7 +11,7 @@ export class CartItemModel {
     constructor(product: Plan){
       this.productId= product.id;
       this.productName = product.name;
-      this.category = 'Plan';
+      this.category = 'DIGITAL_GOODS';
       this.description = 'Esto es una subcripcion';
       this.productPrice = product.price;
       this.quantity = 1;

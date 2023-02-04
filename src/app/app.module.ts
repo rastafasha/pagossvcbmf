@@ -33,6 +33,8 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
 
+import {MdToastModule} from 'md-toast/toast';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,7 @@ import { environment } from '@environments/environment';
     }),
     // AngularFileUploaderModule
     // CKEditorModule,
+
 
   ],
   providers: [
