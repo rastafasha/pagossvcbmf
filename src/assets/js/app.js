@@ -16,21 +16,21 @@ function isOnline() {
     if (navigator.onLine) {
         // tenemos conexión
         console.log('online');
-        $.mdtoast('Online', {
-            interaction: true,
-            interactionTimeout: 1000,
-            actionText: 'OK!'
-        });
+        // $.mdtoast('Online', {
+        //     interaction: true,
+        //     interactionTimeout: 1000,
+        //     actionText: 'OK!'
+        // });
 
 
     } else {
         // No tenemos conexión
         console.log('offline');
-        $.mdtoast('Offline', {
-            interaction: true,
-            actionText: 'OK',
-            type: 'warning'
-        });
+        // $.mdtoast('Offline', {
+        //     interaction: true,
+        //     actionText: 'OK',
+        //     type: 'warning'
+        // });
     }
 
 }

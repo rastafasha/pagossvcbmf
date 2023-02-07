@@ -6,7 +6,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { UserService } from '@app/services/user.service';
 import { User } from '@app/models/user';
 import { TokenService } from '@app/services/token.service';
-
+import { AlertService } from '@app/services/alert.service';
 declare const gapi: any;
 
 
@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     private usuarioService: UserService,
     private token: TokenService,
+    private alertService: AlertService,
   ) {
 
   }
@@ -180,6 +181,8 @@ passwordsIguales(pass1Name: string, pass2Name: string){
 }
 // Registro
 
-
+enviarNotificacion(): void {
+  this.alertService.info("Mensaje de Registro","Se ha creado un nuevo usuario!");
+}
 
 }

@@ -186,13 +186,10 @@ p {
 
 @media(max-width:768px) {
     .instruccioness {
-        flex-direction: column;
-        height: 370px;
+        flex-direction: row;
     }
     .instruccioness .info {
         flex-direction: column;
-        position: relative;
-        left: -67px;
     }
     .acces-icons {
         width: 100%;
@@ -225,8 +222,6 @@ p {
     }
     .instruccioness .info {
         flex-direction: column;
-        position: relative;
-        left: -67px;
     }
     .acces-icons {
         width: calc(100% - 10px);
@@ -247,9 +242,8 @@ p {
         width: auto !important;
         background-image: none;
     }
-    .pagetitle {
+    nav {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
     }
 }

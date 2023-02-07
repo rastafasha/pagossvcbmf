@@ -2,7 +2,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="profile">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-7">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
@@ -16,13 +16,9 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2 push-right">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
-        </div>
-        <div class="col-xs-12 col-sm-3 pull-right">
-            <button class="btn btn-primary pull-right" routerLink="/dashboard/realizar-pago">
-              Realizar un pago
-            </button>
+            <button class="btn btn-outline-success pull-right" routerLink="/dashboard/realizar-pago">Realizar un Pago</button>
         </div>
     </div>
 

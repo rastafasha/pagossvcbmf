@@ -87,6 +87,7 @@ export class ReportarPagoComponent implements OnInit {
 
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     // this.activatedRoute.params.subscribe( ({id}) => this.cargarForm(id));
     this.validarFormulario();
     this.visible= false;

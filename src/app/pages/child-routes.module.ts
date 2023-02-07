@@ -35,6 +35,7 @@ import { ProductoComponent } from './productos/producto/producto.component';
 import { PlanComponent } from './planes/plan/plan.component';
 import { PaymentEditComponent } from './payments/payment-edit/payment-edit.component';
 import { ReportarPagoComponent } from './payments/reportar-pago/reportar-pago.component';
+import { DirectorioViewPublicComponent } from './directorio/directorio-view-public/directorio-view-public.component';
 
 
 
@@ -66,6 +67,7 @@ const childRoutes: Routes = [
     { path: 'directorio/edit/:id', component: DirectorioEditComponent, data:{title:'Directorio Editar'} },
     { path: 'directorio/member/edit/:user_id', component: DirectorioEditComponent, data:{title:'Directorio Editar'} },
     { path: 'directorio/view/:id', component: DirectorioViewComponent, data:{title:'Directorio Editar'} },
+    { path: 'directorio/view-public/:id', component: DirectorioViewPublicComponent, data:{title:'Directorio Publico'} },
 
     //configuraciones
     { path: 'configuraciones',  component: ConfiguracionesComponent, data:{title:'Configuraciones'} },
@@ -73,7 +75,7 @@ const childRoutes: Routes = [
     { path: 'rolesconf', component: RolesViewComponent, data:{title:'Planes'} },
 
     { path: 'planes', component: PlanesIndexComponent, data:{title:'Planes'} },
-    { path: 'plan/:id', component: PlanesIndexComponent, data:{title:'Plan'} },
+    { path: 'plan/:id', component: PlanComponent, data:{title:'Plan'} },
     { path: 'planes/create', component: PlanesEditComponent, data:{title:'Crear Plan'} },
     { path: 'plan/edit/:id', component: PlanesEditComponent, data:{title:'Editar Plan'} },
     { path: 'planes/all', component: PlanesPageComponent, data:{title:'Planes'} },

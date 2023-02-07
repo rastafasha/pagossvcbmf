@@ -14,8 +14,8 @@
         </div>
         <div class="right shadow animated fadeIn">
 
-            <p>Estado del plan: </p>
-            <div *ngIf="userprofile.role == 'MEMBER'||userprofile.role == 'ADMIN'|| userprofile.role == 'SUPERADMIN'">
+            <p>Plan: </p>
+            <div *ngIf="userprofile.role == 'MEMBER'">
                 <span class="badge bg-success">Activo</span>
             </div>
             <div *ngIf="userprofile.role == 'GUEST'">
@@ -26,8 +26,12 @@
     <!-- End Page Title -->
 
     <!-- banners planes -->
-    <app-bannerplanes></app-bannerplanes>
+    <div *ngIf="userprofile.role == 'GUEST'">
+        <app-bannerplanes></app-bannerplanes>
+    </div>
+
     <!-- banners planes -->
+
 
     <div class="clear"></div>
     <!-- acceso iconos -->
@@ -55,7 +59,12 @@
                     </div>
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                        <div *ngIf="!userprofile.directories.image">
+                            <img src="assets/img/no-image.jpg" class="rounded-circle">
+                        </div>
+                        <div *ngIf="userprofile.directories.image">
+                            <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                        </div>
                         <h2>{{user.username}}</h2>
 
                         <p>Usuario desde:<br>{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
@@ -74,10 +83,12 @@
                             <li class="nav-item">
                                 <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">Actualidad</button>
                             </li>
-
-                            <li class="nav-item">
+                            <li class="nav-item" *ngIf="userprofile.role == 'MEMBER'">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">News</button>
                             </li>
+                            <!-- <div *ngIf="user.role === 'MEMBER'">
+
+                            </div> -->
 
 
                         </ul>
@@ -95,7 +106,7 @@
                                         <button class="btn btn-outline-success">Ir a Mi Cuenta</button>
                                     </a>
                                 </div>
-                                <div *ngIf="user.role === 'GUEST'">
+                                <div *ngIf="user.role === 'MEMBER'">
                                     <app-planesyproductos></app-planesyproductos>
                                 </div>
                             </div>
@@ -111,6 +122,8 @@
             </div>
         </div>
     </section>
+
+    <app-directorio></app-directorio>
 
 </div>
 <!--/main-->

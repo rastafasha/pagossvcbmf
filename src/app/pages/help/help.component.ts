@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '@app/services/user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-help',
@@ -9,11 +10,13 @@ import { UserService } from '@app/services/user.service';
 export class HelpComponent implements OnInit {
   title = "Ayuda | FAQ"
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
     this.closeMenu();
+    window.scrollTo(0,0);
   }
 
   closeMenu(){
@@ -22,6 +25,10 @@ export class HelpComponent implements OnInit {
          menuLateral[i].classList.remove("active");
 
       }
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
 }

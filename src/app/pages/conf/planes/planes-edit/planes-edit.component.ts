@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 
@@ -88,11 +88,11 @@ export class PlanesEditComponent implements OnInit {
 
   validarFormulario(){
     this.planForm = this.fb.group({
-      name: ['',Validators.required],
-      price: ['',Validators.required],
-      currency_id: ['',Validators.required],
-      status: [''],
-      image: ['' ],
+      name: new FormControl(null, [Validators.required]),
+      price: new FormControl(null, [Validators.required]),
+      currency_id: new FormControl(null, [Validators.required]),
+      status: new FormControl(null, [Validators.required]),
+      image: new FormControl(null),
     })
   }
 
@@ -166,15 +166,15 @@ export class PlanesEditComponent implements OnInit {
         this.enviarNotificacion();
       })
     }
-
-    // this.subirImagen();
+    this.validarFormulario();
+    this.subirImagen();
 
   }
 
 
 
   enviarNotificacion(): void {
-    this.alertService.info("Mensaje de Monedas","Se ha creado una nueva moneda!");
+    this.alertService.info("Mensaje de Planes","Se ha creado un nuevo plan!");
   }
 
 
@@ -212,6 +212,7 @@ export class PlanesEditComponent implements OnInit {
           Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
       }
     )
+    //sube las imagenes  por separado
     // .actualizarFoto(this.imagenSubir, 'plans', this.planSeleccionado.id)
     // .then(img => { this.planSeleccionado.image = img;
     //   Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
@@ -222,6 +223,13 @@ export class PlanesEditComponent implements OnInit {
     // })
 
   }
+
+
+
+
+
+
+//Source: https://stackoverflow.com/questions/63537120
 
 
 

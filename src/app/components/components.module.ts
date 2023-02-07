@@ -27,6 +27,7 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import {PipesModule} from '../pipes/pipes.module';
 import {ModalComponent} from './modal/modal.component';
+import { DirectorioComponent } from './directorio/directorio.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {ModalComponent} from './modal/modal.component';
     PlanesyproductosComponent,
     NotificacionesComponent,
     ProductItemComponent,
-    ModalComponent
+    ModalComponent,
+    DirectorioComponent
   ],
   exports: [
     AlertComponent,
@@ -65,7 +67,8 @@ import {ModalComponent} from './modal/modal.component';
     PlanesyproductosComponent,
     NotificacionesComponent,
     ProductItemComponent,
-    ModalComponent
+    ModalComponent,
+    DirectorioComponent
   ],
   imports: [
     CommonModule,

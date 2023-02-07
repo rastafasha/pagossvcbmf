@@ -39,7 +39,7 @@ export class User {
       } else if(this.image){
         return `${base_url}users/${this.image}`;
       }else {
-        return `${base_url}users/no-image.jpg`;
+        return `${base_url}/no-image.jpg`;
         // return `./assets/img/no-image.jpg`;
       }
 

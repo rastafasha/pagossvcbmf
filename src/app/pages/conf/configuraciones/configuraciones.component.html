@@ -2,7 +2,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
@@ -16,7 +16,7 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2 push-right">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-6  col-md-4">
                     <div class="card">
-                        <div class="card-body roles">
+                        <div class="card-body ">
                             <i class="bi bi-info-circle"> </i>
                             <h2> Roles</h2>
                             <a routerLink="/dashboard/rolesconf">

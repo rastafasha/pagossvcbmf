@@ -35,7 +35,7 @@ export class Plan {
     } else if(this.image){
       return `${base_url}plans/${this.image}`;
     }else {
-      return `${base_url}plans/no-image.jpg`;
+      return `${base_url}/no-image.jpg`;
     }
 
   }

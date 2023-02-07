@@ -2,23 +2,22 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <!-- <h1><i class="bx bxs-user-account"></i> {{title}}</h1> -->
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
-                        <li class="breadcrumb-item"><a routerLink="/">Productos</a></li>
-                        <li class="breadcrumb-item"><a routerLink="/">Producto</a></li>
-                        <!-- <li class="breadcrumb-item active">{{title}}</li> -->
+                        <li class="breadcrumb-item"><a routerLink="/dashboard/planes/all">planes</a></li>
+                        <li class="breadcrumb-item active">{{plan.name}}</li>
                     </ol>
                 </nav>
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2 push-right">
-            <!-- <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button> -->
+        <div class="buton">
+            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
@@ -31,8 +30,8 @@
                 <div class="col-xs-12 col-sm-6">
                     <!-- banner planes -->
 
-                    <div class="instruccioness shadow animated fadeInUp producto">
-                        <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt="">
+                    <div class=" shadow animated fadeInUp ">
+                        <img [src]="plan.image | imagenPipe: 'plans'">
                         <!-- <div class="info">
 
 
@@ -44,23 +43,14 @@
                 <div class="col-xs-12 col-sm-6">
                     <!-- banner planes -->
 
-                    <div class="instruccioness shadow animated fadeInUp producto">
+                    <div class="instruccioness shadow animated fadeInUp ">
                         <!-- <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt=""> -->
                         <div class="info">
 
-                            <h2>Nombre del Plan</h2>
-                            <p>vea nuestro Catalogo </p>
-                            <h2>$100.00</h2>
-                            <p>Dirijase a la app o web del metodo preferido, </p>
-                            <ul>
-                                <li class="badge bg-primary">Paypal</li>
-                                <li class="badge bg-primary">Zelle</li>
-                                <li class="badge bg-primary">Pago Móvil</li>
-                                <li class="badge bg-primary">Transferencia</li>
-                            </ul>
-                            <a routerLink="/dashboard/productos/producto">
-                                <div class="button btn btn-outline-success">Ver Producto</div>
-                            </a>
+                            <h2>{{plan.name}}</h2>
+                            <br>
+                            <h2>{{plan.price|currency}}</h2>
+
                         </div>
                     </div>
                     <!-- banner planes -->

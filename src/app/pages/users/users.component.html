@@ -2,7 +2,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
@@ -16,7 +16,7 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2 push-right">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
@@ -28,11 +28,14 @@
         <app-confirm></app-confirm>
 
         <!-- Recent Pagos -->
-        <div class="col-12">
-
-            <!-- buscador -->
-            <app-search></app-search>
-            <!-- buscador -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- buscador -->
+                    <app-search></app-search>
+                    <!-- buscador -->
+                </div>
+            </div>
             <div class="card recent-sales overflow-auto">
 
                 <div class="card-body">
@@ -52,8 +55,8 @@
                         <tbody>
                             <tr *ngFor="let user of usuarios |  paginate: { itemsPerPage: count, currentPage: p }">
 
-                                <td>{{user.id}}</td>
-                                <td>{{user.username}} </td>
+                                <td><a [routerLink]="['/dashboard/user/', user.id]">{{user.id}}</a></td>
+                                <td><a [routerLink]="['/dashboard/user/', user.id]">{{user.username}}</a> </td>
                                 <td>{{user.email}}</td>
                                 <td>
                                     <!-- {{user.role }}  -->

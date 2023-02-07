@@ -28,6 +28,7 @@ export class PlanesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlanes();
+    window.scrollTo(0,0);
   }
 
 

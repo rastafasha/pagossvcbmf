@@ -28,6 +28,7 @@ export class DashboardUserComponent implements OnInit {
 
     this.closeMenu();
     this.getUser();
+    window.scrollTo(0,0);
   }
 
   closeMenu(){

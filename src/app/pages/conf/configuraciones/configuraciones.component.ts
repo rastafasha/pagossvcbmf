@@ -24,6 +24,7 @@ export class ConfiguracionesComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.closeMenu();
+    window.scrollTo(0,0);
   }
 
   closeMenu(){

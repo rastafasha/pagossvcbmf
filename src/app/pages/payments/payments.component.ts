@@ -38,6 +38,7 @@ export class PaymentsComponent implements OnInit {
   ngOnInit(): void {
     this.closeMenu();
     this.getPagos();
+    window.scrollTo(0,0);
     // this.getPagos_list();
   }
 

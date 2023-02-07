@@ -1,10 +1,13 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck , ApplicationRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './models/user';
 import { AccountService } from './services/account.service';
 import { AlertService } from './services/alert.service';
 import { StorageService } from './services/storage.service';
 import { UserService } from './services/user.service';
+import { SwUpdate } from '@angular/service-worker';
+import { first, switchMap, Observable, mapTo, timeout, catchError, of, timer } from 'rxjs';
+import { PwaService } from './services/pwa.service';
 
 
 @Component({
@@ -20,6 +23,7 @@ export class AppComponent implements OnInit {
   public user: User;
 
   id:number;
+  check:boolean;
 
   constructor(
     private alertService: AlertService,
@@ -27,14 +31,37 @@ export class AppComponent implements OnInit {
     private accountService: AccountService,
     private storageService: StorageService,
     private router: Router,
+    private swUpdate: SwUpdate,
+    private appRef: ApplicationRef,
+    private pwaService: PwaService
 
     ) {
       this.user = this.accountService.user;
-
+      if (this.swUpdate.isEnabled) {
+        this.appRef.isStable.pipe(
+            first(isStable => isStable === true),
+            switchMap(() => this.swUpdate.available),
+        ).subscribe(() => {
+            this.swUpdate.activateUpdate().then(() => document.location.reload());
+        });
+    }
 
     }
   ngOnInit(): void {
     this.iniciarDarkMode();
+    this.checkForUpdate();
+  }
+
+  checkForUpdate() {
+    return this.pwaService.checkForUpdate().subscribe(
+      res=>{
+        this.check =res;
+        console.log(this.check);
+        if(this.check === true){
+          this.enviarNotificacionActualizacion();
+        }
+      }
+      )
 
   }
 
@@ -91,7 +118,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-
-
+  enviarNotificacionActualizacion(): void {
+    this.alertService.success("Mensaje de Actualización","Versión App Actualizada");
+  }
 
 }

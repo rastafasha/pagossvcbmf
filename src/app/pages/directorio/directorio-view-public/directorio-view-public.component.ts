@@ -10,14 +10,16 @@ import{Payment} from '@app/models/payment';
 import Swal from 'sweetalert2';
 import { AlertService } from '@app/services/alert.service';
 
-@Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
-})
-export class UserProfileComponent implements OnInit {
 
-  title = "Detalles de la cuenta";
+@Component({
+  selector: 'app-directorio-view-public',
+  templateUrl: './directorio-view-public.component.html',
+  styleUrls: ['./directorio-view-public.component.css']
+})
+export class DirectorioViewPublicComponent implements OnInit {
+
+
+  title = "Detalles del directorio";
   user: User;
   userprofile: User;
   error: string;
@@ -92,8 +94,5 @@ export class UserProfileComponent implements OnInit {
   enviarNotificacion(): void {
     this.alertService.success("Mensaje de Usuario","Usuario verificado, Nuevo Miembro!");
   }
-
-
-
 
 }

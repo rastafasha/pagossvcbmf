@@ -1,5 +1,6 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { SwUpdate } from '@angular/service-worker';
 import { first, switchMap, Observable, mapTo, timeout, catchError, of, timer } from 'rxjs';
 
@@ -32,6 +33,7 @@ checkForUpdate(): Observable<boolean> {
             catchError(() => of(false)),
         );
 
+
         // return fromPromise(this.swUpdate.checkForUpdate()).pipe(
         //     switchMap(() => available$),
         // );
@@ -45,4 +47,15 @@ checkForUpdate(): Observable<boolean> {
 function fromPromise(arg0: Promise<boolean>) {
   throw new Error('Function not implemented.');
 }
+
+
+
+
+
+
+
+//Source: https://stackoverflow.com/questions/67935682
+
+
+
 

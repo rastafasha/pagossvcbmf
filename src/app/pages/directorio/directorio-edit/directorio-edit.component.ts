@@ -158,9 +158,9 @@ this.user = this.userService.user;
             vcard: this.vCardInfo,
             user_id: res.user_id,
             status: res.status,
-            // image : res.image
+            image : res.image
           });
-          this.imagePath = res.image;
+          // this.imagePath = res.image;
           this.directory = res;
 
         }
@@ -193,7 +193,7 @@ this.user = this.userService.user;
       twitter: [''],
       linkedin: [''],
       vcard: [this.vCardInfo],
-      image: [''],
+      image: ['imagen-prueba.jpg'],
       user_id: [''],
       status: [''],
     });
@@ -205,24 +205,8 @@ this.user = this.userService.user;
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.directorioForm.get('image').setValue(file.name);
-
-      this.imagen = file.name;
     }
-    // const reader = new FileReader();
 
-    // if(event.target.files && event.target.files.length) {
-    //   const [file] = event.target.files;
-    //   reader.readAsDataURL(file);
-
-    //   reader.onload = () => {
-    //     this.directorioForm.patchValue({
-    //       file: reader.result
-    //    });
-
-    //     // need to run CD since file load runs outside of zone
-    //     this.cd.markForCheck();
-    //   };
-    // }
   }
 
   get nombre() { return this.directorioForm.get('nombre'); }
@@ -277,6 +261,7 @@ this.user = this.userService.user;
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
     formData.append('user_id', this.directorioForm.get('user_id').value);
     formData.append('status', this.directorioForm.get('status').value);
+    // formData.append('image', this.directorioForm.value.image);
     formData.append('image', this.directorioForm.get('image').value);
     formData.append('vcard', this.vCardInfo);
 
@@ -291,12 +276,14 @@ this.user = this.userService.user;
       this.directorioService.updateDirectorio(data).subscribe(
         res => {
           if (this.error) {
+            console.log(this.error);
             // this.uploadError = res.message;
             // Swal.fire('Error', this.uploadError, 'error');
           } else {
             // this.router.navigate(['/directorio']);
             // this.infoDirectorio = res;
             Swal.fire('Guardado', 'Los cambios fueron actualizados', 'success');
+            console.log(data);
           }
         },
         error => this.error = error

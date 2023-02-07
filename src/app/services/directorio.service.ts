@@ -13,6 +13,7 @@ export class DirectorioService {
 
   public directories: Directorio;
   public directory: Directorio;
+  public directoriesPublished: Directorio;
 
 
   constructor(private http: HttpClient) { }
@@ -38,6 +39,13 @@ export class DirectorioService {
   getDirectorios() {
     const url = `${baseUrl}/directories`;
     return this.http.get<any>(url, this.headers)
+      .pipe(
+        map((resp:{ok: boolean, directories: Directorio}) => resp.directories)
+      )
+  }
+  getDirectoriosPublicados() {
+    const url = `${baseUrl}/directorios`;
+    return this.http.get<any>(url)
       .pipe(
         map((resp:{ok: boolean, directories: Directorio}) => resp.directories)
       )
