@@ -28,6 +28,7 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import {PipesModule} from '../pipes/pipes.module';
 import {ModalComponent} from './modal/modal.component';
 import { DirectorioComponent } from './directorio/directorio.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { DirectorioComponent } from './directorio/directorio.component';
     QRCodeModule,
     HttpClientModule,
     NgxPayPalModule,
-    PipesModule
+    PipesModule,
+    NgxPaginationModule
     // CKEditorModule
   ]
 })

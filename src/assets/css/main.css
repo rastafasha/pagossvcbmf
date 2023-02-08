@@ -34,8 +34,22 @@
     --morado: #774477;
     --black: #202023;
     --white: #fff;
+    --red: red;
+    --green: green;
     --bold: 'HelveticaNeueLTPro-Md';
     --font-family: 'HelveticaNeueLTStd-Roman';
+}
+
+.colorsucc {
+    color: var(--green);
+}
+
+.colorsec {
+    color: var(--azulclaro)
+}
+
+.colordang {
+    color: var(--red);
 }
 
 .pointer {

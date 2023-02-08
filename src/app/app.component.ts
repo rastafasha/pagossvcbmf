@@ -50,6 +50,16 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.iniciarDarkMode();
     this.checkForUpdate();
+    if(navigator.onLine) {
+      // alert("You are Online")
+      this.enviarNotificacionOnline();
+      this.checkForUpdate();
+     }
+     else {
+      alert("You are Offline")
+      this.enviarNotificacionOffline();
+     }
+
   }
 
   checkForUpdate() {
@@ -57,7 +67,7 @@ export class AppComponent implements OnInit {
       res=>{
         this.check =res;
         console.log(this.check);
-        if(this.check === true){
+        if(this.check === false){
           this.enviarNotificacionActualizacion();
         }
       }
@@ -120,6 +130,12 @@ export class AppComponent implements OnInit {
 
   enviarNotificacionActualizacion(): void {
     this.alertService.success("Mensaje de Actualización","Versión App Actualizada");
+  }
+  enviarNotificacionOnline(): void {
+    this.alertService.success("Conexon de red","Activa");
+  }
+  enviarNotificacionOffline(): void {
+    this.alertService.error("Conexon de red","Inactiva");
   }
 
 }

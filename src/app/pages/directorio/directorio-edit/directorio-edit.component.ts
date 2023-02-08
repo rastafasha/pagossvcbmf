@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DirectorioService } from '../../../services/directorio.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 // import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { Location } from '@angular/common';
@@ -8,6 +8,8 @@ import { Directorio } from 'src/app/models/directorio';
 import Swal from 'sweetalert2';
 import { UserService } from '../../../services/user.service';
 import { User } from '@app/models/user';
+
+import {NgForm, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-directorio-edit',
@@ -72,7 +74,12 @@ export class DirectorioEditComponent implements OnInit {
   public user:User;
 
   imagen:string;
+  arrayFiles:string;
 
+  public archivo={
+    nombreArchivo:null,
+    base64textString:null
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -85,7 +92,6 @@ export class DirectorioEditComponent implements OnInit {
   ) {
 this.user = this.userService.user;
   }
-
 
 
 
@@ -158,9 +164,9 @@ this.user = this.userService.user;
             vcard: this.vCardInfo,
             user_id: res.user_id,
             status: res.status,
-            image : res.image
+            image : this.archivo.nombreArchivo
           });
-          // this.imagePath = res.image;
+          this.imagePath = res.image;
           this.directory = res;
 
         }
@@ -193,7 +199,7 @@ this.user = this.userService.user;
       twitter: [''],
       linkedin: [''],
       vcard: [this.vCardInfo],
-      image: ['imagen-prueba.jpg'],
+      image: [this.archivo.nombreArchivo],
       user_id: [''],
       status: [''],
     });
@@ -201,13 +207,30 @@ this.user = this.userService.user;
 
   }
 
-  onSelectedFile(event) {debugger
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.directorioForm.get('image').setValue(file.name);
-    }
+  // onSelectedFile(event) {debugger
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     this.directorioForm.get('image').setValue(file.name);
+  //   }
 
-  }
+  // }
+
+  onSelectedFile(event){debugger
+    var files=event.target.files;
+    var file=files[0];
+    this.archivo.nombreArchivo=file.name;
+    if(file && files)    {
+      var reader = new FileReader();
+      reader.onload=this._handleReaderLoader.bind(this);
+      reader.readAsBinaryString(file);
+    }
+    this.directorioForm.get('image').setValue(this.archivo.nombreArchivo);
+    this.directorioForm.get('image').setValue(file.name);
+   }
+   _handleReaderLoader(readerEvent){
+     var binaryString=readerEvent.target.result;
+     this.archivo.base64textString=btoa(binaryString);
+   }
 
   get nombre() { return this.directorioForm.get('nombre'); }
   get surname() { return this.directorioForm.get('surname'); }
@@ -234,6 +257,7 @@ this.user = this.userService.user;
 
 
   guardarDirectorio() {debugger
+
 
     this.formularioVcardGe();
 
@@ -262,10 +286,13 @@ this.user = this.userService.user;
     formData.append('user_id', this.directorioForm.get('user_id').value);
     formData.append('status', this.directorioForm.get('status').value);
     // formData.append('image', this.directorioForm.value.image);
-    formData.append('image', this.directorioForm.get('image').value);
+    // formData.append('image', this.directorioForm.get('image').value);
+    formData.append('image', this.archivo.nombreArchivo);
     formData.append('vcard', this.vCardInfo);
 
     const id = this.directorioForm.get('id').value;
+
+
 
     if (id) {
       const data = {
@@ -401,5 +428,8 @@ hideQRCode(){
   return false;
 
 }
+
+
+
 
 }

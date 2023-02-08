@@ -3,7 +3,8 @@ import { DirectorioService } from '../../services/directorio.service';
 import { Directorio } from '../../models/directorio';
 import { HttpClient, HttpErrorResponse, HttpBackend } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-
+import { User } from '@app/models/user';
+import { UserService } from '@app/services/user.service';
 @Component({
   selector: 'app-directorio',
   templateUrl: './directorio.component.html',
@@ -36,18 +37,25 @@ export class DirectorioComponent implements OnInit {
   elementType: 'url' | 'canvas' | 'img' = 'url';
   href : string;
 
-
+  public user: User;
 
   constructor(
     public directorioService: DirectorioService,
-
+    private userService: UserService,
     handler: HttpBackend) {
     this.http = new HttpClient(handler);
+    this.user = userService.user;
    }
 
   ngOnInit() {
+    this.getPublicados();
+    this.getDirectorios();
+    this.getUser();
+    window.scrollTo(0,0);
 
+  }
 
+  getPublicados(){
     this.directorioService.getDirectoriosPublicados().subscribe(
       res =>{
         this.directories = res;
@@ -55,10 +63,16 @@ export class DirectorioComponent implements OnInit {
         console.log(this.directories);
       }
     );
-    window.scrollTo(0,0);
+  }
 
-
-
+  getDirectorios(): void {
+    this.directorioService.getDirectorios().subscribe(
+      res =>{
+        this.directorios = res;
+        error => this.error = error;
+        // console.log(this.directories);
+      }
+    );
   }
 
   toggleClass(id: number){
@@ -128,6 +142,20 @@ export class DirectorioComponent implements OnInit {
 
     this.vcard = this.href;
     console.log('vcard', this.vcard);
+  }
+
+
+  getUser(): void {
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    // this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
+  }
+
+  getUserProfile(id){
+    this.userService.getUserById(id).subscribe((data: any) => {
+      this.user = data;
+      console.log(this.user)
+    });
   }
 
 

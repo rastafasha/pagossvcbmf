@@ -15,8 +15,6 @@ export class MenuiconosComponent implements OnInit {
   public user: User;
 
   error: string;
-  // roles: Role;
-  // role: Role;
   roleid:number;
   id:number;
 
@@ -31,49 +29,16 @@ export class MenuiconosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    // this.activatedRoute.params.subscribe( ({id}) => this.getUserfromLocalRemoto(id));
 
   }
 
   getUser(): void {
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    // return this.userService.getUserLocalStorage();
-    console.log(this.user);
-    console.log(this.user.id);
-    // this.getRolbyId();
 
 
   }
 
-  // getUserfromLocalRemoto(id:number){
-  //   this.user = JSON.parse(localStorage.getItem('user'));//trae el usuario desde localStorage
-
-  //   this.id = this.user.id;
-
-  //   this.userService.getUserById(this.id).subscribe(//insertamos el id del usuario y lo buscamos al db
-  //     res=>{
-  //       this.user= res;
-  //       console.log(this.user);
-
-
-  //       this.roleid = this.user.roles[0].id;
-  //       console.log('esto rol',this.roleid);
-
-  //       if(this.roleid !== null && this.roleid !== undefined){
-
-  //         this.roleService.getRolbyId(this.roleid).subscribe(
-  //           (res:Role) =>{
-  //             this.role = res;
-  //             error => this.error = error
-  //             console.log('el arreglo rol es',this.role)
-  //             console.log('el numero rol es',this.role.id)
-  //           }
-  //         );
-  //       }
-  //     }
-  //   )
-  // }
 
 
 

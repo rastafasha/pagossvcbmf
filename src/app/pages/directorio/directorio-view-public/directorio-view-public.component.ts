@@ -9,7 +9,7 @@ import { PaymentService } from '@app/services/payment.service';
 import{Payment} from '@app/models/payment';
 import Swal from 'sweetalert2';
 import { AlertService } from '@app/services/alert.service';
-
+import { DirectorioService } from '@app/services/directorio.service';
 
 @Component({
   selector: 'app-directorio-view-public',
@@ -24,6 +24,7 @@ export class DirectorioViewPublicComponent implements OnInit {
   userprofile: User;
   error: string;
   directories: Directorio;
+  directory: Directorio;
   payments: Payment;
   id:number;
 
@@ -36,6 +37,7 @@ export class DirectorioViewPublicComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private alertService: AlertService,
+    private directorioService: DirectorioService,
 
   ) {
     this.user = userService.user;
@@ -44,7 +46,9 @@ export class DirectorioViewPublicComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0,0);
     this.closeMenu();
+    this.activatedRoute.params.subscribe( ({id}) => this.getDirectory(id));
     this.activatedRoute.params.subscribe( ({id}) => this.getUserRemoto(id));
+
   }
 
   closeMenu(){
@@ -72,8 +76,21 @@ export class DirectorioViewPublicComponent implements OnInit {
         console.log(this.userprofile);
       }
     );
+    // id = this.userprofile.id;
 
 
+  }
+
+  getDirectory(id:number): void {
+    // id = this.directory.user_id;
+
+    this.directorioService.getDirectorio(id).subscribe(
+      res =>{
+        this.directory = res;
+        error => this.error = error;
+        console.log(this.directory);
+      }
+    );
   }
 
 
@@ -81,18 +98,5 @@ export class DirectorioViewPublicComponent implements OnInit {
     this.location.back(); // <-- go back to previous location on cancel
   }
 
-  updateUser(user: User){
-    this.userService.update(user).subscribe(
-      resp =>{ console.log(resp);
-        Swal.fire('Actualizado', `actualizado correctamente`, 'success');
-        this.enviarNotificacion();
-
-      }
-    )
-  }
-
-  enviarNotificacion(): void {
-    this.alertService.success("Mensaje de Usuario","Usuario verificado, Nuevo Miembro!");
-  }
 
 }

@@ -3,6 +3,7 @@ import { Directorio } from '../models/directorio';
 import { HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 const baseUrl = environment.apiUrl;
 
@@ -81,6 +82,14 @@ export class DirectorioService {
   deleteDirectorio(id:number) {
     const url = `${baseUrl}/directory/destroy/${id}`;
     return this.http.delete(url, this.headers);
+  }
+
+
+  onUpload(file):Observable<any>{
+    const fd= new FormData;
+    fd.append('image',file,file.name);
+    const url = `${baseUrl}/directory/store`;
+    return this.http.post(url, file, this.headers);
   }
 
 

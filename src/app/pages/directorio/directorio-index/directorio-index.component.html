@@ -67,19 +67,14 @@
                         <tbody>
                             <tr *ngFor="let directory of directories |  paginate: { itemsPerPage: count, currentPage: p }">
 
-                                <!-- <td>{{directory.id}}</td> -->
-                                <td>
-                                    <a [routerLink]="['/dashboard/directorio/view-public/', user.id]">{{directory.id}}</a>
-                                </td>
-                                <td>
-                                    <a [routerLink]="['/dashboard/user/', user.id]">{{directory.user_id}}</a>
-                                </td>
+                                <td>{{directory.id}}</td>
+                                <td>{{directory.user_id}}</td>
                                 <td>{{directory.nombre}} {{directory.surname}}</td>
                                 <td>{{directory.email}} </td>
                                 <td>
-                                    {{directory.status}}
+                                    <!-- {{directory.status}} -->
 
-                                    <span class="badge bg-succes" *ngIf="directory.status === 'PUBLISHED'">Publicado</span>
+                                    <span class="badge bg-success" *ngIf="directory.status === 'PUBLISHED'">Publicado</span>
                                     <span class="badge bg-primary" *ngIf="directory.status === 'PENDING'">Pendiente</span>
                                     <span class="badge bg-danger" *ngIf="directory.status === 'REJECTED'">Rechazado</span>
                                 </td>

@@ -2,10 +2,12 @@
     margin-bottom: 20px;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
     border: none;
-    height: 350px;
+    height: 330px;
     overflow: hidden;
     overflow-y: scroll;
     transition: all .3s ease-in;
+    display: flex;
+    justify-content: space-between;
 }
 
 @media(max-width:480px) {
@@ -78,6 +80,10 @@
     padding: 15px;
 }
 
+.details {
+    padding: 15px 5px;
+}
+
 
 /*---grid ---*/
 
@@ -132,12 +138,16 @@
 
 .elementostop {
     display: grid;
-    /* grid-template-columns: repeat(3, 1fr); */
     grid-template-columns: 50px 128px 30px;
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     padding: 0px;
+    background-color: whitesmoke;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    color: var(--black);
 }
 
 .elementostop .icon1 {
@@ -191,7 +201,7 @@
     align-items: center;
     border-bottom: 1px solid #ccc;
     color: var(--morado);
-    background-color: #f1f1f1;
+    /* background-color: #f1f1f1; */
     font-size: 16px;
     /* font-weight: 300; */
     border-radius: 10px;
@@ -207,7 +217,7 @@
 .redess p i {
     display: flex;
     align-items: center;
-    font-size: 26px;
+    font-size: 20px;
     padding: 10px;
     flex-direction: column;
     border-radius: 100px;
@@ -270,7 +280,7 @@ body {
     font-size: 20px
 }
 
-.icon2 {
+.dark .icon2 {
     background-color: var(--azul);
 }
 
