@@ -19,8 +19,13 @@
                 </div>
             </div>
         </div>
+        <!-- <div *ngIf="user.role == 'SUPERADMIN'">
+            <app-graficas></app-graficas>
+        </div> -->
+        <div *ngIf="user.role == 'SUPERADMIN'|| user.role == 'ADMIN'">
+            <app-bannerplanes></app-bannerplanes>
+        </div>
         <!-- banners planes -->
-        <app-bannerplanes></app-bannerplanes>
         <!-- banners planes -->
 
 

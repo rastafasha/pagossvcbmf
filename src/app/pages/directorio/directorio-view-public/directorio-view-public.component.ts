@@ -29,7 +29,7 @@ export class DirectorioViewPublicComponent implements OnInit {
   id:number;
 
   rolesSelected:number;
-
+  href : string;
 
   constructor(
     private userService: UserService,
@@ -96,6 +96,24 @@ export class DirectorioViewPublicComponent implements OnInit {
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
+  }
+
+  /**
+   * @method: Descarga la imagen del qr
+   * @author: malcolm
+   * @since: 11/07/2022
+   */
+
+  downloadImage(){
+
+    const box = document.getElementById('box');
+    box.parentElement.classList.add('parent')
+
+    box.hasAttribute('img');
+
+    this.href = document.getElementsByClassName('parent')[0].querySelector('img').src;
+
+    // console.log('img', this.href);
   }
 
 

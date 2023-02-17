@@ -1,5 +1,11 @@
+<ng-template #loading>
+    <div id="contenedor_carga">
+        <div id="carga"></div>
+    </div>
+</ng-template>
+
 <div *ngIf="user.role === 'SUPERADMIN'|| user.role === 'ADMIN' ">
-    <div class="acces-icons animated fadeInDown container">
+    <div class="acces-icons animated fadeIn container">
         <!-- <a class="nav-link collapsed cursor" routerLink="/dashboard">
 
             <div class="icontext shadow">

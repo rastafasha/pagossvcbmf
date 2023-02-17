@@ -34,7 +34,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
 
 import {MdToastModule} from 'md-toast/toast';
-
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -54,6 +54,7 @@ import {MdToastModule} from 'md-toast/toast';
     PipesModule,
     NgbModule,
     NgxSpinnerModule,
+
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // enabled: !isDevMode(),
@@ -63,6 +64,7 @@ import {MdToastModule} from 'md-toast/toast';
     }),
     // AngularFileUploaderModule
     // CKEditorModule,
+    ToastrModule.forRoot(), // ToastrModule added
 
 
   ],

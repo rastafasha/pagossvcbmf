@@ -12,7 +12,7 @@ export class CartItemModel {
       this.productId= product.id;
       this.productName = product.name;
       this.category = 'DIGITAL_GOODS';
-      this.description = 'Esto es una subcripcion';
+      this.description = 'Plan temporal SVCBMF';
       this.productPrice = product.price;
       this.quantity = 1;
     }

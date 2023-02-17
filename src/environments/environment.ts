@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   //apirest vps remoto
-  // apiUrl: "http://185.253.155.103/api",
-  // apiUrlMedia: "http://185.253.155.103/storage/app/public/",
+  // apiUrl: "http://80.240.126.57/public/api",
+  // apiUrlMedia: "http://80.240.126.57/public/img/",
   // apirest remoto
   apiUrl: "https://apipagos.svcbmf.net/api",
-  // apiUrl: "https://svcbmf.net/backen-api-pagos-angel-vps/api",
-  apiUrlMedia: "https://apipagos.svcbmf.net/storage/app/public/",
-  // apiUrlMedia: "https://svcbmf.net/backen-api-pagos-angel-vps/storage/app/public/",
+  // apiUrlMedia: "https://apipagos.svcbmf.net/storage/app/public/image/",
+  // apiUrl: "https://svcbmf.net/backen-api-pagos-angel-vps/public/api",
+  apiUrlMedia: "https://svcbmf.net/backen-api-pagos-angel-vps/public/img/",
   clientId: 'AXlazeNsZ0CmjfJIronSzcqzw4hLHkcoVEM5fO5BY7AbD-_GhKoKezRcavq6-T4kQuRqaTXFB_VXmheG'
 
 };

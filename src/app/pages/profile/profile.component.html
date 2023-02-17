@@ -141,8 +141,8 @@
                                         <div class="col-xs-6 col-sm-8">
                                             <h5>{{pageTitle}}</h5>
                                         </div>
-                                        <div class="col-xs-6 col-sm-4">
-                                            <a [routerLink]="['/dashboard/directorio/view/', userprofile.id]">
+                                        <div *ngIf="display" class="col-xs-6 col-sm-4">
+                                            <a [routerLink]="['/dashboard/directorio/view-public/', userprofile.id]">
                                                 <button class="btn btn-outline-success">Ver mi Tarjeta</button>
                                             </a>
                                         </div>

@@ -1,0 +1,43 @@
+.grafica {
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cgdegrafica {
+    border: 1px solid #ccc;
+    background-color: bisque;
+    height: 400px;
+}
+
+.listagrf {
+    border: 1px solid #ccc;
+    background-color: rgb(15, 136, 89);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 120px;
+}
+
+.metodo {
+    display: flex;
+    background-color: rgb(11, 24, 123);
+    height: 120px;
+    margin-right: 5px;
+    flex-direction: column;
+    padding: 10px;
+    width: auto;
+}
+
+.metodo:last-child {
+    margin-right: 0px;
+}
+
+.icontext {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+@media(max-width:480px) {}

@@ -36,11 +36,11 @@ export class Directorio {
     get imagenUrl(){
 
         if(!this.image){
-          return `${base_url}directories/no-image.jpg`;
+          return `${base_url}/directories/no-image.jpg`;
         } else if(this.image.includes('https')){
           return this.image;
         } else if(this.image){
-          return `${base_url}directories/${this.image}`;
+          return `${base_url}/directories/${this.image}`;
         }else {
           return `${base_url}/no-image.jpg`;
           // return `./assets/img/no-image.jpg`;

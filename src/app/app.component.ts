@@ -8,8 +8,8 @@ import { UserService } from './services/user.service';
 import { SwUpdate } from '@angular/service-worker';
 import { first, switchMap, Observable, mapTo, timeout, catchError, of, timer } from 'rxjs';
 import { PwaService } from './services/pwa.service';
-
-
+import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     private swUpdate: SwUpdate,
     private appRef: ApplicationRef,
-    private pwaService: PwaService
+    private pwaService: PwaService,
+    public toastr: ToastrService
 
     ) {
       this.user = this.accountService.user;
@@ -52,14 +53,16 @@ export class AppComponent implements OnInit {
     this.checkForUpdate();
     if(navigator.onLine) {
       // alert("You are Online")
-      this.enviarNotificacionOnline();
+      // this.enviarNotificacionOnline();
       this.checkForUpdate();
+      this.openToast();
      }
      else {
-      alert("You are Offline")
-      this.enviarNotificacionOffline();
+      // alert("You are Offline")
+      // this.enviarNotificacionOffline();
+      this.openToastOffline();
      }
-
+    //  this.toastr.success('hello world', 'Success!');
   }
 
   checkForUpdate() {
@@ -73,6 +76,44 @@ export class AppComponent implements OnInit {
       }
       )
 
+  }
+
+  openToast(){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      // didOpen: (toast) => {
+      //   toast.addEventListener('mouseenter', Swal.stopTimer)
+      //   toast.addEventListener('mouseleave', Swal.resumeTimer)
+      // }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: 'You are Online'
+    })
+  }
+
+  openToastOffline(){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      // didOpen: (toast) => {
+      //   toast.addEventListener('mouseenter', Swal.stopTimer)
+      //   toast.addEventListener('mouseleave', Swal.resumeTimer)
+      // }
+    })
+
+    Toast.fire({
+      icon: 'error',
+      title: 'You are Offline'
+    })
   }
 
   getUser(): void {

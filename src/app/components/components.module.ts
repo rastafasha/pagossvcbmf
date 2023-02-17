@@ -29,6 +29,8 @@ import {PipesModule} from '../pipes/pipes.module';
 import {ModalComponent} from './modal/modal.component';
 import { DirectorioComponent } from './directorio/directorio.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { GraficasComponent } from './graficas/graficas.component';
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NotificacionesComponent,
     ProductItemComponent,
     ModalComponent,
-    DirectorioComponent
+    DirectorioComponent,
+    GraficasComponent,
+    NewsComponent
   ],
   exports: [
     AlertComponent,
@@ -69,7 +73,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NotificacionesComponent,
     ProductItemComponent,
     ModalComponent,
-    DirectorioComponent
+    DirectorioComponent,
+    GraficasComponent,
+    NewsComponent
   ],
   imports: [
     CommonModule,

@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-xs-11 col-sm-11">
                     <!-- buscador -->
-                    <app-search></app-search>
+                    <!-- <app-search></app-search> -->
                     <!-- buscador -->
                 </div>
                 <div class="col-xs-1 col-sm-1">
@@ -58,6 +58,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>user ID</th>
+                                <th>imagen</th>
                                 <th>Nombre</th>
                                 <th>Email</th>
                                 <th>Status</th>
@@ -67,10 +68,25 @@
                         <tbody>
                             <tr *ngFor="let directory of directories |  paginate: { itemsPerPage: count, currentPage: p }">
 
-                                <td>{{directory.id}}</td>
-                                <td>{{directory.user_id}}</td>
+                                <td>
+                                    <a [routerLink]="['/dashboard/directorio/view-public/', directory.id]">{{directory.id}}</a>
+                                </td>
+                                <td>
+                                    <div class="image">
+                                        <div *ngIf="!directory.image ">
+                                            <img src="./assets/img/logo.png" class="img-circle avatar">
+                                        </div>
+                                        <div *ngIf="directory.image">
+                                            <img [src]="directory.image | imagenPipe: 'directories'" class="img-circle avatar">
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/dashboard/user/', directory.user_id]">{{directory.user_id}}</a></td>
                                 <td>{{directory.nombre}} {{directory.surname}}</td>
                                 <td>{{directory.email}} </td>
+
                                 <td>
                                     <!-- {{directory.status}} -->
 

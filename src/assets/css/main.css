@@ -40,6 +40,24 @@
     --font-family: 'HelveticaNeueLTStd-Roman';
 }
 
+html body .b-r {
+    border-right: 1px solid rgba(120, 130, 140, 0.13);
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+img.avatar {
+    display: block;
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+}
+
 .colorsucc {
     color: var(--green);
 }

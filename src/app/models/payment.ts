@@ -31,11 +31,11 @@ export class Payment {
    get imagenUrl(){
 
       if(!this.imagen){
-        return `${base_url}payments/no-image.jpg`;
+        return `${base_url}/payments/no-image.jpg`;
       } else if(this.imagen.includes('https')){
         return this.imagen;
       } else if(this.imagen){
-        return `${base_url}payments/${this.imagen}`;
+        return `${base_url}/payments/${this.imagen}`;
       }else {
         // return `${base_url}payments/no-image.jpg`;
         return `./assets/img/no-image.jpg`;

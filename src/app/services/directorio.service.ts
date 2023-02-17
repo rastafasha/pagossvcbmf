@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Directorio } from '../models/directorio';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -69,14 +69,22 @@ export class DirectorioService {
 
 
 
-  createDirectorio(directory:Directorio) {
+  createDirectorio(directory) {
     const url = `${baseUrl}/directory/store`;
     return this.http.post(url, directory, this.headers);
+    // const headers =new HttpHeaders();
+    // return this.http.post(environment.apiUrl+'/directory/store', directory, {
+    //     headers: headers
+    //   });
   }
 
-  updateDirectorio(directory:Directorio) {
+  updateDirectorio(directory) {
     const url = `${baseUrl}/directory/update/${directory.id}`;
     return this.http.put(url, directory, this.headers);
+    // const headers =new HttpHeaders();
+    // return this.http.put(environment.apiUrl+'/directory/update/', data, {
+    //   headers: headers
+    // });
   }
 
   deleteDirectorio(id:number) {
@@ -90,6 +98,15 @@ export class DirectorioService {
     fd.append('image',file,file.name);
     const url = `${baseUrl}/directory/store`;
     return this.http.post(url, file, this.headers);
+  }
+
+  uploadData(data){
+    // const url = `${baseUrl}/file/${data}`;
+    // return this.http.post(url,data, this.headers )
+    const headers =new HttpHeaders();
+    return this.http.post(environment.apiUrl+'/file', data,{
+      headers: headers
+    });
   }
 
 

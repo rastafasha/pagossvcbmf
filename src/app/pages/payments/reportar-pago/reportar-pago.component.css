@@ -258,8 +258,10 @@
     .instruccioness img,
     .instruccioness .info {
         height: auto;
+        width: 90%;
     }
     .instruccioness {
-        height: auto;
+        height: 550px;
+        width: 100%;
     }
 }

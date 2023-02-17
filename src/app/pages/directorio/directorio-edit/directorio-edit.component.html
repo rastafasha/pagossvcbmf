@@ -17,7 +17,7 @@
             <!-- End Page Title -->
         </div>
         <div class="buton">
-            <button class="btn btn-outline-success pull-right" (click)="guardarDirectorio()" [disabled]="!directorioForm.valid">Guardar</button>
+            <button class="btn btn-outline-success pull-right" (click)="guardarDirectorio()">Guardar</button>
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
@@ -139,11 +139,11 @@
                                             <div class="input-group">
                                                 <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
                                                 <select name="" id="input" class="form-control" formControlName="status" required="required">
-                                          <option value="">Seleccione</option>
-                                          <option value="PUBLISHED">Publicado</option>
-                                          <option value="PENDING">Pendiente</option>
-                                          <option value="REJECTED">Rechazado</option>
-                                        </select>
+                                                    <option value="">Seleccione</option>
+                                                    <option value="PUBLISHED">Publicado</option>
+                                                    <option value="PENDING">Pendiente</option>
+                                                    <option value="REJECTED">Rechazado</option>
+                                                </select>
                                             </div>
 
 
@@ -153,12 +153,16 @@
                                             <div class="form-group form-row">
                                                 <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
                                                 <div class="col-xs-12">
-                                                    <input type="file" id="image" name="image" (change)="onSelectedFile($event)" />
+                                                    <label>Imagen Avatar</label>
+                                                    <input type="file" id="image" formControlName="image"  class="form-control" (change)="uploadImage($event)" />
+
                                                     <div [innerHTML]="uploadError" class="error"></div>
                                                     <div *ngIf="imagePath">
                                                         <br />
-                                                        <img [src]="imagePath" width="50%" value="photo" class="shadow">
+                                                        <img [src]="imagePath | imagenPipe: 'directories'" width="50%" value="photo" class="shadow">
                                                     </div>
+                                                    <!-- <angular-file-uploader [config]="afuConfig " (ApiResponse)="avatarUpload($event) ">
+                                                    </angular-file-uploader> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -217,7 +221,7 @@
                             </div>
 
                             <input type="hidden" formControlName="id">
-                            <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit" [disabled]="!directorioForm.valid">Guardar</button>
+                            <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Guardar</button>
 
 
                         </form>

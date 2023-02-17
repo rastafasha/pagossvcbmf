@@ -27,6 +27,13 @@
     border-radius: 4px;
 }
 
+.imgqr {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    margin: auto;
+}
+
 @media(min-width:1024px) {
     .detail .col-sm-8,
     .detail .col-sm-4 {

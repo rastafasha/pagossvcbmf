@@ -111,6 +111,7 @@ export class CartComponent implements OnInit {
               data.id,
               data.payer.email_address,
               data.payer.name.given_name,
+              data.payer.name.surname,
               data.status,
               data.purchase_units[0].items[0]
 
@@ -163,15 +164,15 @@ export class CartComponent implements OnInit {
     let item = {};
     this.cartItems.forEach((it: CartItemModel)=>{
       item = {
-        name: it.productName,
 
+        name: it.productName,
+        quantity: it.quantity,
+        category: 'DIGITAL_GOODS',
+        description: it.description,
         unit_amount: {
           currency_code: 'USD',
           value: it.productPrice,
         },
-        quantity: it.quantity,
-        id: it.productId,
-        category: it.category,
       };
       items.push(item);
     });
@@ -212,27 +213,19 @@ export class CartComponent implements OnInit {
 
 
 
-  openModal(items, amount, reference,email, name,  status, planid): void{
+  openModal(items, amount, reference, email, name, surname, status, planid): void{
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.items = items;
     modalRef.componentInstance.amount = amount;
     modalRef.componentInstance.reference = reference;
     modalRef.componentInstance.email = email;
     modalRef.componentInstance.name = name;
-    modalRef.componentInstance.amount = amount;
+    modalRef.componentInstance.surname = surname;
     modalRef.componentInstance.status = status;
     modalRef.componentInstance.items[0] = planid;
 
   }
-  // cargarForm(reference,email, name, amount, status): void{
-  //   const modalRef = this.modalService.open(ModalComponent);
-  //   modalRef.componentInstance.reference = reference;
-  //   modalRef.componentInstance.email = email;
-  //   modalRef.componentInstance.name = name;
-  //   modalRef.componentInstance.amount = amount;
-  //   modalRef.componentInstance.status = status;
 
-  // }
 
 
 

@@ -27,6 +27,23 @@
     border-radius: 4px;
 }
 
+.info,
+.info p {
+    font-size: 14px;
+}
+
+.imgqr {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    margin: auto;
+}
+
+.detail .label i {
+    margin-right: 5px;
+    color: var(--azul);
+}
+
 @media(min-width:1024px) {
     .detail .col-sm-8,
     .detail .col-sm-4 {

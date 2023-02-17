@@ -271,6 +271,7 @@ export class ProfileComponent implements OnInit {
       const data = {
         ...this.directorioForm.value,
         user_id: this.user.id,
+        vcard: this.vCardInfo,
         id: this.directory.id
       }
       this.memberService.updateMemberDirectory(data).subscribe(

@@ -9,6 +9,7 @@ import { PaymentService } from '@app/services/payment.service';
 import{Payment} from '@app/models/payment';
 import Swal from 'sweetalert2';
 import { AlertService } from '@app/services/alert.service';
+import { DirectorioService } from '@app/services/directorio.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -27,13 +28,16 @@ export class UserProfileComponent implements OnInit {
 
   rolesSelected:number;
 
-
+  p: number = 1;
+  count: number = 8;
+  directory: Directorio;
   constructor(
     private userService: UserService,
     private paymentService: PaymentService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private alertService: AlertService,
+    private directorioService: DirectorioService,
 
   ) {
     this.user = userService.user;
@@ -43,6 +47,7 @@ export class UserProfileComponent implements OnInit {
     window.scrollTo(0,0);
     this.closeMenu();
     this.activatedRoute.params.subscribe( ({id}) => this.getUserRemoto(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.getDirectory(id));
   }
 
   closeMenu(){
@@ -72,6 +77,18 @@ export class UserProfileComponent implements OnInit {
     );
 
 
+  }
+
+  getDirectory(id:number): void {
+    // id = this.directory.user_id;
+
+    this.directorioService.getDirectorio(id).subscribe(
+      res =>{
+        this.directory = res;
+        error => this.error = error;
+        console.log(this.directory);
+      }
+    );
   }
 
 

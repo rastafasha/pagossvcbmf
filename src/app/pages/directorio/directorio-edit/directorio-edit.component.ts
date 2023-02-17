@@ -8,8 +8,9 @@ import { Directorio } from 'src/app/models/directorio';
 import Swal from 'sweetalert2';
 import { UserService } from '../../../services/user.service';
 import { User } from '@app/models/user';
-
-import {NgForm, ReactiveFormsModule} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import{environment} from '../../../../environments/environment';
+import { AccountService } from '@app/services/account.service';
 
 @Component({
   selector: 'app-directorio-edit',
@@ -50,8 +51,6 @@ export class DirectorioEditComponent implements OnInit {
 
   error: string;
   uploadError: boolean;
-
-
   pageTitle: string;
 
   public imagenSubir: File;
@@ -72,14 +71,49 @@ export class DirectorioEditComponent implements OnInit {
   vcard: string;
 
   public user:User;
-
   imagen:string;
   arrayFiles:string;
+
+  submitted = false;
+  post = new Directorio();
+  files:any;
+  data:any;
+  form: FormGroup;
 
   public archivo={
     nombreArchivo:null,
     base64textString:null
   };
+
+  public afuConfig = {
+    multiple: false,
+    formatsAllowed: '.jpg, .png, .gif, .jpeg',
+    method: 'POST',
+    maxSize: '2',
+    uploadAPI:  {
+      url: environment.apiUrl + '/file',
+      headers: {
+        Authorization: this.accountService.getToken(),
+      },
+      responseType: 'json',
+    },
+    theme: 'dragNDrop',
+    selectFileBtn: 'Select Files',
+    hideProgressBar: false,
+    hideResetBtn: false,
+    hideSelectBtn: false,
+    fileNameIndex: true,
+    replaceTexts: {
+      selectFileBtn: 'Seleccionar imagen',
+      resetBtn: 'Resetear',
+      uploadBtn: 'Subir',
+      dragNDropBox: 'Arrastre y suelte aquí',
+      attachPinBtn: 'Seleccionar una imagen',
+      afterUploadMsg_success: 'Se cargó correctamente el archivo !',
+      afterUploadMsg_error: 'Se produjo un error al subir el archivo!',
+      sizeLimit: 'Límite de tamaño 2 Megas'
+    }
+};
 
   constructor(
     private fb: FormBuilder,
@@ -88,7 +122,10 @@ export class DirectorioEditComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private location: Location,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toastrService: ToastrService,
+    private accountService: AccountService,
+
   ) {
 this.user = this.userService.user;
   }
@@ -100,7 +137,7 @@ this.user = this.userService.user;
     window.scrollTo(0, 0);
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioDirectorio(id));
     // this.openToast();
-
+    // this.createForm();
 
   }
 
@@ -123,6 +160,27 @@ this.user = this.userService.user;
     })
   }
 
+  avatarUpload(datos){
+    //console.log(datos,'estos son los datos devueltos');
+
+
+     const data = JSON.parse(datos.response);
+
+
+//    const data = JSON.parse(JSON.stringify(datos.body));//este es el error
+    //console.log(this.storage+'users/'+data.image)
+
+    /* aca comente los consolelog
+    console.log(datos);
+    console.log(JSON.parse(datos));
+    console.log(JSON.stringify(datos));
+    console.log(JSON.parse(JSON.stringify(datos.body)));
+
+    this.pagos.transf_pdf = data.transf_pdf;// este va en una funcion distinta para que cuando entre el pdf no lo pise con un null o inversamente
+    */
+   this.directory.image = data.image;//almaceno el nombre de la imagen
+  }
+
   /**
    * @method: Permite iniciar formulario y obtener la info del id
    * @author: malcolm
@@ -136,7 +194,7 @@ this.user = this.userService.user;
     if (!id == null || !id == undefined || id) {
       // let id = this.directory.id;
       this.pageTitle = 'Editar Directorio';
-      this.directorioService.getDirectorio(id).subscribe(
+      this.directorioService.getDirectorio(+id).subscribe(
         res => {
           this.directorioForm.patchValue({
             id: res.id,
@@ -164,7 +222,7 @@ this.user = this.userService.user;
             vcard: this.vCardInfo,
             user_id: res.user_id,
             status: res.status,
-            image : this.archivo.nombreArchivo
+            // image : this.archivo.nombreArchivo
           });
           this.imagePath = res.image;
           this.directory = res;
@@ -199,7 +257,7 @@ this.user = this.userService.user;
       twitter: [''],
       linkedin: [''],
       vcard: [this.vCardInfo],
-      image: [this.archivo.nombreArchivo],
+      image: [null],
       user_id: [''],
       status: [''],
     });
@@ -207,15 +265,15 @@ this.user = this.userService.user;
 
   }
 
-  // onSelectedFile(event) {debugger
-  //   if (event.target.files.length > 0) {
-  //     const file = event.target.files[0];
-  //     this.directorioForm.get('image').setValue(file.name);
-  //   }
+  onSelectedFile(event) {debugger
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.directorioForm.get('image').setValue(file.name);
+    }
 
-  // }
+  }
 
-  onSelectedFile(event){debugger
+  onSelectedFile1(event){debugger
     var files=event.target.files;
     var file=files[0];
     this.archivo.nombreArchivo=file.name;
@@ -225,7 +283,7 @@ this.user = this.userService.user;
       reader.readAsBinaryString(file);
     }
     this.directorioForm.get('image').setValue(this.archivo.nombreArchivo);
-    this.directorioForm.get('image').setValue(file.name);
+    // this.directorioForm.get('image').setValue(file.name);
    }
    _handleReaderLoader(readerEvent){
      var binaryString=readerEvent.target.result;
@@ -258,8 +316,13 @@ this.user = this.userService.user;
 
   guardarDirectorio() {debugger
 
+    this.submitted = true;
+  if(this.directorioForm.invalid){
+return;
+  }
 
     this.formularioVcardGe();
+    // this.onSubmit();
 
     const formData = new FormData();
     formData.append('nombre', this.directorioForm.get('nombre').value);
@@ -285,9 +348,11 @@ this.user = this.userService.user;
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
     formData.append('user_id', this.directorioForm.get('user_id').value);
     formData.append('status', this.directorioForm.get('status').value);
-    // formData.append('image', this.directorioForm.value.image);
     // formData.append('image', this.directorioForm.get('image').value);
-    formData.append('image', this.archivo.nombreArchivo);
+    // formData.append('image', this.directorioForm.value.image);
+    // formData.append("image", this.files, this.files.name);
+    // formData.append('image', this.archivo.nombreArchivo);
+    // formData.append('image', this.files, this.files.name);
     formData.append('vcard', this.vCardInfo);
 
     const id = this.directorioForm.get('id').value;
@@ -295,12 +360,12 @@ this.user = this.userService.user;
 
 
     if (id) {
-      const data = {
+      const datos = {
         ...this.directorioForm.value,
         vcard: this.vCardInfo,
         id: this.directory.id
       }
-      this.directorioService.updateDirectorio(data).subscribe(
+      this.directorioService.updateDirectorio(this.directorioForm.value).subscribe(
         res => {
           if (this.error) {
             console.log(this.error);
@@ -309,23 +374,27 @@ this.user = this.userService.user;
           } else {
             // this.router.navigate(['/directorio']);
             // this.infoDirectorio = res;
+            
             Swal.fire('Guardado', 'Los cambios fueron actualizados', 'success');
-            console.log(data);
+            console.log(datos);
           }
         },
         error => this.error = error
       );
     } else {
-      const data = {
-        ...this.directorioForm.value
+      const datos = {
+        ...this.directorioForm.value,
+        image: this.archivo.nombreArchivo,
+        vcard: this.vCardInfo
       }
-      this.directorioService.createDirectorio(data).subscribe(
+      this.directorioService.createDirectorio(this.directorioForm.value).subscribe(
         res => {
           if (res === 'error') {
             // this.uploadError = res;
             // Swal.fire('Error', this.uploadError, 'error');
           } else {
             // this.infoDirectorio = res;
+            this.onSubmit();
             Swal.fire('Guardado', 'Los cambios fueron creados', 'success');
             this.router.navigate(['/dashboard/directorio']);
           }
@@ -429,7 +498,36 @@ hideQRCode(){
 
 }
 
+createForm(){
+  this.directorioForm = this.fb.group({
 
+    image: [null, Validators.required]
+  })
 
+}
+
+get f(){
+  return this.directorioForm.controls;
+}
+
+uploadImage(event){
+  this.files = event.target.files[0];
+  console.log(this.files);
+}
+
+onSubmit(){debugger
+  this.submitted = true;
+  if(this.directorioForm.invalid){
+return;
+  }
+  const formData = new FormData();
+  formData.append("image", this.files, this.files.name);
+
+  this.directorioService.uploadData(formData).subscribe(res=>{
+    this.data = res;
+    console.log(this.data);
+    // this.guardarDirectorio();
+  })
+}
 
 }

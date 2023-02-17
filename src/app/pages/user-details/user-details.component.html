@@ -21,7 +21,7 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="boton">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
@@ -194,7 +194,7 @@
                                             <h5>{{pageTitle}}</h5>
                                         </div>
                                         <div class="col-xs-6 col-sm-4">
-                                            <a [routerLink]="['/dashboard/directorio/view/', userdirectory.user_id]">
+                                            <a [routerLink]="['/dashboard/directorio/view-public/', userdirectory.id]">
                                                 <button class="btn btn-outline-success">Ver mi Tarjeta</button>
                                             </a>
                                         </div>
