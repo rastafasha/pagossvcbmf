@@ -1,7 +1,7 @@
 .formcompr {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, .4fr);
+    grid-template-columns: repeat(3, 0.5fr);
+    grid-template-rows: repeat(5, 0.4fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
@@ -35,7 +35,11 @@
 }
 
 .div8 {
-    grid-area: 4 / 4 / 4 / 2;
+    grid-area: 4 / 3 / 4 / 2;
+}
+
+.div9 {
+    grid-area: 4 / 4 / 4 / 3;
 }
 
 .instruccioness {
@@ -43,6 +47,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     float: left;
+    height: 390px;
 }
 
 .imagenypaypal {
@@ -233,5 +238,30 @@
         flex-direction: column;
         flex-flow: wrap;
         justify-content: space-between;
+    }
+    .formcompr {
+        display: grid;
+        grid-template-columns: repeat(1, 0.5fr);
+        grid-template-rows: repeat(1, 0.4fr);
+    }
+}
+
+@media(max-width:480px) {
+    .info h2 {
+        font-size: 25px;
+        padding-top: 14px;
+    }
+    .formcompr {
+        display: flex;
+        flex-direction: column;
+    }
+    .instruccioness img,
+    .instruccioness .info {
+        height: auto;
+        width: 90%;
+    }
+    .instruccioness {
+        height: 550px;
+        width: 100%;
     }
 }

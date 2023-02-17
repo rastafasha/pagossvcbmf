@@ -35,7 +35,7 @@ export class RolesViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-    // this.getRoles();
+    window.scrollTo(0,0);
   }
 
   getUsers(): void {

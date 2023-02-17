@@ -54,6 +54,7 @@ export class DirectorioIndexComponent implements OnInit {
   ngOnInit(): void {
     this.userService.closeMenu();
     this.getDirectorios();
+    window.scrollTo(0,0);
   }
 
   getDirectorios(): void {

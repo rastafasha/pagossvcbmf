@@ -1,6 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Payment, PagoHecho } from '@app/models/payment';
+import { Payment } from '@app/models/payment';
 import { PaymentService } from '@app/services/payment.service';
 
 @Component({
@@ -13,10 +13,13 @@ export class ReciboFacturaComponent implements OnInit {
   title = "Factura";
   pago: Payment;
   error: string;
-  pagoHecho: PagoHecho;
 
   @Input() amount;
   @Input() items;
+  @Input() reference;
+  @Input() email;
+  @Input() name;
+  @Input() status;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,7 +28,9 @@ export class ReciboFacturaComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( ({id}) => this.getPagoById(id));
-    console.log(this.pagoHecho);
+    // this.getPagoById(this.id, this.reference, this.email, this.name,
+    //   this.status, this.amount, this.items,
+    //   );
   }
 
   getPagoById(id:number){debugger
@@ -36,5 +41,7 @@ export class ReciboFacturaComponent implements OnInit {
       }
     )
   }
+
+
 
 }

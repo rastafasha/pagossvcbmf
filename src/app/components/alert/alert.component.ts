@@ -148,4 +148,5 @@ export class AlertComponent implements OnInit, OnDestroy {
         title: 'Bienvenido!'
       })
     }
+
 }

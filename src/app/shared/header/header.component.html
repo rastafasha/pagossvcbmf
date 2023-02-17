@@ -37,7 +37,14 @@
             <li class="nav-item dropdown pe-3">
 
                 <a href="javascript:void(0)" class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown">
-                    <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                    <div *ngIf="!userprofile.directories.image">
+                        <img src="assets/img/no-image.jpg" class="rounded-circle">
+                    </div>
+                    <div *ngIf="userprofile.directories.image">
+                        <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                    </div>
+
+                    <!-- <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle"> -->
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{user.username | slice:0:2 | uppercase}}</span>
                 </a>
                 <!-- End Profile Iamge Icon -->

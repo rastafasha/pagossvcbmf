@@ -1,1 +1,26 @@
-<p>request-reset works!</p>
+<div class="container">
+    <div class="row">
+        <div class="formularioreset col-xs-12 col-sm-6 ">
+            <!-- Change Password Form -->
+            <form [formGroup]="passwordForm" (ngSubmit)="cambiarPassword()">
+                <div class="row mb-3">
+                    <h3>Cambiar contraseña</h3>
+
+                </div>
+                <div class="row mb-3">
+                    <label for="currentPassword" class="col-xs-12 col-form-label">Email <span class="required">*</span></label>
+                    <div class="col-xs-12 ">
+                        <input name="email" type="email" class="form-control" formControlName="email" id="email" required>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <!-- <input type="hidden" formControlName="id"> -->
+                    <button class="btn btn-outline-danger " href="javascript:void(0)" (click)="goBack()">Volver</button> &nbsp;
+                    <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Cambiar Contraseña</button>
+                </div>
+            </form>
+            <!-- End Change Password Form -->
+        </div>
+    </div>
+</div>

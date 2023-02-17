@@ -29,7 +29,12 @@
                     <span>Directorio</span>
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/planes/all']" routerLinkActive="active">
+                    <i class="bi bi-info-circle"></i>
+                    <span>Planes</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed cursor" routerLink="/dashboard/payments" routerLinkActive="active">
                     <i class="bi bi-currency-exchange"> </i>
@@ -69,6 +74,12 @@
                 <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]" routerLinkActive="active">
                     <i class="bi bi-person"></i>
                     <span>Mi Cuenta</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/planes/all']" routerLinkActive="active">
+                    <i class="bi bi-person"></i>
+                    <span>Planes</span>
                 </a>
             </li>
             <li class="nav-item">

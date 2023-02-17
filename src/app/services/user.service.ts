@@ -127,10 +127,14 @@ export class UserService {
       }
   }
 
-  changePassword(){
-    const url = `${baseUrl}/change-password/`;
-    return this.http.post(url,  this.headers);
+  changePassword(data:User){
+    const url = `${baseUrl}/reset-password/`;
+    return this.http.post(url,  data, this.headers);
   }
+
+
+
+
   resetPassword(){
     const url = `${baseUrl}/reset-password/`;
     return this.http.post(url,  this.headers);

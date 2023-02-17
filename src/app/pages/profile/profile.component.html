@@ -8,7 +8,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="profile" *ngIf="userprofile">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}} </h1>
@@ -21,33 +21,40 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
 
     <section class="section profile">
         <div class="row">
-            <div class="col-xl-4">
+            <div class="col-xs-12 cols-sm-12 col-md-4 col-xl-4">
 
                 <div class="card">
-                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                    <div class="card-body profile-card pt-4  fichasmall">
+                        <div *ngIf="!userprofile.directories.image">
+                            <img src="assets/img/no-image.jpg" class="rounded-circle">
+                        </div>
+                        <div *ngIf="userprofile.directories.image">
+                            <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                        </div>
+                        <div class="inffichasmall">
+                            <h2>{{userprofile.username}}</h2>
+                            <p>{{userprofile.email}}</p>
 
-                        <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
-                        <h2>{{userprofile.username}}</h2>
-                        <p>{{userprofile.email}}</p>
+                            <span class="badge bg-dark-light" *ngIf="userprofile.role === 'SUPERADMIN'">SuperAdmin</span>
+                            <span class="badge bg-primary" *ngIf="userprofile.role === 'ADMIN'">Admin</span>
+                            <span class="badge bg-success" *ngIf="userprofile.role === 'MEMBER'">Miembro</span>
+                            <span class="badge bg-secondary" *ngIf="userprofile.role === 'GUEST'">Invitado</span>
+                        </div>
 
-                        <span class="badge bg-dark-light" *ngIf="userprofile.role === 'SUPERADMIN'">SuperAdmin</span>
-                        <span class="badge bg-primary" *ngIf="userprofile.role === 'ADMIN'">Admin</span>
-                        <span class="badge bg-success" *ngIf="userprofile.role === 'MEMBER'">Miembro</span>
-                        <span class="badge bg-secondary" *ngIf="userprofile.role === 'GUEST'">Invitado</span>
 
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-xl-8">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-xl-8">
 
                 <div class="card">
                     <div class="card-body pt-3">
@@ -58,9 +65,7 @@
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
                                 </li>
-                                <li class="nav-item" *ngIf="userprofile.is_active === 1 ">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Mi Directorio</button>
-                                </li>
+
 
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar
@@ -136,8 +141,8 @@
                                         <div class="col-xs-6 col-sm-8">
                                             <h5>{{pageTitle}}</h5>
                                         </div>
-                                        <div class="col-xs-6 col-sm-4">
-                                            <a [routerLink]="['/dashboard/directorio/view/', userprofile.id]">
+                                        <div *ngIf="display" class="col-xs-6 col-sm-4">
+                                            <a [routerLink]="['/dashboard/directorio/view-public/', userprofile.id]">
                                                 <button class="btn btn-outline-success">Ver mi Tarjeta</button>
                                             </a>
                                         </div>
@@ -147,9 +152,9 @@
                                 <hr>
                                 <div class="clear"></div>
                                 <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm">
-                                    <div class="row flex-nowrap">
+                                    <div class="row">
 
-                                        <div class="col-xs-12 col-sm-12 col-md-8">
+                                        <div class="col-xs-12 col-sm-6 col-md-8">
                                             <div *ngIf="errors?.email" class="alert alert-danger mt-3">
                                                 {{ errors?.email }}
                                             </div>
@@ -254,7 +259,7 @@
                                             <br>
                                             <!----//-->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-4">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
                                             <div class="col-xs-12">
                                                 <div class="form-group form-row">
                                                     <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
@@ -272,9 +277,49 @@
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="col-xs-12">
-                                                <p><b>Codigo Vcard QR</b></p>
 
+
+                                            <div class="col-xs-12">
+                                                <div>
+                                                    <h4>Redes Sociales</h4>
+                                                </div>
+                                                <div class="clear"></div>
+                                                <div class="redes">
+                                                    <div class="row mb-3">
+                                                        <label for="facebook" class="col-xs-12 col-form-label">
+                                                  <i class="bi bi-facebook"></i> Facebook</label>
+                                                        <div class="col-11">
+                                                            <input type="text" class="form-control" formControlName="facebook" value="facebook" placeholder="https://facebook.com/nameuser">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label for="instagram" class="col-xs-12 col-form-label">
+                                                <i class="bi bi-instagram"></i> Instagram</label>
+                                                        <div class="col-11">
+                                                            <input type="text" class="form-control" formControlName="instagram" value="instagram" placeholder="https://instagram.com/nameuser">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label for="twitter" class="col-xs-12 col-form-label">
+                                              <i class="bi bi-twitter"></i> Twitter</label>
+                                                        <div class="col-11">
+                                                            <input type="text" class="form-control" formControlName="twitter" value="twitter" placeholder="https://twitter.com/nameuser">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label for="linkedin" class="col-xs-12 col-form-label">
+                                            <i class="bi bi-linkedin"></i> Linkedin</label>
+                                                        <div class="col-11">
+                                                            <input type="text" class="form-control" formControlName="linkedin" value="linkedin" placeholder="https://linkedin.com/nameuser">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <hr>
+                                            <div class="col-xs-12">
+                                                <h4>Codigo Vcard QR</h4>
                                                 <br>
                                                 <qr-code *ngIf="display" class="code" id="box" [value]="vCardInfo" [size]="200" style=>
                                                     <img class="yellow">
@@ -282,45 +327,9 @@
                                                 <div class="clear"></div>
                                                 <!-- <a class="btn btn-primary" (click)="generateQRCode()">Generar QR</a> -->
                                                 <a class="btn btn-primary" *ngIf="display" value="vCardInfo" (click)="hideQRCode()">Hide QR</a>
-                                                <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directorio.nombre}}_{{directorio.surname}}">Download Image</a>
+                                                <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}">Download Image</a>
                                             </div>
                                             <hr>
-                                            <div>
-                                                <p><b>Redes Sociales</b></p>
-
-                                            </div>
-                                            <div class="clear"></div>
-                                            <div class="redes">
-                                                <div class="row mb-3">
-                                                    <label for="facebook" class="col-md-4 col-lg-3 col-form-label">
-                                            <i class="bi bi-facebook"></i> Facebook</label>
-                                                    <div class="col-md-8 col-lg-9">
-                                                        <input type="text" class="form-control" formControlName="facebook" value="facebook" placeholder="https://facebook.com/nameuser">
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <label for="instagram" class="col-md-4 col-lg-3 col-form-label">
-                                          <i class="bi bi-instagram"></i> Instagram</label>
-                                                    <div class="col-md-8 col-lg-9">
-                                                        <input type="text" class="form-control" formControlName="instagram" value="instagram" placeholder="https://instagram.com/nameuser">
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <label for="twitter" class="col-md-4 col-lg-3 col-form-label">
-                                        <i class="bi bi-twitter"></i> Twitter</label>
-                                                    <div class="col-md-8 col-lg-9">
-                                                        <input type="text" class="form-control" formControlName="twitter" value="twitter" placeholder="https://twitter.com/nameuser">
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <label for="linkedin" class="col-md-4 col-lg-3 col-form-label">
-                                      <i class="bi bi-linkedin"></i> Linkedin</label>
-                                                    <div class="col-md-8 col-lg-9">
-                                                        <input type="text" class="form-control" formControlName="linkedin" value="linkedin" placeholder="https://linkedin.com/nameuser">
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                         </div>
                                     </div>
 

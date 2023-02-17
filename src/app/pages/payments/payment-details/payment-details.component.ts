@@ -24,6 +24,7 @@ export class PaymentDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     this.activatedRoute.params.subscribe( ({id}) => this.getPagoById(id));
   }
   getUser(id:number){

@@ -34,8 +34,40 @@
     --morado: #774477;
     --black: #202023;
     --white: #fff;
+    --red: red;
+    --green: green;
     --bold: 'HelveticaNeueLTPro-Md';
     --font-family: 'HelveticaNeueLTStd-Roman';
+}
+
+html body .b-r {
+    border-right: 1px solid rgba(120, 130, 140, 0.13);
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+img.avatar {
+    display: block;
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+}
+
+.colorsucc {
+    color: var(--green);
+}
+
+.colorsec {
+    color: var(--azulclaro)
+}
+
+.colordang {
+    color: var(--red);
 }
 
 .pointer {
@@ -44,4 +76,108 @@
 
 .profile .profile-card .social-links a {
     color: var(--azul);
+}
+
+.buscadorcont {
+    display: flex;
+    width: 70%;
+    float: left;
+}
+
+.butoncreate {
+    display: flex;
+    width: 30%;
+    height: 30px;
+    justify-content: center;
+}
+
+@media (min-width: 1024px) {
+    .fichasmall {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .leftside {
+        display: contents;
+    }
+    .leftside .pagetitle {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        float: left;
+    }
+    .buton {
+        width: 30%;
+        display: flex;
+        float: left;
+        height: 34px;
+        flex-direction: row;
+        align-items: end;
+        justify-content: end;
+    }
+    .buton .btn {
+        float: right;
+        right: 0;
+        position: relative;
+        width: 30%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .leftside .pagetitle {
+        display: flex;
+        flex-direction: row;
+    }
+    .leftside {
+        float: left;
+        display: flex;
+        width: 80%;
+    }
+    .buton {
+        display: flex;
+        float: left;
+        width: 20%;
+        height: 40px;
+    }
+}
+
+@media (max-width: 420px) {
+    .leftside .pagetitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .leftside {
+        float: left;
+        display: flex;
+        width: 73%;
+    }
+    .buton {
+        display: flex;
+        float: left;
+        width: auto;
+        height: 40px;
+    }
+}
+
+@media (max-width: 390px) {
+    .leftside .pagetitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .leftside {
+        float: left;
+        display: flex;
+        width: 73%;
+    }
+    .buton {
+        display: flex;
+        float: left;
+        width: auto;
+        height: 40px;
+    }
 }

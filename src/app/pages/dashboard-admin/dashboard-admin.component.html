@@ -13,18 +13,19 @@
                 </nav>
             </div>
             <div class="right shadow animated fadeIn">
-                <h1>Plan Semestral</h1>
-                <p>Estado del plan: </p>
+                <p>Plan: </p>
                 <div *ngIf="user.role == 'MEMBER' || user.role == 'ADMIN'|| user.role == 'SUPERADMIN'">
                     <span class="badge bg-success">Activo</span>
                 </div>
-                <div *ngIf="user.role == 'GUEST'">
-                    <span class="badge bg-primary">Inactivo</span>
-                </div>
             </div>
         </div>
+        <!-- <div *ngIf="user.role == 'SUPERADMIN'">
+            <app-graficas></app-graficas>
+        </div> -->
+        <div *ngIf="user.role == 'SUPERADMIN'|| user.role == 'ADMIN'">
+            <app-bannerplanes></app-bannerplanes>
+        </div>
         <!-- banners planes -->
-        <app-bannerplanes></app-bannerplanes>
         <!-- banners planes -->
 
 
@@ -53,12 +54,19 @@
 
                             </ul>
                         </div>
-                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <div class="card-body profile-card pt-4   fichasmall">
+                            <div *ngIf="!userprofile.directories.image">
+                                <img src="assets/img/no-image.jpg" class="rounded-circle">
+                            </div>
+                            <div *ngIf="userprofile.directories.image">
+                                <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                            </div>
+                            <div class="inffichasmall">
+                                <!-- <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle"> -->
+                                <h2>{{user.username}}</h2>
 
-                            <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
-                            <h2>{{user.username}}</h2>
-
-                            <p>Administrador desde:<br>{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
+                                <p>Administrador desde:<br>{{user.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
+                            </div>
                             <!-- <p>Ultima actualización:{{user.updated_at | date:'MMM d, y, h:mm:ss a'}}</p> -->
 
                         </div>
@@ -111,24 +119,9 @@
         </section>
 
     </div>
-    <!-- <div class="col-xs-12 col-sm-3 lateral">
-      <div class="animated fadeInUp">
 
-          <h2>Notificaciones</h2>
-          <div class="item ">
-              <img src="./assets/img/logo.png" alt="">
-              <div class="imagetitulo">
-                  <h1>Plan Semestral</h1>
-                  <p>Desde: Dec 10, 2022</p>
-                  <span class="badge bg-success">Activo</span>
-              </div>
-              <div class="info">
-              </div>
-          </div>
-      </div>
-      <div class="clear"></div>
+    <app-directorio></app-directorio>
 
-  </div> -->
 
 </div>
 <!--/main-->

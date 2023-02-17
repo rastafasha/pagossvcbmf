@@ -1,0 +1,84 @@
+.neews {
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.cardnews {
+    display: flex;
+    flex-direction: column;
+    border: 1px dotted #ccc;
+    color: #333;
+    cursor: pointer;
+    transition: all .3s ease;
+    background-color: var(--white);
+}
+
+.cardnews:hover {
+    border: 1px solid #333;
+    color: var(--black);
+    background-color: #fafafa;
+}
+
+.infoppalarticle {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.imgarticle {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 100px;
+    padding: 5px;
+}
+
+.imgarticle img {
+    width: 100%;
+    display: flex;
+    height: auto;
+    object-fit: cover;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.infoadicional {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.info h3 {
+    font-size: 12px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.info h4 {
+    font-size: 14px;
+    font-weight: var(--bold);
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.info h2 {
+    font-size: 16px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.source {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    overflow-x: scroll;
+}

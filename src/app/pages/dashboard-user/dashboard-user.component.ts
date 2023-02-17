@@ -19,7 +19,7 @@ export class DashboardUserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     this.user = userService.user;
   }
@@ -28,6 +28,7 @@ export class DashboardUserComponent implements OnInit {
 
     this.closeMenu();
     this.getUser();
+    window.scrollTo(0,0);
   }
 
   closeMenu(){
@@ -41,8 +42,8 @@ export class DashboardUserComponent implements OnInit {
   getUser(): void {
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
-    console.log(this.user.id);
+    // console.log(this.user);
+    // console.log(this.user.id);
     this.id = this.user.id;
     // this.getUserRemoto(this.id);
     this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
@@ -56,7 +57,7 @@ export class DashboardUserComponent implements OnInit {
       res =>{
         this.userprofile = res[0];
         error => this.error = error
-        console.log(this.userprofile);
+        // console.log(this.userprofile);
       }
     );
   }

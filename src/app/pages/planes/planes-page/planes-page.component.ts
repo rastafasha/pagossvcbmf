@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Currencies } from '@app/models/currencies';
-import { Plan } from '@app/models/plan';
 import { CurrenciesService } from '@app/services/currencies.service';
 import {MessageService} from '@app/services/message.service';
+import { Plan } from '@app/models/plan';
 import{PlanesService} from '@app/services/planes.service';
 
 @Component({
@@ -28,6 +28,7 @@ export class PlanesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlanes();
+    window.scrollTo(0,0);
   }
 
 

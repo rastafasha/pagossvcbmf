@@ -1,0 +1,51 @@
+<section class="neews">
+    <!-- <p>news!</p> -->
+    <!-- <div class="source">
+
+        <ul class="nav nav-tabs nav-tabs-bordered">
+
+            <li class="nav-item" *ngFor="let source of sources">
+                <button class="nav-link active" (click)="searchSource(source)">{{source.name}}</button>
+            </li>
+
+
+
+        </ul>
+    </div> -->
+
+
+    <div *ngFor="let article of articles">
+        <a href="{{article.url}}" target="_blank" class="text-blue-500">
+            <div class="card cardnews shadow">
+                <div class="infoppalarticle">
+                    <div class="imgarticle">
+                        <a href="{{article.url}}" target="_blank" class="text-blue-500">
+                            <img src="{{article.urlToImage}}" class="rounded w-full object-cover object-center mb-6" [alt]="article.title">
+                        </a>
+
+                    </div>
+                    <div class="info">
+                        <div class="flex justify-between">
+                            <h3><b>Author:</b> {{article.author}}</h3>
+                            <h3><b>Fuente:</b> {{article.source.name}}</h3>
+                            <small>{{article.publishedAt | date:'medium'}}</small>
+                        </div>
+
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-4 overflow-hidden">{{article.title}}</h2>
+
+                    </div>
+                </div>
+                <div class="infoadicional">
+                    <p class="leading-relaxed text-base" [innerHTML]="article.description"></p>
+                    <span>
+          <!-- <a href="{{article.url}}" target="_blank" >
+            <button class="btn btn-outline-success">
+              leer +
+            </button>
+          </a> -->
+        </span>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>

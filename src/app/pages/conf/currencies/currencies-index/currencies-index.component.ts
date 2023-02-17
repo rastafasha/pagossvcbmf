@@ -36,6 +36,7 @@ export class CurrenciesIndexComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrencies();
     this.getUser();
+    window.scrollTo(0,0);
   }
 
   getUser(): void {

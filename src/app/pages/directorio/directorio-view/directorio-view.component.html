@@ -2,7 +2,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
@@ -16,7 +16,7 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2 push-right">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
@@ -25,115 +25,238 @@
 
     <section class="section dashboard">
 
-        <app-confirm></app-confirm>
 
         <!---Nuevo-->
-        <div class="container mt-5 mb-3 escritorio">
+        <div class="container mt-5 mb-3 ">
             <div class="row elemendirec">
-                <div class="fr-view">
-                    <div class="card p-3 mb-2">
-                        <div class="d-flex justify-content-between">
-                            <div class="elementostop">
-                                <!-- <div *ngIf="!directory.image">
-                          <div class="icon icon1">
-                              <img src="./assets/img/logo.png" class="img-circle">
-                          </div>
-                      </div>
-                      <div *ngIf="directory.image">
-                          <div class="icon icon1">
-                              <img src="{{imagenSerUrl}}/directorio/{{directory.image}}" class="img-circle">
-                          </div>
+                <div class="col-xs-12">
 
-                      </div> -->
-                                <div class="ms-2 c-details">
-                                    <h6 class="mb-0">{{userprofile.directories[0].surname}}, {{userprofile.directories[0].nombre}} </h6>
-                                    <span>{{userprofile.directories[0].especialidad}}</span>
-                                    <span>{{userprofile.directories[0].ciudad}}</span>
-                                </div>
-                                <!-- boton mostrar vcard -->
-                                <div *ngIf="userprofile.directories[0].vcard">
-                                    <div class="icon icon2" style="cursor: pointer ;">
-                                        <a data-toggle="modal" [attr.data-target]="'#vcard_' + userprofile.directories[0].user_id"><i class="fa fa-qrcode" ></i></a>
-                                    </div>
+                    <div class="fr-view">
+                        <div class="card ">
+                            <h3>Directorio Lista</h3>
+                            <div class="d-flex justify-content-between">
+                                <div class="elementostop">
+                                    <div class="imagenes">
+                                        <div *ngIf="!userprofile.directories[0].image">
+                                            <div class="icon icon1">
+                                                <img src="./assets/img/logo.png" class="img-circle">
 
-                                </div>
-
-                            </div>
-                        </div>
-                        <div>
-
-                            <p><i class="fa fa-envelope"></i>{{userprofile.directories[0].email}}</p>
-                            <div *ngIf="userprofile.directories[0].website">
-                                <p><i class="fa fa-laptop"></i>{{userprofile.directories[0].website}}</p>
-                            </div>
-                            <div *ngIf="userprofile.directories[0].telprincipal">
-                                <p><i class="fa fa-phone"></i>{{userprofile.directories[0].telprincipal}}</p>
-                            </div>
-                            <div *ngIf="userprofile.directories[0].tel1">
-                                <p><i class="fa fa-phone"></i>{{userprofile.directories[0].tel1}}</p>
-                            </div>
-                            <div *ngIf="userprofile.directories[0].telhome">
-                                <p><i class="fa fa-phone"></i>{{userprofile.directories[0].telhome}}</p>
-                            </div>
-
-                            <div *ngIf="userprofile.directories[0].telefonos">
-                                <p><i class="fa fa-phone"></i>{{userprofile.directories[0].telefonos}}</p>
-                            </div>
-                            <p [innerHTML]="userprofile.directories[0].direccion | keepHtml"></p>
-                            <p [innerHTML]="userprofile.directories[0].direccion1 | keepHtml"></p>
-                            <div class="redess">
-                                <div *ngIf="userprofile.directories[0].facebook">
-                                    <p><i class="fa fa-facebook"></i>{{userprofile.directories[0].facebook}}</p>
-                                </div>
-                                <div *ngIf="userprofile.directories[0].instagram">
-                                    <p><i class="fa fa-instagram"></i>{{userprofile.directories[0].instagram}}</p>
-                                </div>
-                                <div *ngIf="userprofile.directories[0].twitter">
-                                    <p><i class="fa fa-twitter"></i>{{userprofile.directories[0].twitter}}</p>
-                                </div>
-                                <div *ngIf="userprofile.directories[0].linkedin">
-                                    <p><i class="fa fa-linkedin"></i>{{userprofile.directories[0].linkedin}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!---modal QR-->
-                    <div class="modal fade modalproductos" id="vcard_{{userprofile.directories[0].user_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header ">
-                                    <div class="cabz">
-                                        <h5>Código QR vcard de</h5>
-                                        <h6>{{userprofile.directories[0].surname}}, {{userprofile.directories[0].nombre}} </h6>
-                                        <p>Para descargar: boton derecho, (Opcion guardar imagen como)</p>
-                                    </div>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                                </div>
-                                <div class="modal-body modalserv">
-                                    <div class="card cardhome">
-                                        <div class="card-body">
-
-                                            <qr-code class="code" id="box" [value]="userprofile.directories[0].vcard" [size]="250">
-                                                <img>
-                                            </qr-code>
-                                            <!-- <a *ngIf="doctores.vcard" [href]="href" (click)="downloadImage()" download>Download Image</a> -->
+                                            </div>
                                         </div>
+                                        <div *ngIf="userprofile.directories[0].image">
+                                            <div class="icon icon1">
+                                                <img src="{{imagenSerUrl}}/directorio/{{doctores.image}}" class="img-circle">
 
+                                            </div>
+
+                                        </div>
+                                        <div *ngIf="userprofile.directories[0].vcard">
+                                            <div class="icon icon2" style="cursor: pointer ;">
+                                                <a [routerLink]="['/dashboard/directorio/view-public/', doctores.id]"><i class="fa fa-qrcode" ></i></a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="ms-2 c-details">
+                                        <h6 class="mb-0">{{userprofile.directories[0].surname}}, {{userprofile.directories[0].nombre}} </h6>
+                                        <span>{{userprofile.directories[0].especialidad}}</span>
+                                        <span>{{userprofile.directories[0].ciudad}}</span>
+                                        <div class="clear"></div>
+                                        <span class="d-flex justify-content-start " *ngIf="userprofile.directories[0].status === 'PUBLISHED'"><i class="fa fa-check-circle colorsucc" ></i></span>
+                                        <span class="d-flex justify-content-start" *ngIf="userprofile.directories[0].status === 'PENDING'"><i class="fa fa-circle-o-notch colorsec"></i></span>
+                                        <span class="d-flex justify-content-start" *ngIf="userprofile.directories[0].status === 'REJECTED'"><i class="fa fa-close colordang"></i></span>
                                     </div>
                                 </div>
-                                <!-- <div class="modal-footer">
-                      </div> -->
+                            </div>
+                            <div>
+
+                                <div class="details">
+
+                                    <p>
+                                        <a href="mailto:{{userprofile.directories[0].email}}" target="_blank">
+                                            <i class="fa fa-envelope"></i> {{userprofile.directories[0].email}}
+                                        </a>
+                                    </p>
+                                    <div *ngIf="userprofile.directories[0].website">
+                                        <a href="{{userprofile.directories[0].website}}" target="_blank">
+                                            <p><i class="fa fa-laptop"></i> {{userprofile.directories[0].website}}</p>
+                                        </a>
+                                    </div>
+                                    <div *ngIf="userprofile.directories[0].telprincipal">
+                                        <p>
+                                            <a href="tel:{{userprofile.directories[0].telprincipal}}" target="_blank">
+                                                <i class="fa fa-phone"></i> {{userprofile.directories[0].telprincipal}}
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="redess">
+                                    <div *ngIf="userprofile.directories[0].facebook">
+                                        <p>
+                                            <a href="{{userprofile.directories[0].facebook}}" target="_blank">
+                                                <i class="bi bi-facebook"></i>
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="userprofile.directories[0].instagram">
+                                        <p>
+                                            <a href="{{userprofile.directories[0].instagram}}" target="_blank">
+                                                <i class="bi bi-instagram"></i>
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="userprofile.directories[0].twitter">
+                                        <p>
+                                            <a href="{{userprofile.directories[0].twitter}}" target="_blank">
+
+                                                <i class="bi bi-twitter"></i>
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="userprofile.directories[0].linkedin">
+                                        <p>
+                                            <a href="{{userprofile.directories[0].linkedin}}" target="_blank">
+
+                                                <i class="bi bi-linkedin"></i>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    <div class="card">
+                        <h3>Directorio Lista</h3>
+                        <hr>
+                        <div class="card">
+                            <div class="card-body pt-3">
+                                <div class="col-xs-12">
+                                    <div *ngIf="directory">
+                                        <div class="row">
+                                            <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                                <div class="col-12  label"><i class="bi bi-person-circle"></i> Nombre</div>
+                                                <div class="col-12  info">{{directory.nombre}}</div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                                <div class="col-12  label"><i class="bi bi-person-circle"></i> Apellido</div>
+                                                <div class="col-12  info">{{directory.surname}}</div>
+                                            </div>
+
+
+                                            <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                                <div class="col-12  label"><i class="bi  bi-award"></i> Especialidad</div>
+                                                <div class="col-12 info">{{directory.especialidad}} </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                                <div class="col-12  label"><i class="bi bi-bank2"></i> Universidad</div>
+                                                <div class="col-12  info">{{directory.universidad}}</div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                                <div class="col-12  label"><i class="bi  bi-award"></i> Año</div>
+                                                <div class="col-12  info">{{directory.ano}}</div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                                <div class="col-12  label"><i class="bi bi-geo"></i> Website</div>
+                                                <div class="col-12  info">
+                                                    <a href="{{directory.website}}" target="_blank">
+
+                                                    {{directory.website}}
+                                                  </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                                <div class="col-12  label"><i class="bi bi-telephone"></i> Principal</div>
+                                                <div class="col-12  info">
+                                                    <a href="tel:{{directory.telprincipal}}" target="_blank">
+                                                  {{directory.telprincipal}}
+                                                  </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                                <div class="col-12  label"><i class="bi bi-telephone"></i> Móvil</div>
+
+                                                <div class="col-12  info">
+                                                    <a href="tel:{{directory.telmovil}}" target="_blank">
+                                                    {{directory.telmovil}}
+                                                  </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                                <div class="col-12  label"><i class="bi bi-telephone"></i> Oficina</div>
+                                                <div class="col-12  info">
+                                                    <a href="tel:{{directory.telhome}}" target="_blank">
+                                                    {{directory.telhome}}
+                                                  </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                                <div class="col-12  label"><i class="bi bi-telephone"></i> Adicional</div>
+                                                <div class="col-12  info">
+                                                    <a href="tel:{{directory.tel1}}" target="_blank">
+                                                    {{directory.tel1}}
+                                                  </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-3 b-r">
+                                                <div class="col-12  label"><i class="bi bi-telephone"></i> Otros</div>
+                                                <div class="col-12 info">{{directory.telefonos}}</div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                                <div class="col-12  label"><i class="bi bi-geo"></i> Estado</div>
+                                                <div class="col-12  info">{{directory.estado}}</div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-3 b-r">
+                                                <div class="col-12  label"><i class="bi bi-file-text"></i> Dirección</div>
+                                                <div class="col-12  info">
+                                                    <p>{{directory.direccion}}</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-3 b-r">
+                                                <div class="col-12  label"><i class="bi bi-file-text"></i> Dir. Adicional</div>
+                                                <div class="col-12  info">
+                                                    <p>{{directory.direccion1}}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <br>
+                                <hr>
+                                <br>
+                                <div class="imgqr">
+                                    <qr-code class="code" id="box" [value]="directory.vcard" [size]="250">
+                                        <img style="margin: auto;">
+                                    </qr-code>
+                                    <div class="clear"></div>
+                                    <br>
+
+                                    <a class="btn btn-outline-primary" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}"><i class="fa fa-download"></i> Descargar QR</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <!---fin modal QR-->
                 </div>
             </div>
         </div>
         <!---Nuevo-->
+
 
 
 

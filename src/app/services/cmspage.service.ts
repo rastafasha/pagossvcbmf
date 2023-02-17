@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class CmspageService {
 
+  public contact:Contact;
   ServerUrl = environment.apiUrl;
   errorData: {};
 
@@ -23,9 +24,13 @@ export class CmspageService {
       this.http = new HttpClient(handler);
   }
 
+  get status(): 'PENDING' | 'RESOLVED' {
+    return this.contact.status!;
+  }
+
 
   contactForm(formdata: Contact) {
-    return this.http.post<Contact>(this.ServerUrl + '/contact-form', formdata,  this.httpOptions)
+    return this.http.post<Contact>(this.ServerUrl + '/contact/form', formdata,  this.httpOptions)
     .pipe(
       catchError(this.handleError)
     );

@@ -2,7 +2,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
@@ -16,7 +16,7 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2 push-right">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
@@ -28,20 +28,20 @@
         <app-confirm></app-confirm>
 
         <!-- Recent Pagos -->
-        <div class="col-12">
 
+        <div class="container">
             <div class="row">
-                <div class="col-10">
+                <div class="col-xs-11 col-sm-11">
                     <!-- buscador -->
-                    <app-search></app-search>
+                    <!-- <app-search></app-search> -->
                     <!-- buscador -->
                 </div>
-                <div class="col-2">
+                <div class="col-xs-1 col-sm-1">
                     <div class="text-right">
                         <button class="btn btn-primary" [routerLink]="['/dashboard/directorio/create/']">
-                  <i class="fa fa-pencil"></i>
-                  Crear
-                </button>
+                    <i class="fa fa-pencil"></i>
+                    Crear
+                  </button>
                     </div>
                 </div>
             </div>
@@ -58,6 +58,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>user ID</th>
+                                <th>imagen</th>
                                 <th>Nombre</th>
                                 <th>Email</th>
                                 <th>Status</th>
@@ -67,14 +68,29 @@
                         <tbody>
                             <tr *ngFor="let directory of directories |  paginate: { itemsPerPage: count, currentPage: p }">
 
-                                <td>{{directory.id}}</td>
-                                <td>{{directory.user_id}}</td>
+                                <td>
+                                    <a [routerLink]="['/dashboard/directorio/view-public/', directory.id]">{{directory.id}}</a>
+                                </td>
+                                <td>
+                                    <div class="image">
+                                        <div *ngIf="!directory.image ">
+                                            <img src="./assets/img/logo.png" class="img-circle avatar">
+                                        </div>
+                                        <div *ngIf="directory.image">
+                                            <img [src]="directory.image | imagenPipe: 'directories'" class="img-circle avatar">
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/dashboard/user/', directory.user_id]">{{directory.user_id}}</a></td>
                                 <td>{{directory.nombre}} {{directory.surname}}</td>
                                 <td>{{directory.email}} </td>
-                                <td>
-                                    {{directory.status}}
 
-                                    <span class="badge bg-succes" *ngIf="directory.status === 'PUBLISHED'">Publicado</span>
+                                <td>
+                                    <!-- {{directory.status}} -->
+
+                                    <span class="badge bg-success" *ngIf="directory.status === 'PUBLISHED'">Publicado</span>
                                     <span class="badge bg-primary" *ngIf="directory.status === 'PENDING'">Pendiente</span>
                                     <span class="badge bg-danger" *ngIf="directory.status === 'REJECTED'">Rechazado</span>
                                 </td>

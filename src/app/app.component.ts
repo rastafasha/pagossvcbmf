@@ -1,12 +1,15 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck , ApplicationRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './models/user';
 import { AccountService } from './services/account.service';
 import { AlertService } from './services/alert.service';
 import { StorageService } from './services/storage.service';
 import { UserService } from './services/user.service';
-
-
+import { SwUpdate } from '@angular/service-worker';
+import { first, switchMap, Observable, mapTo, timeout, catchError, of, timer } from 'rxjs';
+import { PwaService } from './services/pwa.service';
+import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,6 +23,7 @@ export class AppComponent implements OnInit {
   public user: User;
 
   id:number;
+  check:boolean;
 
   constructor(
     private alertService: AlertService,
@@ -27,15 +31,89 @@ export class AppComponent implements OnInit {
     private accountService: AccountService,
     private storageService: StorageService,
     private router: Router,
+    private swUpdate: SwUpdate,
+    private appRef: ApplicationRef,
+    private pwaService: PwaService,
+    public toastr: ToastrService
 
     ) {
       this.user = this.accountService.user;
-
+      if (this.swUpdate.isEnabled) {
+        this.appRef.isStable.pipe(
+            first(isStable => isStable === true),
+            switchMap(() => this.swUpdate.available),
+        ).subscribe(() => {
+            this.swUpdate.activateUpdate().then(() => document.location.reload());
+        });
+    }
 
     }
   ngOnInit(): void {
     this.iniciarDarkMode();
+    this.checkForUpdate();
+    if(navigator.onLine) {
+      // alert("You are Online")
+      // this.enviarNotificacionOnline();
+      this.checkForUpdate();
+      this.openToast();
+     }
+     else {
+      // alert("You are Offline")
+      // this.enviarNotificacionOffline();
+      this.openToastOffline();
+     }
+    //  this.toastr.success('hello world', 'Success!');
+  }
 
+  checkForUpdate() {
+    return this.pwaService.checkForUpdate().subscribe(
+      res=>{
+        this.check =res;
+        console.log(this.check);
+        if(this.check === false){
+          this.enviarNotificacionActualizacion();
+        }
+      }
+      )
+
+  }
+
+  openToast(){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      // didOpen: (toast) => {
+      //   toast.addEventListener('mouseenter', Swal.stopTimer)
+      //   toast.addEventListener('mouseleave', Swal.resumeTimer)
+      // }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: 'You are Online'
+    })
+  }
+
+  openToastOffline(){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      // didOpen: (toast) => {
+      //   toast.addEventListener('mouseenter', Swal.stopTimer)
+      //   toast.addEventListener('mouseleave', Swal.resumeTimer)
+      // }
+    })
+
+    Toast.fire({
+      icon: 'error',
+      title: 'You are Offline'
+    })
   }
 
   getUser(): void {
@@ -91,7 +169,14 @@ export class AppComponent implements OnInit {
     }
   }
 
-
-
+  enviarNotificacionActualizacion(): void {
+    this.alertService.success("Mensaje de Actualización","Versión App Actualizada");
+  }
+  enviarNotificacionOnline(): void {
+    this.alertService.success("Conexon de red","Activa");
+  }
+  enviarNotificacionOffline(): void {
+    this.alertService.error("Conexon de red","Inactiva");
+  }
 
 }

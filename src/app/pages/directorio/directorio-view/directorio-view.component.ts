@@ -19,6 +19,7 @@ export class DirectorioViewComponent implements OnInit {
   directory: Directorio;
   error: string;
   id:any;
+  href : string;
 
   constructor(
     private directorioService: DirectorioService,
@@ -29,14 +30,16 @@ export class DirectorioViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
+    this.activatedRoute.params.subscribe( ({id}) => this.getDirectory(id));
   }
 
 
   getDirectory(id:number): void {
-    id = this.directory.user_id;
+    // id = this.directory.user_id;
 
-    this.directorioService.getDirectoriobyUser(id).subscribe(
+    this.directorioService.getDirectorio(id).subscribe(
       res =>{
         this.directory = res;
         error => this.error = error;
@@ -57,5 +60,17 @@ export class DirectorioViewComponent implements OnInit {
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
+  }
+
+  downloadImage(){
+
+    const box = document.getElementById('box');
+    box.parentElement.classList.add('parent')
+
+    box.hasAttribute('img');
+
+    this.href = document.getElementsByClassName('parent')[0].querySelector('img').src;
+
+    // console.log('img', this.href);
   }
 }

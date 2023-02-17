@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { map } from 'rxjs/operators';
@@ -72,6 +72,11 @@ export class PlanesService {
   createPlan(plan:any) {
     const url = `${baseUrl}/plan/store`;
     return this.http.post(url, plan, this.headers);
+
+    // this.http.post(`${this.serverUrl}/plan/store`, formData).subscribe(
+    //   (response) => console.log(response),
+    //   (error) => console.log(error)
+    // );
   }
 
   updatePlan(plan:Plan): Observable<any> {
@@ -86,6 +91,15 @@ export class PlanesService {
   deletePlan(plan: Plan) {
     const url = `${baseUrl}/plan/destroy/${plan}`;
     return this.http.delete(url, this.headers);
+  }
+
+  uploadData(data){
+    // const url = `${baseUrl}/file/${data}`;
+    // return this.http.post(url,data, this.headers )
+    const headers =new HttpHeaders();
+    return this.http.post(environment.apiUrl+'/file', data,{
+      headers: headers
+    });
   }
 
 }

@@ -17,6 +17,9 @@ export class UserHistorialpagosComponent implements OnInit {
   user: User;
   id:number;
 
+  p: number = 1;
+  count: number = 8;
+
   constructor(
     private location: Location,
     private alertService: AlertService,
@@ -26,6 +29,7 @@ export class UserHistorialpagosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     this.userService.closeMenu();
     this.getUser();
   }

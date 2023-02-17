@@ -27,6 +27,10 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import {PipesModule} from '../pipes/pipes.module';
 import {ModalComponent} from './modal/modal.component';
+import { DirectorioComponent } from './directorio/directorio.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { GraficasComponent } from './graficas/graficas.component';
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import {ModalComponent} from './modal/modal.component';
     PlanesyproductosComponent,
     NotificacionesComponent,
     ProductItemComponent,
-    ModalComponent
+    ModalComponent,
+    DirectorioComponent,
+    GraficasComponent,
+    NewsComponent
   ],
   exports: [
     AlertComponent,
@@ -65,7 +72,10 @@ import {ModalComponent} from './modal/modal.component';
     PlanesyproductosComponent,
     NotificacionesComponent,
     ProductItemComponent,
-    ModalComponent
+    ModalComponent,
+    DirectorioComponent,
+    GraficasComponent,
+    NewsComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +85,8 @@ import {ModalComponent} from './modal/modal.component';
     QRCodeModule,
     HttpClientModule,
     NgxPayPalModule,
-    PipesModule
+    PipesModule,
+    NgxPaginationModule
     // CKEditorModule
   ]
 })

@@ -49,6 +49,7 @@ import { PlanComponent } from './planes/plan/plan.component';
 import { PaymentEditComponent } from './payments/payment-edit/payment-edit.component';
 import { ReportarPagoComponent } from './payments/reportar-pago/reportar-pago.component';
 import { AuthInterceptor } from '@app/services/auth.interceptor';
+import { DirectorioViewPublicComponent } from './directorio/directorio-view-public/directorio-view-public.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { AuthInterceptor } from '@app/services/auth.interceptor';
     PaymentDetailsComponent,
     PaymentsComponent,
     PaymentEditComponent,
-    ReportarPagoComponent
+    ReportarPagoComponent,
+    DirectorioViewPublicComponent
 
 
 
@@ -100,7 +102,8 @@ import { AuthInterceptor } from '@app/services/auth.interceptor';
     ProductosPageComponent,
     ProductoComponent,
     PlanComponent,
-    ReportarPagoComponent
+    ReportarPagoComponent,
+    DirectorioViewPublicComponent
   ],
   imports: [
     CommonModule,

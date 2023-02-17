@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
+    window.scrollTo(0,0);
     this.closeMenu();
     this.getUsers();
     this.getUser();

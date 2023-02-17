@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PagoHecho } from '@app/models/payment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Payment } from '@app/models/payment';
@@ -22,6 +21,7 @@ export class ModalComponent implements OnInit {
   @Input() reference;
   @Input() email;
   @Input() name;
+  @Input() surname;
   @Input() status;
 
 
@@ -44,7 +44,7 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.procesarPagoPaypal(this.reference, this.email, this.name,
+    this.procesarPagoPaypal(this.reference, this.email, this.name, this.surname,
       this.status, this.amount, this.items,
       );
 
@@ -61,7 +61,7 @@ export class ModalComponent implements OnInit {
   }
 
 
-  procesarPagoPaypal(reference: any, email: any, name: any,
+  procesarPagoPaypal(reference: any, email: any, name: any, surname: any,
     status: any, amount: any, items:any,
     ){debugger
     //crear
@@ -70,12 +70,13 @@ export class ModalComponent implements OnInit {
       referencia: reference,
       email,
       nombre: name,
+      surname,
       status: 'APPROVED',
       metodo: 'Paypal',
       bank_name: 'Paypal',
       monto: amount,
       currency_id: 1,
-      plan_id: 1,
+      plan_id: '1',
       user_id: this.user.id,
       txn_id: 1,
       validacion: 'PENDING',

@@ -36,6 +36,7 @@ export class PlanesIndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlanes();
+    window.scrollTo(0,0);
   }
 
   getPlanes(): void {

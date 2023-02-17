@@ -56,6 +56,18 @@ export class AccountService {
       }
     }
 
+    getToken(){
+      const token = localStorage.getItem('auth_token');
+
+      // // tslint:disable-next-line: triple-equals
+      // if (token && token != 'undefined'){
+      //   this.token = token;
+      // }else{
+      //   this.token = null;
+      // }
+      return this.token;
+   }
+
 
     guardarLocalStorage( user:any, access_token: any){
       // localStorage.setItem('token', JSON.stringify(token));
@@ -93,6 +105,14 @@ export class AccountService {
       return user;
     }));
   }
+  logoutserver(){
+
+    const url = `${this.serverUrl}/logout`;
+    return this.http.get<any>(url,this.headers)
+      .pipe(
+        map((resp:{ok: boolean}) => resp)
+      );
+  }
 
   getUsuario(id:number): Observable<any> {
 
@@ -107,8 +127,8 @@ export class AccountService {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
+    this.logoutserver();
     // this.cookieService.delete('<your-cookie-name>', '/', 'localhost', false, 'Lax');
-    // this.http.post(`${this.serverUrl}/logout`)
   }
 
 

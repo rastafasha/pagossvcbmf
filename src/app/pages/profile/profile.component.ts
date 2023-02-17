@@ -71,6 +71,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     this.closeMenu();
     this.getUser();
     this.activatedRoute.params.subscribe( ({id}) => this.getUserServer(id));
@@ -102,8 +103,13 @@ export class ProfileComponent implements OnInit {
     );
 
 
-    this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioDirectorio(id));
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioPassword(id));
+    if (!id == null || !id == undefined || id) {
+      this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioDirectorio(id));
+
+    }else{
+      alert('Agrega info a tu durectorio!');
+    }
   }
 
 
@@ -149,6 +155,7 @@ export class ProfileComponent implements OnInit {
           this.directory = res;
 
         }
+
       );
     } else {
       this.pageTitle = 'Crear Directorio';
@@ -264,6 +271,7 @@ export class ProfileComponent implements OnInit {
       const data = {
         ...this.directorioForm.value,
         user_id: this.user.id,
+        vcard: this.vCardInfo,
         id: this.directory.id
       }
       this.memberService.updateMemberDirectory(data).subscribe(
@@ -465,7 +473,7 @@ cambiarPassword(){debugger
       ...this.passwordForm.value,
       id: this.userprofile.id
     }
-    this.userService.changePassword().subscribe(
+    this.userService.changePassword(data).subscribe(
       resp =>{
         Swal.fire('Cambiado', `${name}  Password Cambiado correctamente`, 'success');
       });

@@ -42,7 +42,8 @@ export class ContactComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', [Validators.required]),
       subject: new FormControl('', [Validators.required]),
-      message: new FormControl('', [Validators.required])
+      comment: new FormControl('', [Validators.required]),
+      status: new FormControl('PENDING', [Validators.required])
       })
 
   }
@@ -54,9 +55,10 @@ export class ContactComponent implements OnInit {
     this.cmspageService.contactForm(this.contactForm.value).subscribe(
       res => {
         if (this.error) {
-          Swal.fire('Error', this.error, 'error');
+          // Swal.fire('Error', this.error, 'error');
+          console.log(this.error)
         } else {
-          Swal.fire('Enviado!', 'El email fue enviado', 'success');
+          // Swal.fire('Enviado!', 'El email fue enviado', 'success');
           this.router.navigate(['/']);
         }
       },

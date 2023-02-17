@@ -44,6 +44,39 @@
     height: 30px;
 }
 
+.fichasmall {
+    display: flex;
+    flex-direction: column;
+}
+
+.inffichasmall {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+@media(min-width:1024px) {
+    .listapermisos {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .listapermisos .item ul {
+        height: auto;
+        flex-wrap: nowrap;
+        column-count: 1;
+    }
+    .fichasmall {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .inffichasmall {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
+
 @media(max-width:768px) {
     .listapermisos {
         grid-template-columns: repeat(1, 1fr);
@@ -52,6 +85,18 @@
         height: auto;
         flex-wrap: nowrap;
         column-count: 1;
+    }
+    .fichasmall {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .inffichasmall {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding-left: 20px;
     }
 }
 
@@ -84,5 +129,15 @@
         object-fit: contain;
         width: 200px !important;
         display: flex;
+    }
+}
+
+@media(max-width:480px) {
+    .fichasmall {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .profile .profile-card img {
+        max-width: 70px;
     }
 }

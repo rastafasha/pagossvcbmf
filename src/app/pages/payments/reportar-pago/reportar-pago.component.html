@@ -2,7 +2,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="profile">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-9">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
@@ -15,7 +15,7 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-3">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
@@ -164,6 +164,17 @@
                                         </div>
                                         <div class="div5">
                                             <div class="form-group ">
+                                                <label for="">Plan</label>
+
+                                                <select class="form-control " formControlName="plan_id" required>
+                                                <option disabled  value="">SELECCIONAR</option>
+                                                <option *ngFor="let item of planes" [value]="item.id">{{item.name}} | {{item.price}} </option>
+
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="div6">
+                                            <div class="form-group ">
                                                 <label for="">Moneda</label>
 
                                                 <select class="form-control " formControlName="currency_id" required>
@@ -173,26 +184,26 @@
                                               </select>
                                             </div>
                                         </div>
-                                        <div class="div6">
+                                        <div class="div7">
                                             <div class="form-group ">
                                                 <label for="">Moneda Codigo</label>
 
                                                 <select class="form-control " formControlName="moneda_codigo" required>
                                                   <option disabled  value="">SELECCIONAR</option>
-                                                  <!-- <option *ngFor="let item of currenciesAll" [value]="item.id">{{item.name}}</option> -->
-                                                  <option value="EURO">Euro</option>
+                                                  <option *ngFor="let item of currenciesAll" [value]="item.name">{{item.name}}</option>
+                                                  <!-- <option value="EURO">Euro</option>
                                                   <option value="DOLLAR">Dollar</option>
-                                                  <option value="BSVES">BSVES</option>
+                                                  <option value="BSVES">BSVES</option> -->
                                               </select>
                                             </div>
                                         </div>
-                                        <div class="div7">
+                                        <div class="div8">
                                             <div class="form-group ">
                                                 <label for="">Nombre y Apellido </label>
                                                 <input type="text" formControlName="nombre" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="div8">
+                                        <div class="div9">
                                             <div class="form-group ">
                                                 <label for="">Email </label>
                                                 <input type="text" formControlName="email" class="form-control">

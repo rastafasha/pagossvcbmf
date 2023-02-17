@@ -1,77 +1,21 @@
-/*
-Template Name: Admin pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-
-
-/*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-
-
-/*Theme Colors*/
-
-
-/*bootstrap Color*/
-
-
-/*Light colors*/
-
-
-/*Normal Color*/
-
-
-/*Extra Variable*/
-
-
-/*******************
-Login register and recover password Page
-******************/
-
-.login-register {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 100%;
-    width: 100%;
-    padding: 10% 0;
-    position: fixed;
-}
-
-.login-box {
-    width: 400px;
-    margin: 0 auto;
-}
-
-.login-box .footer {
-    width: 100%;
-    left: 0px;
-    right: 0px;
-}
-
-.login-box .social {
-    display: block;
-    margin-bottom: 30px;
-}
-
-#recoverform {
-    display: none;
-}
-
-.login-sidebar {
-    padding: 0px;
-    margin-top: 0px;
-}
-
-.login-sidebar .login-box {
-    right: 0px;
-    position: absolute;
-    height: 100%;
+.main {
+    width: 350px;
+    height: 90vh;
+    background: red;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+    background: #353888;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #353888 0%, #774477 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #353888 0%, #774477 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #353888 0%, #774477 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#353888', endColorstr='#774477', GradientType=0);
+    /* IE6-9 */
 }
 
 
@@ -86,28 +30,6 @@ Login register and recover password Page
     min-height: 100vh;
     font-family: 'Jost', sans-serif;
     background: linear-gradient(to bottom, #0f0c29, var(--azul), var(--azulclaro));
-}
-
-.main {
-    width: 350px;
-    height: 90vh;
-    background: red;
-    overflow: hidden;
-    position: relative;
-    /* background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover; */
-    border-radius: 10px;
-    box-shadow: 5px 20px 50px #000;
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#353888+0,774477+100 */
-    background: #353888;
-    /* Old browsers */
-    background: -moz-linear-gradient(top, #353888 0%, #774477 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #353888 0%, #774477 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #353888 0%, #774477 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#353888', endColorstr='#774477', GradientType=0);
-    /* IE6-9 */
 }
 
 #chk {
@@ -350,5 +272,14 @@ button:hover {
     }
     #chk:checked~.login {
         transform: translateY(-350px);
+    }
+}
+
+@media(max-width:375px) {
+    #chk:checked~.login {
+        transform: translateY(-330px);
+    }
+    .login {
+        height: 580px;
     }
 }

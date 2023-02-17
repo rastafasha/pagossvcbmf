@@ -1,5 +1,7 @@
 <div class="card text-center mb-3 itemproduct">
-    <img [src]="product.image | imagenPipe: 'plans'" alt="">
+    <div class="imageprod">
+        <img [src]="product.image | imagenPipe: 'plans'" alt="">
+    </div>
     <div class="card-body">
         <h5 class="card-title">{{product.name}}</h5>
         <p class="card-text">${{product.price}}</p>

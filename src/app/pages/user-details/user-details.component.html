@@ -8,7 +8,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="profile" *ngIf="userprofile">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}} </h1>
@@ -21,7 +21,7 @@
             </div>
             <!-- End Page Title -->
         </div>
-        <div class="col-xs-12 col-sm-2">
+        <div class="buton">
             <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
         </div>
     </div>
@@ -32,8 +32,13 @@
 
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <div *ngIf="!userprofile.directories.image">
+                            <img src="assets/img/no-image.jpg" class="rounded-circle">
+                        </div>
+                        <div *ngIf="userprofile.directories.image">
+                            <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                        </div>
+                        <!-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
                         <h2>{{userprofile.username}}</h2>
                         <p>{{userprofile.email}}</p>
 
@@ -189,7 +194,7 @@
                                             <h5>{{pageTitle}}</h5>
                                         </div>
                                         <div class="col-xs-6 col-sm-4">
-                                            <a [routerLink]="['/dashboard/directorio/view/', userdirectory.user_id]">
+                                            <a [routerLink]="['/dashboard/directorio/view-public/', userdirectory.id]">
                                                 <button class="btn btn-outline-success">Ver mi Tarjeta</button>
                                             </a>
                                         </div>
