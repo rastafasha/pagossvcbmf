@@ -36,6 +36,7 @@ import { PlanComponent } from './planes/plan/plan.component';
 import { PaymentEditComponent } from './payments/payment-edit/payment-edit.component';
 import { ReportarPagoComponent } from './payments/reportar-pago/reportar-pago.component';
 import { DirectorioViewPublicComponent } from './directorio/directorio-view-public/directorio-view-public.component';
+import { PlanesCreateComponent } from './conf/planes/planes-create/planes-create.component';
 
 
 
@@ -76,7 +77,7 @@ const childRoutes: Routes = [
 
     { path: 'planes', component: PlanesIndexComponent, data:{title:'Planes'} },
     { path: 'plan/:id', component: PlanComponent, data:{title:'Plan'} },
-    { path: 'planes/create', component: PlanesEditComponent, data:{title:'Crear Plan'} },
+    { path: 'planes/create', component: PlanesCreateComponent, data:{title:'Crear Plan'} },
     { path: 'plan/edit/:id', component: PlanesEditComponent, data:{title:'Editar Plan'} },
     { path: 'planes/all', component: PlanesPageComponent, data:{title:'Planes'} },
     { path: 'planes/plan', component: PlanComponent, data:{title:'Planes'} },
