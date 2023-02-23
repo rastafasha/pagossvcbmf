@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, isDevMode } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -6,12 +7,14 @@ import Swal from 'sweetalert2';
 import { Plan } from '@app/models/plan';
 import { PlanesService } from '@app/services/planes.service';
 
-import { User } from 'src/app/models/user';
-import { UserService } from '@app/services/user.service';
 import { Currencies } from '@app/models/currencies';
 import { CurrenciesService } from '@app/services/currencies.service';
-
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AlertService } from '@app/services/alert.service';
+
+import { ToastrService } from 'ngx-toastr';
+import { AccountService } from '@app/services/account.service';
+import { environment } from '@environments/environment';
 
 interface HtmlInputEvent extends Event{
   target : HTMLInputElement & EventTarget;
@@ -27,99 +30,201 @@ declare var $:any;
 })
 export class PlanesEditComponent implements OnInit {
 
-  title : string;
+  editEmployeeForm: Plan = new Plan('','','','');
 
-  public plan: Plan;
-  public usuario: User;
+  @ViewChild("employeeForm")
+  // employeeForm!: NgForm;
+
+  isSubmitted: boolean = false;
+  employeeId: any;
+
+  employeeForm: FormGroup;
+  title : string;
   public currenciesAll: Currencies;
 
-  public planSeleccionado: Plan;
-
-  error: string;
-  id:number
-
-
   // ngform
-  public textInputValue: string;
-  public priceInputValue: string;
-  public currencyIdInputValue: string;
-  public statusInputValue: string;
+  public name: string;
+  public price: string;
+  public currency_id: string;
+  public status: string;
   public fileInputValue: File;
+  // public textInputValue: string;
+  // public priceInputValue: string;
+  // public currencyIdInputValue: string;
+  // public statusInputValue: string;
+  // public fileInputValue: File;
+
+  plan:Plan;
+  planSeleccionado:Plan;
+  id:number;
+
+
+
 
 
   constructor(
-
+    private route: ActivatedRoute, private router: Router,
     private planService: PlanesService,
-    private usuarioService: UserService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService,
     private location: Location,
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
     private currenciesService: CurrenciesService,
-    private alertService: AlertService,
-  ) {
-    this.usuario = usuarioService.user;
-  }
+    private accountService: AccountService,
+    ) { }
 
   ngOnInit(): void {
-    window.scrollTo(0,0);
     this.getCurrencies();
-    this.activatedRoute.params.subscribe( ({id}) => this.getplan(id));
+    this.validarFormulario();
+    this.activatedRoute.params.subscribe( ({id}) => this.getEmployeeDetailById(id));
+    // this.activatedRoute.params.subscribe( ({id}) => this.getplan(id));
 
+
+    if(this.planSeleccionado){
+      //actualizar
+      this.title = 'Creando Plan';
+
+    }else{
+      //crear
+      this.title = 'Edit Plan';
+    }
   }
 
 
+  getEmployeeDetailById(id) {debugger
+    if (id !== null && id !== undefined) {
+      this.title = 'Editando Plan';
+      this.planService.getPlan(+id).subscribe(
+        res => {
+          this.employeeForm.patchValue({
+            id: res.id,
+            name: res.name,
+            price: res.price,
+            status: res.status,
+            currency_id: this.currenciesAll.id,
+            fileInputValue: res.image,
+          });
+          this.planSeleccionado = res;
+          console.log(this.planSeleccionado);
+        }
+      );
+    } else {
+      this.title = 'Creando Plan';
+    }
 
-  getCurrencies(): void {
-    this.currenciesService.getCurrencies().subscribe(
-      res =>{
-        this.currenciesAll = res;
-        error => this.error = error;
+  }
+
+  public onFileSelect(event) {
+    this.fileInputValue = event.target.files[0].name;
+    console.log(this.fileInputValue);
+      // this.employeeForm.get('image').setValue(file.name);
+    }
+
+  EditEmployee() {debugger
+    this.isSubmitted = true;
+    const formData = new FormData();
+
+    formData.append('image', this.fileInputValue);
+    formData.append('name', this.name);
+    formData.append('price', this.price);
+    formData.append('currency_id', this.currency_id);
+    formData.append('status', this.status);
+
+    const id = this.planSeleccionado.id;
+
+    if(id){
+      const datos = {
+        ...this.employeeForm.value,
+        image: this.fileInputValue,
+        id: this.planSeleccionado.id
       }
-    );
+
+      this.planService.updatePlan(datos).subscribe(async data => {
+        if (data != null && data.body != null) {
+          var resultData = data.body;
+          if (resultData != null && resultData.isSuccess) {
+            if (resultData != null && resultData.isSuccess) {
+              this.toastr.success(resultData.message);
+              setTimeout(() => {
+                this.router.navigate(['/dashboard/planes']);
+              }, 500);
+            }
+          }
+        }
+      },
+        async error => {
+          this.toastr.error(error.message);
+          setTimeout(() => {
+            this.router.navigate(['/dashboard/planes']);
+          }, 500);
+        });
+    }
+
+}
+
+
+
+
+
+
+  validarFormulario(){
+    this.employeeForm = this.fb.group({
+      name: ['',Validators.required],
+      price: ['',Validators.required],
+      status: ['',Validators.required],
+      currency_id: ['',Validators.required],
+      image: ['',Validators.required],
+    })
   }
 
-  getplan(id): void {
-    this.planService.getPlan(+id).subscribe(
-      res =>{
-        this.plan = res;
-        error => this.error = error;
-      }
-    );
-  }
 
-  enviarNotificacion(): void {
-    this.alertService.info("Mensaje de Planes","Se ha creado un nuevo plan!");
-  }
+
+
+
+  // EditEmployee() {debugger
+  //   this.isSubmitted = true;
+  //   const formData = new FormData();
+
+  //   formData.append('image', this.employeeForm.value.image);
+  //   formData.append('name', this.textInputValue);
+  //   formData.append('price', this.priceInputValue);
+  //   formData.append('currency_id', this.currencyIdInputValue);
+  //   formData.append('status', this.statusInputValue);
+
+
+  //   if(this.planSeleccionado.id){
+  //     const datos = {
+  //       ...this.employeeForm.value,
+  //       id: this.planSeleccionado.id,
+  //     }
+
+  //   this.planService.updatePlan(datos)
+  //     .subscribe( (resp: any) =>{
+  //       Swal.fire('Actualizado', `actualizado correctamente`, 'success');
+  //       this.router.navigateByUrl(`/dashboard/planes`);
+
+  //     });
+  //   }
+
+  // }
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
   }
 
 
-  savePlan(): void {
-    const formData = new FormData();
-    formData.append('name', this.textInputValue);
-    formData.append('image', this.fileInputValue);
-    formData.append('price', this.priceInputValue);
-    formData.append('currency_id', this.currencyIdInputValue);
-    formData.append('status', this.statusInputValue);
-
-    this.planService.createPlan(formData)
-      .subscribe( (resp: any) =>{
-        Swal.fire('Creado', `creado correctamente`, 'success');
-        this.router.navigateByUrl(`/dashboard/planes`);
-
-      });
+  getCurrencies(): void {
+    this.currenciesService.getCurrencies().subscribe(
+      res =>{
+        this.currenciesAll = res;
+      }
+    );
   }
-
-  public onFileSelect(event) {
-    this.fileInputValue = event.target.files[0];
-    console.log(this.fileInputValue);
-  }
-
-
-
 
 
 
 }
+
+
+
+

@@ -73,20 +73,23 @@ export class PlanesService {
     const url = `${baseUrl}/plan/store`;
     return this.http.post(url, plan, this.headers);
 
-    // this.http.post(`${this.serverUrl}/plan/store`, formData).subscribe(
-    //   (response) => console.log(response),
-    //   (error) => console.log(error)
-    // );
   }
 
   updatePlan(plan:Plan): Observable<any> {
     const url = `${baseUrl}/plan/update/${plan.id}`;
      return this.http.put(url, plan, this.headers);
+
    }
-  updatePlanImage(plan:any): Observable<any> {
-    const url = `${baseUrl}/plan/update/${plan.id}`;
-     return this.http.post(url, plan, this.headers);
-   }
+
+   update(plan): Observable<any>{
+
+    const json = JSON.stringify(plan);
+    const params = 'json=' + json;
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded').set('Authorization', this.token);
+
+    return this.http.put(baseUrl + '/plan/update/' + this.plan.id, params, {headers});
+  }
 
   deletePlan(plan: Plan) {
     const url = `${baseUrl}/plan/destroy/${plan}`;
@@ -101,5 +104,6 @@ export class PlanesService {
       headers: headers
     });
   }
+
 
 }
