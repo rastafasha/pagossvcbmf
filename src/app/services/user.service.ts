@@ -71,7 +71,7 @@ export class UserService {
       )
   }
 
-  getUserById(id:number): Observable<any> {
+  getUserById(id:any): Observable<any> {
 
     const url = `${baseUrl}/user/show/${id}`;
     return this.http.get<any>(url, this.headers)

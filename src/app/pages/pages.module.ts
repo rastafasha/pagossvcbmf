@@ -51,6 +51,7 @@ import { ReportarPagoComponent } from './payments/reportar-pago/reportar-pago.co
 import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { DirectorioViewPublicComponent } from './directorio/directorio-view-public/directorio-view-public.component';
 
+import { httpInterceptorProviders } from '../http-interceptors/index';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { DirectorioViewPublicComponent } from './directorio/directorio-view-publ
 
   ],
   providers: [
+    httpInterceptorProviders,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

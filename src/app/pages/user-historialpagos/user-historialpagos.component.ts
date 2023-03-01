@@ -15,7 +15,7 @@ export class UserHistorialpagosComponent implements OnInit {
   title = "Historial Mis Pagos";
   userProfile!: User;
   user: User;
-  id:number;
+  id:any;
 
   p: number = 1;
   count: number = 8;

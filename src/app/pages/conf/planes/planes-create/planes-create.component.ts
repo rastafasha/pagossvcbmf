@@ -72,7 +72,14 @@ export class PlanesCreateComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0,0);
     this.getCurrencies();
-    this.activatedRoute.params.subscribe( ({id}) => this.getplan(id));
+    if(this.planSeleccionado){
+      //actualizar
+      this.title = 'Edit Plan';
+
+    }else{
+      //crear
+      this.title = 'Creando Plan';
+    }
 
   }
 
@@ -87,14 +94,6 @@ export class PlanesCreateComponent implements OnInit {
     );
   }
 
-  getplan(id): void {
-    this.planService.getPlan(+id).subscribe(
-      res =>{
-        this.plan = res;
-        error => this.error = error;
-      }
-    );
-  }
 
   enviarNotificacion(): void {
     this.alertService.info("Mensaje de Planes","Se ha creado un nuevo plan!");

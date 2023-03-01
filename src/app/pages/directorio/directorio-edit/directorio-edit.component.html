@@ -32,7 +32,7 @@
                     <div class="card-body">
 
 
-                        <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm" enctype="multipart/form-data">
+                        <form class="form-horizontal form-material" [formGroup]="directorioForm" enctype="multipart/form-data">
                             <div class="row ">
 
 
@@ -154,15 +154,19 @@
                                                 <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
                                                 <div class="col-xs-12">
                                                     <label>Imagen Avatar</label>
-                                                    <input type="file" id="image" formControlName="image"  class="form-control" (change)="uploadImage($event)" />
+                                                    <input type="file" id="image" name="image" class="form-control" (change)="onSelectedFile($event)" />
+                                                    <!-- preview image -->
+                                                    <div *ngIf="previsualizacion">
+                                                        <img [src]="previsualizacion" alt="" style="width:100%; padding: 10px;
+                                                        border: 1px solid #ccc;
+                                                        margin-top: 30px;" class="shadow">
+                                                    </div>
 
                                                     <div [innerHTML]="uploadError" class="error"></div>
                                                     <div *ngIf="imagePath">
                                                         <br />
                                                         <img [src]="imagePath | imagenPipe: 'directories'" width="50%" value="photo" class="shadow">
                                                     </div>
-                                                    <!-- <angular-file-uploader [config]="afuConfig " (ApiResponse)="avatarUpload($event) ">
-                                                    </angular-file-uploader> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -221,7 +225,7 @@
                             </div>
 
                             <input type="hidden" formControlName="id">
-                            <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Guardar</button>
+                            <button class="btn btn-outline-success waves-effect waves-light m-r-10" (click)="guardarDirectorio()" type="submit">Guardar</button>
 
 
                         </form>

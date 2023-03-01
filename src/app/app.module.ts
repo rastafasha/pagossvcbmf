@@ -35,7 +35,7 @@ import { environment } from '@environments/environment';
 
 import {MdToastModule} from 'md-toast/toast';
 import {ToastrModule} from 'ngx-toastr';
-
+import { httpInterceptorProviders } from './http-interceptors/index';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +69,7 @@ import {ToastrModule} from 'ngx-toastr';
 
   ],
   providers: [
+    httpInterceptorProviders,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

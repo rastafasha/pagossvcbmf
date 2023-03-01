@@ -12,9 +12,8 @@ import { HttpClient } from '@angular/common/http';
 export class PaymentDetailsComponent implements OnInit {
 
   title = "Detalle Pago";
-  pago: Payment;
+  payment: Payment;
   error: string;
-  private payments = 'assets/dataSimulada/pago.json';
 
   constructor(
     private location: Location,
@@ -30,9 +29,9 @@ export class PaymentDetailsComponent implements OnInit {
   getUser(id:number){
     this.paymentService.getPagosbyUser(id).subscribe(
       res =>{
-        this.pago = res;
+        this.payment = res;
         error => this.error = error
-        console.log(this.pago);
+        console.log(this.payment);
       }
     );
   }
@@ -40,8 +39,8 @@ export class PaymentDetailsComponent implements OnInit {
   getPagoById(id:number){
     this.paymentService.getPagoById(id).subscribe(
       res=>{
-        this.pago = res;
-        console.log(this.pago);
+        this.payment = res;
+        console.log(this.payment);
       }
     )
   }

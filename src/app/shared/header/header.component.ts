@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
 
   urlTheme:any;
   classExist;
-  id:number;
+  id:any;
   roleid:number;
 
 
@@ -95,7 +95,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  getUserProfile(id:number){
+  getUserProfile(id:any){
     id  = this.user.id
     this.userService.getUserById(id).subscribe(
       res =>{

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   public user: User;
 
-  id:number;
+  id:any;
   check:boolean;
 
   constructor(
