@@ -55,6 +55,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
+                                <th scope="col">Imagen</th>
                                 <th scope="col">Referencia</th>
                                 <th scope="col">Metodo </th>
                                 <th scope="col">Monto</th>
@@ -68,11 +69,14 @@
 
                             <tr *ngFor="let userpayment of userProfile.payments|  paginate: { itemsPerPage: count, currentPage: p } ">
                                 <th scope="row"><a [routerLink]="['/dashboard/payment-detail', userpayment.id]">{{userpayment.id}}</a></th>
+                                <td>
+                                    <img [src]="userpayment.image | imagenPipe: 'payments'" style="width:60px; height: 60px;" alt="">
+                                </td>
                                 <th scope="row"><a [routerLink]="['/dashboard/payment-detail', userpayment.id]">{{userpayment.referencia}}</a></th>
 
                                 <td>{{userpayment.metodo}}</td>
                                 <td>{{userpayment.monto}} </td>
-                                <td>{{userpayment.moneda_codigo}}</td>
+                                <td>{{userpayment.currency_id}}</td>
                                 <td>{{userpayment.created_at | date:'MMM d, y, h:mm:ss a'}}</td>
                                 <td>
                                     <!-- <span class="badge bg-success">{{userpayment.status}}</span> -->

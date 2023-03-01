@@ -29,32 +29,36 @@
 
         <div class="card pagodetail">
             <div class="col-xs-12 col-sm-6">
-                <p><b>Referencia:</b> {{pago.referencia}}</p>
-                <p><b>Nombre de la cuenta:</b> {{pago.nombre}}</p>
-                <p><b>email de la cuenta:</b> {{pago.email}}</p>
-                <p><b>Fecha | Hora:</b> {{pago.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
+                <p><b>Referencia:</b> {{payment.referencia}}</p>
+                <p><b>Nombre de la cuenta:</b> {{payment.nombre}}</p>
+                <p><b>email de la cuenta:</b> {{payment.email}}</p>
+                <p><b>Fecha | Hora:</b> {{payment.created_at | date:'MMM d, y, h:mm:ss a'}}</p>
                 <p><b>Status:</b>
-                    <span class="badge bg-success" *ngIf="pago.status === 'APPROVED'">Aprobado</span>
-                    <span class="badge bg-primary" *ngIf="pago.status === 'PENDING'">Pendiente</span>
-                    <span class="badge bg-danger" *ngIf="pago.status === 'REJECTED'">Rechazado</span>
+                    <span class="badge bg-success" *ngIf="payment.status === 'APPROVED'">Aprobado</span>
+                    <span class="badge bg-primary" *ngIf="payment.status === 'PENDING'">Pendiente</span>
+                    <span class="badge bg-danger" *ngIf="payment.status === 'REJECTED'">Rechazado</span>
                 </p>
-                <p><b>Monto:</b> {{pago.moneda_codigo}} {{pago.monto}}</p>
-                <p><b>ProductoId:</b> <a [routerLink]="['/dashboard/plan/', pago.plan_id]">
-                  {{pago.plan_id}}
+                <p><b>Monto:</b> {{payment.moneda_codigo}} {{payment.monto}}</p>
+                <p><b>ProductoId:</b> <a [routerLink]="['/dashboard/plan/', payment.plan_id]">
+                  {{payment.plan_id}}
                 </a></p>
             </div>
             <div class="col-xs-12 col-sm-6">
                 <!-- <p><b>Email:</b> {{pago.email}}</p> -->
-                <p><b>Metodo de Pago:</b> {{pago.metodo}}</p>
-                <div *ngIf="pago.bank_name">
+                <p><b>Metodo de Pago:</b> {{payment.metodo}}</p>
+                <div *ngIf="payment.bank_name">
                     <p><b>Nombre del Banco:</b> {{pago.bank_name}}</p>
                 </div>
                 <p><b>Validación:</b>
-                    <span class="badge bg-success" *ngIf="pago.validacion === 'APPROVED'">Aprobado</span>
-                    <span class="badge bg-primary" *ngIf="pago.validacion === 'PENDING'">Pendiente</span>
-                    <span class="badge bg-danger" *ngIf="pago.validacion === 'REJECTED'">Rechazado</span>
+                    <span class="badge bg-success" *ngIf="payment.validacion === 'APPROVED'">Aprobado</span>
+                    <span class="badge bg-primary" *ngIf="payment.validacion === 'PENDING'">Pendiente</span>
+                    <span class="badge bg-danger" *ngIf="payment.validacion === 'REJECTED'">Rechazado</span>
                 </p>
                 <!-- <p><b>Txn Id:</b> {{pago.}}</p> -->
+
+                <img [src]="payment.image | imagenPipe: 'payments'" style="width:100%; padding: 10px;
+                border: 1px solid #ccc;
+                margin-top: 30px;" class="shadow" alt="">
             </div>
 
         </div>

@@ -15,7 +15,7 @@ export class DashboardUserComponent implements OnInit {
 
   error: string;
 
-  id:number;
+  id:any;
 
   constructor(
     private userService: UserService,
@@ -51,7 +51,7 @@ export class DashboardUserComponent implements OnInit {
 
   }
 
-  getUserProfile(id:number){
+  getUserProfile(id:any){
     id  = this.user.id
     this.userService.getUserById(id).subscribe(
       res =>{

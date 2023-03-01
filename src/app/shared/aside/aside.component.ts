@@ -17,7 +17,7 @@ export class AsideComponent implements OnInit {
 
   error: string;
   public role: Role;
-  id: number;
+  id: any;
   roleid:number;
 
   constructor(

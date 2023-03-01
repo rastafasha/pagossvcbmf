@@ -36,6 +36,16 @@ export class DirectorioService {
     }
   }
 
+  createDirectorio(directory) {
+    const url = `${baseUrl}/directory/store`;
+    return this.http.post(url, directory, this.headers);
+  }
+
+  updateDirectorio(directory) {
+    const url = `${baseUrl}/directory/update/${directory.id}`;
+    return this.http.put(url, directory, this.headers);
+  }
+
 
   getDirectorios() {
     const url = `${baseUrl}/directories`;
@@ -69,23 +79,7 @@ export class DirectorioService {
 
 
 
-  createDirectorio(directory) {
-    const url = `${baseUrl}/directory/store`;
-    return this.http.post(url, directory, this.headers);
-    // const headers =new HttpHeaders();
-    // return this.http.post(environment.apiUrl+'/directory/store', directory, {
-    //     headers: headers
-    //   });
-  }
 
-  updateDirectorio(directory) {
-    const url = `${baseUrl}/directory/update/${directory.id}`;
-    return this.http.put(url, directory, this.headers);
-    // const headers =new HttpHeaders();
-    // return this.http.put(environment.apiUrl+'/directory/update/', data, {
-    //   headers: headers
-    // });
-  }
 
   deleteDirectorio(id:number) {
     const url = `${baseUrl}/directory/destroy/${id}`;
