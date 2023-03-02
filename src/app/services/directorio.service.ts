@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+
 const baseUrl = environment.apiUrl;
 
 @Injectable({
@@ -37,6 +38,7 @@ export class DirectorioService {
   }
 
   createDirectorio(directory) {
+
     const url = `${baseUrl}/directory/store`;
     return this.http.post(url, directory, this.headers);
   }
