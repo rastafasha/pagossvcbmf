@@ -8,11 +8,7 @@ import { Directorio } from 'src/app/models/directorio';
 import Swal from 'sweetalert2';
 import { UserService } from '../../../services/user.service';
 import { User } from '@app/models/user';
-import{environment} from '../../../../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
-
-const baseUrl = environment.apiUrl;
-
 @Component({
   selector: 'app-directorio-edit',
   templateUrl: './directorio-edit.component.html',
@@ -258,7 +254,9 @@ this.user = this.userService.user;
 
 
 
-  guardarDirectorio() {
+  guardarDirectorio() {debugger
+
+
 
     this.submitted = true;
   if(this.directorioForm.invalid){
@@ -290,7 +288,7 @@ return;
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
     formData.append('user_id', this.directorioForm.get('user_id').value);
     formData.append('status', this.directorioForm.get('status').value);
-    // formData.append('image', this.imagensubir);
+    formData.append('image', this.previsualizacion);
     formData.append('vcard', this.vCardInfo);
 
     const id = this.directorioForm.get('id').value;
@@ -299,7 +297,7 @@ return;
       const datos = {
         ...this.directorioForm.value,
         vcard: this.vCardInfo,
-        image: this.imagensubir,
+        image: this.previsualizacion,
         id: this.directory.id
       }
       this.directorioService.updateDirectorio(datos).subscribe(
@@ -321,7 +319,7 @@ return;
     } else {
       const datos = {
         ...this.directorioForm.value,
-        image: this.imagensubir,
+        image: this.previsualizacion,
         vcard: this.vCardInfo
       }
       this.directorioService.createDirectorio(datos).subscribe(

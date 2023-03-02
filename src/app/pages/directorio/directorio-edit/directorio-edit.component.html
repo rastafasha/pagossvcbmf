@@ -154,12 +154,12 @@
                                                 <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
                                                 <div class="col-xs-12">
                                                     <label>Imagen Avatar</label>
-                                                    <input type="file" id="image" name="image" class="form-control" (change)="onSelectedFile($event)" />
+                                                    <input type="file" id="image" accept="image/*" name="image" class="form-control" (change)="onSelectedFile($event)" />
                                                     <!-- preview image -->
                                                     <div *ngIf="previsualizacion">
                                                         <img [src]="previsualizacion" alt="" style="width:100%; padding: 10px;
                                                         border: 1px solid #ccc;
-                                                        margin-top: 30px;" class="shadow">
+                                                        margin-top: 20px;" class="shadow">
                                                     </div>
 
                                                     <div [innerHTML]="uploadError" class="error"></div>
@@ -172,6 +172,7 @@
                                         </div>
 
                                     </div>
+                                    <br>
                                     <div class="col-xs-12">
                                         <div>
                                             <h4>Redes Sociales</h4>
